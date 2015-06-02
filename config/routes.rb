@@ -31,8 +31,6 @@ Rails.application.routes.draw do
   get '/builds/:version/plays/public' => 'plays#public',
     constraints: {version: /.*/ }
 
-  resources :rn_apps
-
   require 'sidekiq/web'
 
   authenticate :user, lambda { |u| u.admin? } do
