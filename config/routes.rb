@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   post '/log' => 'logs#log'
   get '/log/:id' => 'log_emitter#connect'
 
-  get '/builds/:version/plays/public' => 'plays#public',
+  get '/builds/:version/apps/public' => 'apps#public',
     constraints: {version: /.*/ }
 
   require 'sidekiq/web'
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   end
 
 
-  get '/:username/:id', to: "plays#show", as: :user_play
-  get '/:username', to: "plays#public_index", as: :user_plays
+  get '/:username/:id', to: "apps#show", as: :user_apps
+  get '/:username', to: "apps#public_index", as: :user_apps
 
 end
