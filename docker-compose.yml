@@ -1,0 +1,112 @@
+rnplay:
+  build: .
+  restart: always
+  env_file: .env.production
+  volumes:
+    - /home/app/rails/rnplay:/app
+  links:
+    - postgres
+    - cache
+    - redis
+  environment:
+    RAILS_ENV: production
+    VIRTUAL_HOST: rnplay.org,www.rnplay.org
+
+postgres:
+  restart: always
+  env_file: .env.production
+  image: postgres
+
+rnplaystaging:
+  restart: always
+  build: .
+  env_file: .env.production
+  volumes:
+    - /home/app/rails/rnplay_staging:/app
+  links:
+    - postgres
+    - cache
+    - redis
+  environment:
+    RAILS_ENV: staging
+    VIRTUAL_HOST: staging.rnplay.org
+
+postgres:
+  restart: always
+  env_file: .env.production
+  image: postgres
+
+packager042:
+  restart: always
+  image: "packager:0.4.2"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager042.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/play_js:/js
+
+packager043:
+  restart: always
+  image: "packager:0.4.3"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager043.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/play_js:/js
+
+packager044:
+  restart: always
+  image: "packager:0.4.4"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager044.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/play_js:/js
+
+packager050rc1:
+  restart: always
+  image: "packager:0.5.0-rc1"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager050rc1.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/play_js:/js
+
+proxy:
+  restart: always
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+    - "443:443"
+  environment:
+    DEFAULT_HOST: rnplay.org
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    - /home/app/certs:/etc/nginx/certs
+
+redis:
+  restart: always
+  image: redis
+
+cache:
+  restart: always
+  image: memcached
+
+worker:
+  restart: always
+  build: .
+  command: bundle exec sidekiq -e production -c 25
+  volumes:
+    - /home/app/rails/rnplay:/app
+  env_file: .env.production
+  links:
+    - postgres
+    - redis
+    - cache
+
+logger:
+  image: progrium/logspout
+  command: syslog://logs.papertrailapp.com:13269
+  restart: always
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock

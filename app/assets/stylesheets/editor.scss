@@ -1,0 +1,175 @@
+
+$editor-header-bg: #fff;
+$editor-header-bg-dark: #222;
+$editor-header-name-input-copy-dark: #fff;
+$editor-header-save-button-bg-dark: #005A91;
+
+
+body.play-editor-page {
+  height: 100%;
+  max-height: 100vh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.editor-header {
+  min-height: 40px;
+  height: 40px;
+  display: flex;
+  box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.1);
+  background: $editor-header-bg;
+  z-index: 10;
+
+  .build-picker {
+    font-size: 18px;
+    margin-left: 17px;
+    margin-top: 10px;
+    width: 130px;
+  }
+
+  .editor-header__name-input {
+    padding-top: 5px;
+    outline: none;
+    min-height: 30px;
+    font-size: 18px;
+    border: none;
+    padding-left: 20px;
+    flex: 4;
+  }
+
+  .editor-header__save-button {
+    border: none;
+    border-radius: 5px;
+    margin-right: 17px;
+    margin-top: 6px;
+    height: 28px;
+    padding-top: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 16px;
+
+    &:hover, &:active, &:focus {
+      border: none;
+    }
+  }
+
+  .editor-header__pick-button {
+    border: none;
+    border-radius: 5px;
+    margin-right: 17px;
+    margin-top: 6px;
+    height: 28px;
+    padding-top: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 16px;
+
+    &:hover, &:active, &:focus {
+      border: none;
+    }
+  }
+
+
+  &--dark {
+
+    background: $editor-header-bg-dark;
+
+    & .editor-header__name-input {
+      background: transparent;
+      color: $editor-header-name-input-copy-dark;
+    }
+
+    & .editor-header__save-button {
+      background: $editor-header-save-button-bg-dark;
+
+      &:hover, &:active, &:focus {
+        background: lighten($editor-header-save-button-bg-dark, 5%);
+
+      }
+    }
+  }
+}
+.left-hand-pane {
+  flex: 1;
+  padding-top: 55px;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .form-group {
+    margin-bottom: 0;
+  }
+}
+.left-hand-pane form {
+  margin: 0 30px 100px 0px;
+}
+.editor-body-container {
+  flex-direction: row;
+}
+
+[data-react-class="EditorApp"] {
+  width: 100%;
+  display: flex;
+}
+
+.editor-container {
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+}
+
+.editor-container__body {
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+  position: relative;
+}
+
+.editor-container__simulator {
+  background-color: #F9F9F9;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  position: relative;
+
+  &--dark {
+    background-color: #152238;
+  }
+}
+
+.editor-flex-wrapper {
+  flex: 1;
+
+  /* Hack because Safari's 100% is based off of children, */
+  /* so this stretches to fit the content and never triggers overflow scroll */
+  max-height: calc(100vh - 90px);
+  overflow-y: scroll;
+}
+
+.cm-s-solarized.CodeMirror {
+  box-shadow: none !important;
+}
+
+.console {
+  background: #fff;
+  border-top: 1px solid #0B0708;
+  bottom: 40px;
+  color: #777;
+  height: 100px;
+  left: 0;
+  overflow: scroll;
+  padding: 10px;
+  position: fixed;
+  min-width: 900px;
+  text-align: left;
+  width: 100%;
+  z-index: 102;
+}
+
+.CodeMirror-dialog {
+  position: fixed;
+  left: 0; right: 0;
+  background: inherit;
+  z-index: 15;
+  padding: .1em .8em;
+  overflow: hidden;
+  color: rgba(0,0,0,0.9);
+}

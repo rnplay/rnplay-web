@@ -1,0 +1,4 @@
+#!/bin/sh
+# `setuser` is part of baseimage-docker. `setuser mecached xxx...` runs the given command
+# (`xxx...`) as the user `memcache`. If you omit this, the command will be run as root.
+exec /usr/bin/nodejs /app/node_modules/react-native/packager/packager.js --port 9000 >> /var/log/packager.log 2>&1

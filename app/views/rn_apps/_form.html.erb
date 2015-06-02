@@ -1,0 +1,7 @@
+ <table>
+  <tr><td><label>Name</label></td><td><%= f.text_field :name %></td></tr>
+  <tr><td><label>Bundle</label></td><td><%= f.file_field :app_bundle %></td></tr>
+  <tr><td colspan="2">Create your production bundle using the instructions in <i>AppDelegate.m</i></td></tr>
+  <tr><td><label>Description</label></td><td><%= f.text_area :description %></td></tr>
+  <tr><td><%= f.submit "Send" %></td><td></td></tr>
+</table>

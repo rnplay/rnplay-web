@@ -1,0 +1,18 @@
+<div class="container" style="text-align: center; padding-bottom: 50px;">
+  <h1 style="margin-bottom: 40px">My plays</h1>
+  <ul class="list-unstyled" id="plays">
+  <% if @plays.empty? %>
+    <p>
+      You haven't created any plays yet.
+      <br><br><%= link_to "Make your first play!", new_play_path, class: 'btn btn-info' %>
+    </p>
+  <% end %>
+  <% @plays.each do |f| %>
+    <li>
+      <%= link_to f.name || f.module_name, play_path(f.url_token) %>
+      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
+      <%= link_to 'delete', play_path(f), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete' %>
+    </li>
+  <% end %>
+  </ul>
+</div>

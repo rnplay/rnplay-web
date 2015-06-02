@@ -1,0 +1,14 @@
+<div class="container" style="text-align: center; padding-bottom: 50px;">
+  <h1 style="margin-bottom: 40px"><%= @user.name %>'s Plays</h1>
+  <ul class="list-unstyled" id="plays">
+  <% if @user.plays.empty? %>
+  <p>This user hasn't created any public plays.</p>
+  <% end %>
+  <% @user.plays.each do |f| %>
+    <li>
+      <%= link_to f.name || f.module_name, user_play_path(id: f.url_token) %>
+      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
+    </li>
+  <% end %>
+  </ul>
+</div>

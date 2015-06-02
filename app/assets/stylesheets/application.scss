@@ -1,0 +1,344 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require codemirror
+ *= require solarized
+ *= require midnight
+ *= require dialog
+ *= require bootstrap-modal-bs3patch
+ *= require bootstrap-modal
+ *= require font-proxima-nova
+ *= require devise_bootstrap_views
+ *= require editor
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+
+$navbar-default-bg: #fff;
+$navbar-height: 50px;
+$navbar-default-brand-color: #aaa;
+$font-family-sans-serif: 'ProximaNovaLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$purple-100: #712FA9;
+$purple-80: #9134BF;
+
+$dropdown-bg: #3B3738;
+$dropdown-link-color: #000;
+$dropdown-header-color: #000;
+$dropdown-link-hover-bg: $dropdown-bg;
+$dropdown-link-active-bg: $dropdown-bg;
+$dropdown-link-active-color: $dropdown-bg;
+
+@import "font-awesome";
+
+@import "bootstrap";
+
+body.welcome-page {
+  background: #eee;
+}
+
+a {
+  transition: all 0.2s linear;
+}
+
+.CodeMirror {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  background-color: #3B3738;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  left: 0;
+  margin-bottom: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+}
+
+.navbar ul {
+  margin-top: 5px;
+  padding: 3px;
+}
+
+.navbar ul .dropdown {
+  margin-top: 4px;
+}
+
+.navbar ul .dropdown.open a {
+  background-color: transparent !important;
+}
+
+.navbar ul a {
+  font-size: 120%;
+  color: #ddd !important;
+}
+
+.navbar ul a:hover {
+  color: #fff !important;
+}
+
+.navbar li {
+  margin-left: 5px;
+}
+
+.navbar #links {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.container-fluid {
+  padding: 0px;
+}
+
+.navbar-brand {
+  padding: 16px;
+  font-size: 2.1rem !important;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff;
+}
+
+.navbar-logo {
+  width: 32px;
+  margin-top: 12px;
+  margin-left: 17px;
+}
+
+.btn {
+  font-size: 1.7rem;
+  letter-spacing: 0.08rem;
+}
+
+.btn-info {
+  background: $purple-100;
+  border-color: $purple-100;
+}
+
+.btn-info:hover,
+.btn-info:active,
+.btn-info:focus {
+  background: $purple-80;
+  border-color: $purple-80;
+}
+
+.btn-fork-app {
+  margin-top: 20px;
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 13px 25px;
+  font-size: 2rem;
+  line-height: 1.5;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 797px) {
+  body {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.controls {
+  float: left;
+  margin-left: 10px;
+}
+
+#main {
+  margin-top: 55px;
+}
+
+#plays {
+  font-size: 140%;
+  li {
+    margin-bottom: 25px;
+  }
+  p {
+    font-size: 80%;
+    color: #888;
+    margin: 0;
+    padding: 0;
+  }
+  .delete {
+    font-size: 60%;
+    text-transform: uppercase;
+    color: #920000;
+  }
+}
+.form-play {
+  padding-left: 15px;
+}
+.play_name {
+  float: left;
+  width: 30%;
+}
+.form-play .form-group {
+  margin-bottom: 5px;
+}
+.phone-container {
+  text-align: center;
+}
+.radio label label,
+.checkbox label label {
+  padding-left: 0;
+}
+.form-control {
+  border-radius: 3px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  min-height: 50px;
+  padding: 7px 15px 8px;
+}
+.form-control:hover {
+  border-color: lighten($purple-100, 30%);
+  box-shadow: 0 0 4px rgba(150, 40, 180, 0.3);
+}
+.form-control:active,
+.form-control:focus {
+  border-color: $purple-100;
+  box-shadow: 0 0 5px rgba(150, 40, 180, 0.5);
+}
+
+#blurb {
+  font-size: 200%;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 50%;
+}
+
+#welcome {
+  padding-bottom: 70px;
+}
+
+#welcome h1 {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.get-started-button {
+  padding-bottom: 20px;
+}
+
+.panel {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.panel-default {
+  border-color: white;
+}
+.panel-heading {
+  background: #F4F2F2;
+}
+.panel-default > .panel-heading {
+  border-color: #ECEBEB;
+}
+
+.devise-links {
+  width: 50%;
+  margin: 0 auto;
+  list-style: none;
+  height: 30px;
+  padding: 0;
+  margin-top: 30px;
+  padding-left: 18px;
+}
+.devise-links li {
+  padding: 0;
+  margin: 0;
+  float: left;
+  font-size: 120%;
+  margin-right: 60px;
+  height: 30px;
+}
+
+.rnplay-footer {
+  background: #2B2728;
+  border-top: 1px solid #0B0708;
+  bottom: 0;
+  color: #777;
+  height: 40px;
+  left: 0;
+  padding: 10px;
+  position: fixed;
+  min-width: 900px;
+  text-align: right;
+  width: 100%;
+  z-index: 101;
+}
+.rnplay-footer a {
+  color: #a9a9a9;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+}
+
+.homepage-example {
+  display: flex;
+  padding: 20px 10px;
+  border: 1px solid #eee;
+  box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.1);
+  flex-direction: row;
+  height: 627px;
+  max-width: 1050px;
+  margin: 0 auto;
+  background: #fff;
+
+  .homepage-example__code {
+    max-height: 580px;
+    overflow-y: scroll;
+    flex: 1;
+  }
+
+  .homepage-example__simulator {
+    padding-left: 20px;
+    width: 300px;
+  }
+}
+
+.welcome-subtitle {
+  display: block;
+  font-size: 2rem;
+  margin-top: 15px;
+  line-height: 30px;
+}
+
+#settings-icon {
+  color: #fff;
+}
+
+.dropdown span {
+  padding-top: 5px;
+}
+
+.avatar {
+  background-color: #999;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  margin-left: 10px;
+}

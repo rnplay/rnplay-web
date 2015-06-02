@@ -1,0 +1,13 @@
+rnplay:
+  extends:
+    file: docker-compose.yml
+    service: rnplay
+      volumes: /Users/joshua/projects/rnplay:/app
+      ports:
+        - "80:80"
+packager:
+  extends:
+    file: docker-compose.yml
+    service: packager044
+      volumes:
+        - /Users/joshua/projects/rnplay/play_js:/js

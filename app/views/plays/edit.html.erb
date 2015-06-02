@@ -1,0 +1,17 @@
+<div style="display: flex; width: 100%">
+<%= react_component 'EditorApp',
+      play: {
+        id: @play.id,
+        body: @play.body,
+        appetizeUrl: @play.appetize_url(embed: true, autoplay: params[:autoplay]),
+        creatorId: @play.creator_id,
+        buildId: @play.build_id,
+        name: @play.name,
+        picked: @play.pick
+      },
+      currentUser: current_user,
+      useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,
+      useDarkTheme: user_signed_in? && current_user.use_dark_theme?,
+      builds: Build.all,
+      headerLogoSrc: asset_path('header_logo.png') %>
+</div>

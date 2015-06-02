@@ -1,0 +1,7 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 140px">
+<% @apps.each do |app| %>
+<h2><%= link_to app.name, edit_rn_app_path(app) %> <%= link_to "x", rn_app_path(app), method: :delete %></h2>
+<% end %>
+<p>
+<%= link_to "Add an app", new_rn_app_path %>
+</div>

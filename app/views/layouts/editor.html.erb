@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html style="height: 100%; width: 100%; max-width: 100vw; max-height: 100vh; overflow: hidden">
+<head>
+  <title><%= @page_title + " : " if @page_title %>React Native Playground<%= ": Share and test your React Native code in the browser" if !@page_title %></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <script src="//use.typekit.net/ptw6swo.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-10128745-12', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="play-editor-page">
+  <%= yield %>
+</body>
+</html>
