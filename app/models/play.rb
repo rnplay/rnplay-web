@@ -40,7 +40,7 @@ class Play < ActiveRecord::Base
   end
 
   def write_js_to_disk
-    File.open("#{Rails.root}/../play_js/#{self.url_token}.js", "w") {|f| f.write body }
+    File.open("#{Rails.root}/play_js/#{self.url_token}.js", "w") {|f| f.write body }
   end
 
   def appetize_url(options = {})
