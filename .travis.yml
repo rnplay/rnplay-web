@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 2.2.0
+bundler_args: --without production development
+env:
+  - DATABASE_URL=postgresql://postgres@localhost/travis_ci_test
+  - RAILS_ENV=test
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - rake db:setup add_version_data

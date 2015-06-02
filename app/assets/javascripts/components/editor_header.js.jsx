@@ -42,7 +42,7 @@ var EditorHeader = React.createClass({
   },
 
   currentUserIsAdmin: function() {
-    return this.props.currentUser.admin;
+    return this.props.currentUser && this.props.currentUser.admin;
   },
 
   renderPickButton: function() {

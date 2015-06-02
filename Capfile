@@ -5,7 +5,7 @@ server 'hetzner.rnplay.org', :web, :app, :db, :primary => true
 set :app_name, 'rnplay'
 set :user, 'app'
 set :deploy_to, "/home/app/rails/#{app_name}"
-set :repository, 'git@github.com:jsierles/rnplay.git'
+set :repository, 'git@github.com:rnplay/rnplay-web.git'
 set :container_name, 'rnplay_rnplay_1'
 
 default_run_options[:pty] = true
@@ -13,7 +13,7 @@ default_run_options[:pty] = true
 after "deploy:update", "docker:bundle", "docker:precompile_assets", "docker:fix_file_ownership"
 
 task :staging do
-  set :container_name, 'rnplay_rnplay_staging_1'
+  set :container_name, 'rnplay_rnplaystaging_1'
   set :deploy_to, "/home/app/rails/#{app_name}_staging"
 end
 
