@@ -1,35 +1,35 @@
-rnplay:
+rnapp:
   build: .
   restart: always
   env_file: .env.production
   volumes:
-    - /home/app/rails/rnplay:/app
+    - /home/app/rails/rnapp:/app
   links:
     - postgres
     - cache
     - redis
   environment:
     RAILS_ENV: production
-    VIRTUAL_HOST: rnplay.org,www.rnplay.org
+    VIRTUAL_HOST: rnapp.org,www.rnapp.org
 
 postgres:
   restart: always
   env_file: .env.production
   image: postgres
 
-rnplaystaging:
+rnappstaging:
   restart: always
   build: .
   env_file: .env.production
   volumes:
-    - /home/app/rails/rnplay_staging:/app
+    - /home/app/rails/rnapp_staging:/app
   links:
     - postgres
     - cache
     - redis
   environment:
     RAILS_ENV: staging
-    VIRTUAL_HOST: staging.rnplay.org
+    VIRTUAL_HOST: staging.rnapp.org
 
 postgres:
   restart: always
@@ -41,36 +41,36 @@ packager042:
   image: "packager:0.4.2"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager042.rnplay.org
+    VIRTUAL_HOST: packager042.rnapp.org
   volumes:
-    - /home/app/rails/rnplay/play_js:/js
+    - /home/app/rails/rnapp/app_js:/js
 
 packager043:
   restart: always
   image: "packager:0.4.3"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager043.rnplay.org
+    VIRTUAL_HOST: packager043.rnapp.org
   volumes:
-    - /home/app/rails/rnplay/play_js:/js
+    - /home/app/rails/rnapp/app_js:/js
 
 packager044:
   restart: always
   image: "packager:0.4.4"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager044.rnplay.org
+    VIRTUAL_HOST: packager044.rnapp.org
   volumes:
-    - /home/app/rails/rnplay/play_js:/js
+    - /home/app/rails/rnapp/app_js:/js
 
 packager050rc1:
   restart: always
   image: "packager:0.5.0-rc1"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager050rc1.rnplay.org
+    VIRTUAL_HOST: packager050rc1.rnapp.org
   volumes:
-    - /home/app/rails/rnplay/play_js:/js
+    - /home/app/rails/rnapp/app_js:/js
 
 proxy:
   restart: always
@@ -79,7 +79,7 @@ proxy:
     - "80:80"
     - "443:443"
   environment:
-    DEFAULT_HOST: rnplay.org
+    DEFAULT_HOST: rnapp.org
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
     - /home/app/certs:/etc/nginx/certs
@@ -97,7 +97,7 @@ worker:
   build: .
   command: bundle exec sidekiq -e production -c 25
   volumes:
-    - /home/app/rails/rnplay:/app
+    - /home/app/rails/rnapp:/app
   env_file: .env.production
   links:
     - postgres

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150602164048) do
     t.datetime "updated_at"
   end
 
-  create_table "plays", force: :cascade do |t|
+  create_table "apps", force: :cascade do |t|
     t.string   "name"
     t.text     "body"
     t.datetime "created_at",                 null: false
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 20150602164048) do
     t.integer  "creator_id"
     t.integer  "build_id"
     t.integer  "view_count",     default: 0, null: false
-    t.integer  "forked_play_id"
+    t.integer  "forked_app_id"
     t.boolean  "pick"
   end
 
-  add_index "plays", ["name"], name: "index_plays_on_name", using: :btree
+  add_index "apps", ["name"], name: "index_apps_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"

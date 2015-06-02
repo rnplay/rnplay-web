@@ -1,13 +1,13 @@
-<div style="display: flex; width: 100%">
+<div style="disapp: flex; width: 100%">
 <%= react_component 'EditorApp',
-      play: {
-        id: @play.id,
-        body: @play.body,
-        appetizeUrl: @play.appetize_url(embed: true, autoplay: params[:autoplay]),
-        creatorId: @play.creator_id,
-        buildId: @play.build_id,
-        name: @play.name,
-        picked: @play.pick
+      app: {
+        id: @app.id,
+        body: @app.body,
+        appetizeUrl: @app.appetize_url(embed: true, autoapp: params[:autoapp]),
+        creatorId: @app.creator_id,
+        buildId: @app.build_id,
+        name: @app.name,
+        picked: @app.pick
       },
       currentUser: current_user,
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,

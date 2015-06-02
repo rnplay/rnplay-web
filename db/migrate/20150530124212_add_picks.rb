@@ -1,5 +1,5 @@
 class AddPicks < ActiveRecord::Migration
   def change
-    add_column :plays, :pick, :boolean
+    add_column :apps, :pick, :boolean
   end
 end

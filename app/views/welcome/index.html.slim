@@ -2,13 +2,13 @@
 
 #welcome
   h1
-    | The React Native Playground
+    | The React Native Appground
     small.welcome-subtitle
       | For testing and sharing your React Native apps and snippets,
       br
       | from the comfort of your browser.
   p.text-center.get-started-button
-    = link_to "Fork the sample app and have a play!", new_play_path(from: @play.url_token),
+    = link_to "Fork the sample app and have a app!", new_app_path(from: @app.url_token),
         class: "btn btn-info btn-lg btn-fork-app"
 
   = render partial: 'example_app'

@@ -6,4 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Play.create(name: "React ART Example", body: File.read("plays/react_art.js"), build_id: 1)
+App.create(name: "React ART Example", body: File.read("apps/react_art.js"), build_id: 1)

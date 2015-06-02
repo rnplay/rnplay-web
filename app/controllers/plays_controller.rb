@@ -1,26 +1,26 @@
-class PlaysController < ApplicationController
+class AppsController < ApplicationController
   layout :pick_layout
-  before_action :set_play, only: [:show, :edit, :destroy, :raw_simulator]
+  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator]
   before_action :authenticate_user!, only: [:index]
 
   protect_from_forgery except: :show
 
   def index
-    @plays = current_user.plays.all
+    @apps = current_user.apps.all
 
     respond_to do |format|
       format.html
-      format.json { render json: @plays.to_json(except: [:body, :bundle], methods: [:bundle_url, :created_by])}
+      format.json { render json: @apps.to_json(except: [:body, :bundle], methods: [:bundle_url, :created_by])}
     end
   end
 
   def search
-    @plays = Play.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"])
+    @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"])
     render 'apps'
   end
 
   def picks
-    @plays = Play.where(pick: true).order('updated_at desc')
+    @apps = App.where(pick: true).order('updated_at desc')
     respond_to do |format|
       format.html
       format.json { render 'apps' }
@@ -28,7 +28,7 @@ class PlaysController < ApplicationController
   end
 
   def recent
-    @plays = Play.where("name != 'Sample App' AND name != 'Sample Play'").order('updated_at desc')
+    @apps = App.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
   end
 
   def log
@@ -38,16 +38,16 @@ class PlaysController < ApplicationController
   def public
     if params[:version].present?
       @build = Build.where(name: params[:version]).first
-      @plays = @build.plays
+      @apps = @build.apps
     else
-      @plays = Play.where("name != 'Sample App'")
+      @apps = App.where("name != 'Sample App'")
     end
 
-    @plays = @plays.order("updated_at desc").all
+    @apps = @apps.order("updated_at desc").all
 
     respond_to do |format|
       format.html
-      format.json { render json: @plays.to_json(include: {creator: {only: [:username, :avatar_url]}}, except: [:body, :bundle], methods: [:bundle_url])}
+      format.json { render json: @apps.to_json(include: {creator: {only: [:username, :avatar_url]}}, except: [:body, :bundle], methods: [:bundle_url])}
     end
   end
 
@@ -61,8 +61,8 @@ class PlaysController < ApplicationController
   end
 
   def show
-    @page_title = @play.name
-    @play.increment_view_count!
+    @page_title = @app.name
+    @app.increment_view_count!
 
     respond_to do |format|
       format.html { render action: :edit }
@@ -72,61 +72,61 @@ class PlaysController < ApplicationController
   def new
     if !user_signed_in?
       redirect_to new_user_session_path,
-        notice: 'Please sign in to create a new play'
+        notice: 'Please sign in to create a new app'
     else
-      @play = current_user.plays.create({
-        body: File.read('plays/sample_app.js'),
-        name: "Sample Play",
+      @app = current_user.apps.create({
+        body: File.read('apps/sample_app.js'),
+        name: "Sample App",
         build_id: Build.last.id
       })
 
-      redirect_to edit_play_path(@play)
+      redirect_to edit_app_path(@app)
     end
   end
 
   def fork
-    @play = Play.find(params[:id])
+    @app = App.find(params[:id])
 
     if !user_signed_in?
-      render json: {error: 'Please sign in to fork this play'}
+      render json: {error: 'Please sign in to fork this app'}
     else
-      @new_play = current_user.plays.build(play_params)
-      @new_play.forked_play_id = params[:id]
-      @new_play.save
+      @new_app = current_user.apps.build(app_params)
+      @new_app.forked_app_id = params[:id]
+      @new_app.save
 
-      render json: {success: true, token: @new_play.url_token}
+      render json: {success: true, token: @new_app.url_token}
     end
   end
 
   def edit
-    @page_title = @play.name
-    @play.increment_view_count!
+    @page_title = @app.name
+    @app.increment_view_count!
   end
 
   def create
-    @play = (user_signed_in? ? current_user.plays : Play).new(play_params)
+    @app = (user_signed_in? ? current_user.apps : App).new(app_params)
 
     respond_to do |format|
-      if @play.save
-        session[:plays] = [] if !session[:plays]
-        session[:plays] << @play.id
+      if @app.save
+        session[:apps] = [] if !session[:apps]
+        session[:apps] << @app.id
 
-        format.html { redirect_to play_path(@play), notice: 'Play was successfully created.' }
-        format.json { render :show, status: :created, location: @play }
+        format.html { redirect_to app_path(@app), notice: 'App was successfully created.' }
+        format.json { render :show, status: :created, location: @app }
       else
 
         format.html { render :new }
-        format.json { render json: @play.errors, status: :unprocessable_entity }
+        format.json { render json: @app.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    @play = Play.find(params[:id])
+    @app = App.find(params[:id])
 
-    if (play_params[:pick] && current_user.admin?) || (user_signed_in? && @play.created_by?(current_user))
-      @play.update(play_params)
-      logger.info @play.errors.inspect
+    if (app_params[:pick] && current_user.admin?) || (user_signed_in? && @app.created_by?(current_user))
+      @app.update(app_params)
+      logger.info @app.errors.inspect
       render json: {success: true}
     else
       render json: {error: 'Access denied'}
@@ -134,11 +134,11 @@ class PlaysController < ApplicationController
   end
 
   def destroy
-    redirect_to root_path unless user_signed_in? && @play.created_by?(current_user)
+    redirect_to root_path unless user_signed_in? && @app.created_by?(current_user)
 
-    @play.destroy
+    @app.destroy
     respond_to do |format|
-      format.html { redirect_to plays_url, notice: 'Play was successfully destroyed.' }
+      format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -147,15 +147,15 @@ class PlaysController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   #
-  def set_play
-    @play = Play.where(url_token: params[:id]).first
-    raise ActiveRecord::RecordNotFound if !@play
+  def set_app
+    @app = App.where(url_token: params[:id]).first
+    raise ActiveRecord::RecordNotFound if !@app
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   #
-  def play_params
-    params.require(:play).permit(:name, :body, :module_name, :author, :build_id, :pick)
+  def app_params
+    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick)
   end
 
   def pick_layout

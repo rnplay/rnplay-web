@@ -1,6 +1,6 @@
 var Console = React.createClass({
   componentDidMount: function() {
-    // var eventSource = new EventSource('http://localhost:9292/log/'+this.props.play.id);
+    // var eventSource = new EventSource('http://localhost:9292/log/'+this.props.app.id);
 
     // console.log("Connecting to SSE server");
     // eventSource.addEventListener('log', function(event) {

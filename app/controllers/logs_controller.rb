@@ -4,7 +4,7 @@ class LogsController < ApplicationController
 
   def log
     @redis ||= Redis.connect
-    @redis.publish params[:play_id], params.to_json
+    @redis.publish params[:app_id], params.to_json
     render nothing: true
   end
 

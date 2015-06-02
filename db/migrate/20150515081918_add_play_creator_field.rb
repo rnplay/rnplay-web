@@ -1,6 +1,6 @@
-class AddPlayCreatorField < ActiveRecord::Migration
+class AddAppCreatorField < ActiveRecord::Migration
   def change
-    remove_column :plays, :author, :string
-    add_column :plays, :creator_id, :integer
+    remove_column :apps, :author, :string
+    add_column :apps, :creator_id, :integer
   end
 end

@@ -730,14 +730,14 @@ window.Modernizr = (function( window, document, undefined ) {
 
         // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
         try {
-            if ( bool = !!elem.canPlayType ) {
+            if ( bool = !!elem.canAppType ) {
                 bool      = new Boolean(bool);
-                bool.ogg  = elem.canPlayType('video/ogg; codecs="theora"')      .replace(/^no$/,'');
+                bool.ogg  = elem.canAppType('video/ogg; codecs="theora"')      .replace(/^no$/,'');
 
                 // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
-                bool.h264 = elem.canPlayType('video/mp4; codecs="avc1.42E01E"') .replace(/^no$/,'');
+                bool.h264 = elem.canAppType('video/mp4; codecs="avc1.42E01E"') .replace(/^no$/,'');
 
-                bool.webm = elem.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/,'');
+                bool.webm = elem.canAppType('video/webm; codecs="vp8, vorbis"').replace(/^no$/,'');
             }
 
         } catch(e) { }
@@ -750,17 +750,17 @@ window.Modernizr = (function( window, document, undefined ) {
             bool = false;
 
         try {
-            if ( bool = !!elem.canPlayType ) {
+            if ( bool = !!elem.canAppType ) {
                 bool      = new Boolean(bool);
-                bool.ogg  = elem.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,'');
-                bool.mp3  = elem.canPlayType('audio/mpeg;')               .replace(/^no$/,'');
+                bool.ogg  = elem.canAppType('audio/ogg; codecs="vorbis"').replace(/^no$/,'');
+                bool.mp3  = elem.canAppType('audio/mpeg;')               .replace(/^no$/,'');
 
                 // Mimetypes accepted:
                 //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
                 //   bit.ly/iphoneoscodecs
-                bool.wav  = elem.canPlayType('audio/wav; codecs="1"')     .replace(/^no$/,'');
-                bool.m4a  = ( elem.canPlayType('audio/x-m4a;')            ||
-                              elem.canPlayType('audio/aac;'))             .replace(/^no$/,'');
+                bool.wav  = elem.canAppType('audio/wav; codecs="1"')     .replace(/^no$/,'');
+                bool.m4a  = ( elem.canAppType('audio/x-m4a;')            ||
+                              elem.canAppType('audio/aac;'))             .replace(/^no$/,'');
             }
         } catch(e) { }
 

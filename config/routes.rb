@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get '/profile' => 'devise/registrations#edit', as: :profile
 
-  resources :plays do
+  resources :apps do
     member do
       post :fork
       get :raw_simulator

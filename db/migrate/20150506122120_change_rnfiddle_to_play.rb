@@ -1,5 +1,5 @@
-class ChangeRnfiddleToPlay < ActiveRecord::Migration
+class ChangeRnfiddleToApp < ActiveRecord::Migration
   def change
-    rename_table :rnfiddles, :plays
+    rename_table :rnfiddles, :apps
   end
 end

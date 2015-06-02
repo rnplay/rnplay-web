@@ -13,7 +13,7 @@ var SampleApp = React.createClass({
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to the React Native Playground!
+          Welcome to the React Native Appground!
         </Text>
         <Text style={styles.instructions}>
           This is a sample app - just edit and save, and you will see the

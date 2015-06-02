@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,
          :omniauthable, :omniauth_providers => [:twitter]
 
-  has_many :plays, foreign_key: :creator_id
+  has_many :apps, foreign_key: :creator_id
 
   mount_uploader :avatar, AvatarUploader
 

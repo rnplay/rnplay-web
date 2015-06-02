@@ -1,4 +1,4 @@
-json.array!(@plays) do |play|
-  json.extract! play, :id, :name, :body, :author
-  json.url play_url(play, format: :json)
+json.array!(@apps) do |app|
+  json.extract! app, :id, :name, :body, :author
+  json.url app_url(app, format: :json)
 end

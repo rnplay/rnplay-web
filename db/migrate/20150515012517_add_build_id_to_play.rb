@@ -1,4 +1,4 @@
-class AddBuildIdToPlay < ActiveRecord::Migration
+class AddBuildIdToApp < ActiveRecord::Migration
   def self.up
     create_table :builds do |t|
       t.string :name
@@ -7,15 +7,15 @@ class AddBuildIdToPlay < ActiveRecord::Migration
     end
 
     BuildVersionUpdater.execute
-    add_column :plays, :build_id, :integer
+    add_column :apps, :build_id, :integer
 
-    Play.find_each do |play|
-      play.update_attributes(build_id: Build.first.id)
+    App.find_each do |app|
+      app.update_attributes(build_id: Build.first.id)
     end
   end
 
   def self.down
     drop_table :builds
-    remove_column :plays, :build_id, :integer
+    remove_column :apps, :build_id, :integer
   end
 end

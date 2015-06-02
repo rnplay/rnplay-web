@@ -3,8 +3,8 @@ class BundleJob
 
   def perform(id)
     ActiveRecord::Base.connection_pool.with_connection do
-      play = Play.find(id)
-      play.bundle_js
+      app = App.find(id)
+      app.bundle_js
     end
   end
 end

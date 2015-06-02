@@ -41,7 +41,7 @@ var Editor = React.createClass({
     return (
       <div className="editor-flex-wrapper">
         <textarea ref="editorTextArea" onChange={this._onChange}>
-          {this.props.play.body}
+          {this.props.app.body}
         </textarea>
       </div>
     )

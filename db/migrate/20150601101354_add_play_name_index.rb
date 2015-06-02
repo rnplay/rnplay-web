@@ -1,5 +1,5 @@
-class AddPlayNameIndex < ActiveRecord::Migration
+class AddAppNameIndex < ActiveRecord::Migration
   def change
-    add_index :plays, :name
+    add_index :apps, :name
   end
 end

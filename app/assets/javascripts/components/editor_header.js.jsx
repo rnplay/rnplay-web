@@ -37,7 +37,7 @@ var EditorHeader = React.createClass({
   belongsToCurrentUser: function() {
     return (
       this.props.currentUser &&
-      this.props.currentUser.id == this.props.play.creatorId
+      this.props.currentUser.id == this.props.app.creatorId
     )
   },
 
@@ -88,7 +88,7 @@ var EditorHeader = React.createClass({
     return (
       <form className={classes} onSubmit={this._handleOnSubmit}>
         <BuildPicker onChange={this._onUpdateBuild} builds={this.props.builds} selectedBuildId={this.props.buildId} />
-        <input type="text" ref="nameInput" placeholder="Give this play a title"
+        <input type="text" ref="nameInput" placeholder="Give this app a title"
                value={this.props.name}
                onChange={this._onUpdateName}
                className="editor-header__name-input" />

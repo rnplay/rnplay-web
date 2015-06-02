@@ -1,11 +1,11 @@
 var EditorApp = React.createClass({
   getInitialState: function() {
     return {
-      name: this.props.play.name,
-      body: this.props.play.body,
-      buildId: this.props.play.buildId,
+      name: this.props.app.name,
+      body: this.props.app.body,
+      buildId: this.props.app.buildId,
       showHeader: true,
-      picked: this.props.play.picked,
+      picked: this.props.app.picked,
       simulatorActive: false,
     };
   },
@@ -53,9 +53,9 @@ var EditorApp = React.createClass({
 
   onPick: function() {
     $.ajax({
-      url: '/plays/' + this.props.play.id,
+      url: '/apps/' + this.props.app.id,
       data: {
-        play: {pick: this.state.picked ? "0" : "1"}
+        app: {pick: this.state.picked ? "0" : "1"}
       },
       type: 'PUT',
       success: function() {
@@ -68,9 +68,9 @@ var EditorApp = React.createClass({
     var self = this;
 
     $.ajax({
-      url: '/plays/' + this.props.play.id,
+      url: '/apps/' + this.props.app.id,
       data: {
-        play: {name: this.state.name, body: this.state.body, build_id: this.state.buildId}
+        app: {name: this.state.name, body: this.state.body, build_id: this.state.buildId}
       },
       type: 'PUT',
       success: function(data) {
@@ -99,14 +99,14 @@ var EditorApp = React.createClass({
     var self = this;
 
     $.ajax({
-      url: '/plays/' + this.props.play.id + '/fork',
+      url: '/apps/' + this.props.app.id + '/fork',
       data: {
-        play: {name: this.state.name, body: this.state.body, build_id: this.state.buildId}
+        app: {name: this.state.name, body: this.state.body, build_id: this.state.buildId}
       },
       type: 'POST',
       success: function(data) {
         if (data.success) {
-          window.location.href = '/plays/' + data.token;
+          window.location.href = '/apps/' + data.token;
         } else {
           alert(data.error);
         }
@@ -125,10 +125,10 @@ var EditorApp = React.createClass({
 
   render: function() {
     // TODO any other ideas how to do this? Not sure whether the full url should
-    // be stored with the play or just identifier, without all options.
+    // be stored with the app or just identifier, without all options.
     var simulatorUrl = this.props.useDarkTheme ?
-      this.props.play.appetizeUrl.replace('deviceColor=white', 'deviceColor=black') :
-      this.props.play.appetizeUrl;
+      this.props.app.appetizeUrl.replace('deviceColor=white', 'deviceColor=black') :
+      this.props.app.appetizeUrl;
 
     return (
       <div className="editor-container" style={{paddingTop: this.state.showHeader ? 50 : 0}}>
@@ -136,19 +136,19 @@ var EditorApp = React.createClass({
 
         <EditorHeader name={this.state.name}
                       useDarkTheme={this.props.useDarkTheme}
-                      play={this.props.play}
+                      app={this.props.app}
                       currentUser={this.props.currentUser}
                       onUpdateName={this.onUpdateName}
                       onUpdateBuild={this.onUpdateBuild}
                       builds={this.props.builds}
-                      buildId={this.props.play.buildId}
+                      buildId={this.props.app.buildId}
                       picked={this.state.picked}
                       onPick={this.onPick}
                       onSave={this.onSave}
                       onFork={this.onFork} />
 
         <div className="editor-container__body">
-          <Editor play={this.props.play} currentUser={this.props.currentUser}
+          <Editor app={this.props.app} currentUser={this.props.currentUser}
                   useVimKeyBindings={this.props.useVimKeyBindings}
                   useDarkTheme={this.props.useDarkTheme}
                   onUpdateBody={this.onUpdateBody} />

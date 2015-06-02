@@ -1,3 +1,3 @@
 class Build < ActiveRecord::Base
-  has_many :plays
+  has_many :apps
 end
