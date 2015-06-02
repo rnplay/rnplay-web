@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rnplay/rnplay-web.svg?branch=master)](https://travis-ci.org/rnplay/rnplay-web)
+
 ## Setup
 
 Create a file named .env, with the following contents. Replace the database placeholder values with your own. The twitter keys are for development and don't require customization.
