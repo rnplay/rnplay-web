@@ -7,4 +7,4 @@ env:
   - RAILS_ENV=test
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - rake db:create add_version_data
+  - rake db:setup add_version_data
