@@ -4,3 +4,6 @@ rvm:
 bundler_args: --without production development
 env:
   - DATABASE_URL=postgresql://postgres@localhost/travis_ci_test
+  - RAILS_ENV=test
+before_script:
+  - rake db:create add_version_data
