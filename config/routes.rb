@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get :public
       get :recent
       get :picks
+      get :popular
     end
   end
 
