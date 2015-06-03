@@ -10,7 +10,7 @@ class PlaysController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @plays.to_json(except: [:body, :bundle], methods: [:bundle_url, :created_by])}
+      format.json { render 'apps' }
     end
   end
 

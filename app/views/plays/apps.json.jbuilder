@@ -1,5 +1,8 @@
 json.array!(@plays) do |play|
-  json.extract! play, :id, :name, :updated_at, :url_token, :module_name, :view_count, :bundle_url
+  json.extract! play, :id, :name, :updated_at, :url_token, :module_name,
+                      :view_count, :bundle_url, :pick, :build_id,
+                      :creator_id
+
   json.build_name play.try(:build).try(:name)
 
   json.creator do
