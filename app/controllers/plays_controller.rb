@@ -27,6 +27,15 @@ class PlaysController < ApplicationController
     end
   end
 
+  def popular
+    @plays = Play.order('view_count desc').order('updated_at desc').limit(10)
+
+    respond_to do |format|
+      format.html
+      format.json { render 'apps' }
+    end
+  end
+
   def recent
     @plays = Play.where("name != 'Sample App' AND name != 'Sample Play'").order('updated_at desc')
   end
