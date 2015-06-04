@@ -29,8 +29,7 @@ class AppsController < ApplicationController
   end
 
   def popular
-    @plays = App.order('view_count desc').
-      order('updated_at desc').limit(@per_page).offset(@offset)
+    @apps = App.order('view_count desc').order('updated_at desc').limit(@per_page).offset(@offset)
 
     respond_to do |format|
       format.html
