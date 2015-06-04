@@ -81,6 +81,15 @@ packagermaster:
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
+packager8b93b99:
+  restart: always
+  image: "packager:8b93b99"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager8b93b99.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
 proxy:
   restart: always
   image: jwilder/nginx-proxy
