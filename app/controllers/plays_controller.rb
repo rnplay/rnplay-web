@@ -29,7 +29,7 @@ class PlaysController < ApplicationController
 
   def popular
     per_page = 10
-    page = params[:page] || 1
+    page = (params[:page] || 1).to_i
     offset = (page - 1) * per_page
 
     @plays = Play.order('view_count desc').
