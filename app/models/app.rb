@@ -19,7 +19,7 @@ class App < ActiveRecord::Base
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{url_token}.bundle"
     else
-      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnapp.org/#{url_token}.bundle"
+      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{url_token}.bundle"
     end
   end
 
