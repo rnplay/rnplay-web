@@ -105,7 +105,7 @@ class PlaysController < ApplicationController
       render json: {error: 'Please sign in to fork this play'}
     else
       @new_play = current_user.plays.build(play_params)
-      @new_play.forked_play_id = params[:id]
+      @new_play.forked_app_id = params[:id]
       @new_play.save
 
       render json: {success: true, token: @new_play.url_token}

@@ -1,5 +1,5 @@
 class App < ActiveRecord::Base
-  self.table_name = "plays"
+  #self.table_name = "plays"
 
   before_save :add_url_token
   before_save :parse_module_name

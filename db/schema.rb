@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602164048) do
+ActiveRecord::Schema.define(version: 20150604145221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "apps", force: :cascade do |t|
+    t.string   "name"
+    t.text     "body"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "url_token"
+    t.string   "module_name"
+    t.text     "bundle"
+    t.integer  "creator_id"
+    t.integer  "build_id"
+    t.integer  "view_count",    default: 0, null: false
+    t.integer  "forked_app_id"
+    t.boolean  "pick"
+  end
+
+  add_index "apps", ["name"], name: "index_apps_on_name", using: :btree
 
   create_table "builds", force: :cascade do |t|
     t.string   "name"
@@ -22,23 +39,6 @@ ActiveRecord::Schema.define(version: 20150602164048) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "apps", force: :cascade do |t|
-    t.string   "name"
-    t.text     "body"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "url_token"
-    t.string   "module_name"
-    t.text     "bundle"
-    t.integer  "creator_id"
-    t.integer  "build_id"
-    t.integer  "view_count",     default: 0, null: false
-    t.integer  "forked_app_id"
-    t.boolean  "pick"
-  end
-
-  add_index "apps", ["name"], name: "index_apps_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
