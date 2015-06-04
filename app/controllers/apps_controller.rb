@@ -1,6 +1,6 @@
 class AppsController < ApplicationController
   layout :pick_layout
-  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator]
+  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr]
   before_action :authenticate_user!, only: [:index]
   before_action :paginate, only: [:popular, :search, :picks]
 

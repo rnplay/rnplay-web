@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       post :fork
       get :raw_simulator
+      get :qr
       post :log
     end
     collection do
