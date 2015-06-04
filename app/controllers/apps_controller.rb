@@ -10,7 +10,7 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @apps.to_json(except: [:body, :bundle], methods: [:bundle_url, :created_by])}
+      format.json { render 'apps' }
     end
   end
 
@@ -21,6 +21,20 @@ class AppsController < ApplicationController
 
   def picks
     @apps = App.where(pick: true).order('updated_at desc')
+    respond_to do |format|
+      format.html
+      format.json { render 'apps' }
+    end
+  end
+
+  def popular
+    per_page = 10
+    page = (params[:page] || 1).to_i
+    offset = (page - 1) * per_page
+
+    @plays = Play.order('view_count desc').
+      order('updated_at desc').limit(per_page).offset(offset)
+
     respond_to do |format|
       format.html
       format.json { render 'apps' }

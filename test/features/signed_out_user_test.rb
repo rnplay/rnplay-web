@@ -3,7 +3,7 @@ require "test_helper"
 class SignedOutUserTest < Capybara::Rails::TestCase
   test "visitor can access home page" do
     visit root_path
-    assert_content page, "React Native Appground"
+    assert_content page, "React Native Playground"
   end
 
   test "visitor can access app page" do

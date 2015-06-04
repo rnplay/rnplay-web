@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
 
-  get '/:username/:id', to: "apps#show", as: :user_apps
+  get '/:username/:id', to: "apps#show", as: :user_app
   get '/:username', to: "apps#public_index", as: :user_apps
 
 end

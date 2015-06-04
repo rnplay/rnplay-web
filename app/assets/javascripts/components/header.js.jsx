@@ -42,7 +42,7 @@ var Header = React.createClass({
           <a href="/" className="pull-left navbar-logo">
             <img src={this.props.headerLogoSrc} className="img-responsive" width="35" />
           </a>
-          <a className="navbar-brand" href="/">React Native Appground</a>
+          <a className="navbar-brand" href="/">React Native Playground</a>
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
