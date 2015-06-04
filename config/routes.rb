@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   get '/profile' => 'devise/registrations#edit', as: :profile
 
+  get '/plays/:id' => 'apps#show'
+  get '/plays/:id/edit' => 'apps#show'
+
   resources :apps do
     member do
       post :fork
@@ -17,6 +20,7 @@ Rails.application.routes.draw do
       get :qr
       post :log
     end
+
     collection do
       get :search
       post :search
