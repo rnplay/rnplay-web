@@ -33,7 +33,7 @@ class PlaysController < ApplicationController
     offset = (page - 1) * per_page
 
     @plays = Play.order('view_count desc').
-      order('updated_at desc').limit(per_page).offset(page)
+      order('updated_at desc').limit(per_page).offset(offset)
 
     respond_to do |format|
       format.html
