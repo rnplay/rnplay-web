@@ -1,5 +1,4 @@
 class App < ActiveRecord::Base
-  #self.table_name = "plays"
 
   before_save :add_url_token
   before_save :parse_module_name
@@ -42,7 +41,9 @@ class App < ActiveRecord::Base
   end
 
   def write_js_to_disk
-    File.open("#{Rails.root}/app_js/#{self.url_token}.js", "w") {|f| f.write body }
+    root = "#{Rails.root}/app_js"
+    FileUtils.mkdir_p root
+    File.open("#{root}/#{self.url_token}.js", "w") {|f| f.write body }
   end
 
   def appetize_url(options = {})
