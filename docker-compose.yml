@@ -79,7 +79,7 @@ packagermaster:
   environment:
     VIRTUAL_HOST: packagermaster.rnplay.org
   volumes:
-    - /home/app/rails/rnplay/play_js:/js
+    - /home/app/rails/rnplay/app_js:/js
 
 proxy:
   restart: always
