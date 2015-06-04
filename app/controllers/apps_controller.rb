@@ -2,6 +2,7 @@ class AppsController < ApplicationController
   layout :pick_layout
   before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator]
   before_action :authenticate_user!, only: [:index]
+  before_action :paginate, only: [:popular, :search, :picks]
 
   protect_from_forgery except: :show
 
@@ -15,12 +16,12 @@ class AppsController < ApplicationController
   end
 
   def search
-    @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"])
+    @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).limit(@per_page).offset(@offset)
     render 'apps'
   end
 
   def picks
-    @apps = App.where(pick: true).order('updated_at desc')
+    @apps = App.where(pick: true).order('updated_at desc').limit(@per_page).offset(@offset)
     respond_to do |format|
       format.html
       format.json { render 'apps' }
@@ -28,12 +29,8 @@ class AppsController < ApplicationController
   end
 
   def popular
-    per_page = 10
-    page = (params[:page] || 1).to_i
-    offset = (page - 1) * per_page
-
-    @plays = Play.order('view_count desc').
-      order('updated_at desc').limit(per_page).offset(offset)
+    @plays = App.order('view_count desc').
+      order('updated_at desc').limit(@per_page).offset(@offset)
 
     respond_to do |format|
       format.html
@@ -159,15 +156,17 @@ class AppsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  #
+  def paginate
+    @per_page = 10
+    @page = (params[:page] || 1).to_i
+    @offset = (@page - 1) * @per_page
+  end
+
   def set_app
     @app = App.where(url_token: params[:id]).first
     raise ActiveRecord::RecordNotFound if !@app
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  #
   def app_params
     params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick)
   end
