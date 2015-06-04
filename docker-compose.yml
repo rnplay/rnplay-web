@@ -72,6 +72,15 @@ packager050rc1:
   volumes:
     - /home/app/rails/rnapp/app_js:/js
 
+packagermaster:
+  restart: always
+  image: "packager:master"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packagermaster.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/play_js:/js
+
 proxy:
   restart: always
   image: jwilder/nginx-proxy
