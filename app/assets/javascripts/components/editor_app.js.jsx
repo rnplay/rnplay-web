@@ -118,6 +118,7 @@ var EditorApp = React.createClass({
     if (this.state.showHeader) {
       return (
         <Header currentUser={this.props.currentUser}
+                currentApp={this.props.app}
                 headerLogoSrc={this.props.headerLogoSrc} />
       )
     }

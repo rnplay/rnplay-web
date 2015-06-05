@@ -18,6 +18,11 @@ class AppsController < ApplicationController
     end
   end
 
+  def qr
+    qr_code = GoogleQR.new(data: %({"url_token": "#{@app.url_token}", "module_name": "#{@app.module_name}"}), size: '250x250')
+    render json: {url: qr_code.to_s}
+  end
+
   def search
     @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).limit(@per_page).offset(@offset)
     render 'apps'

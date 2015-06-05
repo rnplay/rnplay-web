@@ -1,4 +1,8 @@
 var Header = React.createClass({
+  getInitialState: function() {
+    return { qrModalIsVisible: false }
+  },
+
   renderMyApps: function() {
     if (this.props.currentUser) {
       return <li><a href="/apps">My Apps</a></li>;
@@ -7,17 +11,42 @@ var Header = React.createClass({
     }
   },
 
+  showQRModal: function(e) {
+    e.preventDefault();
+    this.setState({qrModalIsVisible: true});
+  },
+
+  hideQRModal: function(e) {
+    e.preventDefault();
+    this.setState({qrModalIsVisible: false});
+  },
+
+  renderQRModal: function() {
+    if (this.props.currentApp) {
+      return (
+        <QrModal urlToken={this.props.currentApp.urlToken}
+                 onClickBackdrop={this.hideQRModal}
+                 isOpen={this.state.qrModalIsVisible} />
+      )
+    }
+  },
+
   renderSignInOutLink: function() {
     if (this.props.currentUser) {
       return (
-        <div className="dropdown">
-            <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="settings-menu"><span className="glyphicon glyphicon-cog"></span></a>
-          <ul className="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-menu">
-            <li role="presentation"><a href="/users/edit">Profile</a></li>
-            <li role="presentation">
-              <a rel="nofollow" data-method="delete" href="/users/sign_out">Sign Out</a>
-            </li>
-          </ul>
+        <div>
+          <a onClick={this.showQRModal} style={{color: '#fff', marginRight: 15, marginTop: -5, verticalAlign: 'top', paddingTop: 12, display: 'inline-block', cursor: 'pointer'}}>
+            QR Code
+          </a>
+          <div className="dropdown" style={{display: 'inline-block'}}>
+              <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="settings-menu"><span className="glyphicon glyphicon-cog"></span></a>
+            <ul className="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-menu">
+              <li role="presentation"><a href="/users/edit">Profile</a></li>
+              <li role="presentation">
+                <a rel="nofollow" data-method="delete" href="/users/sign_out">Sign Out</a>
+              </li>
+            </ul>
+          </div>
         </div>
       )
     } else {
@@ -28,6 +57,7 @@ var Header = React.createClass({
       )
     }
   },
+
 
   render: function() {
     return (
@@ -55,6 +85,7 @@ var Header = React.createClass({
           </ul>
         </div>
 
+        {this.renderQRModal()}
       </nav>
     );
   }

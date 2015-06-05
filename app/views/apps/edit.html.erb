@@ -7,7 +7,8 @@
         creatorId: @app.creator_id,
         buildId: @app.build_id,
         name: @app.name,
-        picked: @app.pick
+        picked: @app.pick,
+        urlToken: @app.url_token
       },
       currentUser: current_user,
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,

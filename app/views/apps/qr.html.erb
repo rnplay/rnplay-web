@@ -1,1 +1,1 @@
-<%=raw %({"url_token": "#{@app.url_token}", "module_name": "#{@app.module_name}"}).to_qr_image(size: '200x200') %>
+<%= raw %({"url_token": "#{@app.url_token}", "module_name": "#{@app.module_name}"}).to_qr(size: '200x200') %>

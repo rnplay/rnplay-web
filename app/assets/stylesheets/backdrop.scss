@@ -1,0 +1,23 @@
+.backdrop {
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 997;
+  opacity: 0;
+  display: none;
+
+  &.is-visible {
+    opacity: 0.2;
+    display: block;
+    transition: opacity 0.2s ease-out;
+    position: fixed;
+    display: block;
+  }
+
+  &.is-light {
+    background: #fff;
+    opacity: 0.6;
+  }
+}

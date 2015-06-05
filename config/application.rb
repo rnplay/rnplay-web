@@ -10,6 +10,12 @@ module Rnplay
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { :api_token => "3997a4ee-7134-4bb8-b148-a5c1c74c7859" }
     config.active_job.queue_adapter = :sidekiq
+    config.react.addons = true
+
+    # If we do not use this then render json: .. will escape & in urls and break
+    # the app qr code action
+    config.active_support.escape_html_entities_in_json = false
+
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
       allow do
         origins '*'
