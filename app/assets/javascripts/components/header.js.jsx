@@ -31,13 +31,21 @@ var Header = React.createClass({
     }
   },
 
+  renderQRLink: function() {
+    if (this.props.currentApp) {
+      return (
+        <a onClick={this.showQRModal} style={{color: '#fff', marginRight: 15, marginTop: -5, verticalAlign: 'top', paddingTop: 12, display: 'inline-block', cursor: 'pointer'}}>
+          QR Code
+        </a>
+      )
+    }
+  },
+
   renderSignInOutLink: function() {
     if (this.props.currentUser) {
       return (
         <div>
-          <a onClick={this.showQRModal} style={{color: '#fff', marginRight: 15, marginTop: -5, verticalAlign: 'top', paddingTop: 12, display: 'inline-block', cursor: 'pointer'}}>
-            QR Code
-          </a>
+          {this.renderQRLink()}
           <div className="dropdown" style={{display: 'inline-block'}}>
               <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="settings-menu"><span className="glyphicon glyphicon-cog"></span></a>
             <ul className="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-menu">
