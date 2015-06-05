@@ -81,12 +81,12 @@ packagermaster:
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
-packager8b93b99:
+packager8b93b9:
   restart: always
-  image: "packager:8b93b99"
+  image: "packager:8b93b9"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager8b93b99.rnplay.org
+    VIRTUAL_HOST: packager8b93b9.rnplay.org
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
