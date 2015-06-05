@@ -2,16 +2,19 @@ class AppsController < ApplicationController
   layout :pick_layout
   before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr]
   before_action :authenticate_user!, only: [:index]
-  before_action :paginate, only: [:popular, :search, :picks]
+  before_action :paginate, only: [:popular, :search, :picks, :index]
 
   protect_from_forgery except: :show
 
   def index
-    @apps = current_user.apps.all
+    @apps = current_user.apps
 
     respond_to do |format|
       format.html
-      format.json { render 'apps' }
+      format.json do
+        @apps = @apps.limit(@per_page).offset(@offset)
+        render 'apps'
+      end
     end
   end
 
