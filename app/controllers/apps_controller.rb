@@ -19,7 +19,7 @@ class AppsController < ApplicationController
   end
 
   def qr
-    qr_code = GoogleQR.new(data: %({"url_token": "#{@app.url_token}", "module_name": "#{@app.module_name}"}), size: '250x250')
+    qr_code = GoogleQR.new(data: %({"bundle_path": "#{@app.bundle_path}", "module_name": "#{@app.module_name}"}), size: '250x250')
     render json: {url: qr_code.to_s}
   end
 
