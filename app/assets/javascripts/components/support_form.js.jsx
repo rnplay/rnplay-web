@@ -1,10 +1,10 @@
 var SupportForm = React.createClass({
 
-  getInitialState() {
+  getInitialState: function() {
     return { submitted: false }
   },
 
-  onSubmit(e) {
+  onSubmit: function(e) {
     e.preventDefault();
 
     $.post('/contact', {
@@ -18,7 +18,7 @@ var SupportForm = React.createClass({
     }, 5000)
   },
 
-  renderForm() {
+  renderForm: function() {
     return (
       <div className="support-form">
         <h2>Get in touch with us</h2>
@@ -36,7 +36,7 @@ var SupportForm = React.createClass({
     )
   },
 
-  renderSuccess() {
+  renderSuccess: function() {
     return (
       <div className="support-form">
         <div className="contact-form-submitted">
@@ -48,7 +48,7 @@ var SupportForm = React.createClass({
     )
   },
 
-  render() {
+  render: function() {
     if (this.state.submitted) {
       return this.renderSuccess();
     } else {
