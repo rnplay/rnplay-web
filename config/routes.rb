@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   end
 
 
+  get '/privacy', to: "pages#privacy"
   get '/:username/:id', to: "apps#show", as: :user_app
   get '/:username', to: "apps#public_index", as: :user_apps
 
