@@ -22,6 +22,11 @@ class App < ActiveRecord::Base
     end
   end
 
+  # for upcoming multi-file app support
+  def bundle_path
+    "/#{url_token}.bundle"
+  end
+
   def parse_module_name
     self.module_name = body.scan(/module.exports\W=\W(.+);/).flatten.first
   end
