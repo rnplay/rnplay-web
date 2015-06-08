@@ -1,6 +1,6 @@
 class AppsController < ApplicationController
   layout :pick_layout
-  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr]
+  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view]
   before_action :authenticate_user!, only: [:index]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
@@ -76,6 +76,15 @@ class AppsController < ApplicationController
 
   def raw_simulator
     render layout: nil
+  end
+
+  def view
+    @app.increment_view_count!
+    respond_to do |format|
+      format.json do
+        render nothing: true
+      end
+    end
   end
 
   def show

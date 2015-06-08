@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get :raw_simulator
       get :qr
       post :log
+      post :view
     end
 
     collection do
