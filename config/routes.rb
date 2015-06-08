@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     :registrations => "users/registrations"
   }
 
+
+  get '/contact' => 'support#new'
+  post '/contact' => 'support#create'
+
   get '/profile' => 'devise/registrations#edit', as: :profile
 
   get '/plays/:id' => 'apps#show'

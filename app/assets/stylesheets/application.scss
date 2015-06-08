@@ -93,8 +93,9 @@ $dropdown-link-active-color: $dropdown-bg;
 // Our stuff
 @import "modal";
 @import "backdrop";
+@import "support_form";
 
-body.welcome-page {
+body.welcome-page, body.support-page {
   background: #eee;
 }
 
