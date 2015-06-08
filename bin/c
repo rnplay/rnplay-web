@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker exec -i -t rnapp_rnapp_1 /app/bin/rails c
+sudo docker exec -i -t rnplay_rnplay_1 /app/bin/rails c
