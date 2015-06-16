@@ -23,6 +23,7 @@ rnplaystaging:
   env_file: .env.production
   volumes:
     - /home/app/rails/rnplay_staging:/app
+    - /home/app/repos:/var/repos
   links:
     - postgres
     - cache
