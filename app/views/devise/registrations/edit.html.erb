@@ -1,6 +1,9 @@
 <%= bootstrap_devise_error_messages! %>
 <div class="panel panel-default">
+
   <div class="panel-body">
+    <div style="position: absolute; top: 20px; opacity: .8"><p>Your API Token: <strong><%= resource.authentication_token %></strong></p></div>
+
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
       <div class="form-group">
         <%= f.label :email %>
@@ -35,8 +38,8 @@
            Use dark theme
         </label>
       </div>
-
       <%= f.submit t('.update', :default => "Update"), class: "btn btn-info" %>
     <% end %>
   </div>
+
 </div>

@@ -281,6 +281,10 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    simple_token_authentication (1.10.0)
+      actionmailer (>= 3.2.6, < 5)
+      actionpack (>= 3.2.6, < 5)
+      devise (~> 3.2)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -365,6 +369,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sidekiq
   simple_form
+  simple_token_authentication
   sinatra
   slim
   social-share-button

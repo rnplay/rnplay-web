@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  acts_as_token_authentication_handler_for User
+
   protected
 
   def not_found

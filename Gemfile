@@ -51,3 +51,4 @@ gem 'dotenv-rails'
 gem 'newrelic_rpm'
 gem 'sidekiq'
 gem "rack-cors"
+gem "simple_token_authentication"

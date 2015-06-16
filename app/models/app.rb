@@ -1,11 +1,22 @@
 class App < ActiveRecord::Base
 
   before_save :add_url_token
-  before_save :parse_module_name
-  after_save :write_js_to_disk
   validates :name, presence: true
-  validates :body, presence: true
-  validates :build_id, presence: true
+
+  # for apps pushed from the cli
+
+  # TODO: extract the build from package.json
+  # before_save :extract_build, if: :uses_git?
+
+  after_create :create_bare_git_repo, if: :uses_git?
+
+  # for apps created in the editor
+
+  before_save :parse_module_name, unless: :uses_git?
+  after_save :write_js_to_disk, unless: :uses_git?
+
+  validates :body, presence: true, unless: :uses_git?
+  validates :build_id, presence: true, unless: :uses_git?
 
   belongs_to :creator, class_name: "User"
   belongs_to :build
@@ -94,7 +105,11 @@ class App < ActiveRecord::Base
   def queue_for_bundling
     BundleJob.new.async.perform(id)
   end
-
+  
+  def create_bare_git_repo
+    logger.info "Creating git repository for #{url_token}."
+    logger.info `git --bare init --shared /var/repos/#{url_token}.git`
+  end
 
   def add_url_token
     return if url_token

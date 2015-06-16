@@ -184,7 +184,7 @@ class AppsController < ApplicationController
   end
 
   def app_params
-    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick)
+    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick, :uses_git)
   end
 
   def pick_layout
