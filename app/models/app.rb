@@ -6,8 +6,7 @@ class App < ActiveRecord::Base
   # for apps pushed from the cli
 
   # TODO: extract the build from package.json
-  # before_save :extract_build, if: :uses_git?
-
+  after_create :extract_build, if: :uses_git?
   after_create :create_bare_git_repo, if: :uses_git?
 
   # for apps created in the editor
@@ -106,9 +105,41 @@ class App < ActiveRecord::Base
     BundleJob.new.async.perform(id)
   end
 
+  def source_git_repo_path
+    "/var/repos/#{name}.git"
+  end
+
+  def target_git_repo_path
+    "#{Rails.root}/app_js/#{name}"
+  end
+
+  def source_git_hook_path
+    "#{source_git_repo_path}/hooks/post-receive"
+  end
+
   def create_bare_git_repo
-    logger.info "Creating git repository for #{url_token}."
-    logger.info `git --bare init --shared /var/repos/#{name}.git`
+    run "git --bare init --shared #{source_git_repo_path}"
+    run "cp #{Rails.root}/config/git-post-receive #{source_git_hook_path}"
+    run "chmod 755 #{source_git_hook_path}"
+  end
+
+  def run(cmd)
+    logger.info "Running #{cmd}"
+    logger.info `#{cmd}`
+  end
+
+  def rn_version_from_package_json
+    version = JSON.parse(File.read(target_git_repo_path+"/package.json"))['dependencies']['react-native']
+    version.gsub("^", "")
+  end
+
+  def extract_build
+    # if build = Build.find_by(name: rn_version_from_package_json)
+    #   self.build = build
+    # else
+      self.build = Build.find_by(name: 'master')
+      save
+    # end
   end
 
   def add_url_token
