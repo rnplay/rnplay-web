@@ -5,9 +5,8 @@ class AppsController < ApplicationController
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
-  skip_before_action :verify_authenticity_token, only: :create
 
-  protect_from_forgery except: :show
+  protect_from_forgery except: [:show, :create]
 
   def index
     @apps = current_user.apps
