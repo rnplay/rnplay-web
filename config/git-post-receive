@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+PWD=$(dirname `pwd`)
+NAME=$(basename $PWD .git)
+TARGET=/rails/app_js/$NAME
+
+if [ -d $TARGET ]; then
+  cd $TARGET && git fetch origin && git reset --hard origin/master
+else
+  git clone .. /rails/app_js/$NAME
+fi
