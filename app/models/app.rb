@@ -105,10 +105,10 @@ class App < ActiveRecord::Base
   def queue_for_bundling
     BundleJob.new.async.perform(id)
   end
-  
+
   def create_bare_git_repo
     logger.info "Creating git repository for #{url_token}."
-    logger.info `git --bare init --shared /var/repos/#{url_token}.git`
+    logger.info `git --bare init --shared /var/repos/#{name}.git`
   end
 
   def add_url_token
