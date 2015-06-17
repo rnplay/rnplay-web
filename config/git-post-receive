@@ -5,7 +5,7 @@ puts name
 target = "/rails/app_js/#{name}"
 
 if File.exists?(target)
-  puts `git --git-dir #{target}/.git fetch origin && git --git-dir #{target}/.git reset --hard origin/master`
+  puts `git --work-tree #{target} --git-dir #{target}/.git fetch origin && git --work-tree #{target} --git-dir #{target}/.git reset --hard origin/master`
 
 else
   puts 'Cloning...'
