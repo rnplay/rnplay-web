@@ -1,11 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 #
-PWD=$(dirname `pwd`)
-NAME=$(basename $PWD .git)
-TARGET=/rails/app_js/$NAME
+name = Dir.pwd.split("/").last.split(".").first
+puts name
+target = "/rails/app_js/#{name}"
 
-if [ -d $TARGET ]; then
-  cd $TARGET && git fetch origin && git reset --hard origin/master
+if File.exists?(target)
+  puts `git --git-dir #{target}/.git fetch origin && git --git-dir #{target}/.git reset --hard origin/master`
+
 else
-  git clone .. /rails/app_js/$NAME
-fi
+  puts 'Cloning...'
+  puts `git clone /var/repos/#{name}.git /rails/app_js/#{name}`
+end
