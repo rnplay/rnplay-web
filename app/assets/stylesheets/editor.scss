@@ -137,16 +137,27 @@ body.app-editor-page {
 
 .editor-flex-wrapper {
   flex: 1;
+  display: flex;
 
   /* Hack because Safari's 100% is based off of children, */
   /* so this stretches to fit the content and never triggers overflow scroll */
-  max-height: calc(100vh - 90px);
+  /* max-height: calc(100vh - 90px); */
+  // jlumpe: removed this, as it does not seem to make any difference whether we use
+  // max-height or height. We need height though to get the editor to play nice
+
+  height: calc(100vh - 90px);
   overflow-y: scroll;
   p {
     margin-top: 20vw;
     text-align: center;
     font-size: 150%;
   }
+}
+
+.editor-scroll-wrapper {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
 }
 
 .cm-s-solarized.CodeMirror {
@@ -177,4 +188,85 @@ body.app-editor-page {
   padding: .1em .8em;
   overflow: hidden;
   color: rgba(0,0,0,0.9);
+}
+
+.CodeMirror-scroll {
+  min-height: 100%;
+}
+
+.fileselector {
+  flex-shrink: 0;
+  background-color: #222;
+  color: #fff;
+  width: 0;
+  position: relative;
+  z-index: 5;
+  width: 200px;
+  margin-left: -190px;
+  border-right: 1px solid #242424;
+  box-shadow: 0 0 10px #131313;
+  transition: margin-left 0.3s ease;
+
+  .open-handle {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 10px;
+    background-color: #1A1A1A;
+    z-index: 100;
+  }
+
+  &.open {
+    margin-left: 0;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    color: #ccc;
+
+    &__node {
+      cursor: pointer;
+      line-height: 1.8;
+      padding-left: 1em;
+
+      &__label {
+        position: relative;
+        z-index: 10;
+        display: inline-block;
+      }
+
+      &--has-children {
+        font-weight: 700;
+
+        &:before {
+          margin-right: 0.5em;
+          width: 0.5em;
+          content: '+';
+          display: inline-block;
+        }
+      }
+
+      &--open {
+        &:before {
+          content: '-';
+        }
+      }
+
+      &--current {
+        color: #fff;
+
+        &:before {
+          background: #2D2D2D;
+          content: ' ';
+          display: block;
+          height: 25px;
+          width: 100%;
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
+  }
 }
