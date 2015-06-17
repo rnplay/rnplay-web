@@ -142,6 +142,11 @@ body.app-editor-page {
   /* so this stretches to fit the content and never triggers overflow scroll */
   max-height: calc(100vh - 90px);
   overflow-y: scroll;
+  p {
+    margin-top: 20vw;
+    text-align: center;
+    font-size: 150%;
+  }
 }
 
 .cm-s-solarized.CodeMirror {

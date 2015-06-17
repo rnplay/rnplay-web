@@ -8,7 +8,8 @@
         buildId: @app.build_id,
         name: @app.name,
         picked: @app.pick,
-        urlToken: @app.url_token
+        urlToken: @app.url_token,
+        multiFile: @app.uses_git
       },
       currentUser: current_user,
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,

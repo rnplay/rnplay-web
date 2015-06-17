@@ -27,23 +27,30 @@ var Editor = React.createClass({
       options.keyMap = 'vim';
     }
 
-    var textArea = CodeMirror.fromTextArea(this.refs.editorTextArea.getDOMNode(), options);
+    if (!this.props.app.multiFile) {
+      var textArea = CodeMirror.fromTextArea(this.refs.editorTextArea.getDOMNode(), options);
 
-    textArea.on('change', function(e) {
-      this.props.onUpdateBody &&
-        this.props.onUpdateBody(textArea.getValue())
-    }.bind(this));
+      textArea.on('change', function(e) {
+        this.props.onUpdateBody &&
+          this.props.onUpdateBody(textArea.getValue())
+      }.bind(this));
 
-    this.setState({codeMirrorInstance: textArea});
+      this.setState({codeMirrorInstance: textArea});
+    }
   },
 
   render: function() {
-    return (
-      <div className="editor-flex-wrapper">
-        <textarea ref="editorTextArea" onChange={this._onChange}>
-          {this.props.app.body}
-        </textarea>
-      </div>
-    )
+    content = this.props.app.multiFile ?
+    <div className="editor-flex-wrapper">
+      <p>This app can't be edited yet, because it contains multiple files. Support for this coming soon!</p>
+    </div>
+    :
+    <div className="editor-flex-wrapper">
+      <textarea ref="editorTextArea" onChange={this._onChange}>
+        {this.props.app.body}
+      </textarea>
+    </div>
+
+    return content;
   }
 });

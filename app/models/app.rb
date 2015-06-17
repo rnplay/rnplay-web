@@ -25,10 +25,11 @@ class App < ActiveRecord::Base
   end
 
   def bundle_url
+    path = uses_git? ? "#{name}/index.ios.bundle" : "#{url_token}.bundle"
     if Rails.env.development?
-      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{url_token}.bundle"
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{path}"
     else
-      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{url_token}.bundle"
+      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{path}"
     end
   end
 
