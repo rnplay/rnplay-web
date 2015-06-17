@@ -1,6 +1,8 @@
 class App < ActiveRecord::Base
 
   before_save :add_url_token
+  before_save :parse_module_name
+
   validates :name, presence: true
 
   # for apps pushed from the cli
@@ -11,7 +13,6 @@ class App < ActiveRecord::Base
 
   # for apps created in the editor
 
-  before_save :parse_module_name, unless: :uses_git?
   after_save :write_js_to_disk, unless: :uses_git?
 
   validates :body, presence: true, unless: :uses_git?
@@ -39,7 +40,11 @@ class App < ActiveRecord::Base
   end
 
   def parse_module_name
-    self.module_name = body.scan(/module.exports\W=\W(.+);/).flatten.first
+    if uses_git?
+      self.module_name = self.name
+    else
+      self.module_name = body.scan(/module.exports\W=\W(.+);/).flatten.first
+    end
   end
 
   def increment_view_count!
