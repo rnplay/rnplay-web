@@ -126,7 +126,7 @@ class App < ActiveRecord::Base
   def create_bare_git_repo
     run "git --bare init --shared #{source_git_repo_path}"
     run "cp #{Rails.root}/config/git-post-receive #{source_git_hook_path}"
-    run "chmod 755 #{source_git_hook_path}"
+    run "chmod 755 #{source_git_hook_path} && chown -R app:app #{source_git_hook_path}"
   end
 
   def run(cmd)
