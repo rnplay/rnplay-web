@@ -129,3 +129,11 @@ logger:
   restart: always
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
+
+grack:
+  image: grack-docker
+  volumes:
+    - /home/app/repos:/var/repos
+    - /home/app/rails/rnplay:/var/rails
+  links:
+    - postgres
