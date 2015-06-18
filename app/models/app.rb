@@ -121,6 +121,12 @@ class App < ActiveRecord::Base
     end
   end
 
+  def update_file(name, content)
+    File.open("#{target_git_repo_path}/#{name}", "w") do |file|
+      file.write(content)
+    end
+  end
+
   private
 
   def run(cmd)

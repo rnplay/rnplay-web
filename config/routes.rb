@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get :picks
       get :popular
     end
+
+    resources :files
   end
 
   post '/log' => 'logs#log'
