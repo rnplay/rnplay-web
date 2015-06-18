@@ -3,6 +3,7 @@ var EditorApp = React.createClass({
     return {
       name: this.props.app.name,
       body: this.props.app.body,
+      currentFile: null,
       buildId: this.props.app.buildId,
       showHeader: true,
       picked: this.props.app.picked,
@@ -15,7 +16,7 @@ var EditorApp = React.createClass({
   },
 
   componentDidMount: function() {
-    CodeMirror.commands.save = this.onSave.bind(this);
+    CodeMirror.commands.save = this.onFileSave.bind(this);
     var iframe = document.querySelector('iframe');
 
     $(document).keyup(function() {
@@ -64,13 +65,35 @@ var EditorApp = React.createClass({
     });
   },
 
+  onChangeFile: function(filename) {
+    this.setState({currentFile: filename})
+  },
+
+  onFileSave: function() {
+    console.log(this.state);
+
+    $.ajax({
+      url: '/apps/' + this.props.app.id + "/files/" + encodeURIComponent(this.state.currentFile),
+      data: {
+        body: this.state.body
+      },
+      type: 'PUT',
+      success: function(data) {
+        if (data.success) {
+
+        }
+      }
+    });
+
+  },
+
   onSave: function() {
     var self = this;
 
     $.ajax({
       url: '/apps/' + this.props.app.id,
       data: {
-        app: {name: this.state.name, body: this.state.body, build_id: this.state.buildId}
+        app: {name: this.state.name, build_id: this.state.buildId}
       },
       type: 'PUT',
       success: function(data) {
@@ -152,6 +175,7 @@ var EditorApp = React.createClass({
           <Editor app={this.props.app} currentUser={this.props.currentUser}
                   useVimKeyBindings={this.props.useVimKeyBindings}
                   useDarkTheme={this.props.useDarkTheme}
+                  onChangeFile={this.onChangeFile}
                   onUpdateBody={this.onUpdateBody} />
           <Simulator url={simulatorUrl} useDarkTheme={this.props.useDarkTheme} />
         </div>

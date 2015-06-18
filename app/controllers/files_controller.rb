@@ -10,17 +10,22 @@ class FilesController < ApplicationController
   def update
     @app = current_user.apps.find(params[:app_id])
 
-    if @app
-      @app.update_file(params[:id], file_params[:body])
-    else
-      render json: {error: 'Unauthorized!'}
+    respond_to do |format|
+      format.json do
+        if @app
+          @app.update_file(params[:id], file_params[:body])
+          render nothing: true, status: :ok
+        else
+          render json: {error: 'Unauthorized!'}
+        end
+      end
     end
   end
 
   private
 
   def file_params
-    params.permit(:body)
+    params.permit(:body, :app_id, :id)
   end
 
 end

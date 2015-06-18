@@ -60,7 +60,9 @@ var Editor = React.createClass({
       }
     }
 
+    // load the index page first
     textArea.swapDoc(documents['index.ios.js']);
+    this.props.onChangeFile('index.ios.js');
 
     this.setState({codeMirrorInstance: textArea, documents: documents});
   },
@@ -70,6 +72,7 @@ var Editor = React.createClass({
     this.setState({
       currentFile: filename
     });
+    this.props.onChangeFile && this.props.onChangeFile(filename);
   },
 
   render: function() {
