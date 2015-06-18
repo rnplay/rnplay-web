@@ -112,8 +112,7 @@ class App < ActiveRecord::Base
   def git_file_contents
     Dir.glob("#{target_git_repo_path}/**/*.{js,json}").reject do |f|
       f['node_modules'] ||
-      f['iOS'] ||
-      f['package.json']
+      f['iOS']
     end.inject({}) do |hash, path|
       base = path.gsub("#{target_git_repo_path}/", "")
       logger.info "BASE #{base}"
