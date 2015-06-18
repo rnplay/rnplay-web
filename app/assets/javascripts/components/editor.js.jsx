@@ -36,6 +36,7 @@ var Editor = React.createClass({
   },
 
   componentDidMount: function() {
+
     var options = {
       lineNumbers: true,
       mode: 'javascript',
