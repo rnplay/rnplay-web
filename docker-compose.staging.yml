@@ -1,0 +1,45 @@
+web:
+  build: .
+  restart: always
+  env_file: .env.staging
+  volumes:
+    - /home/app/rails/rnplay:/app
+    - /home/app/repos:/var/repos
+  links:
+    - postgres
+    - cache
+    - redis
+  environment:
+    RAILS_ENV: staging
+    VIRTUAL_HOST: staging.rnplay.org
+
+postgres:
+  restart: always
+  env_file: .env.staging
+  image: postgres
+
+packager:
+  restart: always
+  image: "packager:master"
+  env_file: .env.staging
+  environment:
+    VIRTUAL_HOST: packager-staging.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay_staging/app_js:/js
+    - /home/app/repos:/var/repos
+
+redis:
+  restart: always
+  image: redis
+
+cache:
+  restart: always
+  image: memcached
+
+grack:
+  image: grack-docker
+  volumes:
+    - /home/app/repos:/var/repos
+    - /home/app/rails/rnplay_staging:/rails
+  links:
+    - postgres
