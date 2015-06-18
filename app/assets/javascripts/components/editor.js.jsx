@@ -14,12 +14,6 @@ var makeFileTree = function (filenames) {
 
 var Editor = React.createClass({
   getInitialState: function() {
-    // var files = {
-    //   'index.js': this.props.app.body,
-    //   'folder/second.js': this.props.app.body.substring(0, 200),
-    //   'folder/nested/more.js': this.props.app.body.substring(100, 200),
-    //   'folder/different/third.js': this.props.app.body.substring(50, 400)
-    // };
     return {
       codeMirrorInstance: null,
       unsavedBuffers: {},
@@ -80,6 +74,6 @@ var Editor = React.createClass({
           {this.props.app.body}
         </textarea>
       </div>
-    </div>);
+    </div>)
   }
 });
