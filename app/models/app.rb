@@ -29,6 +29,8 @@ class App < ActiveRecord::Base
     path = uses_git? ? "#{name}/index.ios.bundle" : "#{url_token}.bundle"
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{path}"
+    elsif Rails.env.staging?
+      "https://packager-staging.rnplay.org/#{path}"
     else
       "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{path}"
     end
