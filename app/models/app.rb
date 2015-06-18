@@ -100,17 +100,7 @@ class App < ActiveRecord::Base
   def created_by?(user)
     !user.nil? && self.creator == user
   end
-
-  def take_simulator_screenshot
-    logger.info `phantomjs --ssl-protocol=any /app/screenshot.js https://rnapp.org/apps/#{url_token}/raw_simulator /app/public/screenshots/#{url_token}.png`
-  end
-
-  private
-
-  def queue_for_bundling
-    BundleJob.new.async.perform(id)
-  end
-
+  
   def source_git_repo_path
     "/var/repos/#{name}.git"
   end
@@ -128,6 +118,8 @@ class App < ActiveRecord::Base
     run "cp #{Rails.root}/config/git-post-receive #{source_git_hook_path}"
     run "chmod 755 #{source_git_hook_path} && chown -R app:app #{source_git_hook_path}"
   end
+
+  private
 
   def run(cmd)
     logger.info "Running #{cmd}"
