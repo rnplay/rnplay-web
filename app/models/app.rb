@@ -51,16 +51,6 @@ class App < ActiveRecord::Base
     update_columns(view_count: view_count + 1)
   end
 
-  def bundle_js
-    logger.info "Writing js to disk for #{url_token}"
-    File.open(Rails.root+"#{self.url_token}.js", "w") {|f| f.write body }
-    logger.info "Bundling #{url_token}"
-    logger.info `node cli.js bundle --id #{self.url_token}`
-    logger.info "Saving bundle to db"
-    bundle_data = File.read(Rails.root+"public/#{self.url_token}.js")
-    update_column :bundle, bundle_data
-  end
-
   def write_js_to_disk
     root = "#{Rails.root}/app_js"
     FileUtils.mkdir_p root
@@ -100,7 +90,7 @@ class App < ActiveRecord::Base
   def created_by?(user)
     !user.nil? && self.creator == user
   end
-  
+
   def source_git_repo_path
     "/var/repos/#{name}.git"
   end
@@ -117,6 +107,13 @@ class App < ActiveRecord::Base
     run "git --bare init --shared #{source_git_repo_path}"
     run "cp #{Rails.root}/config/git-post-receive #{source_git_hook_path}"
     run "chmod 755 #{source_git_hook_path} && chown -R app:app #{source_git_hook_path}"
+  end
+
+  def git_file_contents
+    Dir.glob("#{target_git_repo_path}/**/*.{js,json}").reject {|f| f['node_modules'] || f['iOS'] || f['package.json'] }.inject({}) do |hash, path|
+      hash[path] = File.read(path)
+      hash
+    end
   end
 
   private
