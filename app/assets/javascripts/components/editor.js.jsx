@@ -14,13 +14,10 @@ var makeFileTree = function (filenames) {
 
 var Editor = React.createClass({
   getInitialState: function() {
+
     return {
       codeMirrorInstance: null,
-      unsavedBuffers: {},
-
-      // TODO remove this, as soon as we have real files passed in,
-      // just for testing purposes
-      files: this.props.app.files,
+      documents: {},
       fileTree: makeFileTree(Object.keys(this.props.app.files))
     };
   },
@@ -55,11 +52,21 @@ var Editor = React.createClass({
         this.props.onUpdateBody(textArea.getValue())
     }.bind(this));
 
-    this.setState({codeMirrorInstance: textArea});
+    var documents = {};
+
+    for (file in this.props.app.files) {
+      if (this.props.app.files.hasOwnProperty(file)) {
+        documents[file] = (new CodeMirror.Doc(this.props.app.files[file], 'javascript'));
+      }
+    }
+
+    textArea.swapDoc(documents['index.ios.js']);
+
+    this.setState({codeMirrorInstance: textArea, documents: documents});
   },
 
   changeFile: function (filename) {
-    this.state.codeMirrorInstance.setValue(this.state.files[filename]);
+    this.state.codeMirrorInstance.swapDoc(this.state.documents[filename]);
     this.setState({
       currentFile: filename
     });
