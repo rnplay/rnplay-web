@@ -11,7 +11,9 @@ module Rnplay
     config.action_mailer.postmark_settings = { :api_token => ENV['POSTMARK_KEY'] }
     config.active_job.queue_adapter = :sidekiq
     config.react.addons = true
-
+    config.react.jsx_transform_options = {
+      harmony: true
+    }
     # If we do not use this then render json: .. will escape & in urls and break
     # the app qr code action
     config.active_support.escape_html_entities_in_json = false
