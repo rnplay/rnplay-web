@@ -86,7 +86,7 @@ var FileSelector = React.createClass({
         })}>
         <div className='open-handle' onClick={this.toggleSelector}></div>
         <ol className='fileselector__list'>
-          {files && Object.keys(files).map(function (filename) {
+          {files && Object.keys(files).map(function(filename) {
             return (
               <FileSelectorNode
                 onSelect={onSelect}
