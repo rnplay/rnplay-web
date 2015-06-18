@@ -9,7 +9,8 @@
         name: @app.name,
         picked: @app.pick,
         urlToken: @app.url_token,
-        multiFile: @app.uses_git
+        multiFile: @app.uses_git,
+        files: @app.git_file_contents
       },
       currentUser: current_user,
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,

@@ -14,20 +14,20 @@ var makeFileTree = function (filenames) {
 
 var Editor = React.createClass({
   getInitialState: function() {
-    var files = {
-      'index.js': this.props.app.body,
-      'folder/second.js': this.props.app.body.substring(0, 200),
-      'folder/nested/more.js': this.props.app.body.substring(100, 200),
-      'folder/different/third.js': this.props.app.body.substring(50, 400)
-    };
+    // var files = {
+    //   'index.js': this.props.app.body,
+    //   'folder/second.js': this.props.app.body.substring(0, 200),
+    //   'folder/nested/more.js': this.props.app.body.substring(100, 200),
+    //   'folder/different/third.js': this.props.app.body.substring(50, 400)
+    // };
     return {
       codeMirrorInstance: null,
       unsavedBuffers: {},
 
       // TODO remove this, as soon as we have real files passed in,
       // just for testing purposes
-      files: files,
-      fileTree: makeFileTree(Object.keys(files))
+      files: this.props.app.files,
+      fileTree: makeFileTree(Object.keys(this.props.app.files))
     };
   },
 
@@ -53,16 +53,14 @@ var Editor = React.createClass({
       options.keyMap = 'vim';
     }
 
-    if (!this.props.app.multiFile) {
-      var textArea = CodeMirror.fromTextArea(this.refs.editorTextArea.getDOMNode(), options);
+    var textArea = CodeMirror.fromTextArea(this.refs.editorTextArea.getDOMNode(), options);
 
-      textArea.on('change', function(e) {
-        this.props.onUpdateBody &&
-          this.props.onUpdateBody(textArea.getValue())
-      }.bind(this));
+    textArea.on('change', function(e) {
+      this.props.onUpdateBody &&
+        this.props.onUpdateBody(textArea.getValue())
+    }.bind(this));
 
-      this.setState({codeMirrorInstance: textArea});
-    }
+    this.setState({codeMirrorInstance: textArea});
   },
 
   changeFile: function (filename) {
@@ -74,20 +72,13 @@ var Editor = React.createClass({
 
   render: function() {
     var currentFile = this.state.currentFile || 'index.js';
-    content = this.props.app.multiFile ?
-    <div className="editor-flex-wrapper">
-      <p>This app can't be edited yet, because it contains multiple files. Support for this coming soon!</p>
-    </div>
-    :
-    <div className="editor-flex-wrapper">
+    return (<div className="editor-flex-wrapper">
       <FileSelector files={this.state.fileTree} current={currentFile} onSelect={this.changeFile} />
       <div className="editor-scroll-wrapper">
         <textarea ref="editorTextArea" onChange={this._onChange}>
           {this.props.app.body}
         </textarea>
       </div>
-    </div>
-
-    return content;
+    </div>);
   }
 });
