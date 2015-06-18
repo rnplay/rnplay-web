@@ -4,6 +4,7 @@ rnplay:
   env_file: .env.production
   volumes:
     - /home/app/rails/rnplay:/app
+    - /home/app/repos:/var/repos
   links:
     - postgres
     - cache
