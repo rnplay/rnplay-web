@@ -45,24 +45,25 @@ var Editor = React.createClass({
       options.keyMap = 'vim';
     }
 
-    var textArea = CodeMirror.fromTextArea(this.refs.editorTextArea.getDOMNode(), options);
+    var textareaNode = React.findDOMNode(this.refs.editorTextArea);
+    var textArea = CodeMirror.fromTextArea(textareaNode, options);
 
-    textArea.on('change', function(e) {
-      this.props.onUpdateBody &&
-        this.props.onUpdateBody(textArea.getValue())
+    // TODO Move this code back to the `onChange` handler and reference it here
+    textArea.on('change', function (e) {
+      this.props.onUpdateBody && this.props.onUpdateBody(textArea.getValue());
     }.bind(this));
 
-    var documents = {};
+    var files = this.props.app.files;
+    var documents = Object.keys(files)
+      .reduce(function (docs, filename) {
+        docs[filename] = new CodeMirror.Doc(files[filename], 'javascript');
+        return docs;
+      }, {});
 
-    for (file in this.props.app.files) {
-      if (this.props.app.files.hasOwnProperty(file)) {
-        documents[file] = (new CodeMirror.Doc(this.props.app.files[file], 'javascript'));
-      }
-    }
-
+    var index = 'index.ios.js';
     // load the index page first
-    textArea.swapDoc(documents['index.ios.js']);
-    this.props.onChangeFile('index.ios.js');
+    textArea.swapDoc(documents[index]);
+    this.props.onChangeFile(index);
 
     this.setState({codeMirrorInstance: textArea, documents: documents});
   },
@@ -72,6 +73,7 @@ var Editor = React.createClass({
     this.setState({
       currentFile: filename
     });
+
     this.props.onChangeFile && this.props.onChangeFile(filename);
   },
 
