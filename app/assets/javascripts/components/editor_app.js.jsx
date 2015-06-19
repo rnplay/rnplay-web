@@ -66,7 +66,7 @@ var EditorApp = React.createClass({
   },
 
   onChangeFile: function(filename) {
-    this.setState({currentFile: filename})
+    this.setState({currentFile: filename});
   },
 
   onFileSave: function() {
@@ -140,10 +140,12 @@ var EditorApp = React.createClass({
   renderHeader: function() {
     if (this.state.showHeader) {
       return (
-        <Header currentUser={this.props.currentUser}
-                currentApp={this.props.app}
-                headerLogoSrc={this.props.headerLogoSrc} />
-      )
+        <Header
+          currentUser={this.props.currentUser}
+          currentApp={this.props.app}
+          headerLogoSrc={this.props.headerLogoSrc}
+        />
+      );
     }
   },
 
@@ -158,25 +160,30 @@ var EditorApp = React.createClass({
       <div className="editor-container" style={{paddingTop: this.state.showHeader ? 50 : 0}}>
         {this.renderHeader()}
 
-        <EditorHeader name={this.state.name}
-                      useDarkTheme={this.props.useDarkTheme}
-                      app={this.props.app}
-                      currentUser={this.props.currentUser}
-                      onUpdateName={this.onUpdateName}
-                      onUpdateBuild={this.onUpdateBuild}
-                      builds={this.props.builds}
-                      buildId={this.props.app.buildId}
-                      picked={this.state.picked}
-                      onPick={this.onPick}
-                      onSave={this.onSave}
-                      onFork={this.onFork} />
+        <EditorHeader
+          name={this.state.name}
+          useDarkTheme={this.props.useDarkTheme}
+          app={this.props.app}
+          currentUser={this.props.currentUser}
+          onUpdateName={this.onUpdateName}
+          onUpdateBuild={this.onUpdateBuild}
+          builds={this.props.builds}
+          buildId={this.props.app.buildId}
+          picked={this.state.picked}
+          onPick={this.onPick}
+          onSave={this.onSave}
+          onFork={this.onFork}
+        />
 
         <div className="editor-container__body">
-          <Editor app={this.props.app} currentUser={this.props.currentUser}
-                  useVimKeyBindings={this.props.useVimKeyBindings}
-                  useDarkTheme={this.props.useDarkTheme}
-                  onChangeFile={this.onChangeFile}
-                  onUpdateBody={this.onUpdateBody} />
+          <Editor
+            app={this.props.app}
+            currentUser={this.props.currentUser}
+            useVimKeyBindings={this.props.useVimKeyBindings}
+            useDarkTheme={this.props.useDarkTheme}
+            onChangeFile={this.onChangeFile}
+            onUpdateBody={this.onUpdateBody}
+          />
           <Simulator url={simulatorUrl} useDarkTheme={this.props.useDarkTheme} />
         </div>
       </div>
