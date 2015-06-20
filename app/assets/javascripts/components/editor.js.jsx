@@ -13,6 +13,11 @@ var makeFileTree = function (filenames) {
 };
 
 var Editor = React.createClass({
+
+  propTypes: {
+    onChangeFile: React.PropTypes.func.isRequired
+  },
+
   getInitialState: function() {
 
     return {
@@ -70,15 +75,14 @@ var Editor = React.createClass({
 
   changeFile: function (filename) {
     this.state.codeMirrorInstance.swapDoc(this.state.documents[filename]);
-    this.setState({
-      currentFile: filename
-    });
-
-    this.props.onChangeFile && this.props.onChangeFile(filename);
+    // this.setState({
+    //   currentFile: filename
+    // });
+    this.props.onChangeFile(filename);
   },
 
   render: function() {
-    var currentFile = this.state.currentFile || 'index.js';
+    var currentFile = this.props.currentFile;
     return (<div className="editor-flex-wrapper">
       <FileSelector files={this.state.fileTree} current={currentFile} onSelect={this.changeFile} />
       <div className="editor-scroll-wrapper">
