@@ -2,8 +2,9 @@ var EditorApp = React.createClass({
   getInitialState: function() {
     return {
       name: this.props.app.name,
-      body: this.props.app.body,
-      currentFile: null,
+      // TODO figure out a better way to get the current file.
+      // maybe we can store the last open file in the database?
+      currentFile: 'index.ios.js',
       buildId: this.props.app.buildId,
       showHeader: true,
       picked: this.props.app.picked,
@@ -12,11 +13,14 @@ var EditorApp = React.createClass({
   },
 
   componentWillMount: function() {
-    window.addEventListener('message', this.handleSimulatorEvent.bind(this), false);
+    // cache for all modified file bodies
+    this.fileBodies = {};
+
+    window.addEventListener('message', this.handleSimulatorEvent, false);
   },
 
   componentDidMount: function() {
-    CodeMirror.commands.save = this.onFileSave.bind(this);
+    CodeMirror.commands.save = this.onFileSave;
     var iframe = document.querySelector('iframe');
 
     $(document).keyup(function() {
@@ -45,7 +49,7 @@ var EditorApp = React.createClass({
   },
 
   onUpdateBody: function(newBody) {
-    this.setState({body: newBody});
+    this.fileBodies[this.state.currentFile] = newBody;
   },
 
   onUpdateBuild: function(newBuild) {
@@ -71,11 +75,12 @@ var EditorApp = React.createClass({
 
   onFileSave: function() {
     console.log(this.state);
+    var fileBody = this.fileBodies[this.state.currentFile];
 
     $.ajax({
       url: '/apps/' + this.props.app.id + "/files/" + encodeURIComponent(this.state.currentFile),
       data: {
-        body: this.state.body
+        body: fileBody
       },
       type: 'PUT',
       success: function(data) {
@@ -89,33 +94,65 @@ var EditorApp = React.createClass({
 
   onSave: function() {
     var self = this;
+    var fileBodies = this.fileBodies;
 
-    $.ajax({
-      url: '/apps/' + this.props.app.id,
+    // reset fileBodies so we don't save these files again next time
+    this.fileBodies = {};
+
+    var appUrl = '/apps/' + this.props.app.id;
+    var filesUrl = appUrl + '/files/';
+    var name = this.state.name;
+    var buildId = this.state.buildId;
+
+    // store all updates files
+    var requests = Object.keys(fileBodies).map(function (filename) {
+      return $.ajax({
+        url: filesUrl + encodeURIComponent(filename),
+        data: {
+          body: fileBodies[filename]
+        },
+        // hacky way until we fix the server to return json (atleast an emtpy string)
+        dataType: 'html',
+        type: 'PUT'
+      });
+    });
+
+    // update app info
+    requests.push($.ajax({
+      url: appUrl,
       data: {
-        app: {name: this.state.name, build_id: this.state.buildId}
+        app: {
+          name: name,
+          buildId: buildId
+        }
       },
-      type: 'PUT',
-      success: function(data) {
-        if (data.success) {
-          if (self.state.buildUpdated) {
-            window.location.reload();
-          } else {
+      type: 'PUT'
+    }).promise());
 
-            // From 0.4.4 and up, we enable live reload - no need to reload the app
-            if (parseInt(this.state.buildId) < 3) {
-              var iframe = document.querySelector('iframe');
-              if (self.state.simulatorActive) {
-                iframe.contentWindow.postMessage('restartApp', '*');
-              } else {
-                iframe.contentWindow.postMessage('requestSession', '*');
-              }
+    Promise.all(requests)
+      .then(function () {
+        if (self.state.buildUpdated) {
+          window.location.reload();
+        } else {
+          var isOldBuild = parseInt(self.state.buildId) < 3;
+          var iframe = document.querySelector('iframe');
+          // From 0.4.4 and up, we enable live reload - no need to reload the app
+          if (isOldBuild) {
+            if (self.state.simulatorActive) {
+              iframe.contentWindow.postMessage('restartApp', '*');
+            } else {
+              iframe.contentWindow.postMessage('requestSession', '*');
             }
-
+          } else if (!self.state.simulatorActive) {
+            iframe.contentWindow.postMessage('requestSession', '*');
           }
         }
-      }.bind(this)
-    });
+      })
+      .catch(function (err) {
+        // TODO display some error message
+        // TODO in case of error do this:
+        // self.fileBodies = _.merge(fileBodies, self.fileBodies);
+      });
   },
 
   onFork: function() {
@@ -178,6 +215,7 @@ var EditorApp = React.createClass({
         <div className="editor-container__body">
           <Editor
             app={this.props.app}
+            currentFile={this.state.currentFile}
             currentUser={this.props.currentUser}
             useVimKeyBindings={this.props.useVimKeyBindings}
             useDarkTheme={this.props.useDarkTheme}
