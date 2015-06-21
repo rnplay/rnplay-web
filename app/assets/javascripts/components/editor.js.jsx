@@ -18,7 +18,7 @@ var Editor = React.createClass({
     onChangeFile: React.PropTypes.func.isRequired
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
 
     return {
       codeMirrorInstance: null,
@@ -27,11 +27,11 @@ var Editor = React.createClass({
     };
   },
 
-  _onChange: function(e) {
-    // This is being handled by the change handler added via componentDidMount
+  handleEditorChange: function (codeMirror) {
+    this.props.onUpdateBody && this.props.onUpdateBody(codeMirror.getValue());
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
 
     var options = {
       lineNumbers: true,
@@ -54,9 +54,7 @@ var Editor = React.createClass({
     var textArea = CodeMirror.fromTextArea(textareaNode, options);
 
     // TODO Move this code back to the `onChange` handler and reference it here
-    textArea.on('change', function (e) {
-      this.props.onUpdateBody && this.props.onUpdateBody(textArea.getValue());
-    }.bind(this));
+    textArea.on('change', this.handleEditorChange);
 
     var files = this.props.app.files;
     var documents = Object.keys(files)
@@ -81,15 +79,17 @@ var Editor = React.createClass({
     this.props.onChangeFile(filename);
   },
 
-  render: function() {
+  render: function () {
     var currentFile = this.props.currentFile;
-    return (<div className="editor-flex-wrapper">
-      <FileSelector files={this.state.fileTree} current={currentFile} onSelect={this.changeFile} />
-      <div className="editor-scroll-wrapper">
-        <textarea ref="editorTextArea" onChange={this._onChange}>
-          {this.props.app.body}
-        </textarea>
+    return (
+      <div className="editor-flex-wrapper">
+        <FileSelector files={this.state.fileTree} current={currentFile} onSelect={this.changeFile} />
+        <div className="editor-scroll-wrapper">
+          <textarea ref="editorTextArea" onChange={this._onChange}>
+            {this.props.app.body}
+          </textarea>
+        </div>
       </div>
-    </div>)
+    );
   }
 });
