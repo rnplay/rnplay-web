@@ -14,11 +14,11 @@ module.exports = {
     root: [
       path.join(railsRoot, './app/assets/javascripts'),
     ],
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
-      { test: /\.js?$/, exclude: [/node_modules/, /vendor/], loader: 'babel-loader' },
+      { test: /\.(js|jsx)?$/, exclude: [/node_modules/, /vendor/], loader: 'babel-loader' },
     ]
   },
   cache: true,
