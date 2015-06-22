@@ -14,7 +14,7 @@ class FilesController < ApplicationController
       format.json do
         if @app
           @app.update_file(params[:id], file_params[:body])
-          render nothing: true, status: :ok
+          render json: {message: "File updated."}, status: :ok
         else
           render json: {error: 'Unauthorized!'}
         end
