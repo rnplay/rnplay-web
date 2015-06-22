@@ -6,25 +6,6 @@ import assign from 'lodash/object/assign';
 
 import FileSelector from './FileSelector';
 
-/**
- * Builds a nested object from an array of filepaths
- * @param  {array} filenames The filenames
- * @return {object}          The tree
- */
-const makeFileTree = (filenames) => {
-  return filenames.reduce((tree, filename) => {
-    const parts = filename.split('/');
-    let tempTree = tree;
-    let part;
-    while((part = parts.shift())) {
-      tempTree = tempTree[part] = parts.length === 0 ?
-        null :
-        tempTree[part] || {};
-    }
-    return tree;
-  }, {});
-};
-
 const DEFAULT_CODEMIRROR_OPTIONS = {
   autofocus: true,
   indentUnit: 2,
@@ -41,19 +22,17 @@ const DEFAULT_CODEMIRROR_OPTIONS = {
 export default class Editor {
 
   static propTypes = {
-    onChangeFile: React.PropTypes.func.isRequired
+    onChangeFile: React.PropTypes.func.isRequired,
+    onUpdateBody: React.PropTypes.func.isRequired
   }
 
   constructor({ app : { files } }, context) {
-    // TODO move this into a store
-    this._fileTree = makeFileTree(Object.keys(files));
     this._codeMirrorInstance = null;
     this._codeMirrorDocuments = null;
   }
 
   handleEditorChange = (codeMirror) => {
-    const { onUpdateBody } = this.props;
-    onUpdateBody && onUpdateBody(codeMirror.getValue());
+    this.props.onUpdateBody(codeMirror.getValue());
   }
 
   componentDidMount() {
@@ -84,7 +63,6 @@ export default class Editor {
 
     // load the index page first
     textArea.swapDoc(documents[currentFile]);
-    onChangeFile(currentFile);
   }
 
   changeFile = (filename) => {
@@ -95,13 +73,14 @@ export default class Editor {
   render() {
     const {
       app: { body },
-      currentFile
+      currentFile,
+      fileTree
     } = this.props;
 
     return (
       <div className="editor-flex-wrapper">
         <FileSelector
-          files={this._fileTree}
+          files={fileTree}
           current={currentFile}
           onSelect={this.changeFile}
         />
