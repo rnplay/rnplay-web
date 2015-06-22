@@ -70,8 +70,8 @@ class App < ActiveRecord::Base
       "moduleName" => module_name,
       "RCTDevMenu" => {
         "liveReloadEnabled" => true
-      }.merge(options[:app_params])
-    }.to_json
+      }
+    }.merge(options[:app_params]).to_json
 
     url = "https://appetize.io/#{options[:embed] ? 'embed' : 'app'}/" +
     "#{appetize_public_key}?" +
