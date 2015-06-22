@@ -3,7 +3,6 @@
 <head>
   <title><%= @page_title + " : " if @page_title %>React Native Playground<%= ": Share and test your React Native code in the browser" if !@page_title %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= webpack_include_tag('editor.js') %>
 
   <script src="//use.typekit.net/ptw6swo.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
@@ -25,4 +24,7 @@
 <body class="app-editor-page">
   <%= yield %>
 </body>
+
+<%= webpack_include_tag('editor.js') %>
+
 </html>
