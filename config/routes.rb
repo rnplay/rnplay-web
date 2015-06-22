@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  mount WebpackRails::Engine, at: 'webpack', as: 'webpack'
+
   devise_for :users, :controllers => {
     :omniauth_callbacks => "callbacks",
     :sessions => "users/sessions",

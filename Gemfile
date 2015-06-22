@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.2'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -52,3 +52,5 @@ gem 'newrelic_rpm'
 gem 'sidekiq'
 gem "rack-cors"
 gem "simple_token_authentication"
+gem 'webpack_rails', '~> 1.0.0.pre', github: 'danott/webpack_rails'
+
