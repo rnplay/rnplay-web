@@ -4,6 +4,9 @@ $editor-header-bg-dark: #222;
 $editor-header-name-input-copy-dark: #fff;
 $editor-header-save-button-bg-dark: #005A91;
 
+#editor-container {
+  width: 100%;
+}
 
 body.app-editor-page {
   height: 100%;
