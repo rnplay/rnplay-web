@@ -6,15 +6,14 @@ import cx from 'react-classset';
 import BuildPicker from './BuildPicker';
 
 const maybeCallMethod = (obj, method, ...args) => {
-  obj[method] && method(...args);
+  obj[method] && obj[method](...args);
 };
 
 export default class EditorHeader {
 
   onUpdateName = () => {
-    const { onUpdateName } = this.props;
     const nameInputNode = React.findDOMNode(this.refs.nameInput);
-    onUpdateName && onUpdateName(nameInputNode.value);
+    maybeCallMethod(this.props, 'onUpdateName', nameInputNode.value);
   }
 
   handleOnSubmit = (e)  => {
