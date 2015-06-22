@@ -1,8 +1,15 @@
+if (typeof require == 'function') {
+  var React = require("react");
+  var cx = require('react-classset');
+  var Backdrop = require('./backdrop.js');
+}
+
 var Modal = React.createClass({
   render: function() {
-    var cx = React.addons.classSet,
-        classes = cx({'modal-container': true,
-                      'is-visible': this.props.isOpen});
+    var classes = cx({
+      'modal-container': true,
+      'is-visible': this.props.isOpen
+    });
 
     return (
       <div className={classes}>
@@ -15,3 +22,7 @@ var Modal = React.createClass({
     )
   }
 });
+
+if (typeof module !== 'undefined') {
+  module.exports = Modal;
+}

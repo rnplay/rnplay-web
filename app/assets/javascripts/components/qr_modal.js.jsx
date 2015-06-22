@@ -1,3 +1,9 @@
+if (typeof require == 'function') {
+  var React = require("react");
+  var Modal = require('./modal.js');
+  var $ = require('jquery');
+}
+
 var QrModal = React.createClass({
   getInitialState: function() {
     return { qrCodeUrl: null }
@@ -30,3 +36,7 @@ var QrModal = React.createClass({
     )
   }
 });
+
+if (typeof module !== 'undefined') {
+  module.exports = QrModal;
+}

@@ -14,3 +14,8 @@ var Footer = React.createClass({
     )
   }
 });
+
+
+if (typeof module !== 'undefined') {
+  module.exports = Footer;
+}

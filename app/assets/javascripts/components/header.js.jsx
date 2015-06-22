@@ -1,4 +1,7 @@
-if (typeof require == 'function') { var React = require("react"); }
+if (typeof require == 'function') {
+  var React = require("react");
+  var QrModal = require('./qr_modal.js.jsx');
+}
 
 var Header = React.createClass({
   getInitialState: function() {
@@ -100,3 +103,8 @@ var Header = React.createClass({
     );
   }
 });
+
+
+if (typeof module !== 'undefined') {
+  module.exports = Header;
+}

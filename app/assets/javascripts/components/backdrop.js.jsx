@@ -1,9 +1,15 @@
+if (typeof require == 'function') {
+  var React = require("react");
+  var cx = require('react-classset');
+}
+
 var Backdrop = React.createClass({
   render: function() {
-    var cx = React.addons.classSet,
-        classes = cx({'backdrop': true,
-                      'is-light': this.props.type == 'light',
-                      'is-visible': this.props.isVisible});
+    var classes = cx({
+      'backdrop': true,
+      'is-light': this.props.type == 'light',
+      'is-visible': this.props.isVisible
+    });
 
     return (
       <div onClick={this.props.onClick}
@@ -11,3 +17,8 @@ var Backdrop = React.createClass({
     )
   }
 });
+
+
+if (typeof module !== 'undefined') {
+  module.exports = Backdrop;
+}
