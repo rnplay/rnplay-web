@@ -63,13 +63,14 @@ class App < ActiveRecord::Base
     options[:embed] ||= false
     options[:screen_only] ||= false
     options[:autoapp] ||= false
+    options[:app_params] ||= {}
 
     params = {
       "bundleUrl" => bundle_url,
       "moduleName" => module_name,
       "RCTDevMenu" => {
         "liveReloadEnabled" => true
-      }
+      }.merge(options[:app_params])
     }.to_json
 
     url = "https://appetize.io/#{options[:embed] ? 'embed' : 'app'}/" +
