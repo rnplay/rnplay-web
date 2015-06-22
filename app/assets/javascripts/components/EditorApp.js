@@ -21,15 +21,16 @@ export default class EditorApp extends Component {
     super(props, context);
 
     this.state = {
-      name: props.app.name,
+      // name: props.app.name,
       // TODO figure out a better way to get the current file.
       // maybe we can store the last open file in the database?
-      currentFile: 'index.ios.js',
-      buildId: props.app.buildId,
-      showHeader: true,
+      // currentFile: 'index.ios.js',
+      // buildId: props.app.buildId,
+      // showHeader: true,
       picked: props.app.picked,
-      simulatorActive: false,
     };
+
+    this.simulatorActive = false;
   }
 
   componentWillMount() {
@@ -47,11 +48,35 @@ export default class EditorApp extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { buildId, buildUpdated, appSaveInProgress } = this.props;
+    const { simulatorActive } = this;
+
+    if (appSaveInProgress && !nextProps.appSaveInProgress) {
+      if (buildUpdated) {
+        window.location.reload();
+      } else {
+        const isOldBuild = parseInt(buildId) < 3;
+        const iframe = document.querySelector('iframe');
+        // From 0.4.4 and up, we enable live reload - no need to reload the app
+        if (isOldBuild) {
+          if (simulatorActive) {
+            iframe.contentWindow.postMessage('restartApp', '*');
+          } else {
+            iframe.contentWindow.postMessage('requestSession', '*');
+          }
+        } else if (!simulatorActive) {
+          iframe.contentWindow.postMessage('requestSession', '*');
+        }
+      }
+    }
+  }
+
   // Keep track of simulator lifecycle
   handleSimulatorEvent(e) {
     const { data } = e;
     if (data == 'sessionRequested') {
-      this.setState({simulatorActive: true});
+      this.simulatorActive = true;
     } else if (data == 'userError') {
         console.log(data);
     } else if (data == 'firstFrameReceived') {
@@ -60,25 +85,23 @@ export default class EditorApp extends Component {
         console.log(data);
     } else if(data == 'sessionEnded') {
       console.log(data);
-      this.setState({simulatorActive: false});
+      this.simulatorActive = false;
     }
   }
 
   onUpdateName = (name) => {
-    this.setState({
-      name
-    });
+    const { dispatch, updateName } = this.props;
+    dispatch(updateName(name));
   }
 
   onUpdateBody = (newBody) => {
-    this.fileBodies[this.state.currentFile] = newBody;
+    const { dispatch, updateBody, currentFile } = this.props;
+    dispatch(updateBody(currentFile, newBody));
   }
 
   onUpdateBuild = (buildId) => {
-    this.setState({
-      buildId,
-      buildUpdated: true
-    });
+    const { dispatch, updateBuildId } = this.props;
+    dispatch(updateBuildId(buildId));
   }
 
   onPick = () => {
@@ -99,96 +122,86 @@ export default class EditorApp extends Component {
   }
 
   onChangeFile = (filename) => {
-    this.setState({
-      currentFile: filename
-    });
+    const { dispatch, switchFile } = this.props;
+    dispatch(switchFile(filename));
   }
 
+  /**
+   * Triggers saving of the current file, if the buffer as been modified
+   */
   onFileSave = () => {
-    const { currentFile } = this.state;
-    const { app: { id } } = this.props;
-    const fileBody = this.fileBodies[currentFile];
+    const { dispatch, saveFile, fileBodies, currentFile, app: { id } } = this.props;
+    const fileBody = fileBodies[currentFile];
 
-    $.ajax({
-      url: `'/apps/${id}/files/${encodeURIComponent(currentFile)}`,
-      data: {
-        body: fileBody
-      },
-      type: 'PUT',
-      success: (data) => {
-        if (data.success) {
-
-        }
-      }
-    });
+    if (fileBody) {
+      dispatch(saveFile(id, currentFile, fileBody));
+    }
   }
 
   onSave = () => {
-    const fileBodies = this.fileBodies;
-    const { app: { id} } = this.props;
-    const { name, buildId, buildUpdated, simulatorActive } = this.state;
+    const { dispatch, saveApp, fileBodies, name, buildId, app: { id} } = this.props;
+    dispatch(saveApp(id, name, buildId, fileBodies));
 
-    // reset fileBodies so we don't save these files again next time
-    this.fileBodies = {};
-
-    const appUrl = `/apps/${id}`;
-    const filesUrl = `${appUrl}/files/`;
+    // const appUrl = `/apps/${id}`;
+    // const filesUrl = `${appUrl}/files/`;
 
     // store all updates files
-    const requests = Object.keys(fileBodies).map((filename) => {
-      return $.ajax({
-        url: filesUrl + encodeURIComponent(filename),
-        data: {
-          body: fileBodies[filename]
-        },
-        // hacky way until we fix the server to return json
-        // (atleast an emtpy string)
-        dataType: 'html',
-        type: 'PUT'
-      });
-    });
+    // const requests = Object.keys(fileBodies).map((filename) => {
+    //   return $.ajax({
+    //     url: filesUrl + encodeURIComponent(filename),
+    //     data: {
+    //       body: fileBodies[filename]
+    //     },
+    //     // hacky way until we fix the server to return json
+    //     // (atleast an emtpy string)
+    //     dataType: 'html',
+    //     type: 'PUT'
+    //   });
+    // });
+    //
+    // // update app info
+    // requests.push($.ajax({
+    //   url: appUrl,
+    //   data: {
+    //     app: {
+    //       name,
+    //       buildId
+    //     }
+    //   },
+    //   type: 'PUT'
+    // }));
 
-    // update app info
-    requests.push($.ajax({
-      url: appUrl,
-      data: {
-        app: {
-          name,
-          buildId
-        }
-      },
-      type: 'PUT'
-    }));
+    // Promise.all(requests)
+      // .then(() => {
+      //   if (buildUpdated) {
+      //     window.location.reload();
+      //   } else {
+      //     const isOldBuild = parseInt(buildId) < 3;
+      //     const iframe = document.querySelector('iframe');
+      //     // From 0.4.4 and up, we enable live reload - no need to reload the app
+      //     if (isOldBuild) {
+      //       if (simulatorActive) {
+      //         iframe.contentWindow.postMessage('restartApp', '*');
+      //       } else {
+      //         iframe.contentWindow.postMessage('requestSession', '*');
+      //       }
+      //     } else if (!simulatorActive) {
+      //       iframe.contentWindow.postMessage('requestSession', '*');
+      //     }
+      //   }
+      // })
+      // .catch((err) => {
+      //   // TODO display some error message
+      //   // TODO in case of error do this:
+      //   // self.fileBodies = _.merge(fileBodies, self.fileBodies);
+      // });
 
-    Promise.all(requests)
-      .then(() => {
-        if (buildUpdated) {
-          window.location.reload();
-        } else {
-          const isOldBuild = parseInt(buildId) < 3;
-          const iframe = document.querySelector('iframe');
-          // From 0.4.4 and up, we enable live reload - no need to reload the app
-          if (isOldBuild) {
-            if (simulatorActive) {
-              iframe.contentWindow.postMessage('restartApp', '*');
-            } else {
-              iframe.contentWindow.postMessage('requestSession', '*');
-            }
-          } else if (!simulatorActive) {
-            iframe.contentWindow.postMessage('requestSession', '*');
-          }
-        }
-      })
-      .catch((err) => {
-        // TODO display some error message
-        // TODO in case of error do this:
-        // self.fileBodies = _.merge(fileBodies, self.fileBodies);
-      });
+    // reset fileBodies so we don't save these files again next time
   }
 
   onFork = () => {
-    const { app: { id } } = this.props;
-    const { name, buildId, buildUpdated, body } = this.state;
+    const { name, buildId, buildUpdated, app: { id } } = this.props;
+    const { body } = this.state;
     $.ajax({
       url: `/apps/${id}/fork`,
       data: {
@@ -210,7 +223,7 @@ export default class EditorApp extends Component {
   }
 
   renderHeader() {
-    if (this.state.showHeader) {
+    if (this.props.showHeader) {
       const { currentUser, app, headerLogoSrc} = this.props;
       return (
         <Header
@@ -229,6 +242,12 @@ export default class EditorApp extends Component {
       app,
       currentUser,
       builds,
+      showHeader,
+      name,
+      picked,
+      currentFile,
+      fileTree,
+      buildId
     } = this.props;
 
     const {
@@ -241,11 +260,8 @@ export default class EditorApp extends Component {
       onFork
     } = this;
 
-    const { showHeader, name, picked, currentFile} = this.state;
-    const { appetizeUrl, buildId } = app;
+    const { appetizeUrl } = app;
 
-    // TODO any other ideas how to do this? Not sure whether the full url should
-    // be stored with the app or just identifier, without all options.
     const simulatorUrl = useDarkTheme ?
       appetizeUrl.replace('deviceColor=white', 'deviceColor=black') :
       appetizeUrl;
@@ -267,6 +283,7 @@ export default class EditorApp extends Component {
 
     const editorProps = {
       app,
+      fileTree,
       currentFile,
       currentUser,
       useVimKeyBindings,
