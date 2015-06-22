@@ -70,7 +70,7 @@ export default class EditorHeader {
     let text = 'Fork &amp; Reload';
 
     if (this.belongsToCurrentUser()) {
-      text = 'Save &amp; Reload';
+      text = 'Save & Reload';
       method = this.onSave;
     }
 
