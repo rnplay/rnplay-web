@@ -1,3 +1,5 @@
+var React = require("react");
+
 var Header = React.createClass({
   getInitialState: function() {
     return { qrModalIsVisible: false }

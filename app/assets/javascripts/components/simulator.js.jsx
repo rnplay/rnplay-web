@@ -1,3 +1,5 @@
+var React = require("react");
+
 var Simulator = React.createClass({
   render: function() {
     var classes = classNames({

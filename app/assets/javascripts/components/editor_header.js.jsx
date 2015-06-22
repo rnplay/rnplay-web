@@ -1,3 +1,5 @@
+var React = require("react");
+
 var EditorHeader = React.createClass({
   _onUpdateName: function() {
     this.props.onUpdateName &&

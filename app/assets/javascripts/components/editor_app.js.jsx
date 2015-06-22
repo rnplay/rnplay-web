@@ -1,3 +1,10 @@
+var React = require("react");
+var CodeMirror = require("codemirror");
+var Header = require("./header.js");
+var Footer = require("./footer.js");
+var EditorHeader = require("./editor_header.js");
+var Simulator = require("./simulator.js");
+
 var EditorApp = React.createClass({
   getInitialState: function() {
     return {
