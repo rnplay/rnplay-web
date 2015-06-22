@@ -1,6 +1,7 @@
 <div style="display: flex; width: 100%">
-<%= react_component 'EditorApp',
-      app: {
+<script>
+  window.__data = <%=
+      raw({app: {
         id: @app.id,
         body: @app.body,
         appetizeUrl: @app.appetize_url(embed: true, autoapp: params[:autoapp]),
@@ -16,5 +17,5 @@
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,
       useDarkTheme: user_signed_in? && current_user.use_dark_theme?,
       builds: Build.all,
-      headerLogoSrc: asset_path('header_logo.png') %>
+      headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
 </div>
