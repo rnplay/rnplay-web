@@ -6,7 +6,7 @@ class AppsController < ApplicationController
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
 
-  protect_from_forgery except: [:show, :create]
+  protect_from_forgery except: [:show, :create, :update]
 
   def index
     @apps = current_user.apps
