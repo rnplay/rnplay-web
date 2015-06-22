@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "assets-webpack-plugin": "^0.1.0",
+    "axios": "^0.5.4",
     "babel-loader": "^5.1.4",
     "codemirror": "^5.3.0",
     "coffee-loader": "^0.7.2",
