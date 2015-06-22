@@ -1,4 +1,5 @@
 <div style="display: flex; width: 100%">
+<div id="editor-container"></div>
 <script>
   window.__data = <%=
       raw({app: {
@@ -18,4 +19,5 @@
       useDarkTheme: user_signed_in? && current_user.use_dark_theme?,
       builds: Build.all,
       headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
+</script>
 </div>
