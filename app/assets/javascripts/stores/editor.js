@@ -68,6 +68,14 @@ export default createStore(initialState, {
     fileBodies: {},
     newBuildId: null,
     appSaveInProgress: false
-  })
+  }),
+
+  [`${actions.saveApp}-failure`]: (state, action) => {
+    // TODO process error here
+    return ({
+      ...state,
+      appSaveInProgress: false
+    })
+  }
 
 });

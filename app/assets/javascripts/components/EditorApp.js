@@ -51,7 +51,6 @@ export default class EditorApp extends Component {
   componentWillReceiveProps(nextProps) {
     const { buildId, buildUpdated, appSaveInProgress } = this.props;
     const { simulatorActive } = this;
-
     if (appSaveInProgress && !nextProps.appSaveInProgress) {
       if (buildUpdated) {
         window.location.reload();
