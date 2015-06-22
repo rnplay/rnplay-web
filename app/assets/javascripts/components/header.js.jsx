@@ -1,4 +1,4 @@
-var React = require("react");
+if (typeof require == 'function') { var React = require("react"); }
 
 var Header = React.createClass({
   getInitialState: function() {

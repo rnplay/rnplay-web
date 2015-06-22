@@ -1,1 +1,2 @@
-//= require_tree ./components
+//= require ./components/header
+//= require ./components/footer
