@@ -18,7 +18,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(js|jsx)?$/, exclude: [/node_modules/, /vendor/], loader: 'babel-loader' },
+      { test: /\.(js|jsx)?$/, exclude: [/node_modules/, /vendor/], loader: 'babel-loader?stage=0' },
     ]
   },
   cache: true,
