@@ -15,6 +15,7 @@
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0",
     "codemirror": "^5.3.0",
-    "react": "0.13.3" 
+    "react": "0.13.3",
+    "jquery": "2.1.4"
   }
 }
