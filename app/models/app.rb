@@ -26,7 +26,7 @@ class App < ActiveRecord::Base
   end
 
   def bundle_url
-    path = uses_git? ? "#{name}/index.ios.bundle" : "#{url_token}.bundle"
+    path = uses_git? ? "#{url_token}/index.ios.bundle" : "#{url_token}.bundle"
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{path}"
     elsif Rails.env.staging?
@@ -95,11 +95,11 @@ class App < ActiveRecord::Base
   end
 
   def source_git_repo_path
-    "/var/repos/#{name}.git"
+    "/var/repos/#{url_token}.git"
   end
 
   def target_git_repo_path
-    "#{Rails.root}/app_js/#{name}"
+    "#{Rails.root}/app_js/#{url_token}"
   end
 
   def source_git_hook_path
