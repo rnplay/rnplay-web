@@ -30,7 +30,8 @@ export default {
   }),
 
   saveApp: (appId, name, buildId, fileBodies) => ({
-    promise: api.saveApp(appId, name, buildId, fileBodies)
+    promise: api.saveApp(appId, name, buildId, fileBodies),
+    fileBodies
   }),
 
   pickApp: (picked) => {
