@@ -119,22 +119,42 @@ body.app-editor-page {
   flex-direction: column;
   display: flex;
   width: 100%;
-}
 
-.editor-container__body {
-  width: 100%;
-  flex-direction: row;
-  display: flex;
-  position: relative;
-}
+  &__body {
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    position: relative;
+  }
 
-.editor-container__simulator {
-  background-color: #F9F9F9;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-  position: relative;
+  .errorview-wrapper {
+    position: absolute;
+    width: 100%;
+    z-index: 500;
+    background-color: rgba(255, 0, 0, 0.74);
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
 
-  &--dark {
-    background-color: #152238;
+    &:empty {
+      padding: 0;
+    }
+
+    .alert-box {
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  &__simulator {
+    background-color: #F9F9F9;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    position: relative;
+
+    &--dark {
+      background-color: #152238;
+    }
   }
 }
 

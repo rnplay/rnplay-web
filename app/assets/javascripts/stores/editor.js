@@ -60,21 +60,25 @@ export default createStore(initialState, {
 
   [`${actions.saveApp}`]: (state) => ({
     ...state,
-    appSaveInProgress: true
+    appSaveInProgress: true,
+    appSaveError: null
   }),
 
   [`${actions.saveApp}-success`]: (state) => ({
     ...state,
     fileBodies: {},
     newBuildId: null,
+    appSaveError: false,
     appSaveInProgress: false
   }),
 
-  [`${actions.saveApp}-failure`]: (state, action) => {
-    // TODO process error here
+  [`${actions.saveApp}-failure`]: (state, { fileBodies, error }) => {
     return ({
       ...state,
-      appSaveInProgress: false
+      appSaveInProgress: false,
+      // TODO move this somewhere else and maybe include the real error message
+      appSaveError: 'There was an error saving your application, please try again.',
+      fileBodies: assign({}, fileBodies, state.fileBodies)
     })
   }
 

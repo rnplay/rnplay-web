@@ -13,6 +13,7 @@ import Editor from './Editor';
 import Header from './header.js';
 import Footer from './footer.js';
 import EditorHeader from './EditorHeader';
+import ErrorView from './ErrorView';
 import Simulator from './Simulator';
 
 export default class EditorApp extends Component {
@@ -42,8 +43,10 @@ export default class EditorApp extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { buildId, buildUpdated, appSaveInProgress } = this.props;
+    const { appSaveInProgress: saveStillInProgress, appSaveError } = nextProps;
     const { simulatorActive } = this;
-    if (appSaveInProgress && !nextProps.appSaveInProgress) {
+
+    if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
       if (buildUpdated) {
         window.location.reload();
       } else {
@@ -238,7 +241,8 @@ export default class EditorApp extends Component {
       picked,
       currentFile,
       fileTree,
-      buildId
+      buildId,
+      appSaveError
     } = this.props;
 
     const {
@@ -288,6 +292,7 @@ export default class EditorApp extends Component {
         {this.renderHeader()}
         <EditorHeader {...editorHeaderProps} />
         <div className="editor-container__body">
+          <ErrorView error={appSaveError} />
           <Editor {...editorProps} />
           <Simulator
             url={simulatorUrl}

@@ -15,7 +15,8 @@ import EditorApp from '../components/EditorApp';
   fileTree: state.editor.fileTree,
   fileBodies: state.editor.fileBodies,
   showHeader: state.editor.showHeader,
-  appSaveInProgress: state.editor.appSaveInProgress
+  appSaveInProgress: state.editor.appSaveInProgress,
+  appSaveError: state.editor.appSaveError
 }))
 export default class Editor {
 
