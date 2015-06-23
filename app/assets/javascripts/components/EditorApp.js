@@ -21,12 +21,6 @@ export default class EditorApp extends Component {
     super(props, context);
 
     this.state = {
-      // name: props.app.name,
-      // TODO figure out a better way to get the current file.
-      // maybe we can store the last open file in the database?
-      // currentFile: 'index.ios.js',
-      // buildId: props.app.buildId,
-      // showHeader: true,
       picked: props.app.picked,
     };
 
@@ -34,8 +28,6 @@ export default class EditorApp extends Component {
   }
 
   componentWillMount() {
-    // cache for all modified file bodies
-    this.fileBodies = {};
     window.addEventListener('message', this.handleSimulatorEvent, false);
   }
 
