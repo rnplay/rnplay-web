@@ -4,7 +4,7 @@ class App < ActiveRecord::Base
 
   validates :name, presence: true
 
-  after_create :create_bare_git_repo
+  after_create :setup_git_repo
   after_create :set_module_name
 
   belongs_to :creator, class_name: "User"
@@ -69,28 +69,30 @@ class App < ActiveRecord::Base
   end
 
   def source_git_repo
-    GitRepo.new(source_git_repo_path)
+    path = Rails.env.development? ? "#{Rails.root}/repos/#{url_token}.git" : "/var/repos/#{url_token}.git"
+    GitRepo.new(path)
   end
 
-  def source_git_repo_path
-    Rails.env.development? ? "#{Rails.root}/repos/#{url_token}.git" : "/var/repos/#{url_token}.git"
+  def target_git_repo
+    GitRepo.new("#{Rails.root}/app_js/#{url_token}")
   end
-
 
   private
-  
+
+  def setup_git_repo
+    source_git_repo.create_as_bare
+    target_git_repo.clone_from(source_git_repo)
+    target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
+  end
+
   def rn_version_from_package_json
-    version = JSON.parse(File.read(target_git_repo_path+"/package.json"))['dependencies']['react-native']
-    version.gsub("^", "")
+    # version = JSON.parse(target_git_repo.files."/package.json"))['dependencies']['react-native']
+    # version.gsub("^", "")
   end
 
   def extract_build
-    # if build = Build.find_by(name: rn_version_from_package_json)
-    #   self.build = build
-    # else
-      self.build = Build.find_by(name: 'master')
-      save
-    # end
+    self.build = Build.find_by(name: 'master')
+    save
   end
 
   def add_url_token

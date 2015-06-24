@@ -12,7 +12,7 @@
         picked: @app.pick,
         urlToken: @app.url_token,
         multiFile: @app.uses_git,
-        files: @app.git_file_contents
+        files: @app.target_git_repo.files_with_contents
       },
       currentUser: current_user,
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,

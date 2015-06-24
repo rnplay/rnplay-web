@@ -1,3 +1,5 @@
+require 'rugged'
+
 class GitRepo
 
   attr_accessor :path
@@ -6,16 +8,18 @@ class GitRepo
     @path = path
   end
 
-  def create_as_bare
-    raise ArgumentError, "Repo at #{path} exists already" if File.exists?(path)
+  def clone_from(source)
+    Rugged::Repository.clone_at(source.path, path)
+  end
 
-    run "git --bare init --shared #{path}"
+  def create_as_bare
+    Rugged::Repository.init_at(path, :bare)
     run "cp #{Rails.root}/config/git-post-receive #{path}/hooks/post-receive"
     run "chmod 755 #{path} && chown -R app:app #{path}"
   end
 
   def bare?
-    File.exists?("#{path}/hooks")
+    Rugged::Repository.new(path).bare?
   end
 
   def files_with_contents
@@ -32,7 +36,7 @@ class GitRepo
 
   # TODO: refactor to File model
   def update_file(name, content)
-    File.open("#{target_git_repo_path}/#{name}", "w") do |file|
+    File.open("#{path}/#{name}", "w") do |file|
       file.write(content)
     end
   end
@@ -40,8 +44,8 @@ class GitRepo
   private
 
   def run(cmd)
-    logger.info "Running #{cmd}"
-    logger.info `#{cmd}`
+    Rails.logger.info "Running #{cmd}"
+    Rails.logger.info `#{cmd}`
   end
 
 end
