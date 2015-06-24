@@ -1,5 +1,11 @@
 ## Setup
 
+Install dependencies:
+
+```
+brew install libgit2 cmake
+```
+
 Create a file named .env, with the following contents. Replace the database placeholder values with your own. The twitter keys are for development and don't require customization.
 
 ```
