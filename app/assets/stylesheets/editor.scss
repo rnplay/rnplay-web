@@ -219,6 +219,7 @@ body.app-editor-page {
 
 .fileselector {
   flex-shrink: 0;
+  display: flex;
   background-color: #222;
   color: #fff;
   width: 0;
@@ -229,12 +230,13 @@ body.app-editor-page {
   border-right: 1px solid #242424;
   box-shadow: 0 0 10px #131313;
   transition: margin-left 0.3s ease;
+  font-size: 1.2rem;
 
   .open-handle {
     cursor: pointer;
     position: absolute;
     right: 0;
-    height: 100%;
+    height: 99%;
     width: 10px;
     background-color: #1A1A1A;
     z-index: 100;
@@ -242,6 +244,14 @@ body.app-editor-page {
 
   &.open {
     margin-left: 0;
+    resize: horizontal;
+    overflow: hidden;
+  }
+
+  &__list-wrapper {
+    overflow: scroll;
+    flex-grow: 1;
+    margin-right: 10px;
   }
 
   &__list {
@@ -252,16 +262,18 @@ body.app-editor-page {
     &__node {
       cursor: pointer;
       line-height: 1.8;
-      padding-left: 1em;
+      padding: 0.2em 0 0.2em 1em;
 
       &__label {
         position: relative;
         z-index: 10;
         display: inline-block;
+        font-family: 'proxima-nova';
       }
 
       &--has-children {
-        font-weight: 700;
+        // not sure how to reference that selector here
+        // without copying
 
         &:before {
           margin-right: 0.5em;
@@ -288,6 +300,13 @@ body.app-editor-page {
           width: 100%;
           position: absolute;
           left: 0;
+        }
+      }
+
+
+      &--current, &--has-children {
+        > .fileselector__list__node__label {
+          font-weight: 700;
         }
       }
     }

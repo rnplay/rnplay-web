@@ -16,8 +16,14 @@ export default class FileSelector extends Component {
 
   toggleSelector = (e) => {
     e.preventDefault();
+    const open = !this.state.open;
+
+    if (!open) {
+      React.findDOMNode(this).style.width = '';
+    }
+
     this.setState({
-      open: !this.state.open
+      open
     });
   }
 
@@ -30,18 +36,20 @@ export default class FileSelector extends Component {
         open: this.state.open
       })}>
         <div className='open-handle' onClick={this.toggleSelector}></div>
-        <ol className='fileselector__list'>
-          {files && Object.keys(files).map((filename) => (
-            <FileSelectorNode
-              onSelect={onSelect}
-              current={current}
-              key={filename}
-              pathPrefix=''
-              label={filename}
-              subtree={files[filename]}
-            />
-          ))}
-        </ol>
+        <div className='fileselector__list-wrapper'>
+          <ol className='fileselector__list'>
+            {files && Object.keys(files).map((filename) => (
+              <FileSelectorNode
+                onSelect={onSelect}
+                current={current}
+                key={filename}
+                pathPrefix=''
+                label={filename}
+                subtree={files[filename]}
+              />
+            ))}
+          </ol>
+        </div>
       </div>
     );
   }
