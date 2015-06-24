@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import Modal from './modal';
 
 export default class QrModal extends Component {
@@ -11,12 +12,8 @@ export default class QrModal extends Component {
   }
 
   componentDidMount = () => {
-    console.log('here');
     var self = this;
     $.get('/apps/' + this.props.urlToken + '/qr', function(result) {
-      console.log("query");
-      console.log(result);
-
       self.setState({qrCodeUrl: result.url});
     });
   }

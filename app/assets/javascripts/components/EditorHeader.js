@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import cx from 'react-classset';
 
 import BuildPicker from './BuildPicker';
-import GitModal from './git_modal.js';
+import GitModal from './git_modal';
 
 const maybeCallMethod = (obj, method, ...args) => {
   obj[method] && obj[method](...args);
@@ -80,7 +80,7 @@ export default class EditorHeader extends Component {
   renderGitButton() {
       return (
         <button
-          onClick={this.renderGitModal}
+          onClick={this.showGitModal}
           className="btn-info editor-header__pick-button"
         >
           Clone with git
@@ -152,6 +152,7 @@ export default class EditorHeader extends Component {
           {this.renderPickButton()}
           {this.renderSaveButton()}
         </form>
+        {this.renderGitModal()}
       </div>
     );
   }
