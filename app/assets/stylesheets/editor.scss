@@ -262,7 +262,7 @@ body.app-editor-page {
     &__node {
       cursor: pointer;
       line-height: 1.8;
-      padding: 0.2em 0 0.2em 1em;
+      padding: 0.2em 0 0.2em 1.7em;
 
       &__label {
         position: relative;
@@ -276,16 +276,21 @@ body.app-editor-page {
         // without copying
 
         &:before {
-          margin-right: 0.5em;
-          width: 0.5em;
-          content: '+';
+          margin-right: 0.4em;
+          width: 16px;
+          height: 16px;
+          content: ' ';
           display: inline-block;
+          background: url('/assets/folder-icons.png');
+          vertical-align: sub;
+          opacity: 0.8;
         }
       }
 
       &--open {
         &:before {
-          content: '-';
+          background-position: 0 -16px;
+          opacity: 1;
         }
       }
 
