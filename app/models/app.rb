@@ -146,7 +146,7 @@ class App < ActiveRecord::Base
     # if build = Build.find_by(name: rn_version_from_package_json)
     #   self.build = build
     # else
-      self.build = Build.find_by(name: '0.5.0')
+      self.build = Build.find_by(name: 'master')
       save
     # end
   end
