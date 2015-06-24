@@ -271,30 +271,7 @@ body.app-editor-page {
         font-family: 'proxima-nova';
       }
 
-      &--has-children {
-        // not sure how to reference that selector here
-        // without copying
-
-        &:before {
-          margin-right: 0.4em;
-          width: 16px;
-          height: 16px;
-          content: ' ';
-          display: inline-block;
-          background: url('/assets/folder-icons.png');
-          vertical-align: sub;
-          opacity: 0.8;
-        }
-      }
-
-      &--open {
-        &:before {
-          background-position: 0 -16px;
-          opacity: 1;
-        }
-      }
-
-      &--current {
+      &.current {
         color: #fff;
 
         &:before {
@@ -308,8 +285,30 @@ body.app-editor-page {
         }
       }
 
+      &--has-children {
+        &:before, &.current:before {
+          position: static;
+          margin-right: 0.4em;
+          width: 16px;
+          height: 16px;
+          content: ' ';
+          display: inline-block;
+          background: url('/assets/folder-icons.png');
+          vertical-align: sub;
+          opacity: 0.8;
+        }
+      }
 
-      &--current, &--has-children {
+      &--open {
+        &:before, &.current:before {
+          background-position: 0 -16px;
+          opacity: 1;
+        }
+      }
+
+      &.current, &--has-children {
+        // not sure how to reference that selector here
+        // without copying
         > .fileselector__list__node__label {
           font-weight: 700;
         }

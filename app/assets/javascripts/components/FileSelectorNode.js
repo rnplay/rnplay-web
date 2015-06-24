@@ -51,7 +51,7 @@ export default class FileSelectorNode extends Component {
         className={cx({
           'fileselector__list__node': true,
           'fileselector__list__node--has-children' : !!subtree,
-          'fileselector__list__node--current': fullPath === current,
+          'current': current.indexOf(fullPath) === 0,
           'fileselector__list__node--open': open
         })}
         onClick={this.onNodeClick}
