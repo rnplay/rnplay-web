@@ -24,6 +24,18 @@ body.app-editor-page {
   background: $editor-header-bg;
   z-index: 10;
 
+  &__fileselector-toggle {
+    width: 20px;
+    height: 25px;
+    border: 0;
+    background: url('/assets/fileselector.png');
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+    margin: .8rem;
+    margin-left: 1.2rem;
+  }
+
   .build-picker {
     font-size: 18px;
     margin-left: 17px;
@@ -226,7 +238,7 @@ body.app-editor-page {
   position: relative;
   z-index: 5;
   width: 200px;
-  margin-left: -190px;
+  margin-left: -200px;
   border-right: 1px solid #242424;
   box-shadow: 0 0 10px #131313;
   transition: margin-left 0.3s ease;

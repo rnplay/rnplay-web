@@ -74,12 +74,14 @@ export default class Editor {
     const {
       app: { body },
       currentFile,
-      fileTree
+      fileTree,
+      fileSelectorOpen
     } = this.props;
 
     return (
       <div className="editor-flex-wrapper">
         <FileSelector
+          open={fileSelectorOpen}
           files={fileTree}
           current={currentFile}
           onSelect={this.changeFile}

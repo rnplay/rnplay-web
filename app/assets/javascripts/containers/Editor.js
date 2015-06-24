@@ -6,18 +6,35 @@ import { connect } from 'redux/react';
 import { editor as editorActions } from '../actions';
 import EditorApp from '../components/EditorApp';
 
-@connect((state) => ({
-  app: state.editor.app,
-  name: state.editor.newName || state.editor.app.name,
-  buildId: state.editor.newBuildId || state.editor.app.buildId,
-  buildUpdated: !!state.editor.newBuildId,
-  currentFile: state.editor.currentFile,
-  fileTree: state.editor.fileTree,
-  fileBodies: state.editor.fileBodies,
-  showHeader: state.editor.showHeader,
-  appSaveInProgress: state.editor.appSaveInProgress,
-  appSaveError: state.editor.appSaveError
-}))
+@connect((state) => {
+  const { editor } = state;
+  const {
+    app,
+    newName,
+    newBuildId,
+    currentFile,
+    fileTree,
+    fileBodies,
+    showHeader,
+    appSaveInProgress,
+    appSaveError,
+    fileSelectorOpen
+  } = editor;
+
+  return {
+    app,
+    name: newName || app.name,
+    buildId: newBuildId || app.buildId,
+    buildUpdated: !!newBuildId,
+    currentFile,
+    fileTree,
+    fileBodies,
+    showHeader,
+    appSaveInProgress,
+    appSaveError,
+    fileSelectorOpen
+  };
+})
 export default class Editor {
 
   render() {

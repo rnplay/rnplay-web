@@ -69,15 +69,15 @@ export default class EditorApp extends Component {
   // Keep track of simulator lifecycle
   handleSimulatorEvent(e) {
     const { data } = e;
-    if (data == 'sessionRequested') {
+    if (data === 'sessionRequested') {
       this.simulatorActive = true;
-    } else if (data == 'userError') {
+    } else if (data === 'userError') {
         console.log(data);
-    } else if (data == 'firstFrameReceived') {
+    } else if (data === 'firstFrameReceived') {
         console.log(data);
-    } else if (data == 'timeoutWarning') {
+    } else if (data === 'timeoutWarning') {
         console.log(data);
-    } else if(data == 'sessionEnded') {
+    } else if(data === 'sessionEnded') {
       console.log(data);
       this.simulatorActive = false;
     }
@@ -135,62 +135,6 @@ export default class EditorApp extends Component {
   onSave = () => {
     const { dispatch, saveApp, fileBodies, name, buildId, app: { id} } = this.props;
     dispatch(saveApp(id, name, buildId, fileBodies));
-
-    // const appUrl = `/apps/${id}`;
-    // const filesUrl = `${appUrl}/files/`;
-
-    // store all updates files
-    // const requests = Object.keys(fileBodies).map((filename) => {
-    //   return $.ajax({
-    //     url: filesUrl + encodeURIComponent(filename),
-    //     data: {
-    //       body: fileBodies[filename]
-    //     },
-    //     // hacky way until we fix the server to return json
-    //     // (atleast an emtpy string)
-    //     dataType: 'html',
-    //     type: 'PUT'
-    //   });
-    // });
-    //
-    // // update app info
-    // requests.push($.ajax({
-    //   url: appUrl,
-    //   data: {
-    //     app: {
-    //       name,
-    //       buildId
-    //     }
-    //   },
-    //   type: 'PUT'
-    // }));
-
-    // Promise.all(requests)
-      // .then(() => {
-      //   if (buildUpdated) {
-      //     window.location.reload();
-      //   } else {
-      //     const isOldBuild = parseInt(buildId) < 3;
-      //     const iframe = document.querySelector('iframe');
-      //     // From 0.4.4 and up, we enable live reload - no need to reload the app
-      //     if (isOldBuild) {
-      //       if (simulatorActive) {
-      //         iframe.contentWindow.postMessage('restartApp', '*');
-      //       } else {
-      //         iframe.contentWindow.postMessage('requestSession', '*');
-      //       }
-      //     } else if (!simulatorActive) {
-      //       iframe.contentWindow.postMessage('requestSession', '*');
-      //     }
-      //   }
-      // })
-      // .catch((err) => {
-      //   // TODO display some error message
-      //   // TODO in case of error do this:
-      //   // self.fileBodies = _.merge(fileBodies, self.fileBodies);
-      // });
-
-    // reset fileBodies so we don't save these files again next time
   }
 
   onFork = () => {
@@ -214,6 +158,11 @@ export default class EditorApp extends Component {
         }
       }
     });
+  }
+
+  onFileSelectorToggle = () => {
+    const { dispatch, toggleFileSelector } = this.props;
+    dispatch(toggleFileSelector());
   }
 
   renderHeader() {
@@ -242,10 +191,12 @@ export default class EditorApp extends Component {
       currentFile,
       fileTree,
       buildId,
-      appSaveError
+      appSaveError,
+      fileSelectorOpen
     } = this.props;
 
     const {
+      onFileSelectorToggle,
       onUpdateName,
       onUpdateBuild,
       onChangeFile,
@@ -273,7 +224,8 @@ export default class EditorApp extends Component {
       onUpdateBuild,
       onPick,
       onSave,
-      onFork
+      onFork,
+      onFileSelectorToggle
     };
 
     const editorProps = {
@@ -284,7 +236,8 @@ export default class EditorApp extends Component {
       useVimKeyBindings,
       useDarkTheme,
       onChangeFile,
-      onUpdateBody
+      onUpdateBody,
+      fileSelectorOpen
     };
 
     return (

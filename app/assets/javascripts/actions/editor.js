@@ -41,6 +41,8 @@ export default {
   saveFile: (appId, filename, filebody) => ({
     promise: api.saveFile(appId, filename, filebody),
     filename
-  })
+  }),
+
+  toggleFileSelector: () => true
 
 };

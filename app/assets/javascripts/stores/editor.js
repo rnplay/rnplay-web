@@ -17,7 +17,8 @@ const initialState = {
   fileBodies: {},
   fileTree: {},
   currentFile: 'index.ios.js',
-  appSaveInProgress: false
+  appSaveInProgress: false,
+  fileSelectorOpen: false
 };
 
 export default createStore(initialState, {
@@ -80,6 +81,12 @@ export default createStore(initialState, {
       appSaveError: 'There was an error saving your application, please try again.',
       fileBodies: assign({}, fileBodies, state.fileBodies)
     })
-  }
+  },
 
+  [`${actions.toggleFileSelector}`]: (state, { fileBodies, error }) => {
+    return ({
+      ...state,
+      fileSelectorOpen: !state.fileSelectorOpen,
+    })
+  }
 });

@@ -84,30 +84,38 @@ export default class EditorHeader {
   }
 
   render() {
-    const { useDarkTheme, builds, name, buildId } = this.props;
+    const { useDarkTheme, builds, name, buildId, onFileSelectorToggle } = this.props;
     const classes = cx({
       'editor-header': true,
       'editor-header--dark': useDarkTheme
     });
 
     return (
-      <form className={classes} onSubmit={this.handleOnSubmit}>
-        <BuildPicker
-          onChange={this.onUpdateBuild}
-          builds={builds}
-          selectedBuildId={buildId}
-        />
-        <input
-          type="text"
-          ref="nameInput"
-          placeholder="Give this app a title"
-          value={name}
-          onChange={this.onUpdateName}
-          className="editor-header__name-input"
-        />
-        {this.renderPickButton()}
-        {this.renderSaveButton()}
-      </form>
+      <div className={classes}>
+        <button
+          className='editor-header__fileselector-toggle'
+          onClick={onFileSelectorToggle}
+        >
+          toggle fileselector
+        </button>
+        <form onSubmit={this.handleOnSubmit}>
+          <BuildPicker
+            onChange={this.onUpdateBuild}
+            builds={builds}
+            selectedBuildId={buildId}
+          />
+          <input
+            type="text"
+            ref="nameInput"
+            placeholder="Give this app a title"
+            value={name}
+            onChange={this.onUpdateName}
+            className="editor-header__name-input"
+          />
+          {this.renderPickButton()}
+          {this.renderSaveButton()}
+        </form>
+      </div>
     );
   }
 }
