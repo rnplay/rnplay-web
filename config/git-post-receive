@@ -5,7 +5,7 @@ target = "/rails/app_js/#{name}"
 
 def npm_install(target)
   puts `cd #{target} && npm install`
-  puts `rm -rf #{target}/node_modules/react-native`
+  puts `find #{target}/node_modules -name react-native -exec rm -rf {} \\;`
 end
 
 if File.exists?(target)
