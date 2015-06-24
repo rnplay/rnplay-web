@@ -33,8 +33,8 @@ export default class QrModal extends Component {
     return (
       <Modal isOpen={this.props.isOpen} onClickBackdrop={this.props.onClickBackdrop}>
         <div className="modal--body qr-modal-body">
-          <h1>Scan this with the
-            <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">React Native Playground iOS app</a>
+          <h1>
+            Scan this with the <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">React Native Playground iOS app.</a>
           </h1>
           {this.renderImage()}
         </div>
