@@ -1,6 +1,6 @@
 FROM phusion/passenger-ruby22:latest
 
-RUN apt-get install -y phantomjs
+RUN apt-get install -y cmake libgit2-dev
 
 ENV HOME /root
 ENV RAILS_ENV production
