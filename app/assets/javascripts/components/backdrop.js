@@ -1,10 +1,8 @@
-if (typeof require == 'function') {
-  var React = require("react");
-  var cx = require('react-classset');
-}
+import React, { Component } from 'react';
+import cx from 'react-classset';
 
-var Backdrop = React.createClass({
-  render: function() {
+export default class Backdrop extends Component {
+  render() {
     var classes = cx({
       'backdrop': true,
       'is-light': this.props.type == 'light',
@@ -16,9 +14,4 @@ var Backdrop = React.createClass({
            className={classes}></div>
     )
   }
-});
-
-
-if (typeof module !== 'undefined') {
-  module.exports = Backdrop;
 }

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import cx from 'react-classset';
 
-import QrModal from './qr_modal.js';
+import QrModal from './qr_modal';
 
 const styles = {
   width: 320,

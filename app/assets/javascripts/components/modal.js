@@ -1,11 +1,9 @@
-if (typeof require == 'function') {
-  var React = require("react");
-  var cx = require('react-classset');
-  var Backdrop = require('./backdrop.js');
-}
+import React, { Component } from 'react';
+import cx from 'react-classset';
+import Backdrop from './backdrop';
 
-var Modal = React.createClass({
-  render: function() {
+export default class Modal extends Component {
+  render() {
     var classes = cx({
       'modal-container': true,
       'is-visible': this.props.isOpen
@@ -21,8 +19,4 @@ var Modal = React.createClass({
       </div>
     )
   }
-});
-
-if (typeof module !== 'undefined') {
-  module.exports = Modal;
 }

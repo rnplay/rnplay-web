@@ -1,15 +1,23 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import cx from 'react-classset';
 
 import BuildPicker from './BuildPicker';
+import GitModal from './git_modal.js';
 
 const maybeCallMethod = (obj, method, ...args) => {
   obj[method] && obj[method](...args);
 };
 
-export default class EditorHeader {
+export default class EditorHeader extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      gitModalIsVisible: null
+    };
+  }
 
   onUpdateName = () => {
     const nameInputNode = React.findDOMNode(this.refs.nameInput);
@@ -49,6 +57,35 @@ export default class EditorHeader {
   currentUserIsAdmin() {
     const { currentUser } = this.props;
     return currentUser && currentUser.admin;
+  }
+
+  showGitModal = (e) => {
+    e.preventDefault();
+    this.setState({gitModalIsVisible: true});
+  }
+
+  hideGitModal = (e) => {
+    e.preventDefault();
+    this.setState({gitModalIsVisible: false});
+  }
+
+  renderGitModal = () => {
+    return (
+      <GitModal app={this.props.app}
+               onClickBackdrop={this.hideGitModal}
+               isOpen={this.state.gitModalIsVisible} />
+    )
+  }
+
+  renderGitButton() {
+      return (
+        <button
+          onClick={this.renderGitModal}
+          className="btn-info editor-header__pick-button"
+        >
+          Clone with git
+        </button>
+      );
   }
 
   renderPickButton() {
@@ -111,6 +148,7 @@ export default class EditorHeader {
             onChange={this.onUpdateName}
             className="editor-header__name-input"
           />
+          {this.renderGitButton()}
           {this.renderPickButton()}
           {this.renderSaveButton()}
         </form>
