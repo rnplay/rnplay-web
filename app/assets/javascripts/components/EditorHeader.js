@@ -93,10 +93,9 @@ export default class EditorHeader {
     return (
       <div className={classes}>
         <button
-          className='editor-header__fileselector-toggle'
           onClick={onFileSelectorToggle}
-        >
-          toggle fileselector
+        title="Open file drawer">
+          <i className="fa fa-folder-open"></i>
         </button>
         <form onSubmit={this.handleOnSubmit}>
           <BuildPicker
