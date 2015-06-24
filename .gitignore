@@ -21,3 +21,4 @@ config/database.yml
 app_js
 public/uploads
 app_files
+repos
