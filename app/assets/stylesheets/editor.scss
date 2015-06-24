@@ -24,6 +24,11 @@ body.app-editor-page {
   background: $editor-header-bg;
   z-index: 10;
 
+  form {
+    display: flex;
+    flex-grow: 1;
+  }
+
   &__fileselector-toggle {
     width: 20px;
     height: 25px;
