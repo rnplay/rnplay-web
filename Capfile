@@ -37,10 +37,12 @@ namespace :docker do
 
   task :bundle do
     docker_exec('bundle --deployment --without development test')
+    docker_exec('npm install')
   end
 
   task :precompile_assets do
     docker_exec('source .powenv && RAILS_ENV=production bundle exec rake assets:precompile')
+    docker_exec('source .powenv && RAILS_ENV=production bundle exec rake webpack_rails:precompile')
   end
 
   task :fix_file_ownership do
