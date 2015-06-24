@@ -1,22 +1,11 @@
 class App < ActiveRecord::Base
 
   before_save :add_url_token
-  before_save :parse_module_name
 
   validates :name, presence: true
 
-  # for apps pushed from the cli
-
-  # TODO: extract the build from package.json
-  after_create :extract_build, if: :uses_git?
-  after_create :create_bare_git_repo, if: :uses_git?
-
-  # for apps created in the editor
-
-  after_save :write_js_to_disk, unless: :uses_git?
-
-  validates :body, presence: true, unless: :uses_git?
-  validates :build_id, presence: true, unless: :uses_git?
+  after_create :create_bare_git_repo
+  after_create :set_module_name
 
   belongs_to :creator, class_name: "User"
   belongs_to :build
@@ -26,7 +15,7 @@ class App < ActiveRecord::Base
   end
 
   def bundle_url
-    path = uses_git? ? "#{url_token}/index.ios.bundle" : "#{url_token}.bundle"
+    path = "#{url_token}/index.ios.bundle"
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{path}"
     elsif Rails.env.staging?
@@ -36,27 +25,15 @@ class App < ActiveRecord::Base
     end
   end
 
-  # for upcoming multi-file app support
-  def bundle_path
-    "/#{url_token}.bundle"
-  end
+  def set_module_name
+    # TODO: parse module name from index.ios.js when it gets saved
 
-  def parse_module_name
-    if uses_git?
-      self.module_name = self.name
-    else
-      self.module_name = body.scan(/module.exports\W=\W(.+);/).flatten.first
-    end
+    self.module_name = name
+    save
   end
 
   def increment_view_count!
     update_columns(view_count: view_count + 1)
-  end
-
-  def write_js_to_disk
-    root = "#{Rails.root}/app_js"
-    FileUtils.mkdir_p root
-    File.open("#{root}/#{self.url_token}.js", "w") {|f| f.write body }
   end
 
   def appetize_url(options = {})
@@ -81,9 +58,6 @@ class App < ActiveRecord::Base
     "&autoapp=#{options[:autoapp]}" +
     "&deviceColor=white" +
     "&params=#{URI.encode(params)}"
-
-    logger.info url
-    url
   end
 
   def appetize_public_key
@@ -94,49 +68,17 @@ class App < ActiveRecord::Base
     !user.nil? && self.creator == user
   end
 
+  def source_git_repo
+    GitRepo.new(source_git_repo_path)
+  end
+
   def source_git_repo_path
-    "/var/repos/#{url_token}.git"
+    Rails.env.development? ? "#{Rails.root}/repos/#{url_token}.git" : "/var/repos/#{url_token}.git"
   end
 
-  def target_git_repo_path
-    "#{Rails.root}/app_js/#{url_token}"
-  end
-
-  def source_git_hook_path
-    "#{source_git_repo_path}/hooks/post-receive"
-  end
-
-  def create_bare_git_repo
-    run "git --bare init --shared #{source_git_repo_path}"
-    run "cp #{Rails.root}/config/git-post-receive #{source_git_hook_path}"
-    run "chmod 755 #{source_git_hook_path} && chown -R app:app #{source_git_hook_path}"
-  end
-
-  def git_file_contents
-    Dir.glob("#{target_git_repo_path}/**/*.{js,json}").reject do |f|
-      f['node_modules'] ||
-      f['iOS']
-    end.inject({}) do |hash, path|
-      base = path.gsub("#{target_git_repo_path}/", "")
-      logger.info "BASE #{base}"
-      hash[base] = File.read(path)
-      hash
-    end
-  end
-
-  def update_file(name, content)
-    File.open("#{target_git_repo_path}/#{name}", "w") do |file|
-      file.write(content)
-    end
-  end
 
   private
-
-  def run(cmd)
-    logger.info "Running #{cmd}"
-    logger.info `#{cmd}`
-  end
-
+  
   def rn_version_from_package_json
     version = JSON.parse(File.read(target_git_repo_path+"/package.json"))['dependencies']['react-native']
     version.gsub("^", "")
