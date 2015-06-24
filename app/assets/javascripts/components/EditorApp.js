@@ -296,6 +296,7 @@ export default class EditorApp extends Component {
           <Editor {...editorProps} />
           <Simulator
             url={simulatorUrl}
+            app={this.props.app}
             useDarkTheme={useDarkTheme}
           />
         </div>
