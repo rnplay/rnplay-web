@@ -2,6 +2,8 @@ class App < ActiveRecord::Base
 
   before_save :add_url_token
 
+  attr_accessor :created_from_web
+
   validates :name, presence: true
 
   after_create :setup_git_repo
@@ -15,14 +17,17 @@ class App < ActiveRecord::Base
   end
 
   def bundle_url
-    path = "#{url_token}/index.ios.bundle"
     if Rails.env.development?
-      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{path}"
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{bundle_path}"
     elsif Rails.env.staging?
-      "https://packager-staging.rnplay.org/#{path}"
+      "https://packager-staging.rnplay.org/#{bundle_path}"
     else
-      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{path}"
+      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{bundle_path}"
     end
+  end
+
+  def bundle_path
+    "#{url_token}/index.ios.bundle"
   end
 
   def set_module_name
@@ -82,7 +87,10 @@ class App < ActiveRecord::Base
   def setup_git_repo
     source_git_repo.create_as_bare
     target_git_repo.clone_from(source_git_repo)
-    target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
+    if created_from_web
+      target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
+      target_git_repo.commit_all_changes
+    end
   end
 
   def rn_version_from_package_json

@@ -104,9 +104,9 @@ class AppsController < ApplicationController
         notice: 'Please sign in to create a new app'
     else
       @app = current_user.apps.create({
-        body: File.read('apps/sample_app.js'),
         name: "Sample App",
-        build_id: Build.last.id
+        build_id: Build.last.id,
+        created_from_web: true
       })
 
       redirect_to edit_app_path(@app)

@@ -12,6 +12,10 @@ class GitRepo
     Rugged::Repository.clone_at(source.path, path)
   end
 
+  def commit_all_changes
+    run "cd #{path} && git add . && git commit --author \"React Native Playground <info@rnplay.org>\" -a -m \"Initial commit.\" && git push origin master"
+  end
+
   def create_as_bare
     Rugged::Repository.init_at(path, :bare)
     run "cp #{Rails.root}/config/git-post-receive #{path}/hooks/post-receive"
@@ -24,7 +28,7 @@ class GitRepo
 
   def files_with_contents
     file_list.inject({}) do |hash, path|
-      base = path.gsub("#{path}/", "")
+      base = path.gsub("#{@path}/", "")
       hash[base] = File.read(path)
       hash
     end
