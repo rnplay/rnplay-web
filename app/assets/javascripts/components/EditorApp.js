@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import React, { Component } from 'react';
+import cx from 'react-classset';
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/search/searchcursor';
 import 'codemirror/addon/dialog/dialog';
@@ -240,8 +241,13 @@ export default class EditorApp extends Component {
       fileSelectorOpen
     };
 
+    const classes = cx({
+      'editor-container': true,
+      'dark-theme': useDarkTheme
+    });
+
     return (
-      <div className="editor-container" style={{paddingTop: showHeader ? 50 : 0}}>
+      <div className={classes} style={{paddingTop: showHeader ? 50 : 0}}>
         {this.renderHeader()}
         <EditorHeader {...editorHeaderProps} />
         <div className="editor-container__body">

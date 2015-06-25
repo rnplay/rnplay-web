@@ -5,6 +5,7 @@ import CodeMirror from 'codemirror';
 import assign from 'lodash/object/assign';
 
 import FileSelector from './FileSelector';
+import FileIndicator from './FileIndicator';
 
 const DEFAULT_CODEMIRROR_OPTIONS = {
   autofocus: true,
@@ -75,7 +76,8 @@ export default class Editor {
       app: { body },
       currentFile,
       fileTree,
-      fileSelectorOpen
+      fileSelectorOpen,
+      useDarkTheme
     } = this.props;
 
     return (
@@ -87,6 +89,7 @@ export default class Editor {
           onSelect={this.changeFile}
         />
         <div className="editor-scroll-wrapper">
+          <FileIndicator current={currentFile} useDarkTheme={useDarkTheme} />
           <textarea ref="editorTextArea" onChange={this._onChange}>
             {body}
           </textarea>
