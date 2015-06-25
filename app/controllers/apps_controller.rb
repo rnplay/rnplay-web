@@ -134,24 +134,23 @@ class AppsController < ApplicationController
 
   def create
     if user_signed_in?
-      @app = current_user.apps.new(app_params)
+      respond_to do |format|
+        if @app = current_user.apps.create(app_params)
+          session[:apps] = [] if !session[:apps]
+          session[:apps] << @app.id
+
+          format.html { redirect_to app_path(@app), notice: 'App was successfully created.' }
+          format.json { render :show, status: :created, location: @app }
+        else
+
+          format.html { render :new }
+          format.json { render json: @app.errors, status: :unprocessable_entity }
+        end
+      end
     else
       render json: {error: "You must provide a valid authentication token to create an app"}
     end
 
-    respond_to do |format|
-      if @app.save
-        session[:apps] = [] if !session[:apps]
-        session[:apps] << @app.id
-
-        format.html { redirect_to app_path(@app), notice: 'App was successfully created.' }
-        format.json { render :show, status: :created, location: @app }
-      else
-
-        format.html { render :new }
-        format.json { render json: @app.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update
