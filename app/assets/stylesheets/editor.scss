@@ -265,7 +265,6 @@ body.app-editor-page {
   &__list-wrapper {
     overflow: scroll;
     flex-grow: 1;
-    margin-right: 10px;
   }
 
   &__list {
@@ -305,17 +304,19 @@ body.app-editor-page {
           margin-right: 0.4em;
           width: 16px;
           height: 16px;
-          content: ' ';
+          // font awesome closed folder icon
+          content: '\f07b';
           display: inline-block;
-          background: url('/assets/folder-icons.png');
-          vertical-align: sub;
           opacity: 0.8;
+
+          font: normal normal normal 14px/1 FontAwesome;
         }
       }
 
       &--open {
         &:before, &.current:before {
-          background-position: 0 -16px;
+          // font awesome open folder icon
+          content: '\f07c';
           opacity: 1;
         }
       }
