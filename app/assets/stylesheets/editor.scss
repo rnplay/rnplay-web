@@ -24,6 +24,17 @@ body.app-editor-page {
   background: $editor-header-bg;
   z-index: 10;
 
+  &__drawer-toggle {
+    color: #fff;
+    background: transparent;
+    border: 0;
+    padding: 0.7em;
+
+    i {
+      vertical-align: middle;
+    }
+  }
+
   form {
     display: flex;
     flex-grow: 1;

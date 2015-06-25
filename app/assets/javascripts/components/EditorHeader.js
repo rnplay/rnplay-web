@@ -130,6 +130,7 @@ export default class EditorHeader extends Component {
     return (
       <div className={classes}>
         <button
+          className="editor-header__drawer-toggle"
           onClick={onFileSelectorToggle}
         title="Open file drawer">
           <i className="fa fa-folder-open"></i>
