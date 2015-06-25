@@ -72,6 +72,23 @@ body.app-editor-page {
     flex: 4;
   }
 
+
+  &__button, .btn-info {
+    color: #fff;
+    border: none;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-top: 1em;
+    transition: all .3s ease;
+
+    &:hover, &:active, &:focus {
+      color: #ccc;
+      border: none;
+      background: transparent;
+    }
+  }
+
   /* .editor-header__save-button {
     border: none;
     border-radius: 5px;

@@ -81,7 +81,7 @@ export default class EditorHeader extends Component {
       return (
         <button
           onClick={this.showGitModal}
-          className="btn-info editor-header__git-button"
+          className="btn-info editor-header__button"
         >
           Clone with git
         </button>
@@ -93,7 +93,7 @@ export default class EditorHeader extends Component {
       return (
         <button
           onClick={this.onPick}
-          className="btn-info editor-header__pick-button"
+          className="btn-info editor-header__button"
         >
           {this.props.picked ? 'Unpick' : 'Pick'}
         </button>
@@ -113,7 +113,7 @@ export default class EditorHeader extends Component {
     return (
       <button
         onClick={method}
-        className="btn-info editor-header__save-button"
+        className="btn-info editor-header__button"
       >
         {text}
       </button>
