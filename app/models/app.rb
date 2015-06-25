@@ -8,6 +8,7 @@ class App < ActiveRecord::Base
 
   after_create :setup_git_repo
   after_create :set_module_name
+  after_create :extract_build
 
   belongs_to :creator, class_name: "User"
   belongs_to :build
