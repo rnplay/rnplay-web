@@ -6,9 +6,6 @@ name = Dir.pwd.split("/").last.split(".").first
 target = "/rails/app_js/#{name}"
 
 def npm_install(target)
-  json = JSON.parse(File.read("#{target}/package.json"))
-  json['dependencies'].delete('react-native')
-  File.open("#{target}/package.json", "w") {|f| f.write(JSON.pretty_generate(json))}
   puts `cd #{target} && npm install`
 end
 
