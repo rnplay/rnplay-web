@@ -19,7 +19,7 @@ class GitRepo
   def create_as_bare
     Rugged::Repository.init_at(path, :bare)
     run "cp #{Rails.root}/config/git-post-receive #{path}/hooks/post-receive"
-    run "chmod 755 #{path} && chown -R app:app #{path}"
+    run "chmod 755 #{path}/hooks/post-receive && chown -R app:app #{path}"
   end
 
   def bare?
