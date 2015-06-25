@@ -24,6 +24,13 @@ body.app-editor-page {
   background: $editor-header-bg;
   z-index: 10;
 
+  &__button-container {
+    width: 321px;
+    border-left: 1px solid #000;
+    padding-left: 1em;
+    text-align: center;
+  }
+
   &__drawer-toggle {
     color: #fff;
     background: transparent;
@@ -51,8 +58,7 @@ body.app-editor-page {
 
   .build-picker {
     font-size: 18px;
-    margin-left: 17px;
-    margin-top: 10px;
+    margin: 10px 17px;
     width: 130px;
   }
 
@@ -66,7 +72,7 @@ body.app-editor-page {
     flex: 4;
   }
 
-  .editor-header__save-button {
+  /* .editor-header__save-button {
     border: none;
     border-radius: 5px;
     margin-right: 17px;
@@ -96,7 +102,7 @@ body.app-editor-page {
     &:hover, &:active, &:focus {
       border: none;
     }
-  }
+  } */
 
 
   &--dark {
@@ -108,14 +114,14 @@ body.app-editor-page {
       color: $editor-header-name-input-copy-dark;
     }
 
-    & .editor-header__save-button {
+    /* & .editor-header__save-button {
       background: $editor-header-save-button-bg-dark;
 
       &:hover, &:active, &:focus {
         background: lighten($editor-header-save-button-bg-dark, 5%);
 
       }
-    }
+    } */
   }
 }
 .left-hand-pane {

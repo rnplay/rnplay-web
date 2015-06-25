@@ -81,7 +81,7 @@ export default class EditorHeader extends Component {
       return (
         <button
           onClick={this.showGitModal}
-          className="btn-info editor-header__pick-button"
+          className="btn-info editor-header__git-button"
         >
           Clone with git
         </button>
@@ -136,11 +136,6 @@ export default class EditorHeader extends Component {
           <i className="fa fa-folder-open"></i>
         </button>
         <form onSubmit={this.handleOnSubmit}>
-          <BuildPicker
-            onChange={this.onUpdateBuild}
-            builds={builds}
-            selectedBuildId={buildId}
-          />
           <input
             type="text"
             ref="nameInput"
@@ -149,9 +144,16 @@ export default class EditorHeader extends Component {
             onChange={this.onUpdateName}
             className="editor-header__name-input"
           />
-          {this.renderGitButton()}
-          {this.renderPickButton()}
-          {this.renderSaveButton()}
+          <BuildPicker
+            onChange={this.onUpdateBuild}
+            builds={builds}
+            selectedBuildId={buildId}
+          />
+          <div className="editor-header__button-container">
+            {this.renderGitButton()}
+            {this.renderPickButton()}
+            {this.renderSaveButton()}
+          </div>
         </form>
         {this.renderGitModal()}
       </div>

@@ -180,15 +180,18 @@ a {
 }
 
 .btn-info {
-  background: $purple-100;
-  border-color: $purple-100;
-}
+  color: #fff;
+  border: none;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  margin-top: 1em;
+  transition: all .3s ease;
 
-.btn-info:hover,
-.btn-info:active,
-.btn-info:focus {
-  background: $purple-80;
-  border-color: $purple-80;
+  &:hover, &:active, &:focus {
+    color: #ccc;
+    border: none;
+  }
 }
 
 .btn-fork-app {
