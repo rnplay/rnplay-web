@@ -133,7 +133,11 @@ class AppsController < ApplicationController
   end
 
   def create
-    @app = (user_signed_in? ? current_user.apps : App).new(app_params)
+    if user_signed_in?
+      @app = current_user.apps.new(app_params)
+    else
+      render json: {error: "You must provide a valid authentication token to create an app"}
+    end
 
     respond_to do |format|
       if @app.save
