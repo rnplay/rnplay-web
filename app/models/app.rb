@@ -114,7 +114,7 @@ class App < ActiveRecord::Base
 
   def extract_build
 
-    self.build = Build.find_by(name: '0.6.0')
+    self.build = Build.find_by(name: '0.6.0') unless self.build
     #
     # json = JSON.read(target_git_repo.contents_of_file("package.json"))
     #
