@@ -1,4 +1,5 @@
 require 'rugged'
+require 'fileutils'
 
 class GitRepo
 
@@ -6,6 +7,10 @@ class GitRepo
 
   def initialize(path)
     @path = path
+  end
+
+  def destroy
+    FileUtils.rm_rf path
   end
 
   def clone_from(source)
@@ -32,6 +37,10 @@ class GitRepo
       hash[base] = File.read(path)
       hash
     end
+  end
+
+  def contents_of_file(filename)
+    File.read("#{@path}/#{filename}")
   end
 
   def file_list

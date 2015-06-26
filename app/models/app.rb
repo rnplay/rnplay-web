@@ -9,6 +9,7 @@ class App < ActiveRecord::Base
   after_create :setup_git_repo
   after_create :set_module_name
   after_create :extract_build
+  after_destroy :remove_git_repos
 
   belongs_to :creator, class_name: "User"
   belongs_to :build
@@ -85,6 +86,11 @@ class App < ActiveRecord::Base
 
   private
 
+  def remove_git_repos
+    source_git_repo.destroy
+    target_git_repo.destroy
+  end
+
   def setup_git_repo
     source_git_repo.create_as_bare
     target_git_repo.clone_from(source_git_repo)
@@ -100,7 +106,18 @@ class App < ActiveRecord::Base
   end
 
   def extract_build
-    self.build = Build.find_by(name: 'master')
+
+    self.build = Build.find_by(name: '0.6.0')
+    #
+    # json = JSON.read(target_git_repo.contents_of_file("package.json"))
+    #
+    # if json['dependencies'] && json['dependencies']['react-native']
+    #
+    #   if build = Build.find_by(name: json['dependencies']['react-native'].gsub("^", ""))
+    #     self.build = build
+    #   end
+    #
+    # end
     save
   end
 
