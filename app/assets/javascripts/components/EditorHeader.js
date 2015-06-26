@@ -103,7 +103,7 @@ export default class EditorHeader extends Component {
 
   renderSaveButton() {
     let method = this.onFork;
-    let text = 'Fork &amp; Reload';
+    let text = 'Fork & Reload';
 
     if (this.belongsToCurrentUser()) {
       text = 'Save & Reload';
