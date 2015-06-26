@@ -54,6 +54,13 @@ class GitRepo
     end
   end
 
+  def fork_to(target_repo)
+    Rails.logger.info(path)
+    Rails.logger.info(target_repo.path)
+
+    puts `cp -pr #{path} #{target_repo.path}`
+  end
+
   private
 
   def run(cmd)

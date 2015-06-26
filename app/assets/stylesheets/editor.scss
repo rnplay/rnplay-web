@@ -101,6 +101,10 @@ body.app-editor-page {
     }
   }
 
+  &__large {
+    font-size: 140%;
+    font-weight: bold;
+  }
   /* .editor-header__save-button {
     border: none;
     border-radius: 5px;

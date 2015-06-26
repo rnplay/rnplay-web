@@ -9,10 +9,12 @@ class App < ActiveRecord::Base
   after_create :setup_git_repo
   after_create :set_module_name
   after_create :extract_build
+
   after_destroy :remove_git_repos
 
   belongs_to :creator, class_name: "User"
   belongs_to :build
+  belongs_to :forked_app, class_name: "App"
 
   def to_param
     url_token
@@ -91,8 +93,14 @@ class App < ActiveRecord::Base
   end
 
   def setup_git_repo
-    source_git_repo.create_as_bare
+    if forked_app
+      forked_app.source_git_repo.fork_to source_git_repo
+    else
+      source_git_repo.create_as_bare
+    end
+
     target_git_repo.clone_from(source_git_repo)
+
     if created_from_web
       target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
       target_git_repo.commit_all_changes

@@ -83,7 +83,18 @@ export default class EditorHeader extends Component {
           onClick={this.showGitModal}
           className="btn-info editor-header__button"
         >
-          Clone with git
+          Clone
+        </button>
+      );
+  }
+
+  renderForkButton() {
+      return (
+        <button
+          onClick={this.onFork}
+          className="btn-info editor-header__button"
+        >
+          Fork
         </button>
       );
   }
@@ -102,22 +113,17 @@ export default class EditorHeader extends Component {
   }
 
   renderSaveButton() {
-    let method = this.onFork;
-    let text = 'Fork & Reload';
 
     if (this.belongsToCurrentUser()) {
-      text = 'Save & Reload';
-      method = this.onSave;
+      return (
+        <button
+          onClick={this.onSave}
+          className="btn-info editor-header__button"
+        >
+          Save
+        </button>
+      );
     }
-
-    return (
-      <button
-        onClick={method}
-        className="btn-info editor-header__button"
-      >
-        {text}
-      </button>
-    );
   }
 
   render() {
@@ -150,6 +156,7 @@ export default class EditorHeader extends Component {
             selectedBuildId={buildId}
           />
           <div className="editor-header__button-container">
+            {this.renderForkButton()}
             {this.renderGitButton()}
             {this.renderPickButton()}
             {this.renderSaveButton()}
