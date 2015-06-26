@@ -14,7 +14,7 @@ class GitRepo
   end
 
   def clone_from(source)
-    Rugged::Repository.clone_at(source.path, path)
+    run "git clone #{source.path} #{path}"
   end
 
   def commit_all_changes
@@ -58,7 +58,7 @@ class GitRepo
     Rails.logger.info(path)
     Rails.logger.info(target_repo.path)
 
-    puts `cp -pr #{path} #{target_repo.path}`
+    run "cp -pr #{path} #{target_repo.path}"
   end
 
   private
