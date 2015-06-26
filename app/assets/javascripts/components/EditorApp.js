@@ -151,8 +151,8 @@ export default class EditorApp extends Component {
         }
       },
       type: 'POST',
-      success: ({ succes, error, token }) => {
-        if (data.success) {
+      success: ({ success, error, token }) => {
+        if (success) {
           window.location.href = `/apps/${token}`;
         } else {
           alert(error);
