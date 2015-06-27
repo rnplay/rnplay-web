@@ -106,7 +106,7 @@ export default class EditorHeader extends Component {
           onClick={this.onPick}
           className="btn-info editor-header__button"
         >
-          {this.props.picked ? 'Unpick' : 'Pick'}
+          {this.props.app.picked ? 'Unpick' : 'Pick'}
         </button>
       );
     }
