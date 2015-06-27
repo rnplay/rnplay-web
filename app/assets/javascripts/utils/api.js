@@ -1,21 +1,21 @@
 'use strict';
-// import axios from 'axios';
+import axios from 'axios';
 import $ from 'jquery';
 
 export default {
 
     saveFile(appId, filename, body) {
-      return $.ajax({
-        url: `/apps/${appId}/files/${encodeURIComponent(filename)}`,
-        data: {
-          body
-        },
-        type: 'PUT',
-        // hacky way until we fix the server to return json
-        // (atleast an emtpy string)
-        dataType: 'html'
-      });
-      // return axios.put(`/apps/${appId}/files/${encodeURIComponent(filename)}`, {body});
+      // return $.ajax({
+      //   url: `/apps/${appId}/files/${encodeURIComponent(filename)}`,
+      //   data: {
+      //     body
+      //   },
+      //   type: 'PUT',
+      //   // hacky way until we fix the server to return json
+      //   // (atleast an emtpy string)
+      //   dataType: 'html'
+      // });
+      return axios.put(`/apps/${appId}/files/${encodeURIComponent(filename)}`, {body});
     },
 
     toggleAppPickStatus(appId, picked) {

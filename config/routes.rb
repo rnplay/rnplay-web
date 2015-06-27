@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       get :popular
     end
 
-    resources :files, constraints: { id: /[^\/]+/, format: 'json'}
+    resources :files, constraints: { id: /[^\/]+/, format: /.*/}
   end
 
   post '/log' => 'logs#log'

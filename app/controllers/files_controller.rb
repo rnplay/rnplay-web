@@ -9,16 +9,11 @@ class FilesController < ApplicationController
 
   def update
     @app = current_user.apps.find(params[:app_id])
-
-    respond_to do |format|
-      format.json do
-        if @app
-          @app.update_file(params[:id], file_params[:body])
-          render json: {message: "File updated."}, status: :ok
-        else
-          render json: {error: 'Unauthorized!'}
-        end
-      end
+    if @app
+      @app.target_git_repo.update_file(params[:id], file_params[:body])
+      render json: {message: "File updated."}, status: :ok
+    else
+      render json: {error: 'Unauthorized!'}
     end
   end
 
