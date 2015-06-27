@@ -23,6 +23,7 @@ group :development, :test do
   gem 'capistrano-slack'
   gem 'quiet_assets'
   gem 'pry'
+  gem 'foreman'
 end
 
 group :test do
