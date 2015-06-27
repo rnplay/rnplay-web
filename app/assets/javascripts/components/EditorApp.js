@@ -30,11 +30,7 @@ export default class EditorApp extends Component {
 
   componentDidMount() {
     CodeMirror.commands.save = this.onFileSave;
-    const iframe = document.querySelector('iframe');
-
-    $(document).keyup(() => {
-      iframe.contentWindow.postMessage('heartbeat', '*');
-    });
+    this.simulatorIframe = document.querySelector('iframe');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -47,7 +43,7 @@ export default class EditorApp extends Component {
         window.location.reload();
       } else {
         const isOldBuild = parseInt(buildId) < 3;
-        const iframe = document.querySelector('iframe');
+        const iframe = this.simulatorIframe;
         // From 0.4.4 and up, we enable live reload - no need to reload the app
         if (isOldBuild) {
           if (simulatorActive) {
@@ -60,6 +56,10 @@ export default class EditorApp extends Component {
         }
       }
     }
+  }
+
+  sendHeartBeat = () => {
+    this.simulatorIframe.contentWindow.postMessage('heartbeat', '*');
   }
 
   // Keep track of simulator lifecycle
@@ -231,7 +231,7 @@ export default class EditorApp extends Component {
     });
 
     return (
-      <div className={classes} style={{paddingTop: showHeader ? 50 : 0}}>
+      <div onKeyUp={this.sendHeartBeat} className={classes} style={{paddingTop: showHeader ? 50 : 0}}>
         {this.renderHeader()}
         <EditorHeader {...editorHeaderProps} />
         <div className="editor-container__body">
