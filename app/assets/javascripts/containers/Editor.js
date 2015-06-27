@@ -19,7 +19,8 @@ import EditorApp from '../components/EditorApp';
     appSaveInProgress,
     appSaveError,
     fileSelectorOpen,
-    appIsPicked
+    appIsPicked,
+    forkToken
   } = editor;
 
   return {
@@ -31,6 +32,7 @@ import EditorApp from '../components/EditorApp';
     currentFile,
     fileTree,
     fileBodies,
+    forkToken,
     showHeader,
     appSaveInProgress,
     appSaveError,

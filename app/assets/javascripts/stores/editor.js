@@ -99,9 +99,10 @@ export default createStore(initialState, {
     })
   },
 
-  [`${actions.forkApp}-success`]: (state, action) => {
+  [`${actions.forkApp}-success`]: (state, { result: { token } }) => {
     return ({
       ...state,
+      forkToken: token
     })
   }
 

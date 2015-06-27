@@ -38,7 +38,7 @@ export default class EditorApp extends Component {
     const { simulatorActive } = this;
 
     if (forkToken) {
-      window.location.href = `/apps/${token}`;
+      window.location.href = `/apps/${forkToken}`;
       return;
     }
 
@@ -127,8 +127,8 @@ export default class EditorApp extends Component {
   }
 
   onFork = () => {
-    const { dispatch, forkApp, app: { id} } = this.props;
-    dispatch(forkApp(id));
+    const { dispatch, forkApp, app: { urlToken } } = this.props;
+    dispatch(forkApp(urlToken));
   }
 
   onFileSelectorToggle = () => {

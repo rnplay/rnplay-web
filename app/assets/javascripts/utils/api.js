@@ -36,12 +36,9 @@ export default {
       return Promise.all(requests);
     },
 
-    forkApp(appId) {
-      return axios.post(`/apps/${appId}/fork.json`)
-      .then(result => {
-        console.log(result);
-        return result;
-      });
+    forkApp(appToken) {
+      return axios.post(`/apps/${appToken}/fork.json`)
+      .then(result => result.data);
     }
 
 };
