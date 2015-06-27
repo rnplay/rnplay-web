@@ -1,34 +1,17 @@
 'use strict';
 import axios from 'axios';
-import $ from 'jquery';
 
 export default {
 
     saveFile(appId, filename, body) {
-      // return $.ajax({
-      //   url: `/apps/${appId}/files/${encodeURIComponent(filename)}`,
-      //   data: {
-      //     body
-      //   },
-      //   type: 'PUT',
-      //   // hacky way until we fix the server to return json
-      //   // (atleast an emtpy string)
-      //   dataType: 'html'
-      // });
       return axios.put(`/apps/${appId}/files/${encodeURIComponent(filename)}`, {body});
     },
 
     toggleAppPickStatus(appId, picked) {
-      // return axios.put(`/apps/${appId}`, {app: {pick: +picked}});
-
-      return $.ajax({
-        url: `/apps/${appId}`,
-        data: {
-          app: {
-            pick: +picked
-          }
-        },
-        type: 'PUT'
+      return axios.put(`/apps/${appId}`, {
+        app: {
+          pick: +picked
+        }
       });
     },
 
@@ -38,31 +21,18 @@ export default {
 
       // store all updates files
       const requests = Object.keys(fileBodies)
-        .map((filename) => {
-          return $.ajax({
-            url: filesUrl + encodeURIComponent(filename),
-            data: {
-              body: fileBodies[filename]
-            },
-            // hacky way until we fix the server to return json
-            // (atleast an emtpy string)
-            dataType: 'html',
-            type: 'PUT'
-          });
-        });
+        .map((filename) => axios.put(`${filesUrl}${encodeURIComponent(filename)}`, {
+          body: fileBodies[filename]
+        }));
 
       // update app info
-      requests.push($.ajax({
-        url: appUrl,
-        data: {
-          app: {
-            name,
-            buildId
-          }
-        },
-        type: 'PUT'
+      requests.push(axios.put(appUrl, {
+        app: {
+          name,
+          buildId
+        }
       }));
-
+      
       return Promise.all(requests);
     }
 };
