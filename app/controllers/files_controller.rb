@@ -20,7 +20,7 @@ class FilesController < ApplicationController
   private
 
   def file_params
-    params.permit(:body, :app_id, :id)
+    params.permit!
   end
 
 end
