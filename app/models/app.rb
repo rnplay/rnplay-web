@@ -85,6 +85,17 @@ class App < ActiveRecord::Base
     GitRepo.new("#{Rails.root}/app_js/#{url_token}")
   end
 
+  def migrate_to_git
+    logger.info "Migrating #{url_token} to git"
+    setup_git_repo
+    target_git_repo.update_file("index.ios.js", body)
+    target_git_repo.commit_all_changes
+  end
+
+  def migrated_to_git?
+    source_git_repo.exists?
+  end
+
   private
 
   def remove_git_repos

@@ -93,6 +93,7 @@ class AppsController < ApplicationController
   end
 
   def show
+    @app.migrate_to_git if !@app.migrated_to_git?
     @page_title = @app.name
     @app.increment_view_count!
 

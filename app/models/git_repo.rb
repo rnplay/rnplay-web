@@ -9,6 +9,10 @@ class GitRepo
     @path = path
   end
 
+  def exists?
+    File.exists?(path)
+  end
+
   def destroy
     FileUtils.rm_rf path
   end
