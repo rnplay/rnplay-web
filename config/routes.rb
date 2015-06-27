@@ -37,9 +37,9 @@ Rails.application.routes.draw do
       get :popular
     end
 
-    resources :files, constraints: { id: /[^\/]+/, format: /.*/}
+    resources :files, constraints: { id: /[^\/]+/, format: /.*/}, defaults: { format: 'json' }
   end
-
+  
   post '/log' => 'logs#log'
   get '/log/:id' => 'log_emitter#connect'
 
