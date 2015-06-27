@@ -18,11 +18,13 @@ import EditorApp from '../components/EditorApp';
     showHeader,
     appSaveInProgress,
     appSaveError,
-    fileSelectorOpen
+    fileSelectorOpen,
+    appIsPicked
   } = editor;
 
   return {
     app,
+    appIsPicked: appIsPicked !== null ? appIsPicked : app.picked,
     name: newName || app.name,
     buildId: newBuildId || app.buildId,
     buildUpdated: !!newBuildId,

@@ -18,7 +18,8 @@ const initialState = {
   fileTree: {},
   currentFile: 'index.ios.js',
   appSaveInProgress: false,
-  fileSelectorOpen: false
+  fileSelectorOpen: false,
+  appIsPicked: null
 };
 
 export default createStore(initialState, {
@@ -54,7 +55,7 @@ export default createStore(initialState, {
     newBuildId
   }),
 
-  [`${actions.saveFile}-success`]: (state, { filename}) => ({
+  [`${actions.saveFile}-success`]: (state, { filename }) => ({
     ...state,
     fileBodies: assign({}, omit(state.fileBodies, filename))
   }),
@@ -88,5 +89,14 @@ export default createStore(initialState, {
       ...state,
       fileSelectorOpen: !state.fileSelectorOpen,
     })
+  },
+
+  [`${actions.toggleAppPickStatus}-success`]: (state, { picked }) => {
+    return ({
+      ...state,
+      appIsPicked: picked,
+    })
   }
+
+
 });
