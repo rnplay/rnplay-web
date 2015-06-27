@@ -114,12 +114,10 @@ class AppsController < ApplicationController
   end
 
   def fork
-    @app = App.find(params[:id])
-
     if !user_signed_in?
       render json: {error: 'Please sign in to fork this app'}
     else
-      current_user.apps.create(name: @app.name, module_name: @app.module_name,
+      @new_app = current_user.apps.create(name: @app.name, module_name: @app.module_name,
                               build_id: @app.build_id, forked_app: @app)
 
       render json: {success: true, token: @new_app.url_token}
