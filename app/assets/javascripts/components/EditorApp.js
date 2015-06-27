@@ -1,6 +1,5 @@
 'use strict';
 
-import $ from 'jquery';
 import React, { Component } from 'react';
 import cx from 'react-classset';
 import CodeMirror from 'codemirror';
@@ -35,8 +34,13 @@ export default class EditorApp extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { buildId, buildUpdated, appSaveInProgress } = this.props;
-    const { appSaveInProgress: saveStillInProgress, appSaveError } = nextProps;
+    const { appSaveInProgress: saveStillInProgress, appSaveError, forkToken } = nextProps;
     const { simulatorActive } = this;
+
+    if (forkToken) {
+      window.location.href = `/apps/${token}`;
+      return;
+    }
 
     if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
       if (buildUpdated) {
@@ -123,26 +127,8 @@ export default class EditorApp extends Component {
   }
 
   onFork = () => {
-    const { name, buildId, buildUpdated, app: { id } } = this.props;
-    const { body } = this.state;
-    $.ajax({
-      url: `/apps/${id}/fork`,
-      data: {
-        app: {
-          name,
-          body,
-          build_id: buildId
-        }
-      },
-      type: 'POST',
-      success: ({ success, error, token }) => {
-        if (success) {
-          window.location.href = `/apps/${token}`;
-        } else {
-          alert(error);
-        }
-      }
-    });
+    const { dispatch, forkApp, app: { id} } = this.props;
+    dispatch(forkApp(id));
   }
 
   onFileSelectorToggle = () => {

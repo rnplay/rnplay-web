@@ -44,6 +44,10 @@ export default {
     filename
   }),
 
+  forkApp: (appId) => ({
+    promise: api.forkApp(appId)
+  }),
+
   toggleFileSelector: () => true
 
 };

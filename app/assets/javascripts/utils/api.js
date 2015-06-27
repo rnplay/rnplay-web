@@ -32,7 +32,16 @@ export default {
           buildId
         }
       }));
-      
+
       return Promise.all(requests);
+    },
+
+    forkApp(appId) {
+      return axios.post(`/apps/${appId}/fork.json`)
+      .then(result => {
+        console.log(result);
+        return result;
+      });
     }
+
 };

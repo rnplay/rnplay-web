@@ -19,7 +19,8 @@ const initialState = {
   currentFile: 'index.ios.js',
   appSaveInProgress: false,
   fileSelectorOpen: false,
-  appIsPicked: null
+  appIsPicked: null,
+  forkToken: null
 };
 
 export default createStore(initialState, {
@@ -96,7 +97,12 @@ export default createStore(initialState, {
       ...state,
       appIsPicked: picked,
     })
-  }
+  },
 
+  [`${actions.forkApp}-success`]: (state, action) => {
+    return ({
+      ...state,
+    })
+  }
 
 });
