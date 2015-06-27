@@ -18,6 +18,20 @@ export default {
       // return axios.put(`/apps/${appId}/files/${encodeURIComponent(filename)}`, {body});
     },
 
+    toggleAppPickStatus(appId, picked) {
+      // return axios.put(`/apps/${appId}`, {app: {pick: +picked}});
+
+      return $.ajax({
+        url: `/apps/${appId}`,
+        data: {
+          app: {
+            pick: +picked
+          }
+        },
+        type: 'PUT'
+      });
+    },
+
     saveApp(appId, name, buildId, fileBodies) {
       const appUrl = `/apps/${appId}`;
       const filesUrl = `${appUrl}/files/`;

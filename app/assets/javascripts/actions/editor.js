@@ -34,9 +34,10 @@ export default {
     fileBodies
   }),
 
-  pickApp: (picked) => {
-    // TODO pick app
-  },
+  toggleAppPickStatus: (appId, picked) => ({
+    promise: api.toggleAppPickStatus(appId, picked),
+    picked
+  }),
 
   saveFile: (appId, filename, filebody) => ({
     promise: api.saveFile(appId, filename, filebody),

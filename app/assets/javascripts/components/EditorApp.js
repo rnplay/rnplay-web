@@ -21,11 +21,6 @@ export default class EditorApp extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      picked: props.app.picked,
-    };
-
     this.simulatorActive = false;
   }
 
@@ -100,20 +95,9 @@ export default class EditorApp extends Component {
   }
 
   onPick = () => {
-    $.ajax({
-      url: `/apps/${this.props.app.id}`,
-      data: {
-        app: {
-          pick: +!this.state.picked
-        }
-      },
-      type: 'PUT',
-      success: () => {
-        this.setState({
-          picked: !this.state.picked
-        });
-      }
-    });
+    const { dispatch, toggleAppPickStatus, appIsPicked, app: { id } } = this.props;
+    dispatch(toggleAppPickStatus(id, !appIsPicked));
+
   }
 
   onChangeFile = (filename) => {
@@ -188,11 +172,11 @@ export default class EditorApp extends Component {
       builds,
       showHeader,
       name,
-      picked,
       currentFile,
       fileTree,
       buildId,
       appSaveError,
+      appIsPicked,
       fileSelectorOpen
     } = this.props;
 
@@ -217,10 +201,10 @@ export default class EditorApp extends Component {
       name,
       useDarkTheme,
       app,
+      appIsPicked,
       currentUser,
       builds,
       buildId,
-      picked,
       onUpdateName,
       onUpdateBuild,
       onPick,
