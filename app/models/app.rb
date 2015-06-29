@@ -36,7 +36,7 @@ class App < ActiveRecord::Base
 
   def set_module_name
     # TODO: parse module name from index.ios.js when it gets saved
-    self.module_name = self.name
+    self.module_name = self.name unless self.module_name
     save
   end
 
