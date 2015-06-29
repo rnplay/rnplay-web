@@ -90,9 +90,11 @@ export default class Editor {
         />
         <div className="editor-scroll-wrapper">
           <FileIndicator current={currentFile} useDarkTheme={useDarkTheme} />
-          <textarea ref="editorTextArea" onChange={this._onChange}>
-            {body}
-          </textarea>
+          <textarea
+            ref="editorTextArea"
+            onChange={this._onChange}
+            defaultValue={body}
+          />
         </div>
       </div>
     );
