@@ -78,6 +78,7 @@ export default class EditorHeader extends Component {
   }
 
   renderGitButton() {
+    if (this.belongsToCurrentUser()) {
       return (
         <button
           onClick={this.showGitModal}
@@ -86,6 +87,7 @@ export default class EditorHeader extends Component {
           Clone
         </button>
       );
+    }
   }
 
   renderForkButton() {
