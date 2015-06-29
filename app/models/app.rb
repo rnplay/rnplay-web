@@ -65,6 +65,7 @@ class App < ActiveRecord::Base
     "&xdocMsg=true" +
     "&autoapp=#{options[:autoapp]}" +
     "&deviceColor=white" +
+    "&debug=true" +
     "&params=#{URI.encode(params)}"
   end
 
