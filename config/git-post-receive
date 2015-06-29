@@ -6,6 +6,7 @@ name = Dir.pwd.split("/").last.split(".").first
 target = "/rails/app_js/#{name}"
 
 def npm_install(target)
+  puts "Running 'npm install'..."
   puts `cd #{target} && npm install`
 end
 
