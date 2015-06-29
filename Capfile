@@ -6,7 +6,7 @@ set :app_name, 'rnplay'
 set :user, 'app'
 set :deploy_to, "/home/app/rails/#{app_name}"
 set :repository, 'git@github.com:rnplay/rnplay-web.git'
-set :container_name, 'rnplay_rnplay_1'
+set :container_name, 'rnplay_rails_1'
 
 default_run_options[:pty] = true
 
