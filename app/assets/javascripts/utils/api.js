@@ -28,8 +28,8 @@ export default {
       // update app info
       requests.push(axios.put(appUrl, {
         app: {
-          name,
-          buildId
+          name: name,
+          build_id: buildId
         }
       }));
 
