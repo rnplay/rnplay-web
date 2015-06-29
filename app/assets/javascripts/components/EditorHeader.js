@@ -89,6 +89,7 @@ export default class EditorHeader extends Component {
   }
 
   renderForkButton() {
+    if (this.currentUserIsAdmin()) {
       return (
         <button
           onClick={this.onFork}
@@ -97,6 +98,7 @@ export default class EditorHeader extends Component {
           Fork
         </button>
       );
+    }
   }
 
   renderPickButton() {
