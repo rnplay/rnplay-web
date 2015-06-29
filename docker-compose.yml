@@ -65,30 +65,30 @@ packager044:
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
-packager050rc1:
+packager050:
   restart: always
-  image: "packager:0.5.0-rc1"
+  image: "packager:0.5.0"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager050rc1.rnplay.org
+    VIRTUAL_HOST: packager050.rnplay.org
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
-packagermaster:
+packager050:
   restart: always
-  image: "packager:master"
+  image: "packager:0.5.0"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packagermaster.rnplay.org
+    VIRTUAL_HOST: packager050.rnplay.org
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
-packager8b93b9:
+packager05backports:
   restart: always
-  image: "packager:8b93b9"
+  image: "packager:0.5.0"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager8b93b9.rnplay.org
+    VIRTUAL_HOST: packager05backports.rnplay.org
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
