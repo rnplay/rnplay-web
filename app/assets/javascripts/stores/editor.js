@@ -31,10 +31,16 @@ export default createStore(initialState, {
     fileTree: makeFileTree(Object.keys(app.files))
   }),
 
-  [`${actions.switchFile}`]: (state, { currentFile }) => ({
-    ...state,
-    currentFile
-  }),
+  [`${actions.switchFile}`]: (state, { currentFile }) => {
+    currentFile = state.app.files[currentFile] ?
+      currentFile :
+      initialState.currentFile;
+
+    return {
+      ...state,
+      currentFile
+    }
+  },
 
   [`${actions.toggleHeader}`]: (state, { show }) => ({
     ...state,

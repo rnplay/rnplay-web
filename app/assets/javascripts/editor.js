@@ -22,6 +22,11 @@ const {
 
 redux.dispatch(editor.switchApp(app));
 
+const { url_params: { file } } = app;
+if (file) {
+  redux.dispatch(editor.switchFile(file));
+}
+
 React.render((
   <Provider redux={redux}>
     {() => (<Editor {...rest} />)}
