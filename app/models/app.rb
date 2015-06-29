@@ -22,16 +22,16 @@ class App < ActiveRecord::Base
 
   def bundle_url
     if Rails.env.development?
-      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/#{bundle_path}"
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io#{bundle_path}"
     elsif Rails.env.staging?
-      "https://packager-staging.rnplay.org/#{bundle_path}"
+      "https://packager-staging.rnplay.org#{bundle_path}"
     else
-      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org/#{bundle_path}"
+      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org#{bundle_path}"
     end
   end
 
   def bundle_path
-    "#{url_token}/index.ios.bundle"
+    "/#{url_token}/index.ios.bundle"
   end
 
   def set_module_name
