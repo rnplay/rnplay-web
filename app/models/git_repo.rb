@@ -19,16 +19,23 @@ class GitRepo
 
   def clone_from(source)
     run "git clone #{source.path} #{path}"
+    set_app_owner
+  end
+
+  def set_app_owner
+    run "chown -R app:app #{path}"
   end
 
   def commit_all_changes
     run "cd #{path} && git add . && git commit --author \"React Native Playground <info@rnplay.org>\" -a -m \"Initial commit.\" && git push origin master"
+    set_app_owner
   end
 
   def create_as_bare
     Rugged::Repository.init_at(path, :bare)
     run "cp #{Rails.root}/config/git-post-receive #{path}/hooks/post-receive"
-    run "chmod 755 #{path}/hooks/post-receive && chown -R app:app #{path}"
+    run "chmod 755 #{path}/hooks/post-receive"
+    set_app_owner
   end
 
   def bare?
@@ -55,6 +62,7 @@ class GitRepo
   def update_file(name, content)
     File.open("#{path}/#{name}", "w") do |file|
       file.write(content)
+      set_app_owner
     end
   end
 
@@ -63,6 +71,7 @@ class GitRepo
     Rails.logger.info(target_repo.path)
 
     run "cp -pr #{path} #{target_repo.path}"
+    target_repo.set_app_owner
   end
 
   private
