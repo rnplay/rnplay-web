@@ -6,8 +6,23 @@ name = Dir.pwd.split("/").last.split(".").first
 target = "/rails/app_js/#{name}"
 
 def npm_install(target)
-  puts "Running 'npm install'..."
-  puts `cd #{target} && npm install`
+
+  if File.exists?("#{target}/package.json")
+
+    json = JSON.parse(File.read("#{target}/package.json"))
+
+    if json['dependencies']
+      if json['dependencies'].values.any? { |d| d.include("/") }
+        puts "Sorry, to prevent problems with conflicting react-native copies, we can't accept apps with git NPM sources. Please use official npm package versions."
+        exit 1
+      elsif json['dependencies']['react-native']
+        json['dependencies'].delete('react-native')
+        File.open("#{target}/package.json", "w") {|f| f.write(JSON.pretty_generate(json))}
+      end
+      puts "Running 'npm install'..."
+      puts `cd #{target} && npm install`
+    end
+  end
 end
 
 if File.exists?(target)
