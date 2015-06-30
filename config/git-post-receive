@@ -12,7 +12,7 @@ def npm_install(target)
     json = JSON.parse(File.read("#{target}/package.json"))
 
     if json['dependencies']
-      if json['dependencies'].values.any? { |d| d.include("/") }
+      if json['dependencies'].values.any? { |d| d.include?("/") }
         puts "Sorry, to prevent problems with conflicting react-native copies, we can't accept apps with git NPM sources. Please use official npm package versions."
         exit 1
       elsif json['dependencies']['react-native']
