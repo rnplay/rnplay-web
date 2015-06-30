@@ -248,6 +248,15 @@ body.app-editor-page {
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  &__text-wrapper {
+    display: flex;
+    overflow: scroll;
+    flex-grow: 1;
+    flex-basis: 100%;
+    height: 100%;
+  }
+
 }
 
 .cm-s-solarized.CodeMirror {

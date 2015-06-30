@@ -6,6 +6,8 @@ import assign from 'lodash/object/assign';
 
 import FileSelector from './FileSelector';
 import FileIndicator from './FileIndicator';
+import Logger from './Logger';
+
 
 const DEFAULT_CODEMIRROR_OPTIONS = {
   autofocus: true,
@@ -90,11 +92,14 @@ export default class Editor {
         />
         <div className="editor-scroll-wrapper">
           <FileIndicator current={currentFile} useDarkTheme={useDarkTheme} />
-          <textarea
-            ref="editorTextArea"
-            onChange={this._onChange}
-            defaultValue={body}
-          />
+          <div className="editor-scroll-wrapper__text-wrapper">
+            <textarea
+              ref="editorTextArea"
+              onChange={this._onChange}
+              defaultValue={body}
+            />
+          </div>
+          <Logger />
         </div>
       </div>
     );
