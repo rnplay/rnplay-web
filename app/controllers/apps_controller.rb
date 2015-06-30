@@ -150,7 +150,7 @@ class AppsController < ApplicationController
         end
       end
     else
-      render json: {error: "You must provide a valid authentication token to create an app"}
+      render json: {error: "You must provide a valid authentication token to create an app"}, status: :unauthorized
     end
 
   end
