@@ -29,6 +29,6 @@ if File.exists?(target)
   puts `git --work-tree #{target} --git-dir #{target}/.git fetch origin && git --work-tree #{target} --git-dir #{target}/.git reset --hard origin/master && chown -R 9999:9999 #{target}`
   npm_install(target)
 else
-  puts `git clone /var/repos/#{name}.git /rails/app_js/#{name} & chown -R 9999:9999 #{target}`
+  puts `git -C=#{target} clone /var/repos/#{name}.git /rails/app_js/#{name} & chown -R 9999:9999 #{target}`
   npm_install(target)
 end
