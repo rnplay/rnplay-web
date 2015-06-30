@@ -3,11 +3,11 @@
 import React from 'react';
 import { connect } from 'redux/react';
 
-import { editor as editorActions } from '../actions';
+import { editor as editorActions, logger as loggerActions } from '../actions';
 import EditorApp from '../components/EditorApp';
 
 @connect((state) => {
-  const { editor } = state;
+  const { editor, logs } = state;
   const {
     app,
     newName,
@@ -36,13 +36,14 @@ import EditorApp from '../components/EditorApp';
     showHeader,
     appSaveInProgress,
     appSaveError,
-    fileSelectorOpen
+    fileSelectorOpen,
+    logs: logs.logs
   };
 })
 export default class Editor {
 
   render() {
-    return <EditorApp {...this.props} {...editorActions} />;
+    return <EditorApp {...this.props} {...editorActions} {...loggerActions} />;
   }
 
 }

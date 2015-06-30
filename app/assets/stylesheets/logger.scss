@@ -27,6 +27,15 @@
     font-size: 1.2rem;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
     border-top: 1px solid #B2B2B2;
+
+    &__unread {
+      background-color: #FF9B00;
+      padding: 0.2em 0.6em;
+      border-radius: 0.8em;
+      font-weight: 400;
+      font-size: 1rem;
+      margin-right: 0.5em;
+    }
   }
 
   &__content {

@@ -79,7 +79,8 @@ export default class Editor {
       currentFile,
       fileTree,
       fileSelectorOpen,
-      useDarkTheme
+      useDarkTheme,
+      logs
     } = this.props;
 
     return (
@@ -99,7 +100,7 @@ export default class Editor {
               defaultValue={body}
             />
           </div>
-          <Logger />
+          <Logger logs={logs} />
         </div>
       </div>
     );

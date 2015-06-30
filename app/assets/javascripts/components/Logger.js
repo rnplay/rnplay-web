@@ -3,38 +3,70 @@
 import React, { Component } from 'react';
 import cx from 'react-classset';
 
+const formatDate = (date) => date.toISOString().replace('T', ' ').replace('Z', ' ');
+
 export default class Editor extends Component {
 
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      open: false
+      open: false,
+      unread: props.logs.length
     };
 
   }
 
   onToggle = () => {
     this.setState({
-      open: !this.state.open
+      open: !this.state.open,
+      unread: 0
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { length: nextLength } = nextProps.logs;
+    const { length } = this.props.logs;
+    const { unread, open } = this.state;
+
+    if (!open && nextLength > length) {
+      this.setState({
+        unread: unread + (nextLength - length)
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { content, contentInner } = this.refs;
+    const contentNode = React.findDOMNode(content);
+    const contentInnerNode = React.findDOMNode(contentInner);
+    contentNode.scrollTop = contentInnerNode.getBoundingClientRect().height;
+  }
+
   render() {
+    const { open, unread } = this.state;
     const classes = cx({
       'logger': true,
-      'open': this.state.open
+      'open': open
     });
 
-    const logs = ['some, log', 'another log', 'more stuff ', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'];
+    const { logs } = this.props;
 
     return (
       <div className={classes}>
         <button onClick={this.onToggle} className='logger__toggle'>
+          {!!unread && <span className='logger__toggle__unread'>{unread}</span>}
           <span>Log</span>
         </button>
-        <div className='logger__content'>
-          {logs.map((log) => <div className='logger__entry'>{log}</div>)}
+        <div ref='content' className='logger__content'>
+          <div ref='contentInner'>
+            {!!logs.length && logs.map((log) => (
+              <div key={log.id} className='logger__entry'>
+                {log.msgType !== 'debug' && `${formatDate(log.timestamp)} `}
+                {log.message}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );

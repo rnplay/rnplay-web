@@ -67,20 +67,16 @@ export default class EditorApp extends Component {
   }
 
   // Keep track of simulator lifecycle
-  handleSimulatorEvent(e) {
+  handleSimulatorEvent = (e) => {
     const { data } = e;
+    const { dispatch, log } = this.props;
     if (data === 'sessionRequested') {
       this.simulatorActive = true;
-    } else if (data === 'userError') {
-        console.log(data);
-    } else if (data === 'firstFrameReceived') {
-        console.log(data);
-    } else if (data === 'timeoutWarning') {
-        console.log(data);
-    } else if(data === 'sessionEnded') {
-      console.log(data);
+    } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
     }
+    
+    dispatch(log(data));
   }
 
   onUpdateName = (name) => {
@@ -163,7 +159,8 @@ export default class EditorApp extends Component {
       buildId,
       appSaveError,
       appIsPicked,
-      fileSelectorOpen
+      fileSelectorOpen,
+      logs
     } = this.props;
 
     const {
@@ -208,7 +205,8 @@ export default class EditorApp extends Component {
       useDarkTheme,
       onChangeFile,
       onUpdateBody,
-      fileSelectorOpen
+      fileSelectorOpen,
+      logs
     };
 
     const classes = cx({
