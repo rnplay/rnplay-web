@@ -70,7 +70,7 @@ class App < ActiveRecord::Base
   end
 
   def appetize_public_key
-    build.appetize_id
+    Rails.env.staging? ? Build.find_by(name: "0.6.0").appetize_id : build.appetize_id
   end
 
   def created_by?(user)
