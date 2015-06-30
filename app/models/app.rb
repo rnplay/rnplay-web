@@ -36,7 +36,7 @@ class App < ActiveRecord::Base
 
   def set_module_name
     # TODO: parse module name from index.ios.js when it gets saved
-    self.module_name = self.name
+    self.module_name = self.name unless self.module_name
     save
   end
 
@@ -65,11 +65,12 @@ class App < ActiveRecord::Base
     "&xdocMsg=true" +
     "&autoapp=#{options[:autoapp]}" +
     "&deviceColor=white" +
+    "&debug=true" +
     "&params=#{URI.encode(params)}"
   end
 
   def appetize_public_key
-    build.appetize_id
+    Rails.env.staging? ? "zq3p7vdfvx1848vxyaub0fj3cw" : build.appetize_id
   end
 
   def created_by?(user)

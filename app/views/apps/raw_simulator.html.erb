@@ -22,6 +22,8 @@ var messageEventHandler = function(event){
        saveScreenshot();
     }, 8000);
 
+  } else if(event.data && event.data.type == 'debug'){
+    console.log(event.data);
   }
 };
 

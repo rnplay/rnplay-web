@@ -31,10 +31,14 @@ class GitRepo
     set_app_owner
   end
 
-  def create_as_bare
-    Rugged::Repository.init_at(path, :bare)
+  def install_hooks
     run "cp #{Rails.root}/config/git-post-receive #{path}/hooks/post-receive"
     run "chmod 755 #{path}/hooks/post-receive"
+  end
+
+  def create_as_bare
+    Rugged::Repository.init_at(path, :bare)
+    install_hooks
     set_app_owner
   end
 

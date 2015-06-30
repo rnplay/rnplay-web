@@ -1,4 +1,4 @@
-rnplay:
+rails:
   build: .
   restart: always
   env_file: .env.production
@@ -18,9 +18,9 @@ postgres:
   env_file: .env.production
   image: postgres
 
-rnplaystaging:
-  restart: always
+railsstaging:
   build: .
+  restart: always
   env_file: .env.production
   volumes:
     - /home/app/rails/rnplay_staging:/app
@@ -32,6 +32,7 @@ rnplaystaging:
   environment:
     RAILS_ENV: staging
     VIRTUAL_HOST: staging.rnplay.org
+    PASSENGER_APP_ENV: staging 
 
 postgres:
   restart: always
@@ -65,32 +66,41 @@ packager044:
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
-packager050rc1:
+packager060:
   restart: always
-  image: "packager:0.5.0-rc1"
+  image: "packager:0.6.0"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packager050rc1.rnplay.org
+    VIRTUAL_HOST: packager060.rnplay.org
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
-packagermaster:
+packager050:
+  restart: always
+  image: "packager:0.5.0"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager050.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packager05backports:
+  restart: always
+  image: "packager:0.5.0"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager05backports.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packagerstaging:
   restart: always
   image: "packager:master"
   env_file: .env.production
   environment:
-    VIRTUAL_HOST: packagermaster.rnplay.org
+    VIRTUAL_HOST: packager-staging.rnplay.org
   volumes:
-    - /home/app/rails/rnplay/app_js:/js
-
-packager8b93b9:
-  restart: always
-  image: "packager:8b93b9"
-  env_file: .env.production
-  environment:
-    VIRTUAL_HOST: packager8b93b9.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/js
+    - /home/app/rails/rnplay_staging/app_js:/js
 
 proxy:
   restart: always
@@ -103,6 +113,7 @@ proxy:
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
     - /home/app/certs:/etc/nginx/certs
+    - /home/app/proxy/proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
 
 redis:
   restart: always
@@ -138,3 +149,15 @@ grack:
     - /home/app/rails/rnplay:/var/rails
   links:
     - postgres
+  environment:
+    VIRTUAL_HOST: git.rnplay.org
+
+grackstaging:
+  image: grack-docker
+  volumes:
+    - /home/app/rails/rnplay_staging:/rails
+    - /home/app/repos:/var/repos
+  links:
+    - postgres
+  environment:
+    VIRTUAL_HOST: git-staging.rnplay.org

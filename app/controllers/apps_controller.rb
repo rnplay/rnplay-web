@@ -109,6 +109,7 @@ class AppsController < ApplicationController
     else
       @app = current_user.apps.create({
         name: "Sample App",
+        module_name: "SampleApp",
         build_id: Build.last.id,
         created_from_web: true
       })
@@ -149,7 +150,7 @@ class AppsController < ApplicationController
         end
       end
     else
-      render json: {error: "You must provide a valid authentication token to create an app"}
+      render json: {error: "You must provide a valid authentication token to create an app"}, status: :unauthorized
     end
 
   end
