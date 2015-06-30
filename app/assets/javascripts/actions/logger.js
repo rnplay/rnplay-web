@@ -8,7 +8,7 @@ export default {
 
   log: (item) => {
     if (item) {
-      const { msgType = 'lifecycle' } = item;
+      const { type: msgType = 'lifecycle' } = item;
       const { message = item } = item;
 
       return {
