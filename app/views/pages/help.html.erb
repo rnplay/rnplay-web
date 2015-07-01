@@ -1,31 +1,3 @@
 <div class="container" style="padding-bottom: 100px">
-  <h2>What can I do with this site?</h2>
-  <p>Build and test React Native applications with just a browser, and optionally an iOS device! <a href="https://facebook.github.io/react-native/">Learn more about React Native</a>.</p>
-
-  <h2>How can I build an app and test it on the site?</h2>
-  <p>Sign up and start playing right away with our in-browser editor and simulator. Once you're ready to test on a device, download the iOS app, then
-    use the 'Run on Device' link and scan the QR code.</p>
-
-  <h2>How do I 'exit' an app running inside the iOS app?</h2>
-  <p>Long-press the screen with two fingers. After a few seconds, the base iOS app should appear.</p>
-
-  <h2>How does this site work?</h2>
-  <p>Apps are all hosted in their own git repositories on our servers. We run React Native packagers which serve transformed javascript to our custom iOS app, which is compiled with
-    some <a href="https://github.com/rnplay/rnplay-ios/blob/master/package.json#L10-L25">community native modules</a>, available for use in your app.</p>
-
-  <h2>How do I use git to push my app to the site?</h2>
-  <p>First, install the command line client: <em>npm install -g rnplay-cli</em></p>
-  <p>Sign up to the site, and <a href="https://rnplay.org/users/edit">grab your authentication token in your profile page</a>.</p>
-  <p>Run <em>rnplay -a</em> and enter your email and token.</p>
-  <p>From inside your React Native app directory, which should already have a git repository, run <em>rnplay -c</em>. Choose an application name:
-    currently the name should match the registered module name in <em>index.ios.js</em>. This file must exist and be the app entry point.</p>
-  <p>Now your app should be created on the site, with a new git remote added to your repo. <em>git push rnplay master</em> will push your master
-     branch up. Now <em>rnplay -o</em> to open the browser to your app.</p>
-  <h2>What limitations exist for testing apps here?</h2>
-  <p>You may only use native modules from React Native itself, or those included with our iOS app.</p>
-  <p>To prevent conflicts between react-native versions, git repos must not have git repositories as npm sources.</p>
-  <p>Your app may not work if it uses features not available in our supported React Native versions. To run inside the iOS app, your
-     app should work with the its React Native version: <strong>0.5.0</strong>.
-  <p>Your app can't use images or other resources in the iOS app resource bundle, since we have no way to package those at runtime.
-     Later, once React Native supports loading images from alternate bundles, we'll allow you to upload a resource bundle and download it from a URL into your app.</p>
+resource bundle and download it from a URL into your app.</p>
 </div>

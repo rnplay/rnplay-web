@@ -106,7 +106,6 @@ a {
 
 p {
   font-size: 120%;
-  
 }
 .CodeMirror {
   width: 100%;
@@ -143,7 +142,10 @@ p {
 }
 
 .navbar ul a {
-  font-size: 120%;
+  margin-top: 2px;
+  font-size: 100% !important;
+  font-weight: bold;
+  text-transform: uppercase;
   color: #ddd !important;
 }
 
@@ -156,7 +158,7 @@ p {
 }
 
 .navbar #links {
-  margin-left: 5px;
+  margin-left: 30px;
   margin-top: 5px;
 }
 
