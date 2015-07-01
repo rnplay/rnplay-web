@@ -62,6 +62,8 @@ var Header = React.createClass({
             {this.renderMyApps()}
           </ul>
           <ul className="nav navbar-nav pull-right">
+            <li><a href="/about">About</a></li>
+            <li><a href="/help">Help</a></li>
             {this.renderSignInOutLink()}
           </ul>
         </div>

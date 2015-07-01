@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'welcome#index'
+  root 'apps#show'
 
   mount WebpackRails::Engine, at: 'webpack', as: 'webpack'
 
@@ -54,6 +54,9 @@ Rails.application.routes.draw do
 
 
   get '/privacy', to: "pages#privacy"
+  get '/help', to: "pages#help"
+  get '/about', to: "pages#about"
+
   get '/:username/:id', to: "apps#show", as: :user_app
   get '/:username', to: "apps#public_index", as: :user_apps
 

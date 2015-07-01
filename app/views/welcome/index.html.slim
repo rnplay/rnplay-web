@@ -1,12 +1,8 @@
 - content_for(:body_class, 'welcome-page')
 
-#welcome
-  h1
-    | The React Native Playground
-    small.welcome-subtitle
-      | For testing and sharing your React Native apps and snippets,
-      br
-      | from the comfort of your browser.
+#welcome.container
+  small.welcome-subtitle
+    | Test and share your React Native code in the browser or on any iOS device.
   p.text-center.get-started-button
     = link_to "Fork the sample app and play around!", new_app_path(from: @app.url_token),
         class: "btn btn-info btn-lg btn-fork-app"

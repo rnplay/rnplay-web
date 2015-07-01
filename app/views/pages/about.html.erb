@@ -1,0 +1,62 @@
+<div class="container" style="padding-bottom: 100px">
+  <h3>What is this site?</h3>
+  <p>The Playground is a place to easily test and share React Native applications. We host an in-browser code editor, an iOS simulator,
+    and React Native packager instances to quickly test changes to your apps.</p>
+  <h3>Why did you build it?</h3>
+  <p>To demonstrate how powerful React Native is as a mobile development platform. Now, we're an <a href="#team">open source team</a> focused on helping the React Native community, by <a href="https://facebook.github.io/react-native/docs/alertios.html#examples">integrating with React Native documentation</a>,
+     serving as a <a href="https://github.com/facebook/react-native/search?q=rnplay.org&type=Issues&utf8=%E2%9C%93">bug tracking tool</a>, and hosting <a href="/picks">interesting sample applications</a>.</p>
+  <h3>What can I do with this site?</h3>
+  <p>You can:</p>
+  <ul>
+    <li>Write and test React Native apps right in the browser, with our code editor and a real, embedded iOS simulator provided by the
+      awesome team at <a href="http://appetize.io">appetize.io</a></li>
+    <li>Push and pull React Native apps to the site using git. <a href="/help">Learn more about how to do this</a>.</li>
+    <li>Compare behavior across multiple React Native versions</li>
+  </ul>
+  <h2>Is your code open source?</h2>
+  <p>Currently, all code related to this site is <a href="http://github.com/rnplay">available on Github</a>. Please help us out by submitting issues or pull requests!</p>
+  <h3>Which React Native versions do you support?</h3>
+  <p><%= Build.all.collect(&:name).to_sentence %>.</p>
+  <h3>Who built this?</h3>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <a href="http://joshua.si" class="thumbnail">
+        <%= image_tag("joshua.png") %>
+        </a>
+      <div class="caption">
+        <h3><a href="http://joshua.si">Joshua Sierles</a></h3>
+        <p>Ruby server hacker, flamenco guy</p>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <a href="http://brentvatne.ca" class="thumbnail">
+        <%= image_tag("brent.jpg") %>
+      </a>
+      <div class="caption">
+        <h3><a href="http://brentvatne.ca">Brent Vatne</a></h3>
+        <p>React Native community, happy person</p>
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-md-3">
+      <a href="http://jlum.pe" class="thumbnail">
+        <%= image_tag("jlumpe.jpg") %>
+      </a>
+      <div class="caption">
+        <h3><a href="http://jlum.pe">Johannes Lumpe</a></h3>
+        <p>ES7 evangelist, rocker</p>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <a href="http://twitter.com/dsibiski" class="thumbnail">
+        <%= image_tag("dsibiski.jpg") %>
+      </a>
+      <div class="caption">
+        <h3><a href="http://twitter.com/dsibiski">Dave Sibiski</a></h3>
+        <p>Native dev, surfer</p>
+      </div>
+    </div>
+  </div>
+
+</div>
