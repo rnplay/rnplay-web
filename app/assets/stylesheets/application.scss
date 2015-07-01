@@ -387,12 +387,16 @@ p {
 
 #team {
   .thumbnail {
-    width: 200px
+    width: 200px;
+    img {
+    }
   }
 }
 
 .team-col {
-  width: 20%;
+  width: 18%;
+  float: left;
+  margin-right: 10px;
 }
 
 #apps {
