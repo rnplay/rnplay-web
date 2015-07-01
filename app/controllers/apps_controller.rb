@@ -12,7 +12,7 @@ class AppsController < ApplicationController
   protect_from_forgery except: [:show, :create, :update, :fork]
 
   def index
-    @apps = current_user.apps
+    @apps = current_user.apps.order("updated_at desc")
 
     respond_to do |format|
       format.html
