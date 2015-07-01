@@ -228,23 +228,6 @@ p {
   margin-top: 55px;
 }
 
-#apps {
-  font-size: 140%;
-  li {
-    margin-bottom: 25px;
-  }
-  p {
-    font-size: 80%;
-    color: #888;
-    margin: 0;
-    padding: 0;
-  }
-  .delete {
-    font-size: 60%;
-    text-transform: uppercase;
-    color: #920000;
-  }
-}
 .form-app {
   padding-left: 15px;
 }
@@ -405,5 +388,49 @@ p {
 #team {
   .thumbnail {
     width: 200px
+  }
+}
+
+#apps {
+  .delete {
+    font-size: 60%;
+    text-transform: uppercase;
+    color: #920000;
+  }
+}
+
+.play-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    flex-basis: 50%;
+    text-align: left;
+    padding: 0 2.5%;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: $screen-sm-min) {
+      flex-basis: 33%;
+    }
+
+    @media (min-width: $screen-md-min) {
+      flex-basis: 25%;
+    }
+
+    a:first-child {
+      font-size: 2.5rem;
+      word-wrap: break-word;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+      color: #888;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
