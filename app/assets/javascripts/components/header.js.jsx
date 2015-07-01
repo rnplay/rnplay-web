@@ -11,7 +11,7 @@ var Header = React.createClass({
     if (this.props.currentUser) {
       return <li><a href="/apps">My Apps</a></li>;
     } else {
-      return <span />
+      return null;
     }
   },
 
@@ -59,8 +59,8 @@ var Header = React.createClass({
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav" id="links">
             <li><a href="/apps/new">New App</a></li>
-            <li><a href="/apps/picks">Staff Picks</a></li>
             {this.renderMyApps()}
+            <li><a href="/apps/picks">Staff Picks</a></li>
             <li><a href="/about">About</a></li>
           </ul>
           <ul className="nav navbar-nav pull-right">
