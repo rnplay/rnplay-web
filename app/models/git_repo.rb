@@ -26,8 +26,8 @@ class GitRepo
     run "chown -R app:app #{path}"
   end
 
-  def commit_all_changes
-    run "cd #{path} && git add . && git commit --author \"React Native Playground <info@rnplay.org>\" -a -m \"Initial commit.\" && git push origin master"
+  def commit_all_changes(message)
+    run "cd #{path} && git add . && git commit --author \"React Native Playground <info@rnplay.org>\" -a -m #{message} && git push origin master"
     set_app_owner
   end
 

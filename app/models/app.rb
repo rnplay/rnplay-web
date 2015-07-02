@@ -90,7 +90,7 @@ class App < ActiveRecord::Base
     logger.info "Migrating #{url_token} to git"
     setup_git_repo
     target_git_repo.update_file("index.ios.js", body)
-    target_git_repo.commit_all_changes
+    target_git_repo.commit_all_changes("Initial commit from rnplay.org")
   end
 
   def migrated_to_git?
