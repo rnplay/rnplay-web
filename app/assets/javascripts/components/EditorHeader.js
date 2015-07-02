@@ -70,12 +70,14 @@ export default class EditorHeader extends Component {
   }
 
   renderGitModal = () => {
-    return (
-      <GitModal app={this.props.app}
-               token={this.props.currentUser.authentication_token}
-               onClickBackdrop={this.hideGitModal}
-               isOpen={this.state.gitModalIsVisible} />
-    )
+    if (this.belongsToCurrentUser()) {
+      return (
+        <GitModal app={this.props.app}
+                 token={this.props.currentUser.authentication_token}
+                 onClickBackdrop={this.hideGitModal}
+                 isOpen={this.state.gitModalIsVisible} />
+      )
+    }
   }
 
   renderGitButton() {
