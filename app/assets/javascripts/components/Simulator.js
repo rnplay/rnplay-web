@@ -64,7 +64,7 @@ export default class Simulator extends Component {
           <iframe
             src={url}
             width="320px"
-            height="800px"
+            height="9999px"
             frameBorder="0"
             scrolling="no"
           />
