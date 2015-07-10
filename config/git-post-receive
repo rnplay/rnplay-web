@@ -4,6 +4,15 @@ require 'json'
 
 name = Dir.pwd.split("/").last.split(".").first
 target = "/rails/app_js/#{name}"
+source = "/var/repos/#{name}.git"
+
+def check_for_committed_modules(source)
+  puts `git --work-tree #{source} --git-dir #{source} show master:.gitignore | grep node_modules`
+  if !$?.success?
+    puts "Sorry! To prevent problems with conflicting react-native packages, your git repo must not have node_modules checked in. Please add node_modules to .gitignore and remove any checked-in node_modules."
+    exit 1
+  end
+end
 
 def npm_install(target)
 
@@ -26,9 +35,11 @@ def npm_install(target)
 end
 
 if File.exists?(target)
+  check_for_committed_modules(source)
   puts `git --work-tree #{target} --git-dir #{target}/.git fetch origin && git --work-tree #{target} --git-dir #{target}/.git reset --hard origin/master && chown -R 9999:9999 #{target}`
   npm_install(target)
 else
-  puts `git --work-tree #{target} --git-dir #{target}/.git clone /var/repos/#{name}.git /rails/app_js/#{name} & chown -R 9999:9999 #{target}`
+  check_for_committed_modules(source)
+  puts `git --work-tree #{target} --git-dir #{target}/.git clone #{source} /rails/app_js/#{name} & chown -R 9999:9999 #{target}`
   npm_install(target)
 end
