@@ -26,6 +26,9 @@ def npm_install(target)
         exit 1
       elsif json['dependencies']['react-native']
         json['dependencies'].delete('react-native')
+        if json['devDependencies'] && json['devDependencies']['react-native']
+          json['devDependencies'].delete('react-native')
+        end
         File.open("#{target}/package.json", "w") {|f| f.write(JSON.pretty_generate(json))}
       end
       puts "Running 'npm install'..."
