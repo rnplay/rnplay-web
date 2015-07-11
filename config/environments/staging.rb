@@ -48,7 +48,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  # config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -79,8 +79,12 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.lograge.enabled = true
+  log_level = String(ENV['LOG_LEVEL'] || "info").upcase
   config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get(log_level)
+  config.log_level = log_level
+  config.lograge.enabled = true
+
 
 
 end
