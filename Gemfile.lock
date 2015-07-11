@@ -162,6 +162,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     libv8 (3.16.14.7)
+    lograge (0.3.4)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -364,6 +368,7 @@ DEPENDENCIES
   google-qr
   jbuilder (~> 2.0)
   jquery-rails
+  lograge
   minitest-rails-capybara
   newrelic_rpm
   omniauth-twitter

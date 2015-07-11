@@ -55,3 +55,5 @@ gem "rack-cors"
 gem "simple_token_authentication"
 gem 'webpack_rails', '~> 1.0.0.pre', github: 'danott/webpack_rails'
 gem "rugged"
+gem "lograge"
+
