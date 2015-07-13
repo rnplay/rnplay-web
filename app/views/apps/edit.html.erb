@@ -18,7 +18,7 @@
       currentUser: current_user,
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,
       useDarkTheme: user_signed_in? && current_user.use_dark_theme?,
-      builds: Build.all,
+      builds: Rails.env.production? ? Build.production : Build.all,
       headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
 </script>
 </div>
