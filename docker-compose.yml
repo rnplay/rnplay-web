@@ -31,7 +31,7 @@ railsstaging:
     - redis
   environment:
     RAILS_ENV: staging
-    VIRTUAL_HOST: staging.rnplay.org
+    VIRTUAL_HOST: staging.rnplay.org,api.staging.rnplay.org
     PASSENGER_APP_ENV: staging 
 
 postgres:
@@ -93,14 +93,32 @@ packager05backports:
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
+packager060:
+  restart: always
+  image: "packager:0.6.0"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager060.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
 packagerstaging:
   restart: always
-  image: "packager:master"
+  image: "packager:0.7.1"
   env_file: .env.production
   environment:
     VIRTUAL_HOST: packager-staging.rnplay.org
   volumes:
     - /home/app/rails/rnplay_staging/app_js:/js
+
+packager071:
+  restart: always
+  image: "packager:0.7.1"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager071.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
 
 proxy:
   restart: always
