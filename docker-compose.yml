@@ -120,6 +120,15 @@ packager071:
   volumes:
     - /home/app/rails/rnplay/app_js:/js
 
+packager080rc2:
+  restart: always
+  image: "packager:0.8.0-rc.2"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager080rc2.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
 proxy:
   restart: always
   image: jwilder/nginx-proxy
