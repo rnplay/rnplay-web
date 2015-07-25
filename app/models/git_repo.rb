@@ -58,6 +58,10 @@ class GitRepo
     File.read("#{@path}/#{filename}")
   end
 
+  def base_file_list
+    file_list.collect { |file| file.gsub("#{@path}/", "") }
+  end
+
   def file_list
     Dir.glob("#{path}/**/*.{js,json}").reject {|f| f['node_modules'] || f['iOS']}
   end
