@@ -2,7 +2,7 @@
 
 import api from '../utils/api';
 
-export default {
+const actions = {
 
   switchApp: (app) => ({
     app
@@ -39,6 +39,15 @@ export default {
     picked
   }),
 
+  getFiles: (appToken) =>  ({
+    promise: api.getFiles(appToken)
+  }),
+
+  getFile: (appToken, filename) =>  ({
+    promise: api.getFile(appToken, filename),
+    filename
+  }),
+
   saveFile: (appId, filename, filebody) => ({
     promise: api.saveFile(appId, filename, filebody),
     filename
@@ -51,3 +60,5 @@ export default {
   toggleFileSelector: () => true
 
 };
+
+export default actions;

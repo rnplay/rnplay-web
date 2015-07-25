@@ -28,8 +28,20 @@ export default createStore(initialState, {
   [`${actions.switchApp}`]: (state, { app }) => ({
     ...state,
     app,
-    fileTree: makeFileTree(Object.keys(app.files))
+    fileTree: {}
   }),
+
+  [`${actions.getFiles}-success`]: (state, { result: { data } }) => {
+    return {
+      ...state,
+      fileTree: makeFileTree(data)
+    };
+  },
+
+  [`${actions.getFile}-success`]: (state, action) => {
+    console.log(action);
+    return state;
+  },
 
   [`${actions.switchFile}`]: (state, { currentFile }) => {
     currentFile = state.app.files[currentFile] ?

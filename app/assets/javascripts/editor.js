@@ -20,12 +20,17 @@ const {
   ...rest
 } = window.__data;
 
-redux.dispatch(editor.switchApp(app));
+let { urlToken, url_params: { file } } = app;
 
-const { url_params: { file } } = app;
+redux.dispatch(editor.switchApp(app));
+redux.dispatch(editor.getFiles(urlToken));
+
 if (file) {
   redux.dispatch(editor.switchFile(file));
 }
+
+file = file ? file : redux.getState().editor.currentFile;
+redux.dispatch(editor.getFile(urlToken, file));
 
 React.render((
   <Provider redux={redux}>
