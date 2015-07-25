@@ -14,7 +14,7 @@ class FilesController < ApplicationController
 
   def show
     @app = App.find_by(url_token: params[:app_id])
-    render text: @app.target_git_repo.content_of_file(params[:id])
+    render text: @app.target_git_repo.contents_of_file(params[:id])
   end
 
   def update
