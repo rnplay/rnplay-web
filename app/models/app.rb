@@ -1,5 +1,7 @@
 class App < ActiveRecord::Base
 
+  include Commands
+
   before_save :add_url_token
 
   attr_accessor :created_from_web
@@ -26,12 +28,20 @@ class App < ActiveRecord::Base
     elsif Rails.env.staging?
       "https://packager-staging.rnplay.org#{bundle_path}"
     else
-      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org#{bundle_path}"
+      "https://packager#{build.stripped_name}.rnplay.org#{bundle_path}"
     end
   end
 
   def bundle_path
     "/#{url_token}/index.ios.bundle"
+  end
+
+  def queue_for_bundling
+    BundleJob.perform_later(id)
+  end
+
+  def bundle_js
+    run("docker run -v /tmp:/tmp -v /home/app/rails/rnplay#{Rails.env.staging? ? '_staging' : ''}:/rails --rm packager:#{build.name} node /app/node_modules/react-native/local-cli/cli.js bundle --root /rails/app_js/#{url_token}  --out /rails/public/bundles/#{url_token}.bundle")
   end
 
   def set_module_name

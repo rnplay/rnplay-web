@@ -14,12 +14,13 @@ module Rnplay
     config.react.jsx_transform_options = {
       harmony: true
     }
+    config.autoload_paths += %W(#{config.root}/lib)
     # If we do not use this then render json: .. will escape & in urls and break
     # the app qr code action
     config.active_support.escape_html_entities_in_json = false
 
     config.assets.precompile += %w( editor_sprockets.js )
-    
+
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
       allow do
         origins '*'
