@@ -70,7 +70,7 @@ class App < ActiveRecord::Base
   end
 
   def appetize_public_key
-    Rails.env.staging? ? "zq3p7vdfvx1848vxyaub0fj3cw" : build.appetize_id
+    build.appetize_id
   end
 
   def created_by?(user)
