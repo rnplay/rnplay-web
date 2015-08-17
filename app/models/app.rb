@@ -28,7 +28,7 @@ class App < ActiveRecord::Base
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io#{bundle_url_path}"
     elsif Rails.env.staging?
-      "https://packager-staging.rnplay.org#{bundle_url_path}"
+      "https://staging.rnplay.org#{bundle_url_path}"
     else
       "https://packager#{build.stripped_name}.rnplay.org#{bundle_url_path}"
     end
