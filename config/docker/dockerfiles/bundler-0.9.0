@@ -1,0 +1,7 @@
+FROM rnplay_sidekiq:latest
+
+ADD package-0.9.0.json /tmp/package.json
+RUN cd /tmp && npm install || true
+RUN mkdir -p /app && cp -a /tmp/node_modules /app/
+
+WORKDIR /app

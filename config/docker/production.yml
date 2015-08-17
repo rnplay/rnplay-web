@@ -1,0 +1,103 @@
+rails:
+  build: .
+  restart: always
+  env_file: .env.production
+  volumes:
+    - /home/app/rails/rnplay:/app
+    - /home/app/repos:/var/repos
+  links:
+    - postgres
+    - cache
+    - redis
+  environment:
+    RAILS_ENV: production
+    VIRTUAL_HOST: rnplay.org,www.rnplay.org
+
+postgres:
+  restart: always
+  env_file: .env.production
+  image: postgres
+
+packager044:
+  restart: always
+  image: "packager:0.4.4"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager044.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packager050:
+  restart: always
+  image: "packager:0.5.0"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager050.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packager060:
+  restart: always
+  image: "packager:0.6.0"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager060.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packager060:
+  restart: always
+  image: "packager:0.6.0"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager060.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packager071:
+  restart: always
+  image: "packager:0.7.1"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager071.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+packager080rc2:
+  restart: always
+  image: "packager:0.8.0-rc.2"
+  env_file: .env.production
+  environment:
+    VIRTUAL_HOST: packager080rc2.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/js
+
+redis:
+  restart: always
+  image: redis
+
+cache:
+  restart: always
+  image: memcached
+
+worker:
+  restart: always
+  build: .
+  command: bundle exec sidekiq -e production -c 25
+  volumes:
+    - /home/app/rails/rnplay:/app
+  env_file: .env.production
+  links:
+    - postgres
+    - redis
+    - cache
+
+grack:
+  image: grack-docker
+  volumes:
+    - /home/app/repos:/var/repos
+    - /home/app/rails/rnplay:/var/rails
+  links:
+    - postgres
+  environment:
+    VIRTUAL_HOST: git.rnplay.org

@@ -33,7 +33,7 @@ class App < ActiveRecord::Base
   end
 
   def bundle_path
-    "/#{url_token}/index.ios.bundle"
+    "/jsbundles/#{url_token}/#{build.name}.bundle"
   end
 
   def queue_for_bundling
@@ -41,7 +41,7 @@ class App < ActiveRecord::Base
   end
 
   def bundle_js
-    run("docker run -v /tmp:/tmp -v /home/app/rails/rnplay#{Rails.env.staging? ? '_staging' : ''}:/rails --rm packager:#{build.name} node /app/node_modules/react-native/local-cli/cli.js bundle --root /rails/app_js/#{url_token}  --out /rails/public/bundles/#{url_token}.bundle")
+    run("docker run -v /tmp:/tmp -v /home/app/rails/rnplay#{Rails.env.staging? ? '_staging' : ''}:/rails --rm packager:#{build.name} node /app/node_modules/react-native/local-cli/cli.js bundle --root /rails/app_js/#{url_token} --out /rails/public#{bundle_path}")
   end
 
   def set_module_name

@@ -1,0 +1,62 @@
+rails:
+  build: .
+  restart: always
+  env_file: .env
+  volumes:
+    - .:/app
+    - ../repos:/var/repos
+  links:
+    - postgres
+    - cache
+    - redis
+  environment:
+    RAILS_ENV: development
+    VIRTUAL_HOST: development.rnplay.org
+
+postgres:
+  restart: always
+  env_file: .env
+  image: postgres
+
+proxy:
+  restart: always
+  image: jwilder/nginx-proxy
+  ports:
+    - "19080:80"
+    - "19443:443"
+  environment:
+    DEFAULT_HOST: development.rnplay.org
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    - ../certs:/etc/nginx/certs
+    - ./proxy/proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+
+redis:
+  restart: always
+  image: redis
+
+cache:
+  restart: always
+  image: memcached
+
+worker:
+  restart: always
+  build: .
+  command: bundle exec sidekiq -e development -c 25
+  volumes:
+    - .:/app
+  env_file: .env
+  links:
+    - postgres
+    - redis
+    - cache
+
+grack:
+  image: grack-docker
+  volumes:
+    - ../repos:/var/repos
+    - .:/var/rails
+  links:
+    - postgres
+  environment:
+    VIRTUAL_HOST: git-development.rnplay.org

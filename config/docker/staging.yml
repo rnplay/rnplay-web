@@ -1,9 +1,10 @@
-web:
+rails:
   build: .
+  dockerfile: ./config/docker/dockerfiles/rails
   restart: always
   env_file: .env.staging
   volumes:
-    - /home/app/rails/rnplay:/app
+    - /home/app/rails/rnplay_staging:/app
     - /home/app/repos:/var/repos
   links:
     - postgres
@@ -13,20 +14,22 @@ web:
     RAILS_ENV: staging
     VIRTUAL_HOST: staging.rnplay.org
 
+worker:
+  restart: always
+  dockerfile: ./config/docker/dockerfiles/sidekiq
+  build: .
+  volumes:
+    - /home/app/rails/rnplay:/app
+  env_file: .env.staging
+  links:
+    - postgres
+    - redis
+    - cache
+
 postgres:
   restart: always
   env_file: .env.staging
   image: postgres
-
-packager:
-  restart: always
-  image: "packager:master"
-  env_file: .env.staging
-  environment:
-    VIRTUAL_HOST: packager-staging.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay_staging/app_js:/js
-    - /home/app/repos:/var/repos
 
 redis:
   restart: always

@@ -1,0 +1,19 @@
+proxy:
+  restart: always
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+    - "443:443"
+  environment:
+    DEFAULT_HOST: rnplay.org
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    - /home/app/certs:/etc/nginx/certs
+    - /home/app/proxy/proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+
+logger:
+  image: progrium/logspout
+  command: syslog://logs.papertrailapp.com:13269
+  restart: always
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
