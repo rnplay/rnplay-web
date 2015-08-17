@@ -1,8 +1,7 @@
 rails:
-  build: .
-  dockerfile: ./config/docker/dockerfiles/rails
+  image: rnplay_rails
   restart: always
-  env_file: .env.staging
+  env_file: ../../.env.staging
   volumes:
     - /home/app/rails/rnplay_staging:/app
     - /home/app/repos:/var/repos
@@ -16,11 +15,10 @@ rails:
 
 worker:
   restart: always
-  dockerfile: ./config/docker/dockerfiles/sidekiq
-  build: .
+  image: rnplay_sidekiq
   volumes:
     - /home/app/rails/rnplay:/app
-  env_file: .env.staging
+  env_file: ../../.env.staging
   links:
     - postgres
     - redis
@@ -28,7 +26,7 @@ worker:
 
 postgres:
   restart: always
-  env_file: .env.staging
+  env_file: ../../.env.staging
   image: postgres
 
 redis:
