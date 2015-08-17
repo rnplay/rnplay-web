@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class App < ActiveRecord::Base
 
   include Commands
@@ -24,24 +26,38 @@ class App < ActiveRecord::Base
 
   def bundle_url
     if Rails.env.development?
-      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io#{bundle_path}"
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io#{bundle_url_path}"
     elsif Rails.env.staging?
-      "https://packager-staging.rnplay.org#{bundle_path}"
+      "https://packager-staging.rnplay.org#{bundle_url_path}"
     else
-      "https://packager#{build.stripped_name}.rnplay.org#{bundle_path}"
+      "https://packager#{build.stripped_name}.rnplay.org#{bundle_url_path}"
     end
   end
 
-  def bundle_path
-    "/jsbundles/#{url_token}/#{build.name}.bundle"
+
+  def bundle_url_path(build_name = nil)
+    "/jsbundles/#{url_token}/#{build_name || build.name}.jsbundle"
+  end
+
+  def bundle_file_path(build_name = nil)
+    "#{Rails.root}/public/jsbundles/#{url_token}/#{build_name || build.name}.jsbundle"
   end
 
   def queue_for_bundling
     BundleJob.perform_later(id)
   end
 
+  def bundle_directory
+    "#{Rails.root}/public/jsbundles/#{url_token}"
+  end
+
+  def make_bundle_directory
+    FileUtils.mkdir_p(bundle_directory)
+  end
+
   def bundle_js
-    run("docker run -v /tmp:/tmp -v /home/app/rails/rnplay#{Rails.env.staging? ? '_staging' : ''}:/rails --rm packager:#{build.name} node /app/node_modules/react-native/local-cli/cli.js bundle --root /rails/app_js/#{url_token} --out /rails/public#{bundle_path}")
+    make_bundle_directory
+    run("node #{Rails.root}/builds/#{build.name}/node_modules/react-native/local-cli/cli.js bundle --dev --minify --root #{Rails.root}/app_js/#{url_token} --out #{bundle_file_path}")
   end
 
   def set_module_name
