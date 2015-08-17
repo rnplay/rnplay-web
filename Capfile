@@ -13,7 +13,7 @@ default_run_options[:pty] = true
 after "deploy:update", "docker:bundle", "docker:precompile_assets", "docker:fix_file_ownership"
 
 task :staging do
-  set :container_name, 'rnplay_rnplaystaging_1'
+  set :container_name, 'rnplaystaging_rails_1'
   set :deploy_to, "/home/app/rails/#{app_name}_staging"
 end
 
