@@ -46,7 +46,7 @@ class App < ActiveRecord::Base
 
   def queue_for_bundling
     logger.info "Queueing #{url_token} for bundling with build #{build.name}"
-    BundleJob.perform_later(id)
+    BundleJob.perform_async(id)
   end
 
   def bundle_directory

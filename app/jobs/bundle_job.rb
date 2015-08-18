@@ -1,4 +1,6 @@
-class BundleJob < ActiveJob::Base
+class BundleJob
+
+  include Sidekiq::Worker
 
   def perform(id)
     ActiveRecord::Base.connection_pool.with_connection do
