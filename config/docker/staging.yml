@@ -18,7 +18,7 @@ worker:
   restart: always
   image: rnplay_sidekiq
   volumes:
-    - /home/app/rails/rnplay:/app
+    - /home/app/rails/rnplay_staging:/app
   env_file: ../../.env.staging
   links:
     - postgres
