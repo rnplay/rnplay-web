@@ -17,6 +17,7 @@ rails:
 worker:
   restart: always
   image: rnplay_sidekiq
+  command: bundle exec sidekiq -e staging -c 25
   volumes:
     - /home/app/rails/rnplay_staging:/app
   env_file: ../../.env.staging
