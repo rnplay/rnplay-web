@@ -87,7 +87,7 @@ class App < ActiveRecord::Base
       "bundleUrl" => bundle_url,
       "moduleName" => module_name,
       "RCTDevMenu" => {
-        "liveReloadEnabled" => true
+        "liveReloadEnabled" => false
       }
     }.merge(options[:app_params]).to_json
 
