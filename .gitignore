@@ -20,5 +20,6 @@ node_modules
 config/database.yml
 app_js
 public/uploads
+public/jsbundles
 app_files
 repos
