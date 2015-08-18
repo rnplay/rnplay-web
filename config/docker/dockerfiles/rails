@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby22:latest
+FROM phusion/passenger-ruby22:0.9.17
 
 RUN apt-get update
 RUN apt-get install -y cmake libgit2-dev software-properties-common git-core build-essential automake unzip
