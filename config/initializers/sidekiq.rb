@@ -1,11 +1,15 @@
 require 'sidekiq/api'
 
-redis_config = { url: 'redis://redis:6379', namespace: 'sidekiq' }
+if !Rails.env.development?
 
-Sidekiq.configure_server do |config|
-  config.redis = redis_config
-end
+  redis_config = { url: 'redis://redis:6379', namespace: 'sidekiq' }
 
-Sidekiq.configure_client do |config|
-  config.redis = redis_config
+  Sidekiq.configure_server do |config|
+    config.redis = redis_config
+  end
+
+  Sidekiq.configure_client do |config|
+    config.redis = redis_config
+  end
+
 end
