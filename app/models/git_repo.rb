@@ -64,11 +64,15 @@ class GitRepo
     Dir.glob("#{path}/**/*.{js,json}").reject {|f| f['node_modules'] || f['iOS']}
   end
 
+  def has_file?(filename)
+    File.exists?("#{path}/#{filename}")
+  end
+
   # TODO: refactor to File model
   def update_file(name, content)
     File.open("#{path}/#{name}", "w") do |file|
       file.write(content)
-      set_app_owner
+      set_app_owner if !Rails.env.development?
     end
   end
 

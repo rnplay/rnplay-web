@@ -1,5 +1,4 @@
-class BundleJob
-  include SuckerPunch::Job
+class BundleJob < ActiveJob::Base
 
   def perform(id)
     ActiveRecord::Base.connection_pool.with_connection do
@@ -7,4 +6,5 @@ class BundleJob
       app.bundle_js
     end
   end
+
 end
