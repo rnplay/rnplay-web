@@ -111,8 +111,9 @@ class App < ActiveRecord::Base
   end
 
   def source_git_repo
-    path = Rails.env.development? ? "#{Rails.root}/repos/#{url_token}.git" : "/var/repos/#{url_token}.git"
-    GitRepo.new(path)
+    root = Rails.env.development? ? "#{Rails.root}/repos" : "/var/repos"
+    FileUtils.mkdir_p root
+    GitRepo.new("#{root}/#{url_token}.git")
   end
 
   def target_git_repo
