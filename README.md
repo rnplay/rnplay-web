@@ -2,6 +2,8 @@
 
 You should have Ruby 2.2 installed. Preferred way is using [rbenv](https://github.com/sstephenson/rbenv). Once you have that installed, run ```rbenv install 2.2.2```.
 
+You should have nodejs installed.
+
 You'll also need Postgresql and Redis running locally.
 
 Install a few git-related dependencies via Homebrew:
@@ -36,11 +38,16 @@ If you get an error installing the pg gem, find pg_config on your filesystem, th
 
 ```
 export CONFIGURE_ARGS="with-pg-config=/path/to/bin/pg_config"
+export ARCHFLAGS="-arch x86_64"
 ```
 
 Then *bundle install* again.
 
-Finally, to tunnel traffic from the simulators to our machine, install [ngrok](http://ngrok.com).
+To tunnel traffic from the simulators to our machine, install [ngrok](http://ngrok.com).
+
+Finally, run ```npm install``.
+
+
 
 ## Running the app
 
