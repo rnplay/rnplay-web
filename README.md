@@ -40,12 +40,11 @@ export CONFIGURE_ARGS="with-pg-config=/path/to/bin/pg_config"
 
 Then *bundle install* again.
 
-Finally, to tunnel traffic from the simulators to our machine, install [ngrok](http://ngrok.com).
-
 ## Setup for the packager
 
 The packager currently requires the supported node_modules to be in the /app_js directory. More docs on this soon.
 
+Finally, to tunnel traffic from the simulators to our machine, install [ngrok](http://ngrok.com).
 
 ## Running the app
 
