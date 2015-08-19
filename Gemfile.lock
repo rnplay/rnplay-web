@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: 37cf31d34fa411db20e99cc654195020b06202c3
+  revision: c60ee75291de332fa341308d837f4cb0c15d44ca
   specs:
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -111,7 +111,7 @@ GEM
     capybara_minitest_spec (1.0.5)
       capybara (>= 2)
       minitest (>= 4)
-    celluloid (0.16.1)
+    celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
@@ -378,6 +378,7 @@ DEPENDENCIES
   capistrano-slack
   capybara_minitest_spec
   carrierwave!
+  celluloid (= 0.16.0)
   coffee-rails (~> 4.1.0)
   devise
   devise-bootstrap-views

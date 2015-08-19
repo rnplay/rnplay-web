@@ -49,6 +49,7 @@ gem 'react-rails'
 gem 'dotenv-rails'
 gem 'newrelic_rpm'
 gem 'sidekiq'
+gem 'celluloid', '0.16.0'
 gem "rack-cors"
 gem "simple_token_authentication"
 gem 'webpack_rails', '~> 1.0.0.pre', github: 'danott/webpack_rails'
