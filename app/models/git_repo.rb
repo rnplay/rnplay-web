@@ -23,7 +23,7 @@ class GitRepo
   end
 
   def set_app_owner
-    run "chown -R app:app #{path}"
+    run "chown -R app:app #{path}" if !Rails.env.development?
   end
 
   def commit_all_changes(message)
