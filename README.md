@@ -1,17 +1,28 @@
 ## Setup
 
-Install dependencies:
+You should have Ruby 2.2 installed. Preferred way is using [rbenv](https://github.com/sstephenson/rbenv). Once you have that installed, run ```rbenv install 2.2.2```.
+
+You'll also need Postgresql and Redis running locally.
+
+Install a few git-related dependencies via Homebrew:
 
 ```
 brew install libgit2 cmake
 ```
 
-Create a file named .env, with the following contents. Replace the database placeholder values with your own. The twitter keys are for development and don't require customization.
+Install *foreman* for running the app's different services via the Procfile:
+
+```
+gem install foreman
+```
+
+Create a file named .env, with the following contents. Replace the database and ngrok placeholder values with your own. The twitter keys are for development and don't require customization.
 
 ```
 TWITTER_KEY=T34JvmHO6BTLbqfMWo0cDi2F2
 TWITTER_SECRET=ObvEyaNo7yV7rgtzs0z8sqjiIfTIsuUlQV33u9sX0aaWaqJ5I7
 DATABASE_URL=postgresql://user:pass@localhost/rnplay_development?pool=5
+NGROK_SUBDOMAIN=rnplay-somesubdomain
 ```
 
 Run:
@@ -27,50 +38,26 @@ If you get an error installing the pg gem, find pg_config on your filesystem, th
 export CONFIGURE_ARGS="with-pg-config=/path/to/bin/pg_config"
 ```
 
-Then bundle install again.
+Then *bundle install* again.
 
-## Running the app under katon
+Finally, to tunnel traffic from the simulators to our machine, install [ngrok](http://ngrok.com).
 
-Katon makes it easy to access the app via a local dev URL, and automatically starts and stops the server. This also makes it easier to manage callbacks and access the site from devices on the network via xip.io, or remotely via ngrok.com.
+## Running the app
 
-```
-npm install -g katon
-katon add 'bin/rails server --port $PORT --binding=0.0.0.0'
-```
-
-Then visit http://rnplay.ka. Reload the page if the server takes too long to start on the first load.
-
-## Running the packager locally for the simulator
-
-We can run the packager locally and tunnel traffic to it using [ngrok](http://ngrok.com).
-
-Install ngrok and start a tunnel to port 8081.
+To run the Rails app, webpack server and the ngrok tunnel together:
 
 ```
-ngrok http 8081
-
+foreman start
 ```
 
-Take note of the randonly assigned subdomain. Add it to your Rails .env file:
+Leave this terminal window open, as logs will show up here.
 
-```
-NGROK_SUBDOMAIN=660ef9ba
-```
+Visit http://localhost:34560 to see the app main page.
 
-Restart the Rails app. Visit a play page to generate some javascript.
+## Development
 
-Clone the packager repo.
+Work on a branch when making changes. Master should always be deployable to production.
 
-```
-git clone https://github.com/jsierles/react-native-packager-docker.git
-```
+The React app entry point is in *app/assets/javascripts/editor.js*. Its props are passed in from the server template *app/views/apps/edit.html.erb*.
 
-Update the React version you want to test in *package.json*, then *npm install*.
-
-Run the packager, adding root path of the Rails app play_js directory.
-
-```
-node node_modules/react-native/packager/packager.js --root ../rnplay/play_js
-```
-
-Now the simulator should be working!
+All css files are located in *app/assets/stylesheets*.
