@@ -48,9 +48,10 @@ gem 'autoprefixer-rails'
 gem 'react-rails'
 gem 'dotenv-rails'
 gem 'newrelic_rpm'
-gem 'sidekiq', github: 'mperham/sidekiq'
+gem 'sidekiq'
 gem "rack-cors"
 gem "simple_token_authentication"
 gem 'webpack_rails', '~> 1.0.0.pre', github: 'danott/webpack_rails'
 gem "rugged"
 gem "lograge"
+gem "actioncable", github: "rails/actioncable"
