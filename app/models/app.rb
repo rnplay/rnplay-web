@@ -149,7 +149,7 @@ class App < ActiveRecord::Base
 
     if created_from_web
       target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
-      target_git_repo.commit_all_changes("Initial commit from rnplay.org")
+      target_git_repo.commit_all_changes("Initial commit from rnplay.org") unless Rails.env.development?
     end
   end
 
