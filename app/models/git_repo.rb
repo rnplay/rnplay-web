@@ -3,8 +3,6 @@ require 'fileutils'
 
 class GitRepo
 
-  include Commands
-
   attr_accessor :path
 
   def initialize(path)
@@ -78,6 +76,13 @@ class GitRepo
 
     run "cp -pr #{path} #{target_repo.path}"
     target_repo.set_app_owner
+  end
+
+  private
+
+  def run(cmd)
+    Rails.logger.info "Running #{cmd}"
+    Rails.logger.info `#{cmd}`
   end
 
 end
