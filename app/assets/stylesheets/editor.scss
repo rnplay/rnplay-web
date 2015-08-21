@@ -90,6 +90,10 @@ body.app-editor-page {
     margin-top: 1em;
     transition: all .3s ease;
 
+    .btn-save {
+      font-weight: bold;
+    }
+
     .dark-theme & {
       color: #fff;
     }

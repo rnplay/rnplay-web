@@ -125,7 +125,7 @@ export default class EditorHeader extends Component {
       return (
         <button
           onClick={this.onSave}
-          className="btn-info editor-header__button"
+          className="btn-info editor-header__button btn-save"
         >
           Save
         </button>
@@ -163,10 +163,9 @@ export default class EditorHeader extends Component {
             selectedBuildId={buildId}
           />
           <div className="editor-header__button-container">
-            {this.renderForkButton()}
-            {this.renderGitButton()}
-            {this.renderPickButton()}
             {this.renderSaveButton()}
+            {this.renderForkButton()}
+            {this.renderPickButton()}
           </div>
         </form>
         {this.renderGitModal()}
