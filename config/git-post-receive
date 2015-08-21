@@ -39,10 +39,10 @@ end
 
 if File.exists?(target)
   check_for_committed_modules(source)
-  puts `git --work-tree #{target} --git-dir #{target}/.git fetch origin && git --work-tree #{target} --git-dir #{target}/.git reset --hard origin/master && chown -R 9999:9999 #{target}`
+  puts `su app -c 'git --work-tree #{target} --git-dir #{target}/.git fetch origin && git --work-tree #{target} --git-dir #{target}/.git reset --hard origin/master'`
   npm_install(target)
 else
   check_for_committed_modules(source)
-  puts `git --work-tree #{target} --git-dir #{target}/.git clone #{source} /rails/app_js/#{name} & chown -R 9999:9999 #{target}`
+  puts `su app -c 'git --work-tree #{target} --git-dir #{target}/.git clone #{source} /rails/app_js/#{name} & chown -R 9999:9999 #{target}'`
   npm_install(target)
 end
