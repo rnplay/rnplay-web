@@ -96,7 +96,7 @@ grack:
   image: grack-docker
   volumes:
     - /home/app/repos:/var/repos
-    - /home/app/rails/rnplay:/var/rails
+    - /home/app/rails/rnplay:/rails
   links:
     - postgres
   environment:
