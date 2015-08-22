@@ -31,7 +31,7 @@ class App < ActiveRecord::Base
   end
 
   def bundle_path
-    "/#{url_token}/index.ios.bundle"
+    "/js/#{url_token}/index.ios.bundle"
   end
 
   def set_module_name
