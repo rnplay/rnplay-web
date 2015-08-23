@@ -19,59 +19,24 @@ postgres:
   env_file: ../../.env.production
   image: postgres
 
-packager044:
-  restart: always
-  image: "packager:0.4.4"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager044.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/js
-
-packager050:
-  restart: always
-  image: "packager:0.5.0"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager050.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/js
-
-packager060:
-  restart: always
-  image: "packager:0.6.0"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager060.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/js
-
-packager060:
-  restart: always
-  image: "packager:0.6.0"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager060.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/js
-
-packager071:
-  restart: always
-  image: "packager:0.7.1"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager071.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/js
-
 packager080rc2:
   restart: always
   image: "packager:0.8.0-rc.2"
+  command: "node node_modules/react-native/packager/packager.js --port 8081"
   env_file: ../../.env.production
   environment:
     VIRTUAL_HOST: packager080rc2.rnplay.org
   volumes:
-    - /home/app/rails/rnplay/app_js:/js
+    - /home/app/rails/rnplay/app_js:/app/js 
+
+packager0100rc:
+  restart: always
+  image: "packager:0.10.0-rc"
+  env_file: ../../.env.production
+  environment:
+    VIRTUAL_HOST: packager0100rc.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
 
 redis:
   restart: always
