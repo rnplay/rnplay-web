@@ -29,7 +29,7 @@ Run:
 
 ```
 bundle install
-rake db:setup add_version_data
+rake db:create db:schema:load add_version_data db:seed
 ```
 
 If you get an error installing the pg gem, find pg_config on your filesystem, then:
