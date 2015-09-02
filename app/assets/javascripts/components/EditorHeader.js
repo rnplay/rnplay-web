@@ -1,9 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classNames';
 
-import BuildPicker from './BuildPicker';
 import GitModal from './git_modal';
 
 const maybeCallMethod = (obj, method, ...args) => {
@@ -15,8 +14,15 @@ export default class EditorHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gitModalIsVisible: null
+      gitModalIsVisible: null,
+      isMenuOpen: false
     };
+  }
+
+  onMenuToggle() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen }, () => {
+      console.log('menu is', this.state.isMenuOpen ? 'open' : 'closed');
+    });
   }
 
   onUpdateName = () => {
@@ -81,12 +87,11 @@ export default class EditorHeader extends Component {
   }
 
   renderGitButton() {
-    if (this.belongsToCurrentUser()) {
+    if ( ! this.belongsToCurrentUser()) {
       return (
         <button
           onClick={this.showGitModal}
-          className="btn-info editor-header__button"
-        >
+          className="editor-header__button">
           Clone
         </button>
       );
@@ -94,26 +99,29 @@ export default class EditorHeader extends Component {
   }
 
   renderForkButton() {
-    if (this.currentUserIsAdmin()) {
+    if ( ! this.currentUserIsAdmin()) {
       return (
         <button
           onClick={this.onFork}
-          className="btn-info editor-header__button"
+          className="editor-header__button"
         >
-          Fork
+          <i className="fa fa-code-fork"></i> Fork
         </button>
       );
     }
   }
 
   renderPickButton() {
-    if (this.currentUserIsAdmin()) {
+    if ( ! this.currentUserIsAdmin()) {
+
+      const icon = this.props.appIsPicked ? 'fa-star' : 'fa-star-o';
+      const iconClasses = `fa ${icon}`;
+
       return (
         <button
           onClick={this.onPick}
-          className="btn-info editor-header__button"
-        >
-          {this.props.appIsPicked ? 'Unpick' : 'Pick'}
+          className="editor-header__button">
+          <i className={iconClasses}></i> {this.props.appIsPicked ? 'Unpick' : 'Pick'}
         </button>
       );
     }
@@ -121,12 +129,11 @@ export default class EditorHeader extends Component {
 
   renderSaveButton() {
 
-    if (this.belongsToCurrentUser()) {
+    if ( ! this.belongsToCurrentUser()) {
       return (
         <button
           onClick={this.onSave}
-          className="btn-info editor-header__button btn-save"
-        >
+          className="editor-header__button editor-header__button--save">
           Save
         </button>
       );
@@ -134,19 +141,20 @@ export default class EditorHeader extends Component {
   }
 
   render() {
-    const { useDarkTheme, builds, name, buildId, onFileSelectorToggle } = this.props;
-    const classes = cx({
+    const { useDarkTheme, name } = this.props;
+    const classes = classNames({
+      'editor-header--dark': useDarkTheme,
+      'editor-header__bar': true,
       'editor-header': true,
-      'editor-header--dark': useDarkTheme
     });
 
     return (
       <div className={classes}>
         <button
-          className="editor-header__drawer-toggle"
-          onClick={onFileSelectorToggle}
-        title="Open file drawer">
-          <i className="fa fa-folder-open"></i>
+          className="editor-header__button editor-header__menu-toggle"
+          onClick={this.onMenuToggle.bind(this)}
+          title="Open Menu">
+          <i className="fa fa-bars"></i>
         </button>
         <form onSubmit={this.handleOnSubmit}>
           <input
@@ -157,13 +165,7 @@ export default class EditorHeader extends Component {
             onChange={this.onUpdateName}
             className="editor-header__name-input"
           />
-          <BuildPicker
-            onChange={this.onUpdateBuild}
-            builds={builds}
-            selectedBuildId={buildId}
-          />
           <div className="editor-header__button-container">
-            {this.renderSaveButton()}
             {this.renderForkButton()}
             {this.renderPickButton()}
           </div>

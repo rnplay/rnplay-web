@@ -1,0 +1,85 @@
+.editor-header {
+  display: flex;
+  position: relative;
+  z-index: 6;
+
+  form {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__bar {
+    min-height: 30px;
+    max-height: 30px;
+    border-bottom: 1px solid #ddd;
+    line-height: 30px;
+    background: $editor-color-light-grey;
+  }
+
+  &__button {
+    color: $editor-color-purple;
+    border: 0;
+    padding: 0 10px;
+    margin: 0;
+    line-height: 100%;
+    background: transparent;
+    border-right: 1px solid $editor-border-color;
+
+    &:hover {
+      background: #fff;
+    }
+
+    i {
+      padding-right: 5px;
+    }
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bolder;
+
+    button:first-child {
+      border-left: 1px solid $editor-border-color;
+    }
+    
+    button:last-child {
+      border-right: 0;
+    }
+  }
+
+  &__menu-toggle {
+    border: 0;
+    padding: 0;
+    background: $editor-color-purple;
+    color: $editor-color-light-grey;
+    width: 35px;
+    height: 30px;
+
+    &:hover { background: $editor-color-purple; }
+    i { padding: 0 }
+  }
+
+  &__name-input {
+    border: 0;
+    padding: 0 17px;
+    line-height: 100%;
+    font-size: 18px;
+    margin: 0;
+    background: transparent;
+    height: 30px;
+    flex: 1;
+    
+    &:hover {
+      color: $editor-color-darkgreen;
+    }
+    &:focus {
+      outline: none;
+      color: $editor-color-darkgreen;
+    }
+  }
+
+  &__button {
+
+  }
+}

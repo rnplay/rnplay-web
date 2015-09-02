@@ -4,8 +4,9 @@ import React from 'react';
 import CodeMirror from 'codemirror';
 import assign from 'lodash/object/assign';
 
+import EditorHeader from './EditorHeader';
 import FileSelector from './FileSelector';
-import FileIndicator from './FileIndicator';
+import TabBar from './TabBar';
 import Logger from './Logger';
 
 
@@ -79,29 +80,42 @@ export default class Editor {
       currentFile,
       fileTree,
       fileSelectorOpen,
+      onFileSelectorToggle,
       useDarkTheme,
-      logs
+      logs,
+      editorHeaderProps
     } = this.props;
 
+    const tabBarProps = {
+      currentFile,
+      onFileSelectorToggle,
+      useDarkTheme
+    };
+
     return (
-      <div className="editor-flex-wrapper">
-        <FileSelector
-          open={fileSelectorOpen}
-          files={fileTree}
-          current={currentFile}
-          onSelect={this.changeFile}
-        />
-        <div className="editor-scroll-wrapper">
-          <FileIndicator current={currentFile} useDarkTheme={useDarkTheme} />
-          <div className="editor-scroll-wrapper__text-wrapper">
+      <div className="editor-container">
+
+        <EditorHeader {...editorHeaderProps} />
+        <TabBar {...tabBarProps} />
+
+        <div className="editor-wrap">
+          <FileSelector
+            open={fileSelectorOpen}
+            files={fileTree}
+            current={currentFile}
+            onSelect={this.changeFile}
+          />
+          <div className="editor">
             <textarea
               ref="editorTextArea"
               onChange={this._onChange}
               defaultValue={body}
             />
           </div>
-          <Logger logs={logs} />
         </div>
+
+        <Logger logs={logs} />
+
       </div>
     );
   }

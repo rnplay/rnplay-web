@@ -1,0 +1,42 @@
+.editor-tab-bar {
+  flex-shrink: 0;
+  background: $editor-color-darkgrey;
+  border-bottom: 1px solid $editor-border-color;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.09);
+  position: relative;
+  z-index: 5;
+  display: flex;
+
+  &__tab {
+    background: $editor-color-light-grey;
+    border-right: 1px solid $editor-border-color;
+    display: inline-block;
+    padding: 0 10px 0 15px;
+
+    &__circle {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border: 1px solid #AD9745;
+      background: #FFE06E;
+      border-radius: 100%;
+      margin-left: 10px;
+    }
+
+    &__button {
+      background: #fff;
+      border-right: 1px solid $editor-border-color;
+      display: inline-block;
+      padding: 0 10px;
+      width: inherit;
+      transition: width 0.3s ease;
+
+      &--wide {
+        width: 200px;
+      }
+      
+      // Icon color
+      i { color: $editor-color-purple; }
+    }
+  }
+}

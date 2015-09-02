@@ -1,9 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classNames';
 
-const formatDate = (date) => date.toISOString().replace('T', ' ').replace('Z', ' ');
+const formatDate = (date) => date.toISOString().replace('T', ' ').replace('Z', '');
 
 export default class Editor extends Component {
 
@@ -14,7 +14,6 @@ export default class Editor extends Component {
       open: false,
       unread: props.logs.length
     };
-
   }
 
   onToggle = () => {
@@ -45,24 +44,32 @@ export default class Editor extends Component {
 
   render() {
     const { open, unread } = this.state;
-    const classes = cx({
-      'logger': true,
-      'open': open
+    const classes = classNames({
+      'editor-logger': true,
+      'editor-logger--open': open
     });
 
     const { logs } = this.props;
 
+    const toggleIcon = open ? 'down' : 'up';
+    const toggleIconClasses = `fa fa-angle-${toggleIcon}`;
+
     return (
       <div className={classes}>
-        <button onClick={this.onToggle} className='logger__toggle'>
-          {!!unread && <span className='logger__toggle__unread'>{unread}</span>}
-          <span>Log</span>
-        </button>
-        <div ref='content' className='logger__content'>
+        <div className="editor-logger__bar">
+          <button onClick={this.onToggle} className='editor-logger__toggle'>
+            {!!unread && <span className='editor-logger__unread'>{unread}</span>}
+            <span>Log</span>
+          </button>
+          <button onClick={this.onToggle} className='editor-logger__button'>
+            <i className={toggleIconClasses}></i>
+          </button>
+        </div>
+        <div ref='content' className='editor-logger__content'>
           <div ref='contentInner'>
             {!!logs.length && logs.map((log) => (
-              <div key={log.id} className='logger__entry'>
-                {log.msgType !== 'debug' && `${formatDate(log.timestamp)} `}
+              <div key={log.id} className='editor-logger__entry'>
+                {log.msgType !== 'debug' && <span className="editor-logger__entry--timestamp">[{formatDate(log.timestamp)}] </span>}
                 {log.message}
               </div>
             ))}
