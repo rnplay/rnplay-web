@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classNames';
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/search/searchcursor';
 import 'codemirror/addon/dialog/dialog';
@@ -10,9 +10,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/keymap/vim';
 
 import Editor from './Editor';
-import Header from './header.js';
 import Footer from './footer.js';
-import EditorHeader from './EditorHeader';
 import ErrorView from './ErrorView';
 import Simulator from './Simulator';
 
@@ -132,19 +130,6 @@ export default class EditorApp extends Component {
     dispatch(toggleFileSelector());
   }
 
-  renderHeader() {
-    if (this.props.showHeader) {
-      const { currentUser, app, headerLogoSrc} = this.props;
-      return (
-        <Header
-          currentUser={currentUser}
-          currentApp={app}
-          headerLogoSrc={headerLogoSrc}
-        />
-      );
-    }
-  }
-
   render() {
     const {
       useDarkTheme,
@@ -186,14 +171,10 @@ export default class EditorApp extends Component {
       app,
       appIsPicked,
       currentUser,
-      builds,
-      buildId,
       onUpdateName,
-      onUpdateBuild,
       onPick,
       onSave,
-      onFork,
-      onFileSelectorToggle
+      onFork
     };
 
     const editorProps = {
@@ -206,28 +187,34 @@ export default class EditorApp extends Component {
       onChangeFile,
       onUpdateBody,
       fileSelectorOpen,
+      onFileSelectorToggle,
       logs
     };
 
-    const classes = cx({
-      'editor-container': true,
+    const buildPickerProps = {
+      builds,
+      buildId,
+      onUpdateBuild,
+    };
+
+    const classes = classNames({
+      'editor-app': true,
       'dark-theme': useDarkTheme
     });
 
     return (
-      <div onKeyUp={this.sendHeartBeat} className={classes} style={{paddingTop: showHeader ? 50 : 0}}>
-        {this.renderHeader()}
-        <EditorHeader {...editorHeaderProps} />
-        <div className="editor-container__body">
-          <ErrorView error={appSaveError} />
-          <Editor {...editorProps} />
-          <Simulator
-            url={simulatorUrl}
-            app={this.props.app}
-            useDarkTheme={useDarkTheme}
-          />
-        </div>
+      <div onKeyUp={this.sendHeartBeat} className={classes}>
+
+        <Editor editorHeaderProps={editorHeaderProps} {...editorProps} />
+
+        <Simulator
+          url={simulatorUrl}
+          app={this.props.app}
+          useDarkTheme={useDarkTheme}
+          {...buildPickerProps}
+        />
+
       </div>
-    )
+    );
   }
 };

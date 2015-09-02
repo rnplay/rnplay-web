@@ -1,0 +1,49 @@
+$row-height: 2em;
+
+.editor-file-selector {
+  min-width: 200px;
+  max-width: 200px;
+  margin-left: -200px;
+  border-right: 1px solid $editor-border-color;
+  position: relative;
+  overflow-y: scroll;
+  font-family: 'proxima-nova';
+
+  &--open { margin-left: 0; }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__node {
+      line-height: $row-height;
+      display: block;
+      padding: 0 0 0 10px;
+      cursor: pointer;
+
+      i {
+        padding-right: 10px;
+        position: relative;
+        z-index: 2;
+      }
+
+      &__label {
+        position: relative;
+        z-index: 2;
+      }
+
+      &--directory {font-weight: bolder; }
+    }
+  }
+
+  &__current:before {
+    content: '';
+    display: block;
+    height: $row-height;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    background: $editor-border-color;
+  }
+}

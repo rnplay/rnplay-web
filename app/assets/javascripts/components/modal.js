@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classNames';
 import Backdrop from './backdrop';
 
 export default class Modal extends Component {
   render() {
-    var classes = cx({
+    var classes = classNames({
       'modal-container': true,
       'is-visible': this.props.isOpen
     });

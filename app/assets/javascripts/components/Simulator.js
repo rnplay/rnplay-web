@@ -1,16 +1,10 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classNames';
 
+import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
-
-const styles = {
-  width: 320,
-  paddingTop: 20,
-  paddingLeft: 20,
-  overflow: 'hidden'
-};
 
 export default class Simulator extends Component {
 
@@ -41,34 +35,51 @@ export default class Simulator extends Component {
 
   renderQRLink = () => {
     return (
-      <a onClick={this.showQRModal} style={{cursor: 'pointer', textAlign: 'center', display: 'block', marginRight: '2vw', marginBottom: '2vh', fontSize: '130%'}}>
+      <a onClick={this.showQRModal} className="editor-button">
         <i className="fa fa-mobile"></i> Run on your device
       </a>
     )
   }
 
   render() {
-    const { useDarkTheme, url } = this.props;
-    const classes = cx({
-      'editor-container__simulator': true,
-      'editor-container__simulator--dark': useDarkTheme
+    const {
+      useDarkTheme,
+      url,
+      builds,
+      buildId
+    } = this.props;
+
+    const classes = classNames({
+      'editor-simulator-container__simulator': true,
+      'editor-simulator-container--dark': useDarkTheme
     });
 
     return (
-      <div>
-        <div
-          className={classes}
-          style={styles}
-        >
-        {this.renderQRLink()}
+      <div className="editor-simulator-container">
+
+        <div className="editor-header__bar editor-simulator-container__header">
+          <BuildPicker
+            onChange={this.onUpdateBuild}
+            builds={builds}
+            selectedBuildId={buildId}
+          />
+
+        </div>
+
+        <div className="editor-simulator-container__button-container">
+          {this.renderQRLink()}
+        </div>
+
+        <div className={classes}>
           <iframe
             src={url}
-            width="320px"
+            width="294px"
             height="9999px"
             frameBorder="0"
             scrolling="no"
           />
         </div>
+
         {this.renderQRModal()}
 
       </div>

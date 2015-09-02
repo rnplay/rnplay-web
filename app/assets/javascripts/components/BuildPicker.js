@@ -22,12 +22,16 @@ export default class BuildPicker {
 
   render() {
     return (
-      <select
-        onChange={this.onChange}
-        defaultValue={this.props.selectedBuildId}
-        className="build-picker">
-        {this.renderOptions()}
-      </select>
+      <div>
+        <span className="editor-simulator-container__header__text">React Native:</span>
+
+        <select
+          onChange={this.onChange}
+          defaultValue={this.props.selectedBuildId}
+          className="build-picker">
+          {this.renderOptions()}
+        </select>
+      </div>
     )
   }
 }

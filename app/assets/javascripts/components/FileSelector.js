@@ -1,27 +1,32 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classNames';
 import FileSelectorNode from './FileSelectorNode';
 
 export default class FileSelector {
+
+  /*
+  
+  Seems to be unnecessary, toggling using
+  classes should be okay for now.
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.open) {
       React.findDOMNode(this).style.width = '';
     }
   }
+  */
 
   render() {
     const { files, onSelect, current, open } = this.props;
 
     return (
-      <div className={cx({
-        'fileselector': true,
-        'open': open
+      <div className={classNames({
+        'editor-file-selector': true,
+        'editor-file-selector--open': open
       })}>
-        <div className='fileselector__list-wrapper'>
-          <ol className='fileselector__list'>
+          <ul className='editor-file-selector__list'>
             {files && Object.keys(files).map((filename) => (
               <FileSelectorNode
                 onSelect={onSelect}
@@ -32,8 +37,7 @@ export default class FileSelector {
                 subtree={files[filename]}
               />
             ))}
-          </ol>
-        </div>
+          </ul>
       </div>
     );
   }

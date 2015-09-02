@@ -1,5 +1,4 @@
-<div style="display: flex; width: 100%">
-<div id="editor-container"></div>
+<div id="editor-container" class="editor-app"></div>
 <script>
   window.__data = <%=
       raw({app: {
@@ -21,4 +20,3 @@
       builds: Rails.env.production? ? Build.production : Build.all,
       headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
 </script>
-</div>
