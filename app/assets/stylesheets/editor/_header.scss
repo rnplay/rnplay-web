@@ -56,8 +56,12 @@
     width: 35px;
     height: 30px;
 
-    &:hover { background: $editor-color-purple; }
-    i { padding: 0 }
+    &:hover {
+      background: darken($editor-color-purple, 7%);
+      transition: all 0.15s ease-out;
+    }
+
+    i { padding: 0; }
   }
 
   &__name-input {

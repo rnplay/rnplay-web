@@ -1,0 +1,49 @@
+.editor-main-menu {
+  position: absolute;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,.11);
+  border-top: 0;
+  border-left: 0;
+  width: 300px;
+  display: none;
+  
+  &:focus { box-shadow: 0 0 4px 4px red; }
+
+  button { box-shadow: 1px 0 0 rgba(0,0,0,.28); }
+
+  &--open { display: block; }
+
+  &__header {
+    padding: 0 10px 0 0;
+    background: $editor-color-purple;
+    color: rgba(255,255,255,.70);
+    font-size: 16px;
+  }
+
+  &__title { padding-left: 17px; }
+
+  &__link {
+    color: $editor-color-purple;
+    font-weight: bolder;
+    display: block;
+    line-height: 3em;
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      color: #AD0785;
+      background: #FAF3FF;
+      text-decoration: none;
+
+      i { color: #AD0785; }
+    }
+
+    i {
+      display: inline-block;
+      width: 35px;
+      text-align: center;
+      margin-right: 17px;
+      color: hsl(0, 0%, 65%);
+    }
+  }
+}

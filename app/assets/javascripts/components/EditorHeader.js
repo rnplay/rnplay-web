@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import classNames from 'classNames';
 
+import MainMenu from './MainMenu';
 import GitModal from './git_modal';
 
 const maybeCallMethod = (obj, method, ...args) => {
@@ -150,6 +151,9 @@ export default class EditorHeader extends Component {
 
     return (
       <div className={classes}>
+
+        <MainMenu isOpen={this.state.isMenuOpen} onMenuToggle={this.onMenuToggle.bind(this)} />
+
         <button
           className="editor-header__button editor-header__menu-toggle"
           onClick={this.onMenuToggle.bind(this)}
