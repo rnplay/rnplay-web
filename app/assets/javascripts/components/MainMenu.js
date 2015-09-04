@@ -10,7 +10,7 @@ export default class MainMenu extends Component {
 
     if (isUserLoggedIn) {
       return (
-        <a className="editor-main-menu__link" href="/users/sign_out"><i className="fa fa-sign-out"></i>Logout</a>
+        <a className="editor-main-menu__link" rel="nofollow" data-method="delete" href="/users/sign_out"><i className="fa fa-sign-out"></i>Logout</a>
       );
     }
 
