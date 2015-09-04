@@ -4,8 +4,28 @@ import classNames from 'classNames';
 import Backdrop from './backdrop';
 
 export default class MainMenu extends Component {
+
+  renderUserActions() {
+    const { isUserLoggedIn } = this.props;
+
+    if (isUserLoggedIn) {
+      return (
+        <a className="editor-main-menu__link" href="/users/sign_out"><i className="fa fa-sign-out"></i>Logout</a>
+      );
+    }
+
+    return (
+      <div className="editor-main-menu__row">
+        <a className="editor-main-menu__link editor-main-menu__link--row" href="/users/sign_in"><i className="fa fa-sign-in"></i>Login</a>
+        <a className="editor-main-menu__link editor-main-menu__link--row" href="/users/sign_in"><i className="fa fa-user-plus"></i>Sign Up</a>
+      </div>
+    );
+
+  }
+
   render() {
     const { onMenuToggle, isOpen } = this.props;
+
     const classes = classNames({
       'editor-main-menu': true,
       'editor-main-menu--open': this.props.isOpen
@@ -31,7 +51,8 @@ export default class MainMenu extends Component {
           <a className="editor-main-menu__link" href="/apps"><i className="fa fa-rocket"></i>My Apps</a>
           <a className="editor-main-menu__link" href="/apps/picks"><i className="fa fa-star"></i>Staff picks</a>
           <a className="editor-main-menu__link" href="/about"><i className="fa fa-info"></i>About</a>
-          <a className="editor-main-menu__link" href="/users/sign_out"><i className="fa fa-sign-out"></i>Logout</a>
+
+          {this.renderUserActions()}
 
         </div>
       </div>
