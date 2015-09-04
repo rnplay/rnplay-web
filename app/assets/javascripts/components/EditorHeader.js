@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import classNames from 'classNames';
 
+import MainMenu from './MainMenu';
 import GitModal from './git_modal';
 
 const maybeCallMethod = (obj, method, ...args) => {
@@ -20,9 +21,7 @@ export default class EditorHeader extends Component {
   }
 
   onMenuToggle() {
-    this.setState({ isMenuOpen: !this.state.isMenuOpen }, () => {
-      console.log('menu is', this.state.isMenuOpen ? 'open' : 'closed');
-    });
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
   onUpdateName = () => {
@@ -63,6 +62,11 @@ export default class EditorHeader extends Component {
   currentUserIsAdmin() {
     const { currentUser } = this.props;
     return currentUser && currentUser.admin;
+  }
+
+  isUserLoggedIn() {
+    const { currentUser } = this.props;
+    return !!currentUser;
   }
 
   showGitModal = (e) => {
@@ -150,6 +154,12 @@ export default class EditorHeader extends Component {
 
     return (
       <div className={classes}>
+
+        <MainMenu
+          isOpen={this.state.isMenuOpen}
+          isUserLoggedIn={this.isUserLoggedIn()}
+          onMenuToggle={this.onMenuToggle.bind(this)} />
+
         <button
           className="editor-header__button editor-header__menu-toggle"
           onClick={this.onMenuToggle.bind(this)}
