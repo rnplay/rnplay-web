@@ -103,20 +103,18 @@ export default class EditorHeader extends Component {
   }
 
   renderForkButton() {
-    if ( ! this.currentUserIsAdmin()) {
-      return (
-        <button
-          onClick={this.onFork}
-          className="editor-header__button"
-        >
-          <i className="fa fa-code-fork"></i> Fork
-        </button>
-      );
-    }
+    return (
+      <button
+        onClick={this.onFork}
+        className="editor-header__button"
+      >
+        <i className="fa fa-code-fork"></i> Fork
+      </button>
+    );
   }
 
   renderPickButton() {
-    if ( ! this.currentUserIsAdmin()) {
+    if (this.currentUserIsAdmin()) {
 
       const icon = this.props.appIsPicked ? 'fa-star' : 'fa-star-o';
       const iconClasses = `fa ${icon}`;
