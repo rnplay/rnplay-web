@@ -14,7 +14,6 @@
  *= require solarized
  *= require midnight
  *= require dialog
- *= require bootstrap-modal-bs3patch
  *= require font-proxima-nova
  *= require devise_bootstrap_views
  *= require editor
@@ -91,7 +90,6 @@ $dropdown-link-active-color: $dropdown-bg;
 
 
 // Our stuff
-@import "modal";
 @import "backdrop";
 @import "support_form";
 

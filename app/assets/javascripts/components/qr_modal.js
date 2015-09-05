@@ -11,7 +11,7 @@ export default class QrModal extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     var self = this;
     $.get('/apps/' + this.props.urlToken + '/qr', function(result) {
       self.setState({qrCodeUrl: result.url});
@@ -21,9 +21,9 @@ export default class QrModal extends Component {
   renderImage() {
     if (this.state.qrCodeUrl) {
       return <img src={this.state.qrCodeUrl} />
-    } else {
-      return <span />
     }
+
+    return null;
   }
 
   render() {
@@ -31,7 +31,7 @@ export default class QrModal extends Component {
       <Modal isOpen={this.props.isOpen} onClickBackdrop={this.props.onClickBackdrop}>
         <div className="modal--body qr-modal-body">
           <h1>
-            Scan this with the <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">React Native Playground iOS app.</a>
+            Scan this with the <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">React Native Playground iOS app</a>.
           </h1>
           {this.renderImage()}
         </div>
