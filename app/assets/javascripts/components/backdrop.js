@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 export default class Backdrop extends Component {
   render() {

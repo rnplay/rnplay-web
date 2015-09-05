@@ -1,13 +1,13 @@
 'use strict';
 
 import React, { Component } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import FileSelectorNode from './FileSelectorNode';
 
 export default class FileSelector {
 
   /*
-  
+
   Seems to be unnecessary, toggling using
   classes should be okay for now.
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/search/searchcursor';
 import 'codemirror/addon/dialog/dialog';
@@ -73,7 +73,7 @@ export default class EditorApp extends Component {
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
     }
-    
+
     dispatch(log(data));
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import Backdrop from './backdrop';
 
 export default class Modal extends Component {

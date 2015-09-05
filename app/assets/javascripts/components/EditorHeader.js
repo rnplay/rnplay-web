@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 import MainMenu from './MainMenu';
 import GitModal from './git_modal';
