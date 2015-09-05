@@ -35,8 +35,11 @@ class App < ActiveRecord::Base
   end
 
   def set_module_name
-    # TODO: parse module name from index.ios.js when it gets saved
-    self.module_name = self.name unless self.module_name
+    if target_git_repo.has_file?('index.ios.js')
+      self.module_name = target_git_repo.contents_of_file('index.ios.js').lines.grep(/registerComponent/).first.scan(/"(.+)"|'(.+)'/).flatten.compact.first
+    else
+      self.module_name = name
+    end
     save
   end
 
@@ -127,7 +130,7 @@ class App < ActiveRecord::Base
 
   def extract_build
 
-    self.build = Build.find_by(name: '0.8.0-rc2') unless self.build
+    self.build = Build.find_by(name: '0.11.0-rc') unless self.build
     #
     # json = JSON.read(target_git_repo.contents_of_file("package.json"))
     #

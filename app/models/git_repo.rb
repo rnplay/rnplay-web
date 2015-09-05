@@ -27,7 +27,8 @@ class GitRepo
   end
 
   def commit_all_changes(message)
-    run "git config --global user.name \"React Native Playground\" && git config --global user.email \"info@rnplay.org\" && cd #{path} && git add . && git commit --author \"React Native Playground <info@rnplay.org>\" -a -m \"#{message}\" && git push origin master"
+    run "git config --global user.name \"React Native Playground\" && git config --global user.email \"info@rnplay.org\"" unless Rails.env.development?
+    run "cd #{path} && git add . && git commit --author \"React Native Playground <info@rnplay.org>\" -a -m \"#{message}\" && git push origin master"
     set_app_owner
   end
 
@@ -60,6 +61,10 @@ class GitRepo
 
   def file_list
     Dir.glob("#{path}/**/*.{js,json}").reject {|f| f['node_modules'] || f['iOS']}
+  end
+
+  def has_file?(filename)
+    File.exists?("#{path}/#{filename}")
   end
 
   # TODO: refactor to File model

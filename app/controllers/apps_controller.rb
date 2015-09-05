@@ -186,7 +186,7 @@ class AppsController < ApplicationController
   end
 
   def set_app
-    @app = params[:id] ? App.where(url_token: params[:id]).first : (Rails.env.development? ? App.first : App.find(7))
+    @app = params[:id] ? App.where(url_token: params[:id]).first : (Rails.env.development? || Rails.env.staging? ? App.first : App.find(7))
     raise ActiveRecord::RecordNotFound if !@app
   end
 
