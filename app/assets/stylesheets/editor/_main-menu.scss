@@ -58,8 +58,9 @@
       flex: 1;
 
       i {
+        width: auto;
         color: $editor-color-purple;
-        margin: 0;
+        margin-right: 10px;
       }
 
       &:hover {
@@ -75,7 +76,6 @@
   }
 
   &__row {
-    line-height: 3em;
     border-top: 1px solid darken(#FAF3FF, 5%);
     display: flex;
   }

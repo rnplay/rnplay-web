@@ -10,17 +10,19 @@ export default class MainMenu extends Component {
 
     if (isUserLoggedIn) {
       return (
-        <a className="editor-main-menu__link" href="/users/sign_out"><i className="fa fa-sign-out"></i>Logout</a>
+        <div className="editor-main-menu__row">
+          <a className="editor-main-menu__link editor-main-menu__link--row" rel="nofollow" data-method="delete" href="/users/sign_out"><i className="fa fa-sign-out"></i>Logout</a>
+          <a className="editor-main-menu__link editor-main-menu__link--row" href="/users/edit"><i className="fa fa-gear"></i>Settings</a>
+        </div>
       );
     }
 
     return (
       <div className="editor-main-menu__row">
         <a className="editor-main-menu__link editor-main-menu__link--row" href="/users/sign_in"><i className="fa fa-sign-in"></i>Login</a>
-        <a className="editor-main-menu__link editor-main-menu__link--row" href="/users/sign_in"><i className="fa fa-user-plus"></i>Sign Up</a>
+        <a className="editor-main-menu__link editor-main-menu__link--row" href="/users/sign_up"><i className="fa fa-user-plus"></i>Sign Up</a>
       </div>
     );
-
   }
 
   render() {
