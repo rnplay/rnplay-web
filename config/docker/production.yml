@@ -38,6 +38,24 @@ packager0100rc:
   volumes:
     - /home/app/rails/rnplay/app_js:/app/js
 
+packager0101:
+  restart: always
+  image: "packager:0.10.1"
+  env_file: ../../.env.production
+  environment:
+    VIRTUAL_HOST: packager0101.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+
+packager0110rc:
+  restart: always
+  image: "packager:0.11.0-rc"
+  env_file: ../../.env.production
+  environment:
+    VIRTUAL_HOST: packager0110rc.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+
 redis:
   restart: always
   image: redis
