@@ -12,6 +12,11 @@ export default class Modal extends Component {
     return (
       <div className={classes}>
         <div className="modal">
+          <div className="modal--actions">
+            <button className="modal--actions__close" onClick={this.props.onClickBackdrop}>
+              <i className="fa fa-times"></i>
+            </button>
+          </div>
           {this.props.children}
         </div>
 

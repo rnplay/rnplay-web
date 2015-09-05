@@ -20,6 +20,7 @@ $editor-color-darkgreen: #149085;
 @import 'editor/file-selector';
 @import 'editor/simulator';
 @import 'editor/main-menu';
+@import 'editor/modal';
 
 .editor-app, .editor-container {
   display: flex;
