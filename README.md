@@ -22,7 +22,6 @@ Create a file named .env, with the following contents. Replace the database and 
 TWITTER_KEY=T34JvmHO6BTLbqfMWo0cDi2F2
 TWITTER_SECRET=ObvEyaNo7yV7rgtzs0z8sqjiIfTIsuUlQV33u9sX0aaWaqJ5I7
 DATABASE_URL=postgresql://user:pass@localhost/rnplay_development?pool=5
-NGROK_SUBDOMAIN=rnplay-somesubdomain
 ```
 
 Run:
@@ -40,11 +39,25 @@ export CONFIGURE_ARGS="with-pg-config=/path/to/bin/pg_config"
 
 Then *bundle install* again.
 
-## Setup for the packager
+## Setup for the packager and local simulator
 
 The packager currently requires the supported node_modules to be in the /app_js directory. More docs on this soon.
 
 Finally, to tunnel traffic from the simulators to our machine, install [ngrok](http://ngrok.com).
+
+Run ngrok like:
+
+```
+ngrok http 34580
+```
+
+Then, add this line to .env:
+
+```
+NGROK_SUBDOMAIN=your-random-subdomain
+```
+
+Then restart foreman. Your simulator should have access to your local apps.
 
 ## Running the app
 
