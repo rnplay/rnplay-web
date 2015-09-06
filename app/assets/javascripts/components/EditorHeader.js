@@ -24,9 +24,8 @@ export default class EditorHeader extends Component {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
-  onUpdateName = () => {
-    const nameInputNode = React.findDOMNode(this.refs.nameInput);
-    maybeCallMethod(this.props, 'onUpdateName', nameInputNode.value);
+  onUpdateName = (e) => {
+    maybeCallMethod(this.props, 'onUpdateName', e.target.value);
   }
 
   handleOnSubmit = (e)  => {
@@ -130,7 +129,6 @@ export default class EditorHeader extends Component {
   }
 
   renderSaveButton() {
-
     if ( ! this.belongsToCurrentUser()) {
       return (
         <button
@@ -140,6 +138,15 @@ export default class EditorHeader extends Component {
         </button>
       );
     }
+  }
+
+  renderAuthor() {
+    const { username } = this.props.currentUser;
+    const name = username ? `@${username}` : 'anonymous';
+
+    return (
+      <span className="editor-header__author">by {name}</span>
+    );
   }
 
   render() {
@@ -167,13 +174,13 @@ export default class EditorHeader extends Component {
         <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
-            ref="nameInput"
             placeholder="Give this app a title"
             value={name}
             onChange={this.onUpdateName}
             className="editor-header__name-input"
           />
-          <div className="editor-header__button-container">
+          {this.renderAuthor()}
+          <div className="editor-header__actions">
             {this.renderForkButton()}
             {this.renderPickButton()}
           </div>
