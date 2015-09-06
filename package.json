@@ -29,6 +29,8 @@
     "webpack-dev-server": "^1.10.1"
   },
   "devDependencies": {
+    "babel-plugin-react-transform": "^1.0.3",
+    "react-transform-webpack-hmr": "^0.1.4",
     "redux-devtools": "^2.1.0"
   }
 }
