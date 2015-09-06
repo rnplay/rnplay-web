@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { connect } from 'redux/react';
+import { connect } from 'react-redux';
 
 import { editor as editorActions, logger as loggerActions } from '../actions';
 import EditorApp from '../components/EditorApp';

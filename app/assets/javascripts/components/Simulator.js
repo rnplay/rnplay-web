@@ -2,9 +2,13 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-
+import {result, find} from 'lodash';
 import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
+import Qs from 'qs'
+
+// Sample appetize URL
+// https://appetize.io/embed/u702ejhe26p438rp73c74uyxur?device=iphone5s&scale=75&orientation=portrait&screenOnly=false&xdocMsg=true&autoapp=false&deviceColor=white&debug=true&params=%7B%22bundleUrl%22:%22http://rnplay-jsierles.ngrok.io/app_js/cUJ22A/index.ios.bundle%22,%22moduleName%22:%22SampleApp%22,%22RCTDevMenu%22:%7B%22liveReloadEnabled%22:true%7D,%22route%22:%22%22%7D
 
 export default class Simulator extends Component {
 
@@ -13,6 +17,16 @@ export default class Simulator extends Component {
     this.state = {
       qrModalIsVisible: null
     };
+  }
+
+  appetizeUrl() {
+    var prefix = 'https://appetize.io/embed';
+    var appetizeId = find(this.props.builds, (build) => {return build.id == this.props.buildId}).appetize_id
+
+    //u702ejhe26p438rp73c74uyxur?device=iphone5s&scale=75&orientation=portrait&screenOnly=false&xdocMsg=true&autoapp=false&deviceColor=white&debug=true&params=%7B%22bundleUrl%22:%22http://rnplay-jsierles.ngrok.io/app_js/cUJ22A/index.ios.bundle%22,%22moduleName%22:%22SampleApp%22,%22RCTDevMenu%22:%7B%22liveReloadEnabled%22:true%7D,%22route%22:%22%22%7D
+    var url = `${prefix}/${appetizeId}?${Qs.stringify(this.props.app.appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(this.props.app.appetizeOptions.app_params))}`
+    console.log(url)
+    return url;
   }
 
   showQRModal = (e) => {
@@ -59,7 +73,7 @@ export default class Simulator extends Component {
 
         <div className="editor-header__bar editor-simulator-container__header">
           <BuildPicker
-            onChange={this.onUpdateBuild}
+            onChange={this.props.onUpdateBuild}
             builds={builds}
             selectedBuildId={buildId}
           />
@@ -72,7 +86,7 @@ export default class Simulator extends Component {
 
         <div className={classes}>
           <iframe
-            src={url}
+            src={this.appetizeUrl()}
             width="294px"
             height="9999px"
             frameBorder="0"

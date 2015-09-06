@@ -47,6 +47,31 @@ class App < ActiveRecord::Base
     update_columns(view_count: view_count + 1)
   end
 
+  def appetize_options(options = {})
+
+    options[:embed] ||= false
+    options[:screen_only] ||= false
+    options[:autoapp] ||= false
+    options[:app_params] ||= {}
+
+    options[:app_params] = {
+      "bundleUrl" => bundle_url,
+      "moduleName" => module_name,
+      "RCTDevMenu" => { "liveReloadEnabled" => true }
+    }.merge(options[:app_params])
+
+    options.merge({
+      device: 'iphone5',
+      scale: '75',
+      orientation: 'portrait',
+      screenOnly: false,
+      xdocMsg: true,
+      deviceColor: 'white',
+      debug: 'true',
+    })
+    
+  end
+
   def appetize_url(options = {})
     options[:embed] ||= false
     options[:screen_only] ||= false

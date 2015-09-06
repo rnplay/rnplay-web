@@ -41,22 +41,8 @@ export default class EditorApp extends Component {
     }
 
     if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
-      if (buildUpdated) {
-        window.location.reload();
-      } else {
-        const isOldBuild = parseInt(buildId) < 3;
-        const iframe = this.simulatorIframe;
-        // From 0.4.4 and up, we enable live reload - no need to reload the app
-        if (isOldBuild) {
-          if (simulatorActive) {
-            iframe.contentWindow.postMessage('restartApp', '*');
-          } else {
-            iframe.contentWindow.postMessage('requestSession', '*');
-          }
-        } else if (!simulatorActive) {
-          iframe.contentWindow.postMessage('requestSession', '*');
-        }
-      }
+      const iframe = this.simulatorIframe;
+      iframe.contentWindow.postMessage('requestSession', '*');
     }
   }
 
@@ -88,8 +74,8 @@ export default class EditorApp extends Component {
   }
 
   onUpdateBuild = (buildId) => {
-    const { dispatch, updateBuildId } = this.props;
-    dispatch(updateBuildId(buildId));
+    const { dispatch, updateBuildId, app: {id} } = this.props;
+    dispatch(updateBuildId(id, buildId));
   }
 
   onPick = () => {

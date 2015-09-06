@@ -15,6 +15,14 @@ export default {
       });
     },
 
+    saveBuildId(appId, buildId) {
+      return axios.put(`/apps/${appId}`, {
+        app: {
+          build_id: buildId
+        }
+      });
+    },
+
     saveApp(appId, name, buildId, fileBodies) {
       const appUrl = `/apps/${appId}`;
       const filesUrl = `${appUrl}/files/`;
