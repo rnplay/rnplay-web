@@ -24,15 +24,31 @@ export default class TabBar extends Component {
       currentFile
     } = this.props;
 
+    const { isOpen } = this.state;
+
     var buttonClasses = classNames({
       'editor-tab-bar__tab__button': true,
-      'editor-tab-bar__tab__button--wide': this.state.isOpen,
+      'editor-tab-bar__tab__button--wide': isOpen,
+    });
+
+    const iconClasses = classNames({
+      'fa': true,
+      'editor-tab-bar__icon': true,
+      'fa-folder': !isOpen,
+      'fa-folder-open': isOpen,
     });
 
     return (
       <div className="editor-header__bar editor-tab-bar">
-        <span className={buttonClasses} ref="toggleFileSelector" onClick={this.toggleFileSelector.bind(this)}><i className="fa fa-folder-open"></i> Files</span>
-        <span className="editor-tab-bar__tab">{currentFile}<div className="editor-tab-bar__tab__circle"></div></span>
+        <span className={buttonClasses} ref="toggleFileSelector" onClick={this.toggleFileSelector.bind(this)}>
+          <i className={iconClasses}></i>
+          <span className="editor-tab-bar__text">Files</span>
+          <i className="fa fa-angle-right editor-tab-bar__icon--right"></i>
+        </span>
+        <span className="editor-tab-bar__tab">
+          {currentFile}
+          <div className="editor-tab-bar__tab__circle"></div>
+        </span>
       </div>
     );
   }
