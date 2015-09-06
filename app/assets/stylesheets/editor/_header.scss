@@ -34,7 +34,13 @@
     }
   }
 
-  &__button-container {
+  &__author {
+    padding: 0 10px;
+    color: lighten(#333, 25%);
+    font-style: italic;
+  }
+
+  &__actions {
     display: flex;
     justify-content: flex-end;
     font-weight: bolder;
@@ -81,9 +87,5 @@
       outline: none;
       color: $editor-color-darkgreen;
     }
-  }
-
-  &__button {
-
   }
 }
