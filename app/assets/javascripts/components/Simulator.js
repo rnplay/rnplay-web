@@ -22,10 +22,7 @@ export default class Simulator extends Component {
   appetizeUrl() {
     var prefix = 'https://appetize.io/embed';
     var appetizeId = find(this.props.builds, (build) => {return build.id == this.props.buildId}).appetize_id
-
-    //u702ejhe26p438rp73c74uyxur?device=iphone5s&scale=75&orientation=portrait&screenOnly=false&xdocMsg=true&autoapp=false&deviceColor=white&debug=true&params=%7B%22bundleUrl%22:%22http://rnplay-jsierles.ngrok.io/app_js/cUJ22A/index.ios.bundle%22,%22moduleName%22:%22SampleApp%22,%22RCTDevMenu%22:%7B%22liveReloadEnabled%22:true%7D,%22route%22:%22%22%7D
     var url = `${prefix}/${appetizeId}?${Qs.stringify(this.props.app.appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(this.props.app.appetizeOptions.app_params))}`
-    console.log(url)
     return url;
   }
 

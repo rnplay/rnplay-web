@@ -23,6 +23,14 @@ export default {
       });
     },
 
+    saveName(appId, name) {
+      return axios.put(`/apps/${appId}`, {
+        app: {
+          name: name
+        }
+      });
+    },
+
     saveApp(appId, name, buildId, fileBodies) {
       const appUrl = `/apps/${appId}`;
       const filesUrl = `${appUrl}/files/`;

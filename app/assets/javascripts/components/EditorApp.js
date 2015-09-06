@@ -64,8 +64,8 @@ export default class EditorApp extends Component {
   }
 
   onUpdateName = (name) => {
-    const { dispatch, updateName } = this.props;
-    dispatch(updateName(name));
+    const { dispatch, updateName, app: {id} } = this.props;
+    dispatch(updateName(id, name));
   }
 
   onUpdateBody = (newBody) => {

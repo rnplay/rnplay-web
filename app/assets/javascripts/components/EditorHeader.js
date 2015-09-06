@@ -24,15 +24,13 @@ export default class EditorHeader extends Component {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
-  onUpdateName = () => {
-    const nameInputNode = React.findDOMNode(this.refs.nameInput);
-    maybeCallMethod(this.props, 'onUpdateName', nameInputNode.value);
+  onUpdateName = (e) => {
+    maybeCallMethod(this.props, 'onUpdateName', e.target.value);
   }
 
   handleOnSubmit = (e)  => {
     e.preventDefault();
-    const method = this.belongsToCurrentUser() ? 'onSave' : 'onFork';
-    this[method](e);
+    console.log("submitted")
   }
 
   onSave = (e) => {

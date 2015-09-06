@@ -21,7 +21,8 @@ export default {
     show
   }),
 
-  updateName: (newName) => ({
+  updateName: (appId, newName) => ({
+    promise: api.saveName(appId, newName),
     newName
   }),
 
