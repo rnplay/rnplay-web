@@ -25,12 +25,14 @@ export default class EditorHeader extends Component {
   }
 
   onUpdateName = (e) => {
+    e.preventDefault();
     maybeCallMethod(this.props, 'onUpdateName', e.target.value);
+
   }
 
   handleOnSubmit = (e)  => {
     e.preventDefault();
-    console.log("submitted")
+    e.preventPropagation();
   }
 
   onSave = (e) => {
@@ -104,6 +106,7 @@ export default class EditorHeader extends Component {
     return (
       <button
         onClick={this.onFork}
+        type="button"
         className="editor-header__button"
       >
         <i className="fa fa-code-fork"></i> Fork
@@ -162,7 +165,6 @@ export default class EditorHeader extends Component {
           title="Open Menu">
           <i className="fa fa-bars"></i>
         </button>
-        <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
             ref="nameInput"
@@ -175,7 +177,6 @@ export default class EditorHeader extends Component {
             {this.renderForkButton()}
             {this.renderPickButton()}
           </div>
-        </form>
         {this.renderGitModal()}
       </div>
     );

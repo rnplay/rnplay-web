@@ -38,6 +38,10 @@ export default class TabBar extends Component {
       'fa-folder-open': isOpen,
     });
 
+    const saveIndicatorClasses = classNames({
+      'editor-tab-bar__tab__circle': this.props.unsaved
+    });
+
     return (
       <div className="editor-header__bar editor-tab-bar">
         <span className={buttonClasses} ref="toggleFileSelector" onClick={this.toggleFileSelector.bind(this)}>
@@ -47,7 +51,7 @@ export default class TabBar extends Component {
         </span>
         <span className="editor-tab-bar__tab">
           {currentFile}
-          <div className="editor-tab-bar__tab__circle"></div>
+          <div className={saveIndicatorClasses}></div>
         </span>
       </div>
     );

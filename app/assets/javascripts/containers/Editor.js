@@ -20,7 +20,8 @@ import EditorApp from '../components/EditorApp';
     appSaveError,
     fileSelectorOpen,
     appIsPicked,
-    forkToken
+    forkToken,
+    unsaved
   } = editor;
 
   return {
@@ -37,6 +38,7 @@ import EditorApp from '../components/EditorApp';
     appSaveInProgress,
     appSaveError,
     fileSelectorOpen,
+    unsaved,
     logs: logs.logs
   };
 })
