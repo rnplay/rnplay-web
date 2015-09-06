@@ -26,17 +26,31 @@
     &__button {
       background: #fff;
       border-right: 1px solid $editor-border-color;
-      display: inline-block;
+      display: flex;
+      align-items: center;
       padding: 0 10px;
-      width: inherit;
-      transition: width 0.3s ease;
+      cursor: pointer;
+
+      &:hover { background: transparent; }
 
       &--wide {
         width: 200px;
+
+        .editor-tab-bar__icon--right {
+          transform: rotateY(180deg);
+        }
       }
-      
-      // Icon color
-      i { color: $editor-color-purple; }
+    }
+  }
+
+  &__text { padding: 0 10px; }
+
+  &__icon {
+    color: $editor-color-purple;
+
+    &--right {
+      color: #444;
+      margin-left: auto;
     }
   }
 }
