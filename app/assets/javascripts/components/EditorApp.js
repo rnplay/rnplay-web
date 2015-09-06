@@ -63,6 +63,12 @@ export default class EditorApp extends Component {
     dispatch(log(data));
   }
 
+  belongsToCurrentUser = () => {
+    console.log(this.props)
+    const { currentUser, app : { creatorId} } = this.props;
+    return currentUser && currentUser.id === creatorId;
+  }
+
   onUpdateName = (name) => {
     const { dispatch, updateName, app: {id} } = this.props;
     dispatch(updateName(id, name));
@@ -141,6 +147,7 @@ export default class EditorApp extends Component {
       onUpdateBuild,
       onChangeFile,
       onUpdateBody,
+      belongsToCurrentUser,
       onPick,
       onSave,
       onFork
@@ -158,6 +165,7 @@ export default class EditorApp extends Component {
       app,
       appIsPicked,
       currentUser,
+      belongsToCurrentUser,
       onUpdateName,
       onPick,
       onSave,
@@ -173,6 +181,7 @@ export default class EditorApp extends Component {
       useDarkTheme,
       onChangeFile,
       onUpdateBody,
+      belongsToCurrentUser,
       fileSelectorOpen,
       onFileSelectorToggle,
       logs,

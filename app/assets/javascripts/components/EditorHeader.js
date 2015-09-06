@@ -54,11 +54,6 @@ export default class EditorHeader extends Component {
     maybeCallMethod(this.props, 'onUpdateBuild', value);
   }
 
-  belongsToCurrentUser() {
-    const { currentUser, app : { creatorId} } = this.props;
-    return currentUser && currentUser.id === creatorId;
-  }
-
   currentUserIsAdmin() {
     const { currentUser } = this.props;
     return currentUser && currentUser.admin;
@@ -80,7 +75,7 @@ export default class EditorHeader extends Component {
   }
 
   renderGitModal = () => {
-    if (this.belongsToCurrentUser()) {
+    if (this.props.belongsToCurrentUser()) {
       return (
         <GitModal app={this.props.app}
                  token={this.props.currentUser.authentication_token}

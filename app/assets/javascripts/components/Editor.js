@@ -43,12 +43,14 @@ export default class Editor {
     const {
       useDarkTheme,
       useVimKeyBindings,
+      belongsToCurrentUser,
       app : { files },
       onChangeFile,
       currentFile
     } = this.props;
 
     const options = assign({}, DEFAULT_CODEMIRROR_OPTIONS, {
+      readOnly: belongsToCurrentUser ? false : 'nocursor',
       theme: useDarkTheme ? 'midnight' : 'solarized',
     }, useVimKeyBindings ? {keyMap: 'vim'} : {});
 
