@@ -98,7 +98,7 @@ class AppsController < ApplicationController
     @app.increment_view_count!
 
     respond_to do |format|
-      format.html { render action: :edit }
+      format.html
     end
   end
 
@@ -114,7 +114,7 @@ class AppsController < ApplicationController
         created_from_web: true
       })
 
-      redirect_to edit_app_path(@app)
+      redirect_to app_path(@app)
     end
   end
 
@@ -130,8 +130,7 @@ class AppsController < ApplicationController
   end
 
   def edit
-    @page_title = @app.name
-    @app.increment_view_count!
+    redirect_to app_path(@app), permanent: true
   end
 
   def create
