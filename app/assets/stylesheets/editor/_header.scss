@@ -3,11 +3,6 @@
   position: relative;
   z-index: 6;
 
-  form {
-    display: flex;
-    flex-grow: 1;
-  }
-
   &__bar {
     min-height: 30px;
     max-height: 30px;
@@ -25,13 +20,9 @@
     background: transparent;
     border-right: 1px solid $editor-border-color;
 
-    &:hover {
-      background: #fff;
-    }
+    &:hover { background: #fff; }
 
-    i {
-      padding-right: 5px;
-    }
+    i { padding-right: 5px; }
   }
 
   &__button-container {
@@ -39,13 +30,8 @@
     justify-content: flex-end;
     font-weight: bolder;
 
-    button:first-child {
-      border-left: 1px solid $editor-border-color;
-    }
-    
-    button:last-child {
-      border-right: 0;
-    }
+    button:first-child { border-left: 1px solid $editor-border-color; }
+    button:last-child { border-right: 0; }
   }
 
   &__menu-toggle {
@@ -74,16 +60,11 @@
     height: 30px;
     flex: 1;
     
-    &:hover {
-      color: $editor-color-darkgreen;
-    }
+    &:hover { color: $editor-color-darkgreen; }
+    &:disabled { color: inherit; }
     &:focus {
       outline: none;
       color: $editor-color-darkgreen;
     }
-  }
-
-  &__button {
-
   }
 }

@@ -27,7 +27,6 @@ export default class EditorHeader extends Component {
   onUpdateName = (e) => {
     e.preventDefault();
     maybeCallMethod(this.props, 'onUpdateName', e.target.value);
-
   }
 
   handleOnSubmit = (e)  => {
@@ -78,9 +77,9 @@ export default class EditorHeader extends Component {
     if (this.props.belongsToCurrentUser()) {
       return (
         <GitModal app={this.props.app}
-                 token={this.props.currentUser.authentication_token}
-                 onClickBackdrop={this.hideGitModal}
-                 isOpen={this.state.gitModalIsVisible} />
+                  token={this.props.currentUser.authentication_token}
+                  onClickBackdrop={this.hideGitModal}
+                  isOpen={this.state.gitModalIsVisible} />
       )
     }
   }
@@ -102,8 +101,7 @@ export default class EditorHeader extends Component {
       <button
         onClick={this.onFork}
         type="button"
-        className="editor-header__button"
-      >
+        className="editor-header__button">
         <i className="fa fa-code-fork"></i> Fork
       </button>
     );
@@ -126,7 +124,6 @@ export default class EditorHeader extends Component {
   }
 
   renderSaveButton() {
-
     if ( ! this.belongsToCurrentUser()) {
       return (
         <button
@@ -138,10 +135,14 @@ export default class EditorHeader extends Component {
     }
   }
 
+  getAppName() {
+    const { name } = this.props;
+    return name.length > 0 ? name : 'Unnamed App';
+  }
+
   render() {
-    const { useDarkTheme, name } = this.props;
+    const disabled = ! this.props.belongsToCurrentUser();
     const classes = classNames({
-      'editor-header--dark': useDarkTheme,
       'editor-header__bar': true,
       'editor-header': true,
     });
@@ -160,18 +161,20 @@ export default class EditorHeader extends Component {
           title="Open Menu">
           <i className="fa fa-bars"></i>
         </button>
-          <input
-            type="text"
-            ref="nameInput"
-            placeholder="Give this app a title"
-            defaultValue={name}
-            onChange={this.onUpdateName}
-            className="editor-header__name-input"
-          />
-          <div className="editor-header__button-container">
-            {this.renderForkButton()}
-            {this.renderPickButton()}
-          </div>
+
+        <input
+          type="text"
+          disabled={disabled}
+          placeholder="Give this app a title"
+          defaultValue={this.getAppName()}
+          onChange={this.onUpdateName}
+          className="editor-header__name-input"/>
+
+        <div className="editor-header__button-container">
+          {this.renderForkButton()}
+          {this.renderPickButton()}
+        </div>
+
         {this.renderGitModal()}
       </div>
     );
