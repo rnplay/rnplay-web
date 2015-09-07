@@ -123,18 +123,6 @@ export default class EditorHeader extends Component {
     }
   }
 
-  renderSaveButton() {
-    if ( ! this.belongsToCurrentUser()) {
-      return (
-        <button
-          onClick={this.onSave}
-          className="editor-header__button editor-header__button--save">
-          Save
-        </button>
-      );
-    }
-  }
-
   getAppName() {
     const { name } = this.props;
     return name.length > 0 ? name : 'Unnamed App';
@@ -170,7 +158,7 @@ export default class EditorHeader extends Component {
           onChange={this.onUpdateName}
           className="editor-header__name-input"/>
 
-        <div className="editor-header__button-container">
+        <div className="editor-header__actions">
           {this.renderForkButton()}
           {this.renderPickButton()}
         </div>
