@@ -1,5 +1,6 @@
 'use strict';
 import axios from 'axios';
+import _ from 'lodash';
 
 export default {
 
@@ -24,11 +25,14 @@ export default {
     },
 
     saveName(appId, name) {
-      return axios.put(`/apps/${appId}`, {
-        app: {
-          name: name
-        }
-      });
+      // Throttle updates so we don't hit the server on every keystroke.
+      this._updateName = this._updateName || _.throttle((appId, name) => {
+        return axios.put(`/apps/${appId}`, {
+          app: { name }
+        });
+      }, 1000);
+
+      return this._updateName(appId, name);
     },
 
     saveApp(appId, name, buildId, fileBodies) {
