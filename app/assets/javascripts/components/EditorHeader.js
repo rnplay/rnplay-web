@@ -125,7 +125,7 @@ export default class EditorHeader extends Component {
 
   getAppName() {
     const { name } = this.props;
-    return name.length > 0 ? name : 'Unnamed App';
+    return name && name.length > 0 ? name : 'Unnamed App';
   }
 
   render() {
