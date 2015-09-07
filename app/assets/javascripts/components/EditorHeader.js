@@ -164,7 +164,7 @@ export default class EditorHeader extends Component {
             type="text"
             ref="nameInput"
             placeholder="Give this app a title"
-            value={name}
+            defaultValue={name}
             onChange={this.onUpdateName}
             className="editor-header__name-input"
           />

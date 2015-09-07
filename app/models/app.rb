@@ -4,8 +4,6 @@ class App < ActiveRecord::Base
 
   attr_accessor :created_from_web
 
-  validates :name, presence: true
-
   after_create :setup_git_repo
   after_create :set_module_name
   after_create :extract_build
@@ -69,7 +67,7 @@ class App < ActiveRecord::Base
       deviceColor: 'white',
       debug: 'true',
     })
-    
+
   end
 
   def appetize_url(options = {})
