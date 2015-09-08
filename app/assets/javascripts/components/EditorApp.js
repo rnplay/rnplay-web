@@ -64,7 +64,6 @@ export default class EditorApp extends Component {
   }
 
   belongsToCurrentUser = () => {
-    console.log(this.props)
     const { currentUser, app : { creatorId} } = this.props;
     return currentUser && currentUser.id === creatorId;
   }
