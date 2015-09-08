@@ -50,7 +50,7 @@ export default class Editor {
     } = this.props;
 
     const options = assign({}, DEFAULT_CODEMIRROR_OPTIONS, {
-      readOnly: belongsToCurrentUser ? false : 'nocursor',
+      readOnly: belongsToCurrentUser() ? false : 'nocursor',
       theme: useDarkTheme ? 'midnight' : 'solarized',
     }, useVimKeyBindings ? {keyMap: 'vim'} : {});
 
@@ -112,7 +112,6 @@ export default class Editor {
           <div className="editor">
             <textarea
               ref="editorTextArea"
-              onChange={this._onChange}
               defaultValue={body}
             />
           </div>
