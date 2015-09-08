@@ -7,11 +7,11 @@
  */
 
 // Color burger
-$editor-color-light-grey: #F6F6F6;
 $editor-border-color: #DCDCDC;
-$editor-color-darkgrey: #EDEDED;
-$editor-color-purple: #5C069A;
 $editor-color-darkgreen: #149085;
+$editor-color-darkgrey: #EDEDED;
+$editor-color-light-grey: #F6F6F6;
+$editor-color-purple: #5C069A;
 
 // Components
 @import 'editor/header';
@@ -48,20 +48,21 @@ $editor-color-darkgreen: #149085;
 }
 
 .editor-button {
-  padding: 0 15px;
+  border-radius: 4px;
   border: 1px solid $editor-color-purple;
   color: $editor-color-purple;
-  text-align: center;
-  border-radius: 4px;
-  line-height: 1.5em;
-  font-size: 1.2em;
+  cursor: pointer;
   display: inline-block;
+  font-size: 1.2em;
+  line-height: 1.5em;
   margin: 0 auto;
+  padding: 0 15px;
+  text-align: center;
 
   &:hover {
-    text-decoration: none;
     background: $editor-color-purple;
     color: #fff;
+    text-decoration: none;
   }
 
   i { padding-right: 5px; }
