@@ -21,7 +21,8 @@ const initialState = {
   fileSelectorOpen: false,
   appIsPicked: null,
   forkToken: null,
-  unsaved: false
+  unsavedChanges: false,
+  saved: false
 };
 
 export default createStore(initialState, {
@@ -56,7 +57,8 @@ export default createStore(initialState, {
   [`${actions.updateBody}`]: (state, { filename, body }) => ({
     ...state,
     fileBodies: assign({}, state.fileBodies, {[filename]: body}),
-    unsaved: true
+    unsavedChanges: true,
+    saved: false
   }),
 
   [`${actions.updateBuildId}`]: (state, { newBuildId }) => ({
@@ -67,7 +69,8 @@ export default createStore(initialState, {
   [`${actions.saveFile}-success`]: (state, { filename }) => ({
     ...state,
     fileBodies: assign({}, omit(state.fileBodies, filename)),
-    unsaved: false
+    unsavedChanges: false,
+    saved: true
   }),
 
   [`${actions.saveApp}`]: (state) => ({
@@ -82,7 +85,8 @@ export default createStore(initialState, {
     newBuildId: null,
     appSaveError: false,
     appSaveInProgress: false,
-    unsaved: false
+    unsavedChanges: false,
+    saved: true
   }),
 
   [`${actions.saveApp}-failure`]: (state, { fileBodies, error }) => {

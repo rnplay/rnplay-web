@@ -18,10 +18,21 @@ export default class TabBar extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  renderSaveMessage() {
+    if (this.props.saved) {
+      return (
+        <span className="editor-tab-bar__flash-message">
+          Saved
+        </span>
+      );
+    }
+  }
+
   render() {
     const {
       onFileSelectorToggle,
-      currentFile
+      currentFile,
+      unsavedChanges
     } = this.props;
 
     const { isOpen } = this.state;
@@ -39,7 +50,7 @@ export default class TabBar extends Component {
     });
 
     const saveIndicatorClasses = classNames({
-      'editor-tab-bar__tab__circle': this.props.unsaved
+      'editor-tab-bar__tab__circle': unsavedChanges
     });
 
     return (
@@ -53,6 +64,7 @@ export default class TabBar extends Component {
           {currentFile}
           <div className={saveIndicatorClasses}></div>
         </span>
+        {this.renderSaveMessage()}
       </div>
     );
   }

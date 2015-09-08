@@ -86,14 +86,16 @@ export default class Editor {
       useDarkTheme,
       logs,
       editorHeaderProps,
-      unsaved
+      unsavedChanges,
+      saved
     } = this.props;
 
     const tabBarProps = {
       currentFile,
       onFileSelectorToggle,
       useDarkTheme,
-      unsaved
+      unsavedChanges,
+      saved
     };
 
     return (

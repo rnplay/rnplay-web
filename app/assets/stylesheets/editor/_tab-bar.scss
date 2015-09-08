@@ -11,7 +11,7 @@
     background: $editor-color-light-grey;
     border-right: 1px solid $editor-border-color;
     display: inline-block;
-    padding: 0 10px 0 15px;
+    padding: 0 15px;
 
     &__circle {
       display: inline-block;
@@ -45,6 +45,14 @@
 
   &__text { padding: 0 10px; }
 
+  &__flash-message {
+    animation: fadeout 4s;
+    color: lighten(#333, 10%);
+    font-style: italic;
+    padding: 0 15px;
+    opacity: 0;
+  }
+
   &__icon {
     color: $editor-color-purple;
 
@@ -53,4 +61,9 @@
       margin-left: auto;
     }
   }
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }

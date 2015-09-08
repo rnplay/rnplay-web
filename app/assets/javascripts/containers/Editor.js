@@ -21,7 +21,8 @@ import EditorApp from '../components/EditorApp';
     fileSelectorOpen,
     appIsPicked,
     forkToken,
-    unsaved
+    unsavedChanges,
+    saved
   } = editor;
 
   return {
@@ -38,7 +39,8 @@ import EditorApp from '../components/EditorApp';
     appSaveInProgress,
     appSaveError,
     fileSelectorOpen,
-    unsaved,
+    unsavedChanges,
+    saved,
     logs: logs.logs
   };
 })

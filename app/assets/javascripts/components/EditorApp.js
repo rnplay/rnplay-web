@@ -137,7 +137,8 @@ export default class EditorApp extends Component {
       appIsPicked,
       fileSelectorOpen,
       logs,
-      unsaved
+      unsavedChanges,
+      saved
     } = this.props;
 
     const {
@@ -184,7 +185,8 @@ export default class EditorApp extends Component {
       fileSelectorOpen,
       onFileSelectorToggle,
       logs,
-      unsaved
+      unsavedChanges,
+      saved
     };
 
     const buildPickerProps = {
