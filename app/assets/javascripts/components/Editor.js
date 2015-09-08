@@ -51,7 +51,7 @@ export default class Editor {
 
     const options = assign({}, DEFAULT_CODEMIRROR_OPTIONS, {
       readOnly: belongsToCurrentUser() ? false : 'nocursor',
-      theme: useDarkTheme ? 'midnight' : 'solarized',
+      theme: useDarkTheme ? 'midnight' : DEFAULT_CODEMIRROR_OPTIONS.theme,
     }, useVimKeyBindings ? {keyMap: 'vim'} : {});
 
     const textareaNode = React.findDOMNode(this.refs.editorTextArea);
