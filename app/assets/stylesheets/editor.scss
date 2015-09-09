@@ -21,6 +21,7 @@ $editor-color-purple: #5C069A;
 @import 'editor/simulator';
 @import 'editor/main-menu';
 @import 'editor/modal';
+@import 'editor/backdrop';
 
 .editor-app, .editor-container {
   display: flex;
