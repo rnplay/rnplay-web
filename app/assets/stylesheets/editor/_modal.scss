@@ -21,19 +21,48 @@
     overflow: hidden;
     margin: 15px;
     width: 80%;
-    max-width: 850px;
+    max-width: 600px;
     border-radius: 4px;
     z-index: 1001;
 
-    &--body {
+    &__body {
       padding: 35px;
       padding-top: 0;
 
       h1 {
-        font-size: 28px;
+        font-size: 2.2rem;
         margin-bottom: 15px;
       }
+
       p { font-size: 16px; }
+    }
+
+    &__footer {
+      background: $editor-color-light-grey;
+      border-top: 1px solid $editor-border-color;
+      text-align: left;
+      display: flex;
+
+      &--right {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 15px;
+
+        & > * { height: 40px; }
+      }
+
+      &__logo {
+        background: $editor-color-purple;
+        min-height: 130px;
+        min-width: 130px;
+      }
+
+      p {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
     }
 
     &--actions {
