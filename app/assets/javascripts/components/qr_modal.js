@@ -25,7 +25,7 @@ export default class QrModal extends Component {
     return null;
   }
 
-  renderFooter() {
+  renderHeader() {
     return (
       <div className="modal__header">
           <p>Scan this with our <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">iOS app</a>!</p>
@@ -37,7 +37,7 @@ export default class QrModal extends Component {
   render() {
     return (
       <Modal isOpen={this.props.isOpen} onClickBackdrop={this.props.onClickBackdrop}>
-        {this.renderFooter()}
+        {this.renderHeader()}
         <div className="modal__body qr-modal-body">
           {this.renderQRImage()}
         </div>
