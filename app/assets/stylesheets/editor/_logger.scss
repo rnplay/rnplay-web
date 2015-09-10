@@ -1,5 +1,4 @@
 .editor-logger {
-  background: $editor-color-light-grey;
   border-top: 1px solid $editor-border-color;
   min-height: 30px;
   max-height: 30px;
@@ -26,8 +25,9 @@
   &__toggle {
     padding: 0 10px;
     border: 0;
-    text-align: left;
+    text-align: right;
     flex: 1;
+    font-family: Menlo, Consolas, monospace;
     background: transparent;
   }
 
@@ -66,7 +66,7 @@
     font-size: 11px;
     width: 16px;
     height: 16px;
-    color: #B38F00;
+    color: #666;
     background: #FFE164;
     border: 1px solid #DEB100;
     border-radius: 100%;

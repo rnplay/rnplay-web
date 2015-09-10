@@ -9,7 +9,6 @@ import FileSelector from './FileSelector';
 import TabBar from './TabBar';
 import Logger from './Logger';
 
-
 const DEFAULT_CODEMIRROR_OPTIONS = {
   autofocus: true,
   indentUnit: 2,

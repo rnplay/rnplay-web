@@ -52,14 +52,21 @@ export default class EditorApp extends Component {
 
   // Keep track of simulator lifecycle
   handleSimulatorEvent = (e) => {
+
     const { data } = e;
-    const { dispatch, log } = this.props;
+    const { dispatch, log, saveScreenshot } = this.props;
+
     if (data === 'sessionRequested') {
       this.simulatorActive = true;
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
+    } else if (data == 'firstFrameReceived') {
+      setTimeout(() => {
+        this.simulatorIframe.contentWindow.postMessage('getScreenshot', '*');
+      }.bind(this), 5000)
+    } else if (data.type == 'screenshot') {
+      dispatch(saveScreenshot(this.props.app.id, data.data));
     }
-
     dispatch(log(data));
   }
 
@@ -155,10 +162,6 @@ export default class EditorApp extends Component {
 
     const { appetizeUrl } = app;
 
-    const simulatorUrl = useDarkTheme ?
-      appetizeUrl.replace('deviceColor=white', 'deviceColor=black') :
-      appetizeUrl;
-
     const editorHeaderProps = {
       app,
       appIsPicked,
@@ -207,7 +210,6 @@ export default class EditorApp extends Component {
         <Editor editorHeaderProps={editorHeaderProps} {...editorProps} />
 
         <Simulator
-          url={simulatorUrl}
           app={this.props.app}
           useDarkTheme={useDarkTheme}
           {...buildPickerProps}

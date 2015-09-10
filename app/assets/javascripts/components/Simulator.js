@@ -90,7 +90,6 @@ export default class Simulator extends Component {
             scrolling="no"
           />
         </div>
-
         {this.renderQRModal()}
 
       </div>

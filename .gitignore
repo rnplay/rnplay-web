@@ -27,3 +27,4 @@ public/jsbundles
 app_files
 repos
 npm-debug.log
+public/screenshots/*

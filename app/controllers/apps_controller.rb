@@ -157,10 +157,17 @@ class AppsController < ApplicationController
 
   end
 
+  require 'base64'
+
   def update
     @app = App.find(params[:id])
 
     if (app_params[:pick] && current_user.admin?) || (user_signed_in? && @app.created_by?(current_user))
+      if app_params[:screenshot]
+        image_data = Base64::decode64 app_params[:screenshot].split(",").last
+        File.open("#{Rails.root}/public/screenshots/#{@app.url_token}.jpg", "wb") { |f| f.write(image_data) }
+        app_params.delete(:screenshot)
+      end
       @app.update(app_params)
       logger.info @app.errors.inspect
       render json: {success: true}
@@ -193,7 +200,7 @@ class AppsController < ApplicationController
   end
 
   def app_params
-    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick, :uses_git)
+    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick, :uses_git, :screenshot)
   end
 
   def pick_layout

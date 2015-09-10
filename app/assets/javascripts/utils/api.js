@@ -24,6 +24,14 @@ export default {
       });
     },
 
+    saveScreenshot(appId, data) {
+      return axios.put(`/apps/${appId}`, {
+        app: {
+          screenshot: data
+        }
+      });
+    },
+
     saveName(appId, name) {
       // Throttle updates so we don't hit the server on every keystroke.
       this._updateName = this._updateName || _.throttle((appId, name) => {

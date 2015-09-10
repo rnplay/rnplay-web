@@ -36,6 +36,10 @@ export default {
     fileBodies
   }),
 
+  saveScreenshot: (appId, data) => ({
+    promise: api.saveScreenshot(appId, data),
+  }),
+
   toggleAppPickStatus: (appId, picked) => ({
     promise: api.toggleAppPickStatus(appId, picked),
     picked

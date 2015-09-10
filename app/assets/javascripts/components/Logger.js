@@ -59,7 +59,7 @@ export default class Editor extends Component {
         <div className="editor-logger__bar">
           <button onClick={this.onToggle} className='editor-logger__toggle'>
             {!!unread && <span className='editor-logger__unread'>{unread}</span>}
-            <span>Log</span>
+            <span>Console Logs</span>
           </button>
           <button onClick={this.onToggle} className='editor-logger__button'>
             <i className={toggleIconClasses}></i>

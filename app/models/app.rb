@@ -79,6 +79,7 @@ class App < ActiveRecord::Base
     params = {
       "bundleUrl" => bundle_url,
       "moduleName" => module_name,
+      "debug" => true,
       "RCTDevMenu" => {
         "liveReloadEnabled" => true
       }
