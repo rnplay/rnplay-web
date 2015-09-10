@@ -94,7 +94,7 @@ class AppsController < ApplicationController
 
   def show
     @app.migrate_to_git if !@app.migrated_to_git?
-    @page_title = @app.name.present? ? @app.name : "Unnamed App"
+    @page_title = @app.name.presence || "Unnamed App"
     @app.increment_view_count!
 
     respond_to do |format|
