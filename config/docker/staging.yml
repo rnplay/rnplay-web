@@ -52,5 +52,4 @@ packager:
   environment:
     VIRTUAL_HOST: packager-staging.rnplay.org
   volumes:
-    - /home/app/rails_staging/rnplay/app_js:/app/js
-
+    - /home/app/rails/rnplay_staging/app_js:/app/js
