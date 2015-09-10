@@ -1,12 +1,10 @@
 .editor-main-menu {
-  position: absolute;
-  z-index: 1000;
   background: #fff;
   box-shadow: 0 0 4px rgba(0,0,0,.11);
-  border-top: 0;
-  border-left: 0;
-  width: 300px;
   display: none;
+  position: absolute;
+  width: 300px;
+  z-index: 1000;
   
   &:focus { box-shadow: 0 0 4px 4px red; }
 

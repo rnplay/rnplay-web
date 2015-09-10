@@ -25,6 +25,14 @@ export default class MainMenu extends Component {
     );
   }
 
+  renderMenuItemMyApps() {
+    const { isUserLoggedIn } = this.props;
+
+    return isUserLoggedIn && (
+      <a className="editor-main-menu__link" href="/apps"><i className="fa fa-rocket"></i>My Apps</a>
+    );
+  }
+
   render() {
     const { onMenuToggle, isOpen } = this.props;
 
@@ -50,7 +58,7 @@ export default class MainMenu extends Component {
 
           <a className="editor-main-menu__link" href="/"><i className="fa fa-arrow-left"></i>Back to home page</a>
           <a className="editor-main-menu__link" href="/apps/new"><i className="fa fa-plus"></i>New App</a>
-          <a className="editor-main-menu__link" href="/apps"><i className="fa fa-rocket"></i>My Apps</a>
+          {this.renderMenuItemMyApps()}
           <a className="editor-main-menu__link" href="/apps/picks"><i className="fa fa-star"></i>Staff picks</a>
           <a className="editor-main-menu__link" href="/about"><i className="fa fa-info"></i>About</a>
 
