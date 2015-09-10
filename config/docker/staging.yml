@@ -44,3 +44,13 @@ grack:
     - /home/app/rails/rnplay_staging:/rails
   links:
     - postgres
+
+packager:
+  restart: always
+  image: "packager:0.11.0-rc"
+  env_file: ../../.env.staging
+  environment:
+    VIRTUAL_HOST: packager-staging.rnplay.org
+  volumes:
+    - /home/app/rails_staging/rnplay/app_js:/app/js
+
