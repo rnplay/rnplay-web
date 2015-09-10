@@ -27,6 +27,7 @@ export default class EditorHeader extends Component {
 
   onUpdateName = (e) => {
     e.preventDefault();
+    console.log('updating name');
     maybeCallMethod(this.props, 'onUpdateName', e.target.value);
   }
 
@@ -156,7 +157,7 @@ export default class EditorHeader extends Component {
         <AppName
           isDisabled={disabled}
           appName={this.getAppName()}
-          onChange={this.onUpdateName.bind(this)}
+          onUpdateName={this.onUpdateName.bind(this)}
           creator={creator} />
 
         <div className="editor-header__actions">
