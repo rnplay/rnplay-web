@@ -1,0 +1,57 @@
+.navbar {
+  border: 0;
+  border-radius: 0;
+}
+
+.navbar ul .dropdown {
+  margin-top: 4px;
+}
+
+.navbar ul .dropdown.open a {
+  background-color: transparent !important;
+}
+
+.navbar-default {
+  .navbar-brand {
+    color: $color-purple;
+    font-size: 2.1rem;
+    line-height: $navbar-height;
+    padding: 0 16px;
+  }
+
+  .navbar-brand:hover,
+  .navbar-brand:focus {
+    color: $color-purple-light;
+  }
+
+  .nav > li {
+    line-height: $navbar-height;
+  }
+
+  .navbar-nav > li > a {
+    color: $color-purple;
+    font-size: 100%;
+    font-weight: bold;
+    line-height: $navbar-height;
+    margin: 0 16px;
+    padding: 0;
+    text-transform: uppercase;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $color-purple-light;
+    }
+
+  }
+}
+
+.navbar-logo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: $navbar-height;
+  justify-content: center;
+  margin-top: -4px;
+  width: 32px;
+}

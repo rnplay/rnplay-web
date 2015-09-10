@@ -1,19 +1,43 @@
-<div class="container" style="text-align: center; padding-bottom: 50px;">
-  <h1 style="margin-bottom: 40px">My apps</h1>
-  <ul class="list-unstyled play-list" id="apps">
-  <% if @apps.empty? %>
-    <p>
-      You haven't created any apps yet.
-      <br><br><%= link_to "Make your first app!", new_app_path, class: 'btn btn-info' %>
-    </p>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="title">My Apps <% if @apps.count > 2 %><span>You have total of <%= @apps.count %> apps!</span><% end %></h1>
+  </div>
+</div>
+
+<div class="row">
+
+<% if @apps.empty? %>
+  <div class="app-list__item--empty--wrapper">
+    <div class="app-list__item app-list__item--empty">
+      <section>
+        <img src="/img/react-native-playground-logo-grey.svg" alt="React Native Playground Logo grey">
+        <h3>You haven't created any apps yet.</h3>
+        <%= link_to "Make your first app!", new_app_path, class: 'btn btn-action' %>
+      </section>
+    </div>
+  </div>
+<% else %>
+  <% @apps.each_slice(3) do |apps| %>
+
+      <% apps.each do |app| %>
+        <div class="col-xs-12 col-ms-6 col-md-4 col-lg-3">
+          <div class="app-list__item">
+            <img class="screenshot" src="/screenshots/<%= app.url_token %>.jpg" width="320" height="568"/>
+            <section class="app-list__details--wrapper">
+              <section class="app-list__details">
+                <h3><%= link_to app.name || app.module_name, app_path(app.url_token) %></h3>
+                <p class="text-muted">Updated <%= distance_of_time_in_words_to_now(app.updated_at) %> ago</p>
+                <section class="app-list__actions">
+                  <%= link_to ' Delete', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete fa fa-trash' %>
+                </section>
+                <section class="screenshot--blur" style="background-image: url(/screenshots/<%= app.url_token %>.jpg)"></section>
+              </section>
+            </section>
+          </div>
+        </div>
+      <% end %>
+
   <% end %>
-  <% @apps.each do |f| %>
-    <li>
-      <img src="/screenshots/<%= f.url_token %>.jpg" width="80" style="float: left; margin-right: 10px" />
-      <%= link_to f.name || f.module_name, app_path(f.url_token) %>
-      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
-      <%= link_to 'delete', app_path(f), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete' %>
-    </li>
-  <% end %>
-  </ul>
+<% end %>
+
 </div>

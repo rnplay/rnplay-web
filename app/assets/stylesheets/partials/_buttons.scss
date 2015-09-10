@@ -1,0 +1,26 @@
+.btn {
+  font-size: 1.7rem;
+}
+
+.btn-action {
+  background: $color-purple;
+  border-color: $color-purple;
+  color: #fff;
+  display: block;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $color-purple-light;
+    border-color: $color-purple-light;
+    color: #fff;
+  }
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 13px 25px;
+  font-size: 2rem;
+  line-height: 1.5;
+  border-radius: 5px;
+}

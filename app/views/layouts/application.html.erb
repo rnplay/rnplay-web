@@ -22,13 +22,11 @@
 </head>
 <body class="<%= yield(:body_class) %>">
   <%= react_component 'Header', currentUser: current_user,
-      headerLogoSrc: asset_path('header_logo.png') %>
+      headerLogoSrc: asset_path('react-native-playground-logo.svg') %>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div id="main" class="col-xs-12">
-        <%= yield %>
-      </div>
+  <div class="container">
+    <div id="main">
+      <%= yield %>
     </div>
   </div>
 

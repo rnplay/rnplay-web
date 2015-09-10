@@ -22,13 +22,13 @@
 
 @import "bootstrap-sprockets";
 
-$navbar-default-bg: #fff;
-$navbar-height: 50px;
+$navbar-default-bg: transparent;
+$navbar-height: 64px;
 $navbar-default-brand-color: #aaa;
 $font-family-sans-serif: 'ProximaNovaLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$purple-100: #712FA9;
-$purple-80: #9134BF;
+$color-purple-light: #9134BF;
+$color-purple: #5C069A;
 
 $dropdown-bg: #3B3738;
 $dropdown-link-color: #000;
@@ -36,6 +36,8 @@ $dropdown-header-color: #000;
 $dropdown-link-hover-bg: $dropdown-bg;
 $dropdown-link-active-bg: $dropdown-bg;
 $dropdown-link-active-color: $dropdown-bg;
+
+$grid-gutter-width: 24px;
 
 @import "font-awesome";
 
@@ -88,20 +90,38 @@ $dropdown-link-active-color: $dropdown-bg;
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
 
+// The missing breakpoint
+@import "bootstrap-ms";
 
 // Our stuff
 @import "support_form";
+@import "redesign";
+@import "partials/navigation";
+@import "partials/buttons";
+@import "partials/footer";
+
+body {
+  font-size: 16px;
+  color: #444;
+}
 
 body.welcome-page, body.support-page {
   background: #eee;
 }
 
 a {
-  transition: all 0.2s linear;
+  color: $color-purple;
+  transition: all 0.2s ease-out;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-purple-light;
+  }
 }
 
 p {
-  font-size: 120%;
+  font-size: 16px;
 }
 
 button {
@@ -114,105 +134,7 @@ button {
   flex-grow: 1;
 }
 
-.navbar {
-  background-color: #3B3738;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 1px solid #000;
-  border-radius: 0;
-  left: 0;
-  margin-bottom: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 101;
-}
-
-.navbar ul {
-  margin-top: 5px;
-  padding: 3px;
-}
-
-.navbar ul .dropdown {
-  margin-top: 4px;
-}
-
-.navbar ul .dropdown.open a {
-  background-color: transparent !important;
-}
-
-.navbar ul a {
-  margin-top: 2px;
-  font-size: 100% !important;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ddd !important;
-}
-
-.navbar ul a:hover {
-  color: #fff !important;
-}
-
-.navbar li {
-  margin-left: 5px;
-}
-
-.navbar #links {
-  margin-left: 30px;
-  margin-top: 5px;
-}
-
-.container-fluid {
-  padding: 0px;
-}
-
-.navbar-brand {
-  padding: 16px;
-  font-size: 2.1rem !important;
-}
-
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #fff;
-}
-
-.navbar-logo {
-  width: 32px;
-  margin-top: 12px;
-  margin-left: 17px;
-}
-
-.btn {
-  font-size: 1.7rem;
-  letter-spacing: 0.08rem;
-}
-
-.btn-info {
-  background: $purple-100;
-  border-color: $purple-100;
-}
-
-.btn-info:hover,
-.btn-info:active,
-.btn-info:focus {
-  background: $purple-80;
-  border-color: $purple-80;
-}
-
-.btn-fork-app {
-  margin-top: 20px;
-}
-
-.btn-lg,
-.btn-group-lg > .btn {
-  padding: 13px 25px;
-  font-size: 2rem;
-  line-height: 1.5;
-  border-radius: 5px;
-}
-
-
+/*
 @media (max-width: 797px) {
   body {
     padding-left: 0px;
@@ -228,7 +150,7 @@ button {
 #main {
   margin-top: 55px;
 }
-
+*/
 .form-app {
   padding-left: 15px;
 }
@@ -254,15 +176,16 @@ button {
   padding: 7px 15px 8px;
 }
 .form-control:hover {
-  border-color: lighten($purple-100, 30%);
+  border-color: lighten($color-purple-light, 30%);
   box-shadow: 0 0 4px rgba(150, 40, 180, 0.3);
 }
 .form-control:active,
 .form-control:focus {
-  border-color: $purple-100;
+  border-color: $color-purple-light;
   box-shadow: 0 0 5px rgba(150, 40, 180, 0.5);
 }
 
+/*
 #blurb {
   font-size: 200%;
   margin: 0 auto;
@@ -442,4 +365,4 @@ button {
       padding: 0;
     }
   }
-}
+}*/
