@@ -12,6 +12,11 @@
 
   button { box-shadow: 1px 0 0 rgba(0,0,0,.28); }
 
+  &__wrapper {
+    position: relative;
+    z-index: 100;
+  }
+
   &--open { display: block; }
 
   &__header {

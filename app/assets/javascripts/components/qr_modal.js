@@ -7,7 +7,7 @@ export default class QrModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        qrCodeUrl: null
+      qrCodeUrl: null
     };
   }
 
@@ -28,8 +28,8 @@ export default class QrModal extends Component {
   renderHeader() {
     return (
       <div className="modal__header">
-          <p>Scan this with our <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">iOS app</a>!</p>
-          <img src="/img/app-store-badge.svg" width="135" height="40" />
+        <p>Scan this with our <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">iOS app</a>!</p>
+        <img src="/img/app-store-badge.svg" width="135" height="40" />
       </div>
     );
   }
