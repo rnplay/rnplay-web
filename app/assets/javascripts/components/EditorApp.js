@@ -50,6 +50,18 @@ export default class EditorApp extends Component {
     this.simulatorIframe.contentWindow.postMessage('heartbeat', '*');
   }
 
+  saveScreenshot = () => {
+    this.simulatorIframe.contentWindow.postMessage('getScreenshot', '*');
+  }
+
+  openDevMenu = () => {
+    this.simulatorIframe.contentWindow.postMessage('shakeDevice', '*');
+  }
+
+  rotate = (direction) => {
+    this.simulatorIframe.contentWindow.postMessage(`rotate${direction}`, '*');
+  }
+
   // Keep track of simulator lifecycle
   handleSimulatorEvent = (e) => {
 
@@ -62,7 +74,7 @@ export default class EditorApp extends Component {
       this.simulatorActive = false;
     } else if (data == 'firstFrameReceived') {
       setTimeout(() => {
-        this.simulatorIframe.contentWindow.postMessage('getScreenshot', '*');
+        this.saveScreenshot();
       }.bind(this), 5000)
     } else if (data.type == 'screenshot') {
       dispatch(saveScreenshot(this.props.app.id, data.data));
@@ -73,6 +85,11 @@ export default class EditorApp extends Component {
   belongsToCurrentUser = () => {
     const { currentUser, app : { creatorId} } = this.props;
     return currentUser && currentUser.id === creatorId;
+  }
+
+  currentUserIsAdmin = () => {
+    const { currentUser } = this.props;
+    return currentUser && currentUser.admin;
   }
 
   onUpdateName = (name) => {
@@ -155,9 +172,13 @@ export default class EditorApp extends Component {
       onChangeFile,
       onUpdateBody,
       belongsToCurrentUser,
+      currentUserIsAdmin,
       onPick,
       onSave,
-      onFork
+      onFork,
+      saveScreenshot,
+      rotate,
+      openDevMenu
     } = this;
 
     const { appetizeUrl } = app;
@@ -197,6 +218,10 @@ export default class EditorApp extends Component {
       builds,
       buildId,
       onUpdateBuild,
+      currentUserIsAdmin,
+      saveScreenshot,
+      openDevMenu,
+      rotate
     };
 
     const classes = classNames({

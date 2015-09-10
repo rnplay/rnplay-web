@@ -29,7 +29,7 @@ class App < ActiveRecord::Base
   end
 
   def bundle_path
-    "/#{Rails.env.development? ? 'app_js' : 'js'}/#{url_token}/index.ios.bundle"
+    "/#{Rails.env.development? ? '' : 'js/'}#{url_token}/index.ios.bundle"
   end
 
   def set_module_name

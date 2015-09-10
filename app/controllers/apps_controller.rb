@@ -166,9 +166,8 @@ class AppsController < ApplicationController
       if app_params[:screenshot]
         image_data = Base64::decode64 app_params[:screenshot].split(",").last
         File.open("#{Rails.root}/public/screenshots/#{@app.url_token}.jpg", "wb") { |f| f.write(image_data) }
-        app_params.delete(:screenshot)
       end
-      @app.update(app_params)
+      @app.update(app_params.except(:screenshot))
       logger.info @app.errors.inspect
       render json: {success: true}
     else

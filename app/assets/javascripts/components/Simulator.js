@@ -44,6 +44,7 @@ export default class Simulator extends Component {
     )
   }
 
+
   renderQRLink = () => {
     return (
       <a onClick={this.showQRModal} className="editor-button">
@@ -52,6 +53,19 @@ export default class Simulator extends Component {
     )
   }
 
+  renderControls() {
+    if (this.props.currentUserIsAdmin()) {
+      return (
+        <div className="editor-simulator-container__controls">
+          <a onClick={this.props.saveScreenshot}>Save screenshot</a>
+          <a onClick={this.props.openDevMenu}>Dev menu</a>
+          <a onClick={() => this.props.rotate('Left')}>Rotate left</a>
+        </div>
+      )
+    } else {
+      return null
+    }
+  }
   render() {
     const {
       useDarkTheme,
@@ -81,6 +95,8 @@ export default class Simulator extends Component {
           {this.renderQRLink()}
         </div>
 
+        {this.renderControls()}
+
         <div className={classes}>
           <iframe
             src={this.appetizeUrl()}
@@ -90,6 +106,7 @@ export default class Simulator extends Component {
             scrolling="no"
           />
         </div>
+
         {this.renderQRModal()}
 
       </div>

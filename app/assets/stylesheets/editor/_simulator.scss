@@ -12,7 +12,7 @@ $simulator-width: 320px;
 
     &__text { padding-right: 5px; }
   }
-  
+
   /* Simulator iframe has some weird styles,
      hence the padding left. */
   &__simulator {
@@ -28,5 +28,15 @@ $simulator-width: 320px;
   }
 
   &__button-container { padding-top: 20px; }
-}
 
+  &__controls {
+    margin-top: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 80%;
+    a {
+      display: block
+    }
+  }
+
+}

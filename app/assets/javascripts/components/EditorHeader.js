@@ -87,7 +87,7 @@ export default class EditorHeader extends Component {
   }
 
   renderGitButton() {
-    if ( ! this.belongsToCurrentUser()) {
+    if ( ! this.props.belongsToCurrentUser()) {
       return (
         <button
           onClick={this.showGitModal}
