@@ -97,6 +97,9 @@ class AppsController < ApplicationController
     @page_title = @app.name.presence || "Unnamed App"
     @app.increment_view_count!
 
+    creator = User.find(@app.creator_id)
+    @creator = creator.name.presence || creator.username.presence || "anonymous"
+
     respond_to do |format|
       format.html
     end

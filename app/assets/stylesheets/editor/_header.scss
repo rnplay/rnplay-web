@@ -50,21 +50,35 @@
     i { padding: 0; }
   }
 
-  &__name-input {
-    border: 0;
-    padding: 0 17px;
-    line-height: 100%;
-    font-size: 18px;
-    margin: 0;
-    background: transparent;
-    height: 30px;
-    flex: 1;
+  &__name {
     
-    &:hover { color: $editor-color-darkgreen; }
-    &:disabled { color: inherit; }
-    &:focus {
-      outline: none;
-      color: $editor-color-darkgreen;
+    &--text {
+      flex: 1;
+      font-size: 18px;
+      padding: 0 17px;
+    }
+
+    &--creator {
+      font-size: 0.70em;
+      color: lighten(#333, 40%);
+    }
+
+    &--input {
+      background: transparent;
+      border: 0;
+      flex: 1;
+      font-size: 18px;
+      height: 30px;
+      line-height: 100%;
+      margin: 0;
+      padding: 0 17px;
+
+      &:hover { color: $editor-color-darkgreen; }
+      &:disabled { color: inherit; }
+      &:focus {
+        outline: none;
+        color: $editor-color-darkgreen;
+      }
     }
   }
 }

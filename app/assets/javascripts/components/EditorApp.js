@@ -160,16 +160,17 @@ export default class EditorApp extends Component {
       appetizeUrl;
 
     const editorHeaderProps = {
-      name,
-      useDarkTheme,
       app,
       appIsPicked,
-      currentUser,
       belongsToCurrentUser,
-      onUpdateName,
+      currentUser,
+      creator: app.creator,
+      name,
+      onFork,
       onPick,
       onSave,
-      onFork
+      onUpdateName,
+      useDarkTheme,
     };
 
     const editorProps = {

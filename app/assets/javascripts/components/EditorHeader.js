@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
+import AppName from './AppName';
 import MainMenu from './MainMenu';
 import GitModal from './git_modal';
 
@@ -130,6 +131,8 @@ export default class EditorHeader extends Component {
 
   render() {
     const disabled = ! this.props.belongsToCurrentUser();
+    const { creator } = this.props;
+
     const classes = classNames({
       'editor-header__bar': true,
       'editor-header': true,
@@ -150,13 +153,11 @@ export default class EditorHeader extends Component {
           <i className="fa fa-bars"></i>
         </button>
 
-        <input
-          type="text"
-          disabled={disabled}
-          placeholder="Give this app a title"
-          defaultValue={this.getAppName()}
-          onChange={this.onUpdateName}
-          className="editor-header__name-input"/>
+        <AppName
+          isDisabled={disabled}
+          appName={this.getAppName()}
+          onChange={this.onUpdateName.bind(this)}
+          creator={creator} />
 
         <div className="editor-header__actions">
           {this.renderForkButton()}
