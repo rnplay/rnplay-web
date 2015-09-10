@@ -9,6 +9,7 @@
   <% end %>
   <% @apps.each do |f| %>
     <li>
+      <img src="/screenshots/<%= f.url_token %>.jpg" width="80" style="float: left; margin-right: 10px" />
       <%= link_to f.name || f.module_name, app_path(f.url_token) %>
       <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
       <%= link_to 'delete', app_path(f), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete' %>
