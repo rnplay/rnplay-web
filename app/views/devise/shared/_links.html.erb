@@ -21,7 +21,7 @@
 
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
-      <li><%= link_to image_tag("sign-in-with-#{provider.to_s}-link.png"), omniauth_authorize_path(resource_name, provider) %></li>
+      <li><%= link_to image_tag("Octocat.png", width: '40')+" Sign in with Github", omniauth_authorize_path(resource_name, provider) %></li>
     <% end -%>
   <% end -%>
 </div>
