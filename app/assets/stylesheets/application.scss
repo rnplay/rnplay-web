@@ -14,7 +14,6 @@
  *= require solarized
  *= require midnight
  *= require dialog
- *= require font-proxima-nova
  *= require devise_bootstrap_views
  *= require editor
  *= require_self
@@ -25,7 +24,7 @@
 $navbar-default-bg: transparent;
 $navbar-height: 64px;
 $navbar-default-brand-color: #aaa;
-$font-family-sans-serif: 'ProximaNovaLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 
 $color-purple-light: #9134BF;
 $color-purple: #5C069A;

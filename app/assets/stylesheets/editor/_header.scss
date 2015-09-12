@@ -28,7 +28,6 @@
   &__actions {
     display: flex;
     justify-content: flex-end;
-    font-weight: bolder;
 
     button:first-child { border-left: 1px solid $editor-border-color; }
     button:last-child { border-right: 0; }
