@@ -77,7 +77,6 @@ var Header = React.createClass({
   }
 });
 
-
 if (typeof module !== 'undefined') {
   module.exports = Header;
 }

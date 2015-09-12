@@ -1,2 +1,2 @@
-//= require ./components/Header
+//= require ./components/header
 //= require ./components/footer
