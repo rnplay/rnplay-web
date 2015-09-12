@@ -29,12 +29,11 @@ $font-family-sans-serif: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', Arial
 $color-purple-light: #9134BF;
 $color-purple: #5C069A;
 
-$dropdown-bg: #3B3738;
-$dropdown-link-color: #000;
-$dropdown-header-color: #000;
-$dropdown-link-hover-bg: $dropdown-bg;
-$dropdown-link-active-bg: $dropdown-bg;
-$dropdown-link-active-color: $dropdown-bg;
+$dropdown-bg: #fff;
+$dropdown-link-color: #333;
+$dropdown-link-hover-bg: #eee;
+$dropdown-link-active-bg: $dropdown-link-hover-bg;
+$dropdown-link-active-color: #333;
 
 $grid-gutter-width: 24px;
 

@@ -19,7 +19,7 @@ var Header = React.createClass({
     if (this.props.currentUser) {
       return (
         <div>
-          <div className="dropdown" style={{display: 'inline-block'}}>
+          <div className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="settings-menu"><span className="glyphicon glyphicon-cog"></span></a>
             <ul className="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-menu">
               <li role="presentation"><a href="/users/edit">Profile</a></li>

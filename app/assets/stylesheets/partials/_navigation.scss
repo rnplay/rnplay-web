@@ -3,12 +3,26 @@
   border-radius: 0;
 }
 
-.navbar ul .dropdown {
-  margin-top: 4px;
-}
+.navbar ul {
+  .dropdown {
+    line-height: $navbar-height;
 
-.navbar ul .dropdown.open a {
-  background-color: transparent !important;
+    &-toggle {
+      background-color: transparent !important;
+    }
+
+    &-menu {
+      border-radius: 0 0 3px 3px;
+      border: 0;
+      border-top: 2px solid hsl(280, 57%, 48%);
+      box-shadow: 0 1px 1px 1px rgba(0,0,0,.09);
+      margin-top: -18px;
+
+      a:hover {
+        background: #eee;
+      }
+    }
+  }
 }
 
 .navbar-default {
