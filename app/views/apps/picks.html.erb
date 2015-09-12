@@ -2,20 +2,6 @@
   <h1 style="margin-bottom: 40px">Staff picks</h1>
   <p style="margin-bottom: 30px">Try out some of these exemplary React Native sample apps.</p>
 
-  <% @apps.each_slice(3) do |apps| %>
-    <div class="row">
-      <% apps.each do |app| %>
-        <div class="col-md-4">
-          <img class="screenshot" src="/screenshots/<%= app.url_token %>.jpg" width="320" height="568"/>
-          <%= link_to app.name || app.module_name, app_path(app.url_token) %>
-          <p>Updated <%= distance_of_time_in_words(app.updated_at, Time.now) %> ago</p>
-          <% if app.creator %>
-            <%= link_to app.try(:creator).try(:username) || 'anonymous', user_apps_path(app.creator) %>
-            <%= image_tag(app.creator.avatar.url, class: "avatar") %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-
+  <%= render partial: 'apps', locals: {apps: @apps} %>
+  
 </div>

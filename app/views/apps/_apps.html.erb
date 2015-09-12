@@ -1,0 +1,23 @@
+<% apps.each_slice(3) do |app_group| %>
+
+    <% app_group.each do |app| %>
+      <div class="col-xs-12 col-ms-6 col-md-4 col-lg-3">
+        <div class="app-list__item">
+          <%= screenshot_for(app) %>
+          <section class="app-list__details--wrapper">
+            <section class="app-list__details">
+              <h3><%= link_to app.name || app.module_name, app_path(app.url_token) %></h3>
+              <p class="text-muted">Updated <%= distance_of_time_in_words_to_now(app.updated_at) %> ago</p>
+              <% if params[:action] == 'index' %>
+              <section class="app-list__actions">
+                <%= link_to ' Delete', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete fa fa-trash' %>
+              </section>
+              <% end %>
+              <section class="screenshot--blur" style="background-image: url(<%= screenshot_path_for(app) %>)"></section>
+            </section>
+          </section>
+        </div>
+      </div>
+    <% end %>
+
+<% end %>
