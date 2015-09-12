@@ -4,11 +4,5 @@
   <% if @user.apps.empty? %>
   <p>This user hasn't created any public apps.</p>
   <% end %>
-  <% @user.apps.each do |f| %>
-    <li>
-      <%= link_to f.name || f.module_name, user_app_path(id: f.url_token) %>
-      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
-    </li>
-  <% end %>
-  </ul>
+  <%= render partial: 'apps', locals: {apps: @user.apps} %>
 </div>
