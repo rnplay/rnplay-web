@@ -122,15 +122,11 @@ body {
   }
 
   &__actions {
-
+    a {
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
   }
 }
-
-// @media screen and (max-width: $screen-xs-max) {
-//   .container {
-//     padding: 0 8px;
-//   }
-//   .col-xs-6, .col-xs-12 {
-//     padding: 0 8px;
-//   }
-// }
