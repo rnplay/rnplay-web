@@ -8,6 +8,14 @@ body {
   margin-right: 0;
 }
 
+.container {
+  &--picks { text-align: center;
+    header {
+      margin-bottom: 32px;
+    }
+  }
+}
+
 .header { max-width: $screen-lg-min; }
 
 .title {
