@@ -41,7 +41,7 @@ var Header = React.createClass({
 
   render: function() {
     return (
-      <div className="container">
+      <div className="container-fluid header">
         <div className="row">
           <div className="col-xs-12">
             <nav className="navbar navbar-default">

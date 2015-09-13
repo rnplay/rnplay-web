@@ -8,6 +8,10 @@ body {
   margin-right: 0;
 }
 
+.header {
+  max-width: $screen-lg-min;
+}
+
 .title {
   border-bottom: 1px solid #ddd;
   padding-bottom: 16px;
