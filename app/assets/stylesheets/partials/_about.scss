@@ -1,0 +1,29 @@
+.container {
+  &--about {
+    .row {
+      margin-bottom: 32px;
+      line-height: 1.642em;
+    }
+  }
+}
+
+.team {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 32px;
+}
+
+.team-col {
+  width: 224px;
+  padding: 0 24px;
+  margin: 32px 0;
+
+  img { border-radius: 100%; }
+
+  
+  &--wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
