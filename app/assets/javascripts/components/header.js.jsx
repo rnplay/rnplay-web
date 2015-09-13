@@ -46,19 +46,19 @@ var Header = React.createClass({
           <div className="col-xs-12">
             <nav className="navbar navbar-default">
               <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-main">
                   <span className="sr-only">Toggle navigation</span>
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <a href="/" className="pull-left navbar-logo">
+                <a href="/" className="pull-left navbar-logo hidden-mobile">
                   <img src={this.props.headerLogoSrc} className="img-responsive" width="24" />
                 </a>
                 <a className="navbar-brand" href="/">React Native Playground</a>
               </div>
 
-              <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <div className="collapse navbar-collapse" id="navbar-collapse-main">
                 <ul className="nav navbar-nav" id="links">
                   <li><a href="/apps/new">New App</a></li>
                   {this.renderMyApps()}

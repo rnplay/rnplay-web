@@ -8,9 +8,7 @@ body {
   margin-right: 0;
 }
 
-.header {
-  max-width: $screen-lg-min;
-}
+.header { max-width: $screen-lg-min; }
 
 .title {
   border-bottom: 1px solid #ddd;
@@ -185,5 +183,13 @@ body {
     &--picks {
       .text-muted { padding: 0; }
     }
+  }
+}
+
+.hidden-mobile {
+  display: none !important;
+
+  @media (min-width: $collapse-nav-half) {
+    display: flex !important;
   }
 }

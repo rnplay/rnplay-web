@@ -3,6 +3,10 @@
   border-radius: 0;
 }
 
+.navbar-toggle {
+  margin-right: 0;
+}
+
 .navbar ul {
   .dropdown {
     line-height: $navbar-height;
@@ -30,7 +34,11 @@
     color: $color-purple;
     font-size: 2.1rem;
     line-height: $navbar-height;
-    padding: 0 16px;
+    padding: 0;
+
+    @media (min-width: $collapse-nav-half) {
+      padding: 0 16px;
+    }
   }
 
   .navbar-brand:hover,
