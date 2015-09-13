@@ -65,6 +65,17 @@ body {
       margin-top: 0;
     }
 
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: hsl(289, 100%, 73%);
+        text-decoration: none;
+      }
+    }
+
     .screenshot {
       border-radius: 3px;
       height: auto;
@@ -156,7 +167,7 @@ body {
       &:hover,
       &:active,
       &:focus {
-        color: #fff;
+        color: lighten($color-purple, 20%);
         background: #000;
         text-decoration: none;
       }
@@ -169,6 +180,10 @@ body {
       display: inline-block;
       line-height: 24px;
       padding-left: 16px;
+    }
+
+    &--picks {
+      .text-muted { padding: 0; }
     }
   }
 }

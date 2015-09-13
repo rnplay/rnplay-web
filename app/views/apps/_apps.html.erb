@@ -11,13 +11,13 @@
                   <h3><%= link_to app.name || app.module_name, app_path(app.url_token) %></h3>
                   <%= image_tag(app.creator.avatar.url, class: "avatar") %>
                   <span><%= link_to app.try(:creator).try(:username) || 'anonymous', user_apps_path(app.creator) %></span>
-                  <% if params[:action] == 'index' %>
                 </div>
-                <div class="app-list__actions">
+                <div class="app-list__actions <% if params[:action] == 'picks' %>app-list__actions--picks<% end %>">
                   <span class="text-muted">Updated <%= time_ago_in_words(app.updated_at) %> ago</span>
-                  <%= link_to ' Delete', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, class: 'app-list__actions--delete fa fa-trash' %>
+                  <% if params[:action] == 'index' %>
+                    <%= link_to ' Delete', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, class: 'app-list__actions--delete fa fa-trash' %>
+                  <% end %>
                 </div>
-                <% end %>
                 <section class="screenshot--blur" style="background-image: url(<%= screenshot_path_for(app) %>)"></section>
               </section>
             </section>
