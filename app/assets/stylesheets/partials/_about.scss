@@ -4,6 +4,12 @@
       margin-bottom: 32px;
       line-height: 1.642em;
     }
+
+    .intro {
+      font-size: 1.2em;
+      line-height: 1.2em*1.4;
+      color: lighten(#333, 15%);
+    }
   }
 }
 
@@ -19,7 +25,6 @@
   margin: 32px 0;
 
   img { border-radius: 100%; }
-
   
   &--wrapper {
     display: flex;

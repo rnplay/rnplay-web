@@ -1,14 +1,14 @@
 <div class="container container--about">
   
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h2>What is this site?</h2>
-      <p>The Playground is a place to easily test and share React Native applications. We host an in-browser code editor, an iOS simulator, and React Native packager instances to quickly test changes to your apps.</p>
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2 class="title">What is this site?</h2>
+      <p class="intro">The Playground is a place to easily test and share React Native applications. We host an in-browser code editor, an iOS simulator, and React Native packager instances to quickly test changes to your apps.</p>
     </div>
   </div>
   
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>Why did you build it?</h2>
       <p>To demonstrate how powerful React Native is as a mobile development platform. Now, we're an <a href="#team">open source team</a> focused on helping the React Native community, by <a href="https://facebook.github.io/react-native/docs/alertios.html#examples">integrating with React Native documentation</a>,
          serving as a <a href="https://github.com/facebook/react-native/search?q=rnplay.org&type=Issues&utf8=%E2%9C%93">bug tracking tool</a>, and hosting <a href="/apps/picks">interesting sample applications</a>.</p>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>What can I do with this site?</h2>
       <p>You can:</p>
       <ul>
@@ -29,42 +29,42 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>Is your code open source?</h2>
       <p>Currently, all code related to this site is <a href="http://github.com/rnplay">available on Github</a>. Please help us out by submitting issues or pull requests!</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>Which React Native versions do you support?</h2>
       <p><%= Build.all.collect(&:name).to_sentence %>.</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>What can I do with this site?</h2>
       <p>Build and test React Native applications with just a browser, and optionally an iOS device! <a href="https://facebook.github.io/react-native/">Learn more about React Native</a>.</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>How can I build an app and test it on the site?</h2>
       <p>Sign up and start playing right away with our in-browser editor and simulator. Once you're ready to test on a device, download the iOS app, then use the 'Run on Device' link and scan the QR code.</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>How do I 'exit' an app running inside the iOS app?</h2>
       <p>Long-press the screen with two fingers. After a few seconds, the base iOS app should appear.</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>How does this site work?</h2>
       <p>Apps are all hosted in their own git repositories on our servers. We run React Native packagers which serve transformed javascript to our custom iOS app, which is compiled with
         some <a href="https://github.com/rnplay/rnplay-ios/blob/master/package.json#L10-L25">community native modules</a>, available for use in your app.</p>
@@ -72,7 +72,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>How do I use git to push my app to the site?</h2>
       <p>First, install the command line client: <em>npm install -g rnplay-cli</em></p>
       <p>Sign up to the site, and <a href="https://rnplay.org/users/edit">grab your authentication token in your profile page</a>.</p>
@@ -85,7 +85,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>What limitations exist for testing apps here?</h2>
       <p>You may only use native modules from React Native itself, or those included with our iOS app.</p>
       <p>To prevent conflicts between react-native versions, git repos must not have git repositories as npm sources.</p>
@@ -96,9 +96,9 @@
   </div>
 
   <div class="row team">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
   
-      <h1>Who built this?</h1>
+      <h1 class="title">Who built this?</h1>
 
       <div class="team-col--wrapper">
 

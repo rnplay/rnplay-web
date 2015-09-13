@@ -15,6 +15,23 @@
     border-color: $color-purple-light;
     color: #fff;
   }
+
+  &--inline {
+    display: inline-block;
+    margin-right: 8px;
+  }
+}
+
+.btn-login {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: hsl(214, 50%, 50%);
+
+  &:hover {
+    background: #f5f5f5;
+    border-color: #afafaf;
+  }
 }
 
 .btn-lg,
@@ -24,3 +41,5 @@
   line-height: 1.5;
   border-radius: 5px;
 }
+
+.omniauth { margin: 16px 0; }
