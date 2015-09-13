@@ -1,23 +1,21 @@
 <div class="row">
   <div class="col-xs-12">
-    <h1 class="title">My Apps <% if @apps.count > 2 %><span>You have total of <%= @apps.count %> apps!</span><% end %></h1>
+    <h1 class="title">My Apps <% if @apps.count > 2 %><span class="title--sub">You have total of <%= @apps.count %> apps!</span><% end %></h1>
   </div>
 </div>
 
 <div class="row">
-
-<% if @apps.empty? %>
-  <div class="app-list__item--empty--wrapper">
-    <div class="app-list__item app-list__item--empty">
-      <section>
-        <img src="/img/react-native-playground-logo-grey.svg" alt="React Native Playground Logo grey">
-        <h3>You haven't created any apps yet.</h3>
-        <%= link_to "Make your first app!", new_app_path, class: 'btn btn-action' %>
-      </section>
+  <% if @apps.empty? %>
+    <div class="app-list__item--empty--wrapper">
+      <div class="app-list__item app-list__item--empty">
+        <section>
+          <img src="/img/react-native-playground-logo-grey.svg" alt="React Native Playground Logo grey">
+          <h3>You haven't created any apps yet.</h3>
+          <%= link_to "Make your first app!", new_app_path, class: 'btn btn-action' %>
+        </section>
+      </div>
     </div>
-  </div>
-<% else %>
-  <%= render partial: 'apps', locals: {apps: @apps} %>
-<% end %>
-
+  <% else %>
+    <%= render partial: 'apps', locals: {apps: @apps} %>
+  <% end %>
 </div>

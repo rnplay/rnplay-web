@@ -3,13 +3,18 @@ body {
   padding-bottom: 80px;
 }
 
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .title {
   border-bottom: 1px solid #ddd;
   padding-bottom: 16px;
   margin-bottom: 24px;
 
-  span {
-    color: #888;
+  &--sub {
+    color: #8F8F8F;
     font-size: 0.5em;
 
     @media (max-width: 440px) {
@@ -21,16 +26,25 @@ body {
 
 .avatar {
   background: #ddd;
-  height: 40px;
-  width: 40px;
+  height: 24px;
+  width: 24px;
   border-radius: 20%;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
-.delete {
-  border: 1px solid #fff;
-  padding: 4px 8px;
-  border-radius: 3px;
+.apps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.app-list--wrapper {
+  max-width: 100%;
+  margin: 0 12px;
+
+  @media (min-width: 270px) {
+    max-width: 256px;
+  }
 }
 
 .app-list {
@@ -40,8 +54,10 @@ body {
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.09);
     margin-bottom: 24px;
     position: relative;
+    color: #C4C4C4;
 
     h3 {
+      font-size: 20px;
       margin-top: 0;
     }
 
@@ -102,31 +118,53 @@ body {
         margin: 8px;
       }
     }
-
-    &--wrapper { position: relative; }
   }
 
-  &__details {
+  &__info {
     background: linear-gradient(rgba(0,0,0,.5), #000);
     border-radius: 0 0 3px 3px;
     bottom: 0;
     overflow: hidden;
-    padding: 16px;
     position: absolute;
     width: 100%;
     z-index: 11;
-
-    a {
-      color: #fff;
-    }
   }
 
+  &__details { padding: 16px; }
+
   &__actions {
-    a {
-      &:hover {
+    height: 24px;
+    border-top: 1px solid rgba(255,255,255,.25);
+    background-color: hsla(0, 0%, 0%, 0.31);
+
+    &--delete {
+      float: right;
+      display: inline-block;
+      line-height: 24px;
+      border: 0;
+      border-left: 1px solid rgba(255,255,255,.25);
+      border-radius: 0;
+      padding: 0 8px;
+      border-right: 1px #fff;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+
+      &:hover,
+      &:active,
+      &:focus {
         color: #fff;
+        background: #000;
         text-decoration: none;
       }
+    }
+
+    .text-muted {
+      position: relative;
+      top: -2px;
+      font-size: 11px;
+      display: inline-block;
+      line-height: 24px;
+      padding-left: 16px;
     }
   }
 }
