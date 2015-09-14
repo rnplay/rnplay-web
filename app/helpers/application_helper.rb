@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def screenshot_path_for(app)
-    File.exists?("#{Rails.root}/public/screenshots/#{app.url_token}.jpg") ? "/screenshots/#{app.url_token}.jpg" : asset_path("screenshot-placeholder.jpg")
+    File.exists?("#{Rails.root}/public/screenshots/#{app.url_token}.jpg") ? "/screenshots/#{app.url_token}.jpg" : asset_path("screenshot-placeholder.svg")
   end
 
 end
