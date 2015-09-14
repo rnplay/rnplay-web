@@ -56,7 +56,6 @@ export default class MainMenu extends Component {
             <span className="editor-main-menu__title">React Native Playground</span>
           </div>
 
-          <a className="editor-main-menu__link" href="/"><i className="fa fa-arrow-left"></i>Back to home page</a>
           <a className="editor-main-menu__link" href="/apps/new"><i className="fa fa-plus"></i>New App</a>
           {this.renderMenuItemMyApps()}
           <a className="editor-main-menu__link" href="/apps/picks"><i className="fa fa-star"></i>Staff picks</a>
