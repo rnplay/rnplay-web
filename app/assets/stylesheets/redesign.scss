@@ -21,12 +21,10 @@ body {
   &--picks {
     text-align: center;
 
-    header {
-      margin-bottom: 32px;
-    }
+    header { margin-bottom: 32px; }
   }
 
-  &--settings {
+  &--narrow {
     max-width: 600px;
     margin: 0 auto;
   }

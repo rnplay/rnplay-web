@@ -1,27 +1,29 @@
-<%= bootstrap_devise_error_messages! %>
-<div class="form">
-  <h2 class="title">Sign Up
-  <%- if controller_name != 'sessions' %>
-    <span class="title--sub">Already have an account? <%= link_to "Sign in!", new_session_path(resource_name) %></span>
-  <% end -%>
-  </h2>
+<div class="container container--narrow">
+  <%= bootstrap_devise_error_messages! %>
+  <div class="form">
+    <h2 class="title">Sign Up
+    <%- if controller_name != 'sessions' %>
+      <span class="title--sub">Already have an account? <%= link_to "Sign in!", new_session_path(resource_name) %></span>
+    <% end -%>
+    </h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
-    </div>
-    <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-action" %>
-  <% end %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+      <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-action" %>
+    <% end %>
 
-  <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
 
+  </div>
 </div>
