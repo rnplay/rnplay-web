@@ -37,7 +37,10 @@ $dropdown-link-active-color: #333;
 
 $grid-gutter-width: 24px;
 
-$collapse-nav-half: 400px;
+// Navigation collapse point
+$grid-float-breakpoint: 785px;
+
+$collapse-nav-logo: 400px;
 
 @import "font-awesome";
 

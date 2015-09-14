@@ -207,7 +207,7 @@ body {
 .hidden-mobile {
   display: none !important;
 
-  @media (min-width: $collapse-nav-half) {
+  @media (min-width: $collapse-nav-logo) {
     display: flex !important;
   }
 }
