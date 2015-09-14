@@ -1,8 +1,9 @@
-<div class="container" style="text-align: center; padding-bottom: 50px;">
-  <h1 style="margin-bottom: 40px"><%= @user.name %>'s Apps</h1>
+<div class="container container--picks">
+  <h1 class="title"><%= @user.name.presence || @user.username.presence %>'s Apps</h1>
   <ul class="list-unstyled" id="apps">
   <% if @user.apps.empty? %>
-  <p>This user hasn't created any public apps.</p>
+  	<p>This user hasn't created any public apps.</p>
+  <% else %>
+  	<%= render partial: 'apps', locals: {apps: @user.apps} %>
   <% end %>
-  <%= render partial: 'apps', locals: {apps: @user.apps} %>
 </div>
