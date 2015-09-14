@@ -1,3 +1,5 @@
+* { box-sizing: border-box; }
+
 body {
   background: #f5f5f5;
   padding-bottom: 80px;
@@ -8,8 +10,17 @@ body {
   margin-right: 0;
 }
 
+.wrapper {
+  &--main {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
 .container {
-  &--picks { text-align: center;
+  &--picks {
+    text-align: center;
+
     header {
       margin-bottom: 32px;
     }

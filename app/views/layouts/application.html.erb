@@ -25,10 +25,8 @@
   <%= react_component 'Header', currentUser: current_user,
       headerLogoSrc: asset_path('react-native-playground-logo.svg') %>
 
-  <div class="container">
-    <div id="main">
-      <%= yield %>
-    </div>
+  <div class="wrapper--main">
+    <%= yield %>
   </div>
 
   <%= react_component 'Footer' %>
