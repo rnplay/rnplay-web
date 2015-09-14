@@ -9,6 +9,7 @@ module Rnplay
     config.active_record.raise_in_transactional_callbacks = true
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { :api_token => ENV['POSTMARK_KEY'] || 'POSTMARK_API_TEST' }
+    config.action_mailer.default_url_options = { :host => 'rnplay.org' }  
     config.active_job.queue_adapter = :sidekiq
     config.react.addons = true
     # If we do not use this then render json: .. will escape & in urls and break
