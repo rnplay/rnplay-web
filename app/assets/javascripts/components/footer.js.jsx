@@ -8,7 +8,6 @@ var Footer = React.createClass({
           <div className="col-xs-12">
             <p className="footer-links">
               <a href="/about">About</a> 
-              <a href="/contact">Contact</a>
               <a href="/privacy">Privacy</a>
               <a href="https://github.com/rnplay">We're on Github!</a>
             </p>
