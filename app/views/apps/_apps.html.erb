@@ -10,7 +10,7 @@
                 <div class="app-list__details">
                   <h3><%= link_to app.name || app.module_name, app_path(app.url_token) %></h3>
                   <%= image_tag(app.creator.avatar.url, class: "avatar") %>
-                  <span><%= link_to app.try(:creator).try(:username) || 'anonymous', user_apps_path(app.creator) %></span>
+                  <span><%= link_to app.try(:creator).try(:username) || 'anonymous', user_apps_path(app.creator.username) %></span>
                 </div>
                 <div class="app-list__actions <% if params[:action] == 'picks' %>app-list__actions--picks<% end %>">
                   <span class="text-muted">Updated <%= time_ago_in_words(app.updated_at) %> ago</span>
