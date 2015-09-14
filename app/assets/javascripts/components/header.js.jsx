@@ -16,19 +16,19 @@ var Header = React.createClass({
   },
 
   renderSignInOutLink: function() {
-    if (this.props.currentUser) {
+    const { currentUser } = this.props;
+
+    if (currentUser) {
       return (
-        <div>
-          <div className="dropdown">
-            <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="settings-menu"><span className="glyphicon glyphicon-cog"></span></a>
-            <ul className="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-menu">
-              <li role="presentation"><a href="/users/edit">Profile</a></li>
-              <li role="presentation">
-                <a rel="nofollow" data-method="delete" href="/users/sign_out">Sign Out</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <li className="dropdown">
+          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i className="fa fa-gear"></i>
+          </a>
+          <ul className="dropdown-menu" role="menu" aria-labelledby="settings-menu">
+            <li role="presentation"><a href="/users/edit">Profile</a></li>
+            <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Sign Out</a></li>
+          </ul>
+        </li>
       )
     } else {
       return (
@@ -65,7 +65,7 @@ var Header = React.createClass({
                   <li><a href="/apps/picks">Staff Picks</a></li>
                   <li><a href="/about">About</a></li>
                 </ul>
-                <ul className="nav navbar-nav pull-right">
+                <ul className="nav navbar-nav navbar-right">
                   {this.renderSignInOutLink()}
                 </ul>
               </div>
