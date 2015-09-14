@@ -4,7 +4,9 @@
       <% app_group.each do |app| %>
         <div class="app-list--wrapper">
           <div class="app-list__item">
-            <%= screenshot_for(app) %>
+            <%= link_to app_path(app.url_token) do %>
+              <%= screenshot_for(app) %>
+            <% end %>
             <section class="app-list__info--wrapper">
               <section class="app-list__info">
                 <div class="app-list__details">
