@@ -29,6 +29,9 @@ $font-family-sans-serif: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', Arial
 $color-purple-light: #9134BF;
 $color-purple: #5C069A;
 
+$color-footer-text: #777;
+$color-footer-link: $color-purple;
+
 $dropdown-bg: #fff;
 $dropdown-link-color: #333;
 $dropdown-link-hover-bg: #eee;
@@ -38,7 +41,7 @@ $dropdown-link-active-color: #333;
 $grid-gutter-width: 24px;
 
 // Navigation collapse point
-$grid-float-breakpoint: 785px;
+$grid-float-breakpoint: 795px;
 
 $collapse-nav-logo: 400px;
 
