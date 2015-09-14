@@ -16,4 +16,12 @@ module ApplicationHelper
     File.exists?("#{Rails.root}/public/screenshots/#{app.url_token}.jpg") ? "/screenshots/#{app.url_token}.jpg" : asset_path("screenshot-placeholder.svg")
   end
 
+  def app_list_for(user)
+    if user
+      link_to user.username, user_apps_path(username: user.username)
+    else
+      "anonymous"
+    end
+  end
+
 end
