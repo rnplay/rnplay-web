@@ -21,7 +21,7 @@
 
 .team-col {
   width: 224px;
-  padding: 0 24px;
+  padding: 0 20px;
   margin: 32px 0;
 
   img { border-radius: 100%; }
@@ -30,5 +30,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .yellow {
+    $shadow-color: hsl(44, 68%, 48%);
+    color: hsl(60, 100%, 50%);
+    text-shadow: -1px -1px 0 $shadow-color,
+                  1px -1px 0 $shadow-color,
+                 -1px 1px 0 $shadow-color,
+                  1px 1px 0 $shadow-color,
+                  1px 0px 0 $shadow-color,
+                 -1px 0px 0 $shadow-color,
+                  0px 1px 0 $shadow-color,
+                  0px -1px 0 $shadow-color;
   }
 }
