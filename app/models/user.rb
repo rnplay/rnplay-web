@@ -35,8 +35,11 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
 
-    if old_user = find_by(email: auth.info.email, provider: 'twitter')
-      old_user.update_attribute(:email, "migrated-#{old_user.email}")
+    if existing_user = find_by(email: auth.info.email)
+      if !existing_user.provider.present? || existing_user.provider == 'twitter'
+        existing_user.update_attribute(:provider, "github")
+        existing_user.update_attribute(:uid, auth.uid)
+      end
     end
 
     user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -49,10 +52,10 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
     end
 
-    if old_user
-      old_user.apps.each { |app| app.creator = user; app.save }
-    end
-
+    user.update_attributes(name: auth.info.name) if !user.name
+    user.update_attributes(username: auth.info.nickname) if !user.username
+    user.update_attributes(remote_avatar_url: auth.info.image) if !user.avatar.file
+    
     user
   end
 
