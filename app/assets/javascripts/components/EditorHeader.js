@@ -27,7 +27,6 @@ export default class EditorHeader extends Component {
 
   onUpdateName = (e) => {
     e.preventDefault();
-    console.log('updating name');
     maybeCallMethod(this.props, 'onUpdateName', e.target.value);
   }
 
