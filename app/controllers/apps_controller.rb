@@ -75,7 +75,7 @@ class AppsController < ApplicationController
   end
 
   def public_index
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(username: params[:username]) || User.find(params[:id])
     raise ActiveRecord::RecordNotFound if !@user
   end
 

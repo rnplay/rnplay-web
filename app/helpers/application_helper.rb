@@ -18,7 +18,8 @@ module ApplicationHelper
 
   def app_list_for(user)
     if user
-      link_to user.username, user_apps_path(username: user.username)
+      path = user.username ? user_apps_path(username: user.username) : userid_apps_path(user)
+      link_to user.username, path
     else
       "anonymous"
     end
