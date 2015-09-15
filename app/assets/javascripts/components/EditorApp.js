@@ -88,8 +88,8 @@ export default class EditorApp extends Component {
   }
 
   belongsToCurrentUser = () => {
-    const { currentUser, app : { creatorId} } = this.props;
-    return currentUser && currentUser.id === creatorId;
+    const { currentUser, app } = this.props;
+    return currentUser && currentUser.id === app.creator.id;
   }
 
   currentUserIsAdmin = () => {
