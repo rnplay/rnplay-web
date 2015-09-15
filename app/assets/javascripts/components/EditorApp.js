@@ -68,19 +68,21 @@ export default class EditorApp extends Component {
     const { data } = e;
     const { dispatch, log, saveScreenshot } = this.props;
 
-    if (data.type == 'screenshot') {
+    if (data.type === 'screenshot') {
       dispatch(saveScreenshot(this.props.app.id, data.data));
     } else if (data === 'sessionRequested') {
       this.simulatorActive = true;
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
-    } else if (data.includes('Running Application')) {
+    } else if (data.type === 'debug' && data.message.indexOf('Running application') && (this.belongsToCurrentUser() || this.currentUserIsAdmin())) {
+      console.log('Taking screenshot in 3 seconds...')
       setTimeout(() => {
+        console.log('Took a screenshot!')
         this.saveScreenshot();
       }.bind(this), 3000)
     }
 
-    if (data.type !== 'screenshot') {
+    if (data.type == 'debug') {
       dispatch(log(data));
     }
   }
