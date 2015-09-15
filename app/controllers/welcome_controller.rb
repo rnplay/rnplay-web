@@ -1,5 +1,10 @@
 class WelcomeController < ApplicationController
- def index
-   @app = Rails.env.development? || Rails.env.staging? ? App.first : App.find(7)
- end
+
+   def index
+     @apps = App.where(pick: true).order('updated_at desc').limit(@per_page).offset(@offset)
+     respond_to do |format|
+       format.html
+     end
+   end
+
 end

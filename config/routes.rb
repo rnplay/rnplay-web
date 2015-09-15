@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'apps#show'
+  root 'welcome#index'
 
   mount WebpackRails::Engine, at: 'webpack', as: 'webpack'
 

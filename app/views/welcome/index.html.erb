@@ -1,0 +1,8 @@
+<div class="container <% if params[:action] == 'picks' %>container--picks<% end %>">
+  <header>
+    <h1 class="title">Build, test and share React Native apps.</h1>
+  </header>
+
+  <%= render partial: '/apps/apps', locals: {apps: @apps} %>
+
+</div>
