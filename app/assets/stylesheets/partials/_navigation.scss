@@ -48,13 +48,6 @@
 
     &.new-app {
       font-weight: bold;
-      &:hover,
-      &:active,
-      &:focus {
-        background: hsl(107, 63%, 35%);
-        color: hsl(62, 100%, 100%);
-        box-shadow: none;
-      }
     }
   }
 }
