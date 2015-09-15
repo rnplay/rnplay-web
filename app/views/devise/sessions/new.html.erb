@@ -25,10 +25,5 @@
     <% end %>
 
     <%= render "devise/shared/links" %>
-
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <p class="form--footer">Don't have an account? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
-    <% end -%>
-
   </div>
 </div>
