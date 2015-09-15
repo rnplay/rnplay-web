@@ -59,13 +59,11 @@ var Header = React.createClass({
               </div>
 
               <div className="collapse navbar-collapse" id="navbar-collapse-main">
-                <ul className="nav navbar-nav" id="links">
-                  <li><a className="new-app" href="/apps/new"><i className="fa fa-plus"></i> New App</a></li>
+                <ul className="nav navbar-nav navbar-right">
+                  <li><a className="new-app" href="/apps/new">New App</a></li>
                   {this.renderMyApps()}
                   <li><a href="/apps/picks">Staff Picks</a></li>
                   <li><a href="/about">About</a></li>
-                </ul>
-                <ul className="nav navbar-nav navbar-right">
                   {this.renderSignInOutLink()}
                 </ul>
               </div>
