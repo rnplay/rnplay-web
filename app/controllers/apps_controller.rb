@@ -162,7 +162,7 @@ class AppsController < ApplicationController
   def update
     @app = App.find(params[:id])
 
-    if (app_params[:pick] && current_user.admin?) || (user_signed_in? && @app.created_by?(current_user))
+    if current_user.admin? || (user_signed_in? && @app.created_by?(current_user))
       if app_params[:screenshot]
         image_data = Base64::decode64 app_params[:screenshot].split(",").last
         File.open("#{Rails.root}/public/screenshots/#{@app.url_token}.jpg", "wb") { |f| f.write(image_data) }
