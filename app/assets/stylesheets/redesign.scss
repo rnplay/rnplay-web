@@ -214,6 +214,18 @@ body {
   }
 }
 
+.form-group label + span {
+  padding-left: 8px;
+}
+
+.form--footer {
+  text-align: center;
+
+  @media (min-width: 500px) {
+    text-align: left;
+  }
+}
+
 .hidden-mobile {
   display: none !important;
 

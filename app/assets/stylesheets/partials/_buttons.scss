@@ -7,6 +7,7 @@
   border-color: $color-purple;
   color: #fff;
   display: block;
+  width: 100%;
 
   &:hover,
   &:active,
@@ -17,8 +18,14 @@
   }
 
   &--inline {
+    width: auto;
     display: inline-block;
     margin-right: 8px;
+  }
+
+  @media (min-width: 500px) {
+    display: inline-block;
+    width: auto;
   }
 }
 
@@ -42,4 +49,13 @@
   border-radius: 5px;
 }
 
-.omniauth { margin: 16px 0; }
+.omniauth {
+  text-align: center;
+  margin: 32px 0;
+  padding-top: 32px;
+  border-top: 1px solid #ddd;
+
+  @media (min-width: 500px) {
+    text-align: left; 
+  }
+}
