@@ -54,6 +54,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     edit_user_registration_path(resource)
   end
 
+  def after_sign_up_path_for(resource)
+    signed_in_root_path(resource)
+  end
   # You can put the params you want to permit in the empty array.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.for(:sign_up) << :attribute
