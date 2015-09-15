@@ -23,8 +23,6 @@ export default class BuildPicker {
   render() {
     return (
       <div>
-        <span className="editor-simulator-container__header__text">React Native:</span>
-
         <select
           onChange={this.onChange}
           defaultValue={this.props.selectedBuildId}
