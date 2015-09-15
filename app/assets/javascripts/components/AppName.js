@@ -16,11 +16,13 @@ export default class AppName extends Component {
       onUpdateName
     } = this.props;
 
+    const creatorUrl = `/${creator}`;
+
     // Don't render input if in view mode
     if (isDisabled) {
       return (
         <div className="editor-header__name--text">
-          {appName} <span className="editor-header__name--creator">by {creator}</span>
+          {appName} <span className="editor-header__name--creator">by <a href={creatorUrl}>{creator}</a></span>
         </div>
       );
     }
