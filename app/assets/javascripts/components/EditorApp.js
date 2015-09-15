@@ -136,8 +136,12 @@ export default class EditorApp extends Component {
   }
 
   onFork = () => {
-    const { dispatch, forkApp, app: { urlToken } } = this.props;
-    dispatch(forkApp(urlToken));
+    const { dispatch, forkApp, app: { urlToken }, currentUser } = this.props;
+    if (currentUser) {
+      dispatch(forkApp(urlToken));
+    } else {
+      window.location = "/users/sign_in";
+    }
   }
 
   onFileSelectorToggle = () => {
