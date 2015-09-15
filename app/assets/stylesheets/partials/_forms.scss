@@ -26,13 +26,7 @@
     }
   }
 
-  &--footer {
-    text-align: center;
-
-    @media (min-width: 500px) {
-      text-align: left;
-    }
-  }
+  &--footer { text-align: center; }
 }
 
 .radio label label,

@@ -1,10 +1,11 @@
 <div class="container container--narrow">
   <%= bootstrap_devise_error_messages! %>
   <div class="form">
-    <h2 class="title">Sign Up
-    <%- if controller_name != 'sessions' %>
-      <span class="title--sub">Already have an account? <%= link_to "Sign in!", new_session_path(resource_name) %></span>
-    <% end -%>
+    <h2 class="title">
+      <span>Sign Up</span>
+      <%- if controller_name != 'sessions' %>
+        <span class="title--sub">Already have an account? <%= link_to "Sign in!", new_session_path(resource_name) %></span>
+      <% end -%>
     </h2>
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
