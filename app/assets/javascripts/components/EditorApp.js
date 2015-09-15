@@ -74,7 +74,7 @@ export default class EditorApp extends Component {
       this.simulatorActive = true;
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
-    } else if (data.type === 'debug' && data.message.indexOf('Running application') && (this.belongsToCurrentUser() || this.currentUserIsAdmin())) {
+    } else if (data.type === 'debug' && data.message.indexOf('Running application') !== -1 && this.belongsToCurrentUser()) {
       console.log('Taking screenshot in 3 seconds...')
       setTimeout(() => {
         console.log('Took a screenshot!')
