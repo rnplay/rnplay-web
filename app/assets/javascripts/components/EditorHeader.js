@@ -1,9 +1,10 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classnames';
 
-import BuildPicker from './BuildPicker';
+import AppName from './AppName';
+import MainMenu from './MainMenu';
 import GitModal from './git_modal';
 
 const maybeCallMethod = (obj, method, ...args) => {
@@ -15,19 +16,23 @@ export default class EditorHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gitModalIsVisible: null
+      gitModalIsVisible: null,
+      isMenuOpen: false
     };
   }
 
-  onUpdateName = () => {
-    const nameInputNode = React.findDOMNode(this.refs.nameInput);
-    maybeCallMethod(this.props, 'onUpdateName', nameInputNode.value);
+  onMenuToggle() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
+
+  onUpdateName = (e) => {
+    e.preventDefault();
+    maybeCallMethod(this.props, 'onUpdateName', e.target.value);
   }
 
   handleOnSubmit = (e)  => {
     e.preventDefault();
-    const method = this.belongsToCurrentUser() ? 'onSave' : 'onFork';
-    this[method](e);
+    e.preventPropagation();
   }
 
   onSave = (e) => {
@@ -49,14 +54,14 @@ export default class EditorHeader extends Component {
     maybeCallMethod(this.props, 'onUpdateBuild', value);
   }
 
-  belongsToCurrentUser() {
-    const { currentUser, app : { creatorId} } = this.props;
-    return currentUser && currentUser.id === creatorId;
-  }
-
   currentUserIsAdmin() {
     const { currentUser } = this.props;
     return currentUser && currentUser.admin;
+  }
+
+  isUserLoggedIn() {
+    const { currentUser } = this.props;
+    return !!currentUser;
   }
 
   showGitModal = (e) => {
@@ -70,23 +75,22 @@ export default class EditorHeader extends Component {
   }
 
   renderGitModal = () => {
-    if (this.belongsToCurrentUser()) {
+    if (this.props.belongsToCurrentUser()) {
       return (
         <GitModal app={this.props.app}
-                 token={this.props.currentUser.authentication_token}
-                 onClickBackdrop={this.hideGitModal}
-                 isOpen={this.state.gitModalIsVisible} />
+                  token={this.props.currentUser.authentication_token}
+                  onClickBackdrop={this.hideGitModal}
+                  isOpen={this.state.gitModalIsVisible} />
       )
     }
   }
 
   renderGitButton() {
-    if (this.belongsToCurrentUser()) {
+    if ( ! this.props.belongsToCurrentUser()) {
       return (
         <button
           onClick={this.showGitModal}
-          className="btn-info editor-header__button"
-        >
+          className="editor-header__button">
           Clone
         </button>
       );
@@ -94,80 +98,72 @@ export default class EditorHeader extends Component {
   }
 
   renderForkButton() {
-    if (this.currentUserIsAdmin()) {
-      return (
-        <button
-          onClick={this.onFork}
-          className="btn-info editor-header__button"
-        >
-          Fork
-        </button>
-      );
-    }
+    return (
+      <button
+        onClick={this.onFork}
+        type="button"
+        className="editor-header__button">
+        <i className="fa fa-code-fork"></i> Fork
+      </button>
+    );
   }
 
   renderPickButton() {
     if (this.currentUserIsAdmin()) {
+
+      const icon = this.props.appIsPicked ? 'fa-star' : 'fa-star-o';
+      const iconClasses = `fa ${icon}`;
+
       return (
         <button
           onClick={this.onPick}
-          className="btn-info editor-header__button"
-        >
-          {this.props.appIsPicked ? 'Unpick' : 'Pick'}
+          className="editor-header__button">
+          <i className={iconClasses}></i> {this.props.appIsPicked ? 'Unpick' : 'Pick'}
         </button>
       );
     }
   }
 
-  renderSaveButton() {
-
-    if (this.belongsToCurrentUser()) {
-      return (
-        <button
-          onClick={this.onSave}
-          className="btn-info editor-header__button btn-save"
-        >
-          Save
-        </button>
-      );
-    }
+  getAppName() {
+    const { name } = this.props;
+    return name && name.length > 0 ? name : 'Unnamed App';
   }
 
   render() {
-    const { useDarkTheme, builds, name, buildId, onFileSelectorToggle } = this.props;
-    const classes = cx({
+    const disabled = ! this.props.belongsToCurrentUser();
+    const { creator } = this.props;
+
+    const classes = classNames({
+      'editor-header__bar': true,
       'editor-header': true,
-      'editor-header--dark': useDarkTheme
     });
 
     return (
       <div className={classes}>
+
+        <MainMenu
+          isOpen={this.state.isMenuOpen}
+          isUserLoggedIn={this.isUserLoggedIn()}
+          onMenuToggle={this.onMenuToggle.bind(this)} />
+
         <button
-          className="editor-header__drawer-toggle"
-          onClick={onFileSelectorToggle}
-        title="Open file drawer">
-          <i className="fa fa-folder-open"></i>
+          className="editor-header__button editor-header__menu-toggle"
+          onClick={this.onMenuToggle.bind(this)}
+          title="Open Menu">
+          <i className="fa fa-bars"></i>
         </button>
-        <form onSubmit={this.handleOnSubmit}>
-          <input
-            type="text"
-            ref="nameInput"
-            placeholder="Give this app a title"
-            value={name}
-            onChange={this.onUpdateName}
-            className="editor-header__name-input"
-          />
-          <BuildPicker
-            onChange={this.onUpdateBuild}
-            builds={builds}
-            selectedBuildId={buildId}
-          />
-          <div className="editor-header__button-container">
-            {this.renderSaveButton()}
-            {this.renderForkButton()}
-            {this.renderPickButton()}
-          </div>
-        </form>
+
+        <AppName
+          isDisabled={disabled}
+          appName={this.getAppName()}
+          onUpdateName={this.onUpdateName.bind(this)}
+          creator={creator} />
+
+        <div className="editor-header__actions">
+          {this.renderForkButton()}
+          {this.renderPickButton()}
+        </div>
+
         {this.renderGitModal()}
       </div>
     );

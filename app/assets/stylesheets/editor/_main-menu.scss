@@ -1,0 +1,84 @@
+.editor-main-menu {
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,.11);
+  display: none;
+  position: absolute;
+  width: 300px;
+  z-index: 1000;
+
+  &:focus { box-shadow: 0 0 4px 4px red; }
+
+  button { box-shadow: 1px 0 0 rgba(0,0,0,.28); }
+
+  &__wrapper {
+    position: relative;
+    z-index: 100;
+  }
+
+  &--open { display: block; }
+
+  &__header {
+    padding: 0 10px 0 0;
+    background: $editor-color-purple;
+    color: rgba(255,255,255,.70);
+    font-size: 16px;
+  }
+
+  &__title { padding-left: 17px; }
+
+  &__link {
+    color: $editor-color-purple;
+    display: block;
+    line-height: 3em;
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      color: #AD0785;
+      background: #FAF3FF;
+      text-decoration: none;
+
+      i { color: #AD0785; }
+    }
+
+    &:focus {
+      color: #AD0785;
+      background: #FAF3FF;
+
+      i { color: #AD0785; }
+    }
+
+    i {
+      display: inline-block;
+      width: 35px;
+      text-align: center;
+      margin-right: 17px;
+      color: hsl(0, 0%, 65%);
+    }
+
+    &--row {
+      text-align: center;
+      flex: 1;
+
+      i {
+        width: auto;
+        color: $editor-color-purple;
+        margin-right: 10px;
+      }
+
+      &:hover {
+        color: #AD0785;
+        background: #FAF3FF;
+        text-decoration: none;
+      }
+
+      &:first-child {
+        border-right: 1px solid darken(#FAF3FF, 5%);
+      }
+    }
+  }
+
+  &__row {
+    border-top: 1px solid darken(#FAF3FF, 5%);
+    display: flex;
+  }
+}

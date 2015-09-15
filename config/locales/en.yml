@@ -21,3 +21,39 @@
 
 en:
   hello: "Hello world"
+  datetime:
+      distance_in_words:
+        half_a_minute: "30s"
+        less_than_x_seconds:
+          one:   "1s"        # default: "less than 1 second"
+          other: "%{count}s" # default: "less than %{count} seconds"
+        x_seconds:
+          one:   "1s"
+          other: "%{count}s"
+        less_than_x_minutes:
+          one:   "1m"        # default: "less than a minute"
+          other: "%{count}m" # default: "less than %{count} minutes"
+        x_minutes:
+          one:   "1m"
+          other: "%{count}m"
+        about_x_hours:
+          one:   "1h"        # default: "about 1 hour"
+          other: "%{count}h" # default: "about %{count} hours"
+        x_days:
+          one:   "1d"
+          other: "%{count}d"
+        about_x_months:
+          one:   "1m"        # default: "about 1 month"
+          other: "%{count}m" # default: "about %{count} months"
+        x_months:
+          one:   "1m"
+          other: "%{count}m"
+        about_x_years:
+          one:   "1y"        # default: "about 1 year"
+          other: "%{count}y" # default: "about %{count} years"
+        over_x_years:
+          one:   "1y"        # default: "over 1 year"
+          other: "%{count}y" # default: "over %{count} years"
+        almost_x_years:
+          one:   "1y"        # default: "almost 1 year"
+          other: "%{count}y" # default: "almost %{count} years"

@@ -1,5 +1,6 @@
 'use strict';
 import axios from 'axios';
+import _ from 'lodash';
 
 export default {
 
@@ -13,6 +14,33 @@ export default {
           pick: +picked
         }
       });
+    },
+
+    saveBuildId(appId, buildId) {
+      return axios.put(`/apps/${appId}`, {
+        app: {
+          build_id: buildId
+        }
+      });
+    },
+
+    saveScreenshot(appId, data) {
+      return axios.put(`/apps/${appId}`, {
+        app: {
+          screenshot: data
+        }
+      });
+    },
+
+    saveName(appId, name) {
+      // Throttle updates so we don't hit the server on every keystroke.
+      this._updateName = this._updateName || _.throttle((appId, name) => {
+        return axios.put(`/apps/${appId}`, {
+          app: { name }
+        });
+      }, 1000);
+
+      return this._updateName(appId, name);
     },
 
     saveApp(appId, name, buildId, fileBodies) {

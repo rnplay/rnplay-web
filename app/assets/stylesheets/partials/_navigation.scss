@@ -1,0 +1,84 @@
+.navbar {
+  border: 0;
+  border-radius: 0;
+}
+
+.navbar-toggle {
+  margin-right: 0;
+}
+
+.navbar-default {
+  .navbar-brand {
+    color: $color-purple;
+    font-size: 1.8rem;
+    line-height: $navbar-height;
+    padding: 0;
+
+    @media (min-width: $collapse-nav-logo) {
+      padding: 0 16px;
+    }
+  }
+
+  .navbar-brand:hover,
+  .navbar-brand:focus {
+    color: $color-purple-light;
+  }
+
+  .nav > li {
+    line-height: $navbar-height;
+  }
+
+  .navbar-nav > li > a {
+    box-shadow: inset 0 -2px 0 hsla(280, 57%, 48%, 0);
+    color: $color-purple;
+    font-size: 100%;
+    font-weight: normal;
+    line-height: $navbar-height / 2;
+    display: inline-block;
+    padding: 0;
+    margin: 0 16px;
+    text-transform: uppercase;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: inset 0 -2px 0 hsla(280, 57%, 48%, 1);
+      color: $color-purple-light;
+    }
+
+    &.new-app {
+      font-weight: bold;
+    }
+  }
+}
+
+.navbar-logo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: $navbar-height;
+  justify-content: center;
+  margin-top: -4px;
+  width: 32px;
+}
+
+.navbar ul {
+  .dropdown {
+    line-height: $navbar-height;
+
+    &-toggle {
+      background-color: transparent !important;
+    }
+
+    &-menu {
+      border-radius: 0 0 3px 3px;
+      border: 0;
+      border-top: 2px solid hsl(280, 57%, 48%);
+      box-shadow: 0 1px 1px 1px rgba(0,0,0,.09);
+      margin-top: -18px;
+
+
+      a:hover { background: #eee; }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import axios from 'axios';
 import Modal from './modal';
 
 export default class QrModal extends Component {
@@ -7,33 +7,39 @@ export default class QrModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        qrCodeUrl: null
+      qrCodeUrl: null
     };
   }
 
-  componentDidMount = () => {
-    var self = this;
-    $.get('/apps/' + this.props.urlToken + '/qr', function(result) {
-      self.setState({qrCodeUrl: result.url});
-    });
+  componentDidMount() {
+    axios.get(`/apps/${this.props.urlToken}/qr`)
+         .then(response => response.data)
+         .then(data => this.setState({qrCodeUrl: data.url}));
   }
 
-  renderImage() {
+  renderQRImage() {
     if (this.state.qrCodeUrl) {
       return <img src={this.state.qrCodeUrl} />
-    } else {
-      return <span />
     }
+
+    return null;
+  }
+
+  renderHeader() {
+    return (
+      <div className="modal__header">
+        <p>Scan this with our <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">iOS app</a>!</p>
+        <img src="/img/app-store-badge.svg" width="135" height="40" />
+      </div>
+    );
   }
 
   render() {
     return (
       <Modal isOpen={this.props.isOpen} onClickBackdrop={this.props.onClickBackdrop}>
-        <div className="modal--body qr-modal-body">
-          <h1>
-            Scan this with the <a href="https://itunes.apple.com/us/app/react-native-playground/id1002032944">React Native Playground iOS app.</a>
-          </h1>
-          {this.renderImage()}
+        {this.renderHeader()}
+        <div className="modal__body qr-modal-body">
+          {this.renderQRImage()}
         </div>
       </Modal>
     )

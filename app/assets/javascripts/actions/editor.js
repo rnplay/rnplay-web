@@ -21,17 +21,23 @@ export default {
     show
   }),
 
-  updateName: (newName) => ({
+  updateName: (appId, newName) => ({
+    promise: api.saveName(appId, newName),
     newName
   }),
 
-  updateBuildId: (newBuildId) => ({
+  updateBuildId: (appId, newBuildId) => ({
+    promise: api.saveBuildId(appId, newBuildId),
     newBuildId
   }),
 
   saveApp: (appId, name, buildId, fileBodies) => ({
     promise: api.saveApp(appId, name, buildId, fileBodies),
     fileBodies
+  }),
+
+  saveScreenshot: (appId, data) => ({
+    promise: api.saveScreenshot(appId, data),
   }),
 
   toggleAppPickStatus: (appId, picked) => ({

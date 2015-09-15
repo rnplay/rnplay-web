@@ -1,16 +1,9 @@
-<div class="container" style="text-align: center; padding-bottom: 50px;">
-  <h1 style="margin-bottom: 40px">Staff picks</h1>
-  <p style="margin-bottom: 30px">Try out some of these exemplary React Native sample apps.</p>
-  <ul class="list-unstyled play-list" id="apps">
-  <% @apps.each do |f| %>
-    <li>
-      <%= link_to f.name || f.module_name, app_path(f.url_token) %>
-      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
-      <% if f.creator %>
-        <%= link_to f.try(:creator).try(:username) || 'anonymous', user_apps_path(f.creator) %>
-        <%= image_tag(f.creator.avatar.url, class: "avatar") %>
-      <% end %>
-    </li>
-  <% end %>
-  </ul>
+<div class="container <% if params[:action] == 'picks' %>container--picks<% end %>">
+  <header>
+    <h1 class="title">Staff Picks</h1>
+    <p>Try out some of these exemplary React Native apps.</p>
+  </header>
+
+  <%= render partial: 'apps', locals: {apps: @apps} %>
+  
 </div>

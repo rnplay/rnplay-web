@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   }
 
 
+  get '/users/:id', to: "apps#public_index", as: :userid_apps
   get '/contact' => 'support#new'
   post '/contact' => 'support#create'
 

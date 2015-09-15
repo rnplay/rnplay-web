@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classnames';
 
 export default class FileSelectorNode extends Component {
 
@@ -46,18 +46,33 @@ export default class FileSelectorNode extends Component {
         />
       ));
 
+    const classes = classNames({
+      'editor-file-selector__list__node': true,
+      'editor-file-selector__current': current.indexOf(fullPath) === 0 && !subtree,
+      'editor-file-selector__list__node--open': open
+    });
+
+    const labelClasses = classNames({
+      'editor-file-selector__list__node--directory' : !!subtree,
+      'editor-file-selector__list__node--open': open,
+      'editor-file-selector__list__node__label': true,
+    });
+
+
+    // Display right icon based on node type (folder or file)
+    let icon;
+
+    if (!!subtree) {
+      icon = open ? <i className="fa fa-folder-open"></i> : <i className="fa fa-folder"></i>;
+    } else {
+      icon = <i className="fa fa-file-code-o"></i>;
+    }
+
     return (
-      <li
-        className={cx({
-          'fileselector__list__node': true,
-          'fileselector__list__node--has-children' : !!subtree,
-          'current': current.indexOf(fullPath) === 0,
-          'fileselector__list__node--open': open
-        })}
-        onClick={this.onNodeClick}
-      >
-        <span className='fileselector__list__node__label'>{label}</span>
-        {open && sub && <ol className='fileselector__list'>{sub}</ol>}
+      <li className={classes} onClick={this.onNodeClick}>
+        {icon}
+        <span className={labelClasses}>{label}</span>
+        {open && sub && <ul className='editor-file-selector__list'>{sub}</ul>}
       </li>
     );
   }

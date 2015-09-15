@@ -1,0 +1,83 @@
+.editor-header {
+  display: flex;
+  position: relative;
+  z-index: 6;
+
+  &__bar {
+    min-height: 30px;
+    max-height: 30px;
+    border-bottom: 1px solid #ddd;
+    line-height: 30px;
+    background: $editor-color-light-grey;
+  }
+
+  &__button {
+    color: $editor-color-purple;
+    border: 0;
+    padding: 0 10px;
+    margin: 0;
+    line-height: 100%;
+    background: transparent;
+    border-right: 1px solid $editor-border-color;
+
+    &:hover { background: #fff; }
+
+    i { padding-right: 5px; }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button:first-child { border-left: 1px solid $editor-border-color; }
+    button:last-child { border-right: 0; }
+  }
+
+  &__menu-toggle {
+    border: 0;
+    padding: 0;
+    background: $editor-color-purple;
+    color: $editor-color-light-grey;
+    width: 35px;
+    height: 30px;
+
+    &:hover {
+      background: darken($editor-color-purple, 7%);
+      transition: all 0.15s ease-out;
+    }
+
+    i { padding: 0; }
+  }
+
+  &__name {
+    
+    &--text {
+      flex: 1;
+      font-size: 18px;
+      padding: 0 17px;
+    }
+
+    &--creator {
+      font-size: 0.70em;
+      color: lighten(#333, 40%);
+    }
+
+    &--input {
+      background: transparent;
+      border: 0;
+      flex: 1;
+      font-size: 18px;
+      height: 30px;
+      line-height: 100%;
+      margin: 0;
+      padding: 0 17px;
+
+      &:hover { color: $editor-color-darkgreen; }
+      &:disabled { color: inherit; }
+      &:focus {
+        outline: none;
+        color: $editor-color-darkgreen;
+      }
+    }
+  }
+}

@@ -6,4 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-App.create(name: "React ART Example", body: File.read("apps/react_art.js"), build: Build.first)
+u = User.create(email: "info@rnplay.org", password: "rnplay", password_confirmation: "rnplay")
+u.apps.create({
+  name: "Sample App",
+  module_name: "SampleApp",
+  build_id: Build.last.id,
+  created_from_web: true
+})

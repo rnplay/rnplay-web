@@ -1,434 +1,76 @@
+/**
+ * The main Editor stylsheet
+ *
+ *  - Includes variables
+ *  - Imports partials
+ *  - Layout for main components using flexbox
+ */
 
-$editor-header-bg: #fff;
-$editor-header-bg-dark: #222;
-$editor-header-name-input-copy-dark: #fff;
-$editor-header-save-button-bg-dark: #005A91;
+// Color burger
+$editor-border-color: #DCDCDC;
+$editor-color-darkgreen: #149085;
+$editor-color-darkgrey: #EDEDED;
+$editor-color-light-grey: #F6F6F6;
+$editor-color-purple: #5C069A;
 
-#editor-container {
+// Components
+@import 'editor/header';
+@import 'editor/tab-bar';
+@import 'editor/logger';
+@import 'editor/file-selector';
+@import 'editor/simulator';
+@import 'editor/main-menu';
+@import 'editor/modal';
+@import 'editor/backdrop';
+
+.editor-app, .editor-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 100vh;
   width: 100%;
+  font-size: 14px;
 }
 
-body.app-editor-page {
-  height: 100%;
-  max-height: 100vh;
+.editor-app { color: #444; }
+
+.editor-container { flex-direction: column; }
+
+.editor-container > * { flex: 1 1 auto; }
+.editor-wrap { display: flex; }
+
+.editor-wrap {
+  display: flex;
   overflow-y: hidden;
-  display: flex;
-  flex-direction: row;
 }
 
-.editor-header {
-  min-height: 40px;
-  height: 40px;
-  display: flex;
-  box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.1);
-  background: $editor-header-bg;
-  z-index: 10;
-
-  &__button-container {
-    width: 321px;
-    border-left: 1px solid #ccc;
-    padding-left: 1em;
-    text-align: center;
-
-    .dark-theme & {
-      border-left: 1px solid #000;
-    }
-  }
-
-  &__drawer-toggle {
-    color: #222;
-    background: transparent;
-    border: 0;
-    padding: 0.7em;
-
-    .dark-theme & {
-      color: #fff;
-    }
-
-    i {
-      vertical-align: middle;
-    }
-  }
-
-  form {
-    display: flex;
-    flex-grow: 1;
-  }
-
-  &__fileselector-toggle {
-    width: 20px;
-    height: 25px;
-    border: 0;
-    color: transparent;
-    margin: .8rem;
-    margin-left: 1.2rem;
-  }
-
-  .build-picker {
-    font-size: 18px;
-    margin: 10px 17px;
-    width: 130px;
-  }
-
-  .editor-header__name-input {
-    padding-top: 5px;
-    outline: none;
-    min-height: 30px;
-    font-size: 18px;
-    border: none;
-    padding-left: 20px;
-    flex: 4;
-  }
-
-
-  &__button, .btn-info {
-    color: #222;
-    border: none;
-    background: transparent;
-    text-transform: uppercase;
-    font-size: 0.8em;
-    margin-top: 1em;
-    transition: all .3s ease;
-
-    .btn-save {
-      font-weight: bold;
-    }
-
-    .dark-theme & {
-      color: #fff;
-    }
-
-    &:hover, &:active, &:focus {
-      color: #ccc;
-      border: none;
-      background: transparent;
-    }
-  }
-
-  &__large {
-    font-size: 140%;
-    font-weight: bold;
-  }
-  /* .editor-header__save-button {
-    border: none;
-    border-radius: 5px;
-    margin-right: 17px;
-    margin-top: 6px;
-    height: 28px;
-    padding-top: 4px;
-    padding-left: 12px;
-    padding-right: 12px;
-    font-size: 16px;
-
-    &:hover, &:active, &:focus {
-      border: none;
-    }
-  }
-
-  .editor-header__pick-button {
-    border: none;
-    border-radius: 5px;
-    margin-right: 17px;
-    margin-top: 6px;
-    height: 28px;
-    padding-top: 4px;
-    padding-left: 12px;
-    padding-right: 12px;
-    font-size: 16px;
-
-    &:hover, &:active, &:focus {
-      border: none;
-    }
-  } */
-
-
-  &--dark {
-
-    background: $editor-header-bg-dark;
-
-    & .editor-header__name-input {
-      background: transparent;
-      color: $editor-header-name-input-copy-dark;
-    }
-
-    /* & .editor-header__save-button {
-      background: $editor-header-save-button-bg-dark;
-
-      &:hover, &:active, &:focus {
-        background: lighten($editor-header-save-button-bg-dark, 5%);
-
-      }
-    } */
-  }
-}
-.left-hand-pane {
-  flex: 1;
-  padding-top: 55px;
-  flex-direction: column;
-  flex-grow: 1;
-
-  .form-group {
-    margin-bottom: 0;
-  }
-}
-.left-hand-pane form {
-  margin: 0 30px 100px 0px;
-}
-.editor-body-container {
-  flex-direction: row;
-}
-
-[data-react-class="EditorApp"] {
+.editor {
+  overflow-y: scroll;
   width: 100%;
-  display: flex;
 }
 
-.editor-container {
-  flex-direction: column;
-  display: flex;
-  width: 100%;
+.editor-button {
+  border-radius: 4px;
+  border: 1px solid $editor-color-purple;
+  color: $editor-color-purple;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  padding: 0 15px;
+  text-align: center;
 
-  &__body {
-    width: 100%;
-    flex-direction: row;
-    display: flex;
-    position: relative;
-  }
-
-  .errorview-wrapper {
-    position: absolute;
-    width: 100%;
-    z-index: 500;
-    background-color: rgba(255, 0, 0, 0.74);
+  &:hover {
+    background: $editor-color-purple;
     color: #fff;
-    font-weight: 700;
-    padding: 1rem;
-    text-align: center;
-    transition: all 0.3s ease;
-
-    &:empty {
-      padding: 0;
-    }
-
-    .alert-box {
-      margin-bottom: 0.3rem;
-    }
+    text-decoration: none;
   }
 
-  &__simulator {
-    background-color: #F9F9F9;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-    position: relative;
-    z-index: 7;
-
-    &--dark {
-      background-color: #152238;
-    }
-  }
+  i { padding-right: 5px; }
 }
 
-.editor-flex-wrapper {
-  flex: 1;
-  display: flex;
-
-  /* Hack because Safari's 100% is based off of children, */
-  /* so this stretches to fit the content and never triggers overflow scroll */
-  /* max-height: calc(100vh - 90px); */
-  // jlumpe: removed this, as it does not seem to make any difference whether we use
-  // max-height or height. We need height though to get the editor to play nice
-
-  height: calc(100vh - 90px);
-  overflow-y: scroll;
-  p {
-    margin-top: 20vw;
-    text-align: center;
-    font-size: 150%;
-  }
-}
-
-.editor-scroll-wrapper {
-  overflow-y: scroll;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  &__text-wrapper {
-    display: flex;
-    overflow: scroll;
-    flex-grow: 1;
-    flex-basis: 100%;
-    height: 100%;
-  }
-
-}
-
+// Override CodeMirror theme
 .cm-s-solarized.CodeMirror {
   box-shadow: none !important;
-}
-
-.console {
-  background: #fff;
-  border-top: 1px solid #0B0708;
-  bottom: 40px;
-  color: #777;
-  height: 100px;
-  left: 0;
-  overflow: scroll;
-  padding: 10px;
-  position: fixed;
-  min-width: 900px;
-  text-align: left;
-  width: 100%;
-  z-index: 102;
-}
-
-.CodeMirror-dialog {
-  position: fixed;
-  left: 0; right: 0;
-  background: inherit;
-  z-index: 15;
-  padding: .1em .8em;
-  overflow: hidden;
-  color: rgba(0,0,0,0.9);
-}
-
-.CodeMirror-scroll {
-  min-height: 100%;
-}
-
-.file-indicator {
-  padding: 0.2em;
-  padding-left: 3em;
-  min-height: 3%;
-  flex-shrink: 0;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.11);
-  position: relative;
-  z-index: 5;
-
-  .dark-theme & {
-    background-color: #171717;
-    color: #868686;
-  }
-}
-
-.fileselector {
-  flex-shrink: 0;
-  display: flex;
-  background-color: #fff;
-  width: 0;
-  position: relative;
-  z-index: 5;
-  width: 200px;
-  margin-left: -200px;
-  border-right: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  transition: margin-left 0.3s ease;
-  font-size: 1.2rem;
-
-  .dark-theme & {
-    border-right-color: #242424;
-    background-color: #222;
-    box-shadow: 0 0 10px #131313;
-  }
-
-  .open-handle {
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    height: 99%;
-    width: 10px;
-    background-color: #1A1A1A;
-    z-index: 100;
-  }
-
-  &.open {
-    margin-left: 0;
-    resize: horizontal;
-    overflow: hidden;
-  }
-
-  &__list-wrapper {
-    overflow: scroll;
-    flex-grow: 1;
-    margin-right: 5px;
-  }
-
-  &__list {
-    list-style: none;
-    padding: 0;
-    color: #2A2A2A;
-
-    .dark-theme & {
-      color: #ccc;
-    }
-
-    &__node {
-      cursor: pointer;
-      line-height: 1.8;
-      padding: 0.2em 0 0.2em 1.7em;
-
-      &__label {
-        position: relative;
-        z-index: 10;
-        display: inline-block;
-        font-family: 'proxima-nova';
-      }
-
-      &.current {
-        color: #000;
-
-        .dark-theme & {
-          color: #fff;
-        }
-
-        &:before {
-          background: #ccc;
-          content: ' ';
-          display: block;
-          height: 25px;
-          width: 100%;
-          position: absolute;
-          left: 0;
-
-          .dark-theme & {
-            background: #2D2D2D;
-          }
-        }
-      }
-
-      &--has-children {
-        &:before, &.current:before {
-          background: transparent;
-          position: static;
-          margin-right: 0.4em;
-          width: 16px;
-          height: 16px;
-          // font awesome closed folder icon
-          content: '\f07b';
-          display: inline-block;
-          opacity: 0.8;
-
-          font: normal normal normal 14px/1 FontAwesome;
-        }
-      }
-
-      &--open {
-        &:before, &.current:before {
-          // font awesome open folder icon
-          content: '\f07c';
-          opacity: 1;
-        }
-      }
-
-      &.current, &--has-children {
-        // not sure how to reference that selector here
-        // without copying
-        > .fileselector__list__node__label {
-          font-weight: 700;
-        }
-      }
-    }
-  }
 }

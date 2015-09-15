@@ -22,12 +22,14 @@ export default class BuildPicker {
 
   render() {
     return (
-      <select
-        onChange={this.onChange}
-        defaultValue={this.props.selectedBuildId}
-        className="build-picker">
-        {this.renderOptions()}
-      </select>
+      <div>
+        <select
+          onChange={this.onChange}
+          defaultValue={this.props.selectedBuildId}
+          className="build-picker">
+          {this.renderOptions()}
+        </select>
+      </div>
     )
   }
 }

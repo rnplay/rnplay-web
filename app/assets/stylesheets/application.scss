@@ -14,30 +14,36 @@
  *= require solarized
  *= require midnight
  *= require dialog
- *= require bootstrap-modal-bs3patch
- *= require font-proxima-nova
  *= require devise_bootstrap_views
  *= require editor
- *= require logger
  *= require_self
  */
 
 @import "bootstrap-sprockets";
 
-$navbar-default-bg: #fff;
-$navbar-height: 50px;
+$navbar-default-bg: transparent;
+$navbar-height: 64px;
 $navbar-default-brand-color: #aaa;
-$font-family-sans-serif: 'ProximaNovaLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 
-$purple-100: #712FA9;
-$purple-80: #9134BF;
+$color-purple-light: #9134BF;
+$color-purple: #5C069A;
 
-$dropdown-bg: #3B3738;
-$dropdown-link-color: #000;
-$dropdown-header-color: #000;
-$dropdown-link-hover-bg: $dropdown-bg;
-$dropdown-link-active-bg: $dropdown-bg;
-$dropdown-link-active-color: $dropdown-bg;
+$color-footer-text: #777;
+$color-footer-link: $color-purple;
+
+$dropdown-bg: #fff;
+$dropdown-link-color: #333;
+$dropdown-link-hover-bg: #eee;
+$dropdown-link-active-bg: $dropdown-link-hover-bg;
+$dropdown-link-active-color: #333;
+
+$grid-gutter-width: 24px;
+
+// Navigation collapse point
+$grid-float-breakpoint: 680px;
+
+$collapse-nav-logo: 400px;
 
 @import "font-awesome";
 
@@ -47,7 +53,6 @@ $dropdown-link-active-color: $dropdown-bg;
 
 // Reset and dependencies
 @import "bootstrap/normalize";
-@import "bootstrap/print";
 @import "bootstrap/glyphicons";
 
 // Core CSS
@@ -55,395 +60,50 @@ $dropdown-link-active-color: $dropdown-bg;
 @import "bootstrap/type";
 @import "bootstrap/code";
 @import "bootstrap/grid";
-@import "bootstrap/tables";
 @import "bootstrap/forms";
 @import "bootstrap/buttons";
 
 // Components
+@import "bootstrap/alerts";
+@import "bootstrap/close";
 @import "bootstrap/component-animations";
 @import "bootstrap/dropdowns";
-@import "bootstrap/button-groups";
-@import "bootstrap/input-groups";
-@import "bootstrap/navs";
-@import "bootstrap/navbar";
-@import "bootstrap/breadcrumbs";
-@import "bootstrap/pagination";
-@import "bootstrap/pager";
 @import "bootstrap/labels";
-@import "bootstrap/badges";
-@import "bootstrap/jumbotron";
-@import "bootstrap/thumbnails";
-@import "bootstrap/alerts";
-@import "bootstrap/progress-bars";
-@import "bootstrap/media";
-@import "bootstrap/list-group";
-@import "bootstrap/panels";
-@import "bootstrap/responsive-embed";
-@import "bootstrap/wells";
-@import "bootstrap/close";
-
-// Components w/ JavaScript
-@import "bootstrap/tooltip";
-@import "bootstrap/popovers";
+@import "bootstrap/navbar";
+@import "bootstrap/navs";
 
 // Utility classes
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
 
-
 // Our stuff
-@import "modal";
-@import "backdrop";
-@import "support_form";
+@import "redesign";
+@import "partials/navigation";
+@import "partials/buttons";
+@import "partials/about";
+@import "partials/forms";
+@import "partials/footer";
 
-body.welcome-page, body.support-page {
-  background: #eee;
+body {
+  font-size: 16px;
+  color: #444;
 }
 
 a {
-  transition: all 0.2s linear;
+  color: $color-purple;
+  transition: all 0.2s ease-out;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-purple-light;
+  }
 }
 
-p {
-  font-size: 120%;
-}
-
-button {
-  outline: 0;
-}
+button { outline: 0; }
 
 .CodeMirror {
   width: 100%;
   height: 100%;
   flex-grow: 1;
-}
-
-.navbar {
-  background-color: #3B3738;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 1px solid #000;
-  border-radius: 0;
-  left: 0;
-  margin-bottom: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 101;
-}
-
-.navbar ul {
-  margin-top: 5px;
-  padding: 3px;
-}
-
-.navbar ul .dropdown {
-  margin-top: 4px;
-}
-
-.navbar ul .dropdown.open a {
-  background-color: transparent !important;
-}
-
-.navbar ul a {
-  margin-top: 2px;
-  font-size: 100% !important;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ddd !important;
-}
-
-.navbar ul a:hover {
-  color: #fff !important;
-}
-
-.navbar li {
-  margin-left: 5px;
-}
-
-.navbar #links {
-  margin-left: 30px;
-  margin-top: 5px;
-}
-
-.container-fluid {
-  padding: 0px;
-}
-
-.navbar-brand {
-  padding: 16px;
-  font-size: 2.1rem !important;
-}
-
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #fff;
-}
-
-.navbar-logo {
-  width: 32px;
-  margin-top: 12px;
-  margin-left: 17px;
-}
-
-.btn {
-  font-size: 1.7rem;
-  letter-spacing: 0.08rem;
-}
-
-.btn-info {
-  background: $purple-100;
-  border-color: $purple-100;
-}
-
-.btn-info:hover,
-.btn-info:active,
-.btn-info:focus {
-  background: $purple-80;
-  border-color: $purple-80;
-}
-
-.btn-fork-app {
-  margin-top: 20px;
-}
-
-.btn-lg,
-.btn-group-lg > .btn {
-  padding: 13px 25px;
-  font-size: 2rem;
-  line-height: 1.5;
-  border-radius: 5px;
-}
-
-
-@media (max-width: 797px) {
-  body {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-}
-
-.controls {
-  float: left;
-  margin-left: 10px;
-}
-
-#main {
-  margin-top: 55px;
-}
-
-.form-app {
-  padding-left: 15px;
-}
-.app_name {
-  float: left;
-  width: 30%;
-}
-.form-app .form-group {
-  margin-bottom: 5px;
-}
-.phone-container {
-  text-align: center;
-}
-.radio label label,
-.checkbox label label {
-  padding-left: 0;
-}
-.form-control {
-  border-radius: 3px;
-  font-size: 16px;
-  margin-bottom: 5px;
-  min-height: 50px;
-  padding: 7px 15px 8px;
-}
-.form-control:hover {
-  border-color: lighten($purple-100, 30%);
-  box-shadow: 0 0 4px rgba(150, 40, 180, 0.3);
-}
-.form-control:active,
-.form-control:focus {
-  border-color: $purple-100;
-  box-shadow: 0 0 5px rgba(150, 40, 180, 0.5);
-}
-
-#blurb {
-  font-size: 200%;
-  margin: 0 auto;
-  margin-top: 100px;
-  width: 50%;
-}
-
-#welcome {
-  padding-bottom: 70px;
-}
-
-#welcome h1 {
-  padding-top: 20px;
-}
-
-.get-started-button {
-  padding-bottom: 20px;
-}
-
-.panel {
-  width: 50%;
-  margin: 0 auto;
-  margin-top: 40px;
-}
-.panel-default {
-  border-color: white;
-}
-.panel-heading {
-  background: #F4F2F2;
-}
-.panel-default > .panel-heading {
-  border-color: #ECEBEB;
-}
-
-.devise-links {
-  width: 50%;
-  margin: 0 auto;
-  list-style: none;
-  height: 30px;
-  padding: 0;
-  margin-top: 30px;
-  padding-left: 18px;
-}
-.devise-links li {
-  padding: 0;
-  margin: 0;
-  float: left;
-  font-size: 120%;
-  margin-right: 60px;
-  height: 30px;
-}
-
-.rnplay-footer {
-  background: #2B2728;
-  border-top: 1px solid #0B0708;
-  bottom: 0;
-  color: #777;
-  height: 40px;
-  left: 0;
-  padding: 10px;
-  position: fixed;
-  min-width: 900px;
-  text-align: right;
-  width: 100%;
-  z-index: 101;
-}
-.rnplay-footer a {
-  color: #a9a9a9;
-}
-
-@media (min-width: 768px) {
-  .navbar-nav > li > a {
-    padding-top: 8px;
-    padding-bottom: 7px;
-  }
-}
-
-.homepage-example {
-  display: flex;
-  padding: 20px 10px;
-  border: 1px solid #eee;
-  box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.1);
-  flex-direction: row;
-  height: 627px;
-  max-width: 1050px;
-  margin: 0 auto;
-  background: #fff;
-
-  .homepage-example__code {
-    max-height: 580px;
-    overflow-y: scroll;
-    flex: 1;
-  }
-
-  .homepage-example__simulator {
-    padding-left: 20px;
-    width: 300px;
-  }
-}
-
-.welcome-subtitle {
-  display: block;
-  font-size: 2rem;
-  margin-top: 15px;
-  line-height: 30px;
-}
-
-#settings-icon {
-  color: #fff;
-}
-
-.dropdown span {
-  padding-top: 5px;
-}
-
-.avatar {
-  background-color: #999;
-  width: 30px;
-  height: 30px;
-  border-radius: 20px;
-  margin-left: 10px;
-}
-
-#team {
-  .thumbnail {
-    width: 200px;
-    img {
-    }
-  }
-}
-
-.team-col {
-  width: 18%;
-  float: left;
-  margin-right: 10px;
-}
-
-#apps {
-  .delete {
-    font-size: 60%;
-    text-transform: uppercase;
-    color: #920000;
-  }
-}
-
-.play-list {
-  display: flex;
-  flex-wrap: wrap;
-
-  li {
-    flex-basis: 50%;
-    text-align: left;
-    padding: 0 2.5%;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-
-    @media (min-width: $screen-sm-min) {
-      flex-basis: 33%;
-    }
-
-    @media (min-width: $screen-md-min) {
-      flex-basis: 25%;
-    }
-
-    a:first-child {
-      font-size: 2.5rem;
-      word-wrap: break-word;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.5rem;
-      color: #888;
-      margin: 0;
-      padding: 0;
-    }
-  }
 }

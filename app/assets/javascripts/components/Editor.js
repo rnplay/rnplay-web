@@ -4,10 +4,10 @@ import React from 'react';
 import CodeMirror from 'codemirror';
 import assign from 'lodash/object/assign';
 
+import EditorHeader from './EditorHeader';
 import FileSelector from './FileSelector';
-import FileIndicator from './FileIndicator';
+import TabBar from './TabBar';
 import Logger from './Logger';
-
 
 const DEFAULT_CODEMIRROR_OPTIONS = {
   autofocus: true,
@@ -42,13 +42,15 @@ export default class Editor {
     const {
       useDarkTheme,
       useVimKeyBindings,
+      belongsToCurrentUser,
       app : { files },
       onChangeFile,
       currentFile
     } = this.props;
 
     const options = assign({}, DEFAULT_CODEMIRROR_OPTIONS, {
-      theme: useDarkTheme ? 'midnight' : 'solarized',
+      readOnly: belongsToCurrentUser() ? false : 'nocursor',
+      theme: useDarkTheme ? 'midnight' : DEFAULT_CODEMIRROR_OPTIONS.theme,
     }, useVimKeyBindings ? {keyMap: 'vim'} : {});
 
     const textareaNode = React.findDOMNode(this.refs.editorTextArea);
@@ -79,29 +81,45 @@ export default class Editor {
       currentFile,
       fileTree,
       fileSelectorOpen,
+      onFileSelectorToggle,
       useDarkTheme,
-      logs
+      logs,
+      editorHeaderProps,
+      unsavedChanges,
+      saved
     } = this.props;
 
+    const tabBarProps = {
+      currentFile,
+      onFileSelectorToggle,
+      useDarkTheme,
+      unsavedChanges,
+      saved
+    };
+
     return (
-      <div className="editor-flex-wrapper">
-        <FileSelector
-          open={fileSelectorOpen}
-          files={fileTree}
-          current={currentFile}
-          onSelect={this.changeFile}
-        />
-        <div className="editor-scroll-wrapper">
-          <FileIndicator current={currentFile} useDarkTheme={useDarkTheme} />
-          <div className="editor-scroll-wrapper__text-wrapper">
+      <div className="editor-container">
+
+        <EditorHeader {...editorHeaderProps} />
+        <TabBar {...tabBarProps} />
+
+        <div className="editor-wrap">
+          <FileSelector
+            open={fileSelectorOpen}
+            files={fileTree}
+            current={currentFile}
+            onSelect={this.changeFile}
+          />
+          <div className="editor">
             <textarea
               ref="editorTextArea"
-              onChange={this._onChange}
               defaultValue={body}
             />
           </div>
-          <Logger logs={logs} />
         </div>
+
+        <Logger logs={logs} />
+
       </div>
     );
   }

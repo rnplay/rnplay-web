@@ -1,0 +1,75 @@
+.editor-logger {
+  border-top: 1px solid $editor-border-color;
+  min-height: 30px;
+  max-height: 30px;
+  line-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  &__bar {
+    background: $editor-color-darkgrey;
+    border: 0;
+    display: flex;
+    flex: 1;
+    min-height: 30px;
+    max-height: 30px;
+    border-bottom: 1px solid darken($editor-border-color, 3%);
+    box-shadow: 0 0 4px rgba(0,0,0,0.11);
+
+    &:hover {
+      background: $editor-color-light-grey;
+    }
+  }
+
+  &__toggle {
+    padding: 0 10px;
+    border: 0;
+    text-align: right;
+    flex: 1;
+    font-family: Menlo, Consolas, monospace;
+    background: transparent;
+  }
+
+  &__button {
+    border: 0;
+    padding: 0 10px;
+    background: transparent;
+    line-height: 27px;
+    color: #666;
+  }
+
+  &--open {
+    min-height: 30vh;
+  }
+
+  &__content {
+    padding: 10px 0;
+    overflow-y: scroll;
+    font-family: Menlo, Consolas, monospace;
+    line-height: 1.673em;
+    font-size: 11px;
+  }
+
+  &__entry {
+    padding: 0 10px;
+    border-bottom: 1px solid #f0f0f0;
+
+    &--timestamp { color: #888; }
+  }
+
+  &__unread {
+    padding-top: 1px;
+    font-family: Menlo, Consolas, monospace;
+    display: inline-block;
+    text-align: center;
+    font-size: 11px;
+    width: 16px;
+    height: 16px;
+    color: #666;
+    background: #FFE164;
+    border: 1px solid #DEB100;
+    border-radius: 100%;
+    margin-right: 5px;
+  }
+}

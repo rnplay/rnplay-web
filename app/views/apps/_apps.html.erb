@@ -1,0 +1,31 @@
+<div class="apps">
+  <% apps.each_slice(3) do |app_group| %>
+
+      <% app_group.each do |app| %>
+        <div class="app-list--wrapper">
+          <div class="app-list__item">
+            <%= link_to app_path(app.url_token) do %>
+              <%= screenshot_for(app) %>
+            <% end %>
+            <section class="app-list__info--wrapper">
+              <section class="app-list__info">
+                <div class="app-list__details">
+                  <h3><%= link_to app.name || app.module_name, app_path(app.url_token) %></h3>
+                  <%= image_tag(app.creator.avatar.url, class: "avatar") %>
+                  <span><%= app_list_for(app.creator) %></span>
+                </div>
+                <div class="app-list__actions <% if params[:action] == 'picks' %>app-list__actions--picks<% end %>">
+                  <span class="text-muted"><%= time_ago_in_words(app.updated_at) %></span>
+                  <% if params[:action] == 'index' %>
+                    <%= link_to 'Delete', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, class: 'app-list__actions--delete' %>
+                  <% end %>
+                </div>
+                <section class="screenshot--blur" style="background-image: url(<%= screenshot_path_for(app) %>)"></section>
+              </section>
+            </section>
+          </div>
+        </div>
+      <% end %>
+
+  <% end %>
+</div>

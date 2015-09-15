@@ -1,0 +1,42 @@
+$simulator-width: 320px;
+
+.editor-simulator-container {
+  min-width: $simulator-width;
+  width: $simulator-width;
+  max-width: $simulator-width;
+  border-left: 1px solid #ddd;
+  text-align: center;
+
+  &__header {
+    padding: 0 10px;
+
+    &__text { padding-right: 5px; }
+  }
+
+  /* Simulator iframe has some weird styles,
+     hence the padding left. */
+  &__simulator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: $simulator-width;
+    padding-top: 20px;
+    padding-left: 20px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  &__button-container { padding-top: 20px; }
+
+  &__controls {
+    margin-top: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 80%;
+    a {
+      display: block
+    }
+  }
+
+}

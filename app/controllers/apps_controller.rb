@@ -75,7 +75,7 @@ class AppsController < ApplicationController
   end
 
   def public_index
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(username: params[:username]) || User.find(params[:id])
     raise ActiveRecord::RecordNotFound if !@user
   end
 
@@ -94,11 +94,14 @@ class AppsController < ApplicationController
 
   def show
     @app.migrate_to_git if !@app.migrated_to_git?
-    @page_title = @app.name
+    @page_title = @app.name.presence || "Unnamed App"
     @app.increment_view_count!
 
+    creator = User.find(@app.creator_id)
+    @creator = creator.name.presence || creator.username.presence || "anonymous"
+
     respond_to do |format|
-      format.html { render action: :edit }
+      format.html
     end
   end
 
@@ -114,7 +117,7 @@ class AppsController < ApplicationController
         created_from_web: true
       })
 
-      redirect_to edit_app_path(@app)
+      redirect_to app_path(@app)
     end
   end
 
@@ -130,8 +133,7 @@ class AppsController < ApplicationController
   end
 
   def edit
-    @page_title = @app.name
-    @app.increment_view_count!
+    redirect_to app_path(@app), permanent: true
   end
 
   def create
@@ -155,11 +157,17 @@ class AppsController < ApplicationController
 
   end
 
+  require 'base64'
+
   def update
     @app = App.find(params[:id])
 
-    if (app_params[:pick] && current_user.admin?) || (user_signed_in? && @app.created_by?(current_user))
-      @app.update(app_params)
+    if current_user.admin? || (user_signed_in? && @app.created_by?(current_user))
+      if app_params[:screenshot]
+        image_data = Base64::decode64 app_params[:screenshot].split(",").last
+        File.open("#{Rails.root}/public/screenshots/#{@app.url_token}.jpg", "wb") { |f| f.write(image_data) }
+      end
+      @app.update(app_params.except(:screenshot))
       logger.info @app.errors.inspect
       render json: {success: true}
     else
@@ -191,7 +199,7 @@ class AppsController < ApplicationController
   end
 
   def app_params
-    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick, :uses_git)
+    params.require(:app).permit(:name, :body, :module_name, :author, :build_id, :pick, :uses_git, :screenshot)
   end
 
   def pick_layout

@@ -1,9 +1,8 @@
-<%= bootstrap_devise_error_messages! %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= t('.change_your_password', :default => 'Change your password') %></h4>
-  </div>
-  <div class="panel-body">
+<div class="container container--narrow">
+  <div class="form">
+    <%= bootstrap_devise_error_messages! %>
+    <h2 class="title"><%= t('.change_your_password', :default => 'Change your password') %></h2>
+
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, role: "form" }) do |f| %>
       <%= f.hidden_field :reset_password_token %>
 
@@ -20,5 +19,5 @@
       <%= f.submit t('.change_my_password', :default => 'Change my password'), class: "btn btn-info" %>
     <% end %>
   </div>
+  <%= render "devise/shared/links" %>
 </div>
-<%= render "devise/shared/links" %>

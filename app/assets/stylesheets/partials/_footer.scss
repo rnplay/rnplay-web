@@ -1,0 +1,16 @@
+.rnplay-footer {
+  margin-top: 64px;
+  text-align: center;
+  color: $color-footer-text;
+
+  a { color: $color-footer-link; }
+
+  .footer-links {
+    a {
+      display: inline-block;
+      padding: 0 8px;
+
+      &:last-child { font-weight: bolder; }
+    }
+  }
+}

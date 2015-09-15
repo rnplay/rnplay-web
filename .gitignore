@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Installed bundles
+vendor/bundle
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -18,8 +21,11 @@
 node_modules
 .env*
 config/database.yml
-app_js
+app_js/*
+!app_js/package.json
 public/uploads
 public/jsbundles
 app_files
 repos
+npm-debug.log
+public/screenshots/*

@@ -1,98 +1,163 @@
-<div class="container" style="padding-bottom: 100px; width: 60%">
-  <h3>What is this site?</h3>
-  <p>The Playground is a place to easily test and share React Native applications. We host an in-browser code editor, an iOS simulator,
-    and React Native packager instances to quickly test changes to your apps.</p>
-  <h3>Why did you build it?</h3>
-  <p>To demonstrate how powerful React Native is as a mobile development platform. Now, we're an <a href="#team">open source team</a> focused on helping the React Native community, by <a href="https://facebook.github.io/react-native/docs/alertios.html#examples">integrating with React Native documentation</a>,
-     serving as a <a href="https://github.com/facebook/react-native/search?q=rnplay.org&type=Issues&utf8=%E2%9C%93">bug tracking tool</a>, and hosting <a href="/apps/picks">interesting sample applications</a>.</p>
-  <h3>What can I do with this site?</h3>
-  <p>You can:</p>
-  <ul>
-    <li><p>Write and test React Native apps right in the browser, with our code editor and a real, embedded iOS simulator provided by the
-      awesome team at <a href="http://appetize.io">appetize.io</a>.</p></li>
-    <li><p>Push and pull React Native apps to the site using git.<p></li>
-    <li><p>Compare behavior across multiple React Native versions.</p></li>
-  </ul>
-  <h2>Is your code open source?</h2>
-  <p>Currently, all code related to this site is <a href="http://github.com/rnplay">available on Github</a>. Please help us out by submitting issues or pull requests!</p>
-  <h3>Which React Native versions do you support?</h3>
-  <p><%= Build.all.collect(&:name).to_sentence %>.</p>
-
-  <h2>What can I do with this site?</h2>
-  <p>Build and test React Native applications with just a browser, and optionally an iOS device! <a href="https://facebook.github.io/react-native/">Learn more about React Native</a>.</p>
-
-  <h2>How can I build an app and test it on the site?</h2>
-  <p>Sign up and start playing right away with our in-browser editor and simulator. Once you're ready to test on a device, download the iOS app, then
-    use the 'Run on Device' link and scan the QR code.</p>
-
-  <h2>How do I 'exit' an app running inside the iOS app?</h2>
-  <p>Long-press the screen with two fingers. After a few seconds, the base iOS app should appear.</p>
-
-  <h2>How does this site work?</h2>
-  <p>Apps are all hosted in their own git repositories on our servers. We run React Native packagers which serve transformed javascript to our custom iOS app, which is compiled with
-    some <a href="https://github.com/rnplay/rnplay-ios/blob/master/package.json#L10-L25">community native modules</a>, available for use in your app.</p>
-
-  <h2>How do I use git to push my app to the site?</h2>
-  <p>First, install the command line client: <em>npm install -g rnplay-cli</em></p>
-  <p>Sign up to the site, and <a href="https://rnplay.org/users/edit">grab your authentication token in your profile page</a>.</p>
-  <p>Run <em>rnplay -a</em> and enter your email and token.</p>
-  <p>From inside your React Native app directory, which should already have a git repository, run <em>rnplay -c</em>. Choose an application name:
-    currently the name should match the registered module name in <em>index.ios.js</em>. This file must exist and be the app entry point.</p>
-  <p>Now your app should be created on the site, with a new git remote added to your repo. <em>git push rnplay master</em> will push your master
-     branch up. Now <em>rnplay -o</em> to open the browser to your app.</p>
-  <h2>What limitations exist for testing apps here?</h2>
-  <p>You may only use native modules from React Native itself, or those included with our iOS app.</p>
-  <p>To prevent conflicts between react-native versions, git repos must not have git repositories as npm sources.</p>
-  <p>Your app may not work if it uses features not available in our supported React Native versions. To run inside the iOS app, your
-     app should work with the its React Native version: <strong>0.5.0</strong>.
-  <p>Your app can't use images or other resources in the iOS app resource bundle, since we have no way to package those at runtime.</p>
-  <h3>Who built this?</h3>
+<div class="container container--about">
+  
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2 class="title">What is this site?</h2>
+      <p class="intro">The Playground is a place to easily test and share React Native applications. We host an in-browser code editor, an iOS simulator, and React Native packager instances to quickly test changes to your apps.</p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>Why did you build it?</h2>
+      <p>To demonstrate how powerful React Native is as a mobile development platform. Now, we're an <a href="#team">open source team</a> focused on helping the React Native community, by <a href="https://facebook.github.io/react-native/docs/alertios.html#examples">integrating with React Native documentation</a>,
+         serving as a <a href="https://github.com/facebook/react-native/search?q=rnplay.org&type=Issues&utf8=%E2%9C%93">bug tracking tool</a>, and hosting <a href="/apps/picks">interesting sample applications</a>.</p>
+    </div>
+  </div>
 
   <div class="row">
-    <div class="team-col">
-      <a href="http://joshua.si">
-        <%= image_tag("joshua.png", class: 'img-responsive') %>
-        </a>
-      <div class="caption">
-        <h3><a href="http://joshua.si">Joshua Sierles</a></h3>
-        <p>Ruby server hacker, flamenco guy</p>
-      </div>
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>What can I do with this site?</h2>
+      <p>You can:</p>
+      <ul>
+        <li><p>Write and test React Native apps right in the browser, with our code editor and a real, embedded iOS simulator provided by the
+          awesome team at <a href="http://appetize.io">appetize.io</a>.</p></li>
+        <li><p>Push and pull React Native apps to the site using git.</p></li>
+        <li><p>Compare behavior across multiple React Native versions.</p></li>
+      </ul>
     </div>
-    <div class="team-col">
-      <a href="http://brentvatne.ca">
-        <%= image_tag("brent.jpg", class: 'img-responsive') %>
-      </a>
-      <div class="caption">
-        <h3><a href="http://brentvatne.ca">Brent Vatne</a></h3>
-        <p>React Native community leader, happy person</p>
-      </div>
-    </div>
+  </div>
 
-    <div class="team-col">
-      <a href="http://blog.lum.pe">
-        <%= image_tag("jlumpe.jpg", class: 'img-responsive') %>
-      </a>
-      <div class="caption">
-        <h3><a href="http://lum.pe/">Johannes Lumpe</a></h3>
-        <p>ES7 evangelist, rocker</p>
-      </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>Is your code open source?</h2>
+      <p>Currently, all code related to this site is <a href="http://github.com/rnplay">available on Github</a>. Please help us out by submitting issues or pull requests!</p>
     </div>
-    <div class="team-col">
-      <a href="http://twitter.com/dsibiski">
-        <%= image_tag("dsibiski.jpg", class: 'img-responsive') %>
-      </a>
-      <div class="caption">
-        <h3><a href="http://twitter.com/dsibiski">Dave Sibiski</a></h3>
-        <p>Native dev, surfer</p>
-      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>Which React Native versions do you support?</h2>
+      <p><%= Build.all.collect(&:name).to_sentence %>.</p>
     </div>
-    <div class="team-col">
-      <a href="http://twitter.com/_cdro">
-        <%= image_tag("chris.jpg", class: 'img-responsive') %>
-      </a>
-      <div class="caption">
-        <h3><a name="team" href="http://twitter.com/_cdro">Christopher Dro</a></h3>
-        <p>Programmer, guitarist</p>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>What can I do with this site?</h2>
+      <p>Build and test React Native applications with just a browser, and optionally an iOS device! <a href="https://facebook.github.io/react-native/">Learn more about React Native</a>.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>How can I build an app and test it on the site?</h2>
+      <p>Sign up and start playing right away with our in-browser editor and simulator. Once you're ready to test on a device, download the iOS app, then use the 'Run on Device' link and scan the QR code.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>How do I 'exit' an app running inside the iOS app?</h2>
+      <p>Long-press the screen with two fingers. After a few seconds, the base iOS app should appear.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>How does this site work?</h2>
+      <p>Apps are all hosted in their own git repositories on our servers. We run React Native packagers which serve transformed javascript to our custom iOS app, which is compiled with
+        some <a href="https://github.com/rnplay/rnplay-ios/blob/master/package.json#L10-L25">community native modules</a>, available for use in your app.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>How do I use git to push my app to the site?</h2>
+      <p>First, install the command line client: <em>npm install -g rnplay-cli</em></p>
+      <p>Sign up to the site, and <a href="https://rnplay.org/users/edit">grab your authentication token in your profile page</a>.</p>
+      <p>Run <em>rnplay -a</em> and enter your email and token.</p>
+      <p>From inside your React Native app directory, which should already have a git repository, run <em>rnplay -c</em>. Choose an application name:
+        currently the name should match the registered module name in <em>index.ios.js</em>. This file must exist and be the app entry point.</p>
+      <p>Now your app should be created on the site, with a new git remote added to your repo. <em>git push rnplay master</em> will push your master
+         branch up. Now <em>rnplay -o</em> to open the browser to your app.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2>What limitations exist for testing apps here?</h2>
+      <p>You may only use native modules from React Native itself, or those included with our iOS app.</p>
+      <p>To prevent conflicts between react-native versions, git repos must not have git repositories as npm sources.</p>
+      <p>Your app may not work if it uses features not available in our supported React Native versions. To run inside the iOS app, your
+         app should work with the its React Native version: <strong>0.5.0</strong>.</p>
+      <p>Your app can't use images or other resources in the iOS app resource bundle, since we have no way to package those at runtime.</p>
+    </div>
+  </div>
+
+  <div class="row team">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+  
+      <h1 class="title">Who built this?</h1>
+
+      <div class="team-col--wrapper">
+
+        <div class="team-col">
+          <a href="http://joshua.si">
+            <%= image_tag("joshua.png", class: 'img-responsive') %>
+            </a>
+          <div class="caption">
+            <h3><a href="http://joshua.si">Joshua Sierles</a></h3>
+            <p>Ruby server hacker, flamenco guy</p>
+          </div>
+        </div>
+        <div class="team-col">
+          <a href="http://brentvatne.ca">
+            <%= image_tag("brent.jpg", class: 'img-responsive') %>
+          </a>
+          <div class="caption">
+            <h3><a href="http://brentvatne.ca">Brent Vatne</a></h3>
+            <p>React Native community leader, happy person</p>
+          </div>
+        </div>
+
+        <div class="team-col">
+          <a href="http://blog.lum.pe">
+            <%= image_tag("jlumpe.jpg", class: 'img-responsive') %>
+          </a>
+          <div class="caption">
+            <h3><a href="http://lum.pe/">Johannes Lumpe</a></h3>
+            <p>ES7 evangelist, rocker</p>
+          </div>
+        </div>
+        <div class="team-col">
+          <a href="http://twitter.com/dsibiski">
+            <%= image_tag("dsibiski.jpg", class: 'img-responsive') %>
+          </a>
+          <div class="caption">
+            <h3><a href="http://twitter.com/dsibiski">Dave Sibiski</a></h3>
+            <p>Native dev, surfer</p>
+          </div>
+        </div>
+        <div class="team-col">
+          <a href="http://twitter.com/_cdro">
+            <%= image_tag("chris.jpg", class: 'img-responsive') %>
+          </a>
+          <div class="caption">
+            <h3><a name="team" href="http://twitter.com/_cdro">Christopher Dro</a></h3>
+            <p>Programmer, guitarist</p>
+          </div>
+        </div>
+        <div class="team-col">
+          <a href="https://latehours.net">
+            <%= image_tag("johan.jpg", class: 'img-responsive') %>
+          </a>
+          <div class="caption">
+            <h3><a name="team" href="https://latehours.net">Johan Ruokangas</a></h3>
+            <p>UI &amp; UX enthusiast, <span class="yellow">yellow</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

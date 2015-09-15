@@ -1,19 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @app.name %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @app.body %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @app.author %>
-</p>
-
-<%= link_to 'Edit', edit_app_path(@app) %> |
-<%= link_to 'Back', apps_path %>
+<div id="editor-container" class="editor-app"></div>
+<script>
+  window.__data = <%=
+      raw({app: {
+        id: @app.id,
+        body: @app.body,
+        appetizeOptions: @app.appetize_options(embed: true, autoapp: params[:autoapp], app_params: {route: params[:route] || ""}),
+        creator: {username: @app.creator.username, name: @app.creator.name, id: @app.creator_id},
+        buildId: @app.build_id,
+        name: @app.name,
+        picked: @app.pick,
+        urlToken: @app.url_token,
+        multiFile: @app.uses_git,
+        files: @app.target_git_repo.files_with_contents,
+        url_params: params
+      },
+      currentUser: current_user,
+      useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,
+      useDarkTheme: user_signed_in? && current_user.use_dark_theme?,
+      isDevelopment: Rails.env.development?,
+      builds: Rails.env.production? ? Build.production : Build.all,
+      headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
+</script>

@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import cx from 'react-classset';
+import classNames from 'classnames';
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/search/searchcursor';
 import 'codemirror/addon/dialog/dialog';
@@ -10,9 +10,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/keymap/vim';
 
 import Editor from './Editor';
-import Header from './header.js';
 import Footer from './footer.js';
-import EditorHeader from './EditorHeader';
 import ErrorView from './ErrorView';
 import Simulator from './Simulator';
 
@@ -43,22 +41,8 @@ export default class EditorApp extends Component {
     }
 
     if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
-      if (buildUpdated) {
-        window.location.reload();
-      } else {
-        const isOldBuild = parseInt(buildId) < 3;
-        const iframe = this.simulatorIframe;
-        // From 0.4.4 and up, we enable live reload - no need to reload the app
-        if (isOldBuild) {
-          if (simulatorActive) {
-            iframe.contentWindow.postMessage('restartApp', '*');
-          } else {
-            iframe.contentWindow.postMessage('requestSession', '*');
-          }
-        } else if (!simulatorActive) {
-          iframe.contentWindow.postMessage('requestSession', '*');
-        }
-      }
+      const iframe = this.simulatorIframe;
+      iframe.contentWindow.postMessage('requestSession', '*');
     }
   }
 
@@ -66,22 +50,56 @@ export default class EditorApp extends Component {
     this.simulatorIframe.contentWindow.postMessage('heartbeat', '*');
   }
 
+  saveScreenshot = () => {
+    this.simulatorIframe.contentWindow.postMessage('getScreenshot', '*');
+  }
+
+  openDevMenu = () => {
+    this.simulatorIframe.contentWindow.postMessage('shakeDevice', '*');
+  }
+
+  rotate = (direction) => {
+    this.simulatorIframe.contentWindow.postMessage(`rotate${direction}`, '*');
+  }
+
   // Keep track of simulator lifecycle
   handleSimulatorEvent = (e) => {
+
     const { data } = e;
-    const { dispatch, log } = this.props;
-    if (data === 'sessionRequested') {
+    const { dispatch, log, saveScreenshot } = this.props;
+
+    if (data.type === 'screenshot') {
+      dispatch(saveScreenshot(this.props.app.id, data.data));
+    } else if (data === 'sessionRequested') {
       this.simulatorActive = true;
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
+    } else if (data.type === 'debug' && data.message.indexOf('Running application') !== -1 && this.belongsToCurrentUser()) {
+      console.log('Taking screenshot in 3 seconds...')
+      setTimeout(() => {
+        console.log('Took a screenshot!')
+        this.saveScreenshot();
+      }.bind(this), 3000)
     }
-    
-    dispatch(log(data));
+
+    if (data.type == 'debug' && data.message.indexOf('GoogleAnalytics') === -1 && data.message.indexOf('devtools socket') === -1) {
+      dispatch(log(data));
+    }
+  }
+
+  belongsToCurrentUser = () => {
+    const { currentUser, app } = this.props;
+    return currentUser && currentUser.id === app.creator.id;
+  }
+
+  currentUserIsAdmin = () => {
+    const { currentUser } = this.props;
+    return currentUser && currentUser.admin;
   }
 
   onUpdateName = (name) => {
-    const { dispatch, updateName } = this.props;
-    dispatch(updateName(name));
+    const { dispatch, updateName, app: {id} } = this.props;
+    dispatch(updateName(id, name));
   }
 
   onUpdateBody = (newBody) => {
@@ -90,8 +108,8 @@ export default class EditorApp extends Component {
   }
 
   onUpdateBuild = (buildId) => {
-    const { dispatch, updateBuildId } = this.props;
-    dispatch(updateBuildId(buildId));
+    const { dispatch, updateBuildId, app: {id} } = this.props;
+    dispatch(updateBuildId(id, buildId));
   }
 
   onPick = () => {
@@ -123,26 +141,17 @@ export default class EditorApp extends Component {
   }
 
   onFork = () => {
-    const { dispatch, forkApp, app: { urlToken } } = this.props;
-    dispatch(forkApp(urlToken));
+    const { dispatch, forkApp, app: { urlToken }, currentUser } = this.props;
+    if (currentUser) {
+      dispatch(forkApp(urlToken));
+    } else {
+      window.location = "/users/sign_in";
+    }
   }
 
   onFileSelectorToggle = () => {
     const { dispatch, toggleFileSelector } = this.props;
     dispatch(toggleFileSelector());
-  }
-
-  renderHeader() {
-    if (this.props.showHeader) {
-      const { currentUser, app, headerLogoSrc} = this.props;
-      return (
-        <Header
-          currentUser={currentUser}
-          currentApp={app}
-          headerLogoSrc={headerLogoSrc}
-        />
-      );
-    }
   }
 
   render() {
@@ -160,7 +169,9 @@ export default class EditorApp extends Component {
       appSaveError,
       appIsPicked,
       fileSelectorOpen,
-      logs
+      logs,
+      unsavedChanges,
+      saved
     } = this.props;
 
     const {
@@ -169,31 +180,30 @@ export default class EditorApp extends Component {
       onUpdateBuild,
       onChangeFile,
       onUpdateBody,
+      belongsToCurrentUser,
+      currentUserIsAdmin,
       onPick,
       onSave,
-      onFork
+      onFork,
+      saveScreenshot,
+      rotate,
+      openDevMenu
     } = this;
 
     const { appetizeUrl } = app;
 
-    const simulatorUrl = useDarkTheme ?
-      appetizeUrl.replace('deviceColor=white', 'deviceColor=black') :
-      appetizeUrl;
-
     const editorHeaderProps = {
-      name,
-      useDarkTheme,
       app,
       appIsPicked,
+      belongsToCurrentUser,
       currentUser,
-      builds,
-      buildId,
-      onUpdateName,
-      onUpdateBuild,
+      creator: app.creator,
+      name,
+      onFork,
       onPick,
       onSave,
-      onFork,
-      onFileSelectorToggle
+      onUpdateName,
+      useDarkTheme,
     };
 
     const editorProps = {
@@ -205,29 +215,41 @@ export default class EditorApp extends Component {
       useDarkTheme,
       onChangeFile,
       onUpdateBody,
+      belongsToCurrentUser,
       fileSelectorOpen,
-      logs
+      onFileSelectorToggle,
+      logs,
+      unsavedChanges,
+      saved
     };
 
-    const classes = cx({
-      'editor-container': true,
+    const buildPickerProps = {
+      builds,
+      buildId,
+      onUpdateBuild,
+      currentUserIsAdmin,
+      saveScreenshot,
+      openDevMenu,
+      rotate
+    };
+
+    const classes = classNames({
+      'editor-app': true,
       'dark-theme': useDarkTheme
     });
 
     return (
-      <div onKeyUp={this.sendHeartBeat} className={classes} style={{paddingTop: showHeader ? 50 : 0}}>
-        {this.renderHeader()}
-        <EditorHeader {...editorHeaderProps} />
-        <div className="editor-container__body">
-          <ErrorView error={appSaveError} />
-          <Editor {...editorProps} />
-          <Simulator
-            url={simulatorUrl}
-            app={this.props.app}
-            useDarkTheme={useDarkTheme}
-          />
-        </div>
+      <div onKeyUp={this.sendHeartBeat} className={classes}>
+
+        <Editor editorHeaderProps={editorHeaderProps} {...editorProps} />
+
+        <Simulator
+          app={this.props.app}
+          useDarkTheme={useDarkTheme}
+          {...buildPickerProps}
+        />
+
       </div>
-    )
+    );
   }
 };

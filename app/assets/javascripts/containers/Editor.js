@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { connect } from 'redux/react';
+import { connect } from 'react-redux';
 
 import { editor as editorActions, logger as loggerActions } from '../actions';
 import EditorApp from '../components/EditorApp';
@@ -20,7 +20,9 @@ import EditorApp from '../components/EditorApp';
     appSaveError,
     fileSelectorOpen,
     appIsPicked,
-    forkToken
+    forkToken,
+    unsavedChanges,
+    saved
   } = editor;
 
   return {
@@ -37,6 +39,8 @@ import EditorApp from '../components/EditorApp';
     appSaveInProgress,
     appSaveError,
     fileSelectorOpen,
+    unsavedChanges,
+    saved,
     logs: logs.logs
   };
 })

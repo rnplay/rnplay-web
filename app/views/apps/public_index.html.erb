@@ -1,14 +1,15 @@
-<div class="container" style="text-align: center; padding-bottom: 50px;">
-  <h1 style="margin-bottom: 40px"><%= @user.name %>'s Apps</h1>
+<div class="container container--picks">
+  <h1 class="title">
+    <% if @user.name || @user.username %>
+      <%= @user.name || @user.username %>'s Apps
+    <% else %>
+      
+    <% end %>
+  </h1>
   <ul class="list-unstyled" id="apps">
   <% if @user.apps.empty? %>
-  <p>This user hasn't created any public apps.</p>
+  	<p>This user hasn't created any public apps.</p>
+  <% else %>
+  	<%= render partial: 'apps', locals: {apps: @user.apps} %>
   <% end %>
-  <% @user.apps.each do |f| %>
-    <li>
-      <%= link_to f.name || f.module_name, user_app_path(id: f.url_token) %>
-      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
-    </li>
-  <% end %>
-  </ul>
 </div>

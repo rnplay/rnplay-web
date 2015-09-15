@@ -1,18 +1,21 @@
-<div class="container" style="text-align: center; padding-bottom: 50px;">
-  <h1 style="margin-bottom: 40px">My apps</h1>
-  <ul class="list-unstyled play-list" id="apps">
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="title">My Apps</h1>
+  </div>
+</div>
+
+<div class="row">
   <% if @apps.empty? %>
-    <p>
-      You haven't created any apps yet.
-      <br><br><%= link_to "Make your first app!", new_app_path, class: 'btn btn-info' %>
-    </p>
+    <div class="app-list__item--empty--wrapper">
+      <div class="app-list__item app-list__item--empty">
+        <section>
+          <img src="/img/react-native-playground-logo-grey.svg" alt="React Native Playground Logo grey">
+          <h3>You haven't created any apps yet.</h3>
+          <%= link_to "Make your first app!", new_app_path, class: 'btn btn-action' %>
+        </section>
+      </div>
+    </div>
+  <% else %>
+    <%= render partial: 'apps', locals: {apps: @apps} %>
   <% end %>
-  <% @apps.each do |f| %>
-    <li>
-      <%= link_to f.name || f.module_name, app_path(f.url_token) %>
-      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
-      <%= link_to 'delete', app_path(f), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete' %>
-    </li>
-  <% end %>
-  </ul>
 </div>

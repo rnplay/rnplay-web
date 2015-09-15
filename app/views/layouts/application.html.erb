@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html style="max-width: 100vw; overflow-x: hidden">
+<!doctype html>
+<html>
 <head>
   <title><%= @page_title + " : " if @page_title %>React Native Playground<%= ": Share and test your React Native code in the browser" if !@page_title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 
-  <script src="//use.typekit.net/ptw6swo.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,400italic' rel='stylesheet' type='text/css'>
+
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -22,14 +23,10 @@
 </head>
 <body class="<%= yield(:body_class) %>">
   <%= react_component 'Header', currentUser: current_user,
-      headerLogoSrc: asset_path('header_logo.png') %>
+      headerLogoSrc: asset_path('react-native-playground-logo.svg') %>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div id="main" class="col-xs-12">
-        <%= yield %>
-      </div>
-    </div>
+  <div class="wrapper--main">
+    <%= yield %>
   </div>
 
   <%= react_component 'Footer' %>
