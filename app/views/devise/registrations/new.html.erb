@@ -1,7 +1,8 @@
 <div class="container container--narrow">
   <%= bootstrap_devise_error_messages! %>
   <div class="form">
-    <h2 class="title">
+
+    <h2 class="title title--form">
       <span>Sign Up</span>
       <%- if controller_name != 'sessions' %>
         <span class="title--sub">Already have an account? <%= link_to "Sign in!", new_session_path(resource_name) %></span>

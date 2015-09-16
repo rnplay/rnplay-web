@@ -2,7 +2,7 @@
   <%= bootstrap_devise_error_messages! %>
   <div class="form">
 
-    <h2 class="title">
+    <h2 class="title title--form">
       <span class="">Sign In</span>
       <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
         <span class="title--sub">Don't have an account? <%= link_to "Sign up", new_registration_path(resource_name) %></span>
