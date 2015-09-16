@@ -16,7 +16,7 @@
                 </div>
                 <div class="app-list__actions <% if params[:action] == 'picks' %>app-list__actions--picks<% end %>">
                   <span class="text-muted"><%= time_ago_in_words(app.updated_at) %></span>
-                  <% if params[:action] == 'index' %>
+                  <% if params[:action] == 'index' && params['controller'] == 'apps' %>
                     <%= link_to 'Delete', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, class: 'app-list__actions--delete' %>
                   <% end %>
                 </div>
