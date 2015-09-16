@@ -44,5 +44,3 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('SampleApp', () => SampleApp);
-
-module.exports = SampleApp;
