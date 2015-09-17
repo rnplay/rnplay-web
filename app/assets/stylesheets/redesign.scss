@@ -19,9 +19,34 @@ body {
 
 .container {
   &--picks {
-    text-align: center;
 
-    header { margin-bottom: 32px; }
+    header {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      text-align: center;
+
+      .title {
+        border: 0;
+        margin-bottom: 0;
+        padding: 0;
+      }
+
+      p {
+        color: lighten(#333, 15%);
+        font-size: 1.2em;
+        line-height: 1.2em*1.4;
+        margin-bottom: 0;
+
+        @media (max-width: 440px) {
+          font-size: 1em;
+        }
+      }
+
+      @media (min-width: $grid-float-breakpoint) {
+        text-align: left;
+      }
+    }
   }
 
   &--narrow {
@@ -41,11 +66,16 @@ body {
   border-bottom: 1px solid #ddd;
   padding-bottom: 8px;
   margin-bottom: 24px;
-  display: flex;
   line-height: 1.5em;
+  text-align: center;
 
-  span:first-child {
-    flex: 1 1 auto;
+  &--form {
+    text-align: left;
+    display: flex;
+
+    span:first-child {
+      flex: 1 1 auto;
+    }
   }
 
   &--sub {
@@ -55,6 +85,10 @@ body {
     @media (max-width: 440px) {
       display: block;
     }
+  }
+
+  @media (min-width: $grid-float-breakpoint) {
+    text-align: left;
   }
 }
 

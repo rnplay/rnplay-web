@@ -2,7 +2,7 @@
 
   <%= bootstrap_devise_error_messages! %>
   <div class="form">
-    <h2 class="title"><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h2>
+    <h2 class="title title--form"><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h2>
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form" }) do |f| %>
       <div class="form-group">
         <%= f.label :email %>
