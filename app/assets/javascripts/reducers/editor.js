@@ -61,9 +61,18 @@ export default createStore(initialState, {
     saved: false
   }),
 
-  [`${actions.updateBuildId}`]: (state, { newBuildId }) => ({
+  [`${actions.viewerUpdateBuildId}`]: (state, { newBuildId }) => ({
     ...state,
     newBuildId
+  }),
+
+  [`${actions.authorUpdateBuildId}-success`]: (state, { newBuildId }) => ({
+    ...state,
+    newBuildId
+  }),
+
+  [`${actions.authorUpdateBuildId}-failure`]: (state, { newBuildId }) => ({
+    ...state
   }),
 
   [`${actions.saveFile}-success`]: (state, { filename }) => ({

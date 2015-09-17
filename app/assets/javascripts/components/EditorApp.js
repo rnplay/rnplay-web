@@ -108,8 +108,12 @@ export default class EditorApp extends Component {
   }
 
   onUpdateBuild = (buildId) => {
-    const { dispatch, updateBuildId, app: {id} } = this.props;
-    dispatch(updateBuildId(id, buildId));
+    const { dispatch, viewerUpdateBuildId, authorUpdateBuildId, app: {id} } = this.props;
+    if (this.belongsToCurrentUser()) {
+      dispatch(authorUpdateBuildId(id, buildId));
+    } else {
+      dispatch(viewerUpdateBuildId(id, buildId));
+    }
   }
 
   onPick = () => {

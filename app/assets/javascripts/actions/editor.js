@@ -26,8 +26,12 @@ export default {
     newName
   }),
 
-  updateBuildId: (appId, newBuildId) => ({
+  authorUpdateBuildId: (appId, newBuildId) => ({
     promise: api.saveBuildId(appId, newBuildId),
+    newBuildId
+  }),
+
+  viewerUpdateBuildId: (appId, newBuildId) => ({
     newBuildId
   }),
 
