@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import {result, find} from 'lodash';
+import {result, find, template} from 'lodash';
 import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
 import Qs from 'qs'
@@ -21,8 +21,14 @@ export default class Simulator extends Component {
 
   appetizeUrl() {
     var prefix = 'https://appetize.io/embed';
-    var appetizeId = find(this.props.builds, (build) => {return build.id == this.props.buildId}).appetize_id
-    var url = `${prefix}/${appetizeId}?${Qs.stringify(this.props.app.appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(this.props.app.appetizeOptions.app_params))}`
+    var buildShortName = this.props.buildId
+    var build = find(this.props.builds, (build) => {return build.id == this.props.buildId})
+    var appetizeId = build.appetize_id
+    var appParams = this.props.app.appetizeOptions.app_params
+
+    appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: appParams.bundlePath, buildShortName: build.short_name})
+    var url = `${prefix}/${appetizeId}?${Qs.stringify(this.props.app.appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
+    console.log(url)
     return url;
   }
 

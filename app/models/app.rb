@@ -22,9 +22,19 @@ class App < ActiveRecord::Base
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io#{bundle_path}"
     elsif Rails.env.staging?
-      "https://packagerstaging#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org#{bundle_path}"
+      "https://packagerstaging#{build.short_name}.rnplay.org#{bundle_path}"
     else
-      "https://packager#{build.name.gsub(".", "").gsub("-", "")}.rnplay.org#{bundle_path}"
+      "https://packager#{build.short_name}.rnplay.org#{bundle_path}"
+    end
+  end
+
+  def packager_url_template
+    if Rails.env.development?
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io${bundlePath}"
+    elsif Rails.env.staging?
+      "https://packagerstaging${buildShortName}.rnplay.org${bundlePath}"
+    else
+      "https://packager${buildShortName}.rnplay.org${bundlePath}"
     end
   end
 
@@ -53,7 +63,8 @@ class App < ActiveRecord::Base
     options[:app_params] ||= {}
 
     options[:app_params] = {
-      "bundleUrl" => bundle_url,
+      "bundlePath" => bundle_path,
+      "packagerUrlTemplate" => packager_url_template,
       "moduleName" => module_name,
       "RCTDevMenu" => { "liveReloadEnabled" => true }
     }.merge(options[:app_params])
