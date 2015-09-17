@@ -250,6 +250,7 @@ export default class EditorApp extends Component {
         <Simulator
           app={this.props.app}
           useDarkTheme={useDarkTheme}
+          belongsToCurrentUser={belongsToCurrentUser}
           {...buildPickerProps}
         />
 

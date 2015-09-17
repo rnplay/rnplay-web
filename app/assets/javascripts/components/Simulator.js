@@ -26,9 +26,12 @@ export default class Simulator extends Component {
     var appetizeId = build.appetize_id
     var appParams = this.props.app.appetizeOptions.app_params
 
+    if (!this.props.belongsToCurrentUser()) {
+      appParams.RCTDevMenu.liveReloadEnabled = false
+    }
+
     appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: appParams.bundlePath, buildShortName: build.short_name})
     var url = `${prefix}/${appetizeId}?${Qs.stringify(this.props.app.appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
-    console.log(url)
     return url;
   }
 
