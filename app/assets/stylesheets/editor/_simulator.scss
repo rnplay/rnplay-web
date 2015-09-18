@@ -30,7 +30,10 @@ $simulator-width: 350px;
     margin-top: 20px;
     text-transform: uppercase;
 
-    a { display: block; }
+    a {
+      display: inline-block;
+      padding: 0 7px;
+    }
   }
 
   &__title {
