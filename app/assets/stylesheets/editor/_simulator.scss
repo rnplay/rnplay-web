@@ -81,35 +81,31 @@ $simulator-width: 350px;
 
   .label {
     background: rgba(0,0,0,.05);
+    border-radius: 0;
     color: #444;
     display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
     line-height: 24px;
+    margin: 0;
     padding: 0;
     text-align: center;
     transition: all 0.2s ease-out;
     width: 72px;
-
-    label {
-      font-size: 14px;
-      font-weight: normal;
-      margin: 0;
-      padding: 0;
-    }
+    cursor: pointer;
 
     &:hover { background: transparent; }
-
-    // Doh...
-    &, &.selected, & > * { cursor: pointer; }
   }
 
   .selected {
     background: #fff;
+    border-radius: 3px;
     box-shadow: 0 0 0 1px $editor-border-color;
 
     // Don't change on hover
     &:hover { background: #fff; }
 
-    label span {
+    span {
       color: $editor-color-purple;
       font-weight: bolder;
     }

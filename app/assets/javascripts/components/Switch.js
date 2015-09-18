@@ -13,10 +13,9 @@ export default class Switch extends Component {
     return this.props.children.map(function(child, index) {
       var selected = child.props.value === this.state.selected || index === this.state.selected;
       return (
-        <div
+        <label htmlFor={`sc-${this.props.name}${index}`}
           className={`label ${selected ? ' selected' : ''}`}
-          key={`sc-${this.props.name}${index}`}
-        >
+          key={`sc-${this.props.name}${index}`}>
           <input
             type="radio"
             name={`sc-${this.props.name}`}
@@ -25,11 +24,8 @@ export default class Switch extends Component {
             checked={selected}
             onChange={this.handleChange}
           />
-          <label htmlFor={`sc-${this.props.name}${index}`}>
             {child}
-          </label>
-
-        </div>
+        </label>
       )
     }.bind(this));
   }

@@ -154,7 +154,6 @@ export default class Simulator extends Component {
   render() {
     const {
       // useDarkTheme,
-      url,
       builds,
       buildId
     } = this.props;
