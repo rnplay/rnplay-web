@@ -8,7 +8,7 @@ import 'codemirror/addon/dialog/dialog';
 import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/keymap/vim';
-
+import {find} from 'lodash';
 import Editor from './Editor';
 import Footer from './footer.js';
 import ErrorView from './ErrorView';
@@ -116,7 +116,7 @@ export default class EditorApp extends Component {
     }
   }
 
-  onSelectPlatform = (platform, value) => {
+  onSelectSupportedPlatform = (platform, value) => {
     const { dispatch, authorSelectPlatform, app: {id} } = this.props;
     dispatch(authorSelectPlatform(id, platform, value));
   }
@@ -165,7 +165,6 @@ export default class EditorApp extends Component {
 
   render() {
 
-    console.log(this.props)
     const {
       useDarkTheme,
       useVimKeyBindings,
@@ -193,7 +192,7 @@ export default class EditorApp extends Component {
       onUpdateBuild,
       onChangeFile,
       onUpdateBody,
-      onSelectPlatform,
+      onSelectSupportedPlatform,
       belongsToCurrentUser,
       currentUserIsAdmin,
       onPick,
@@ -241,7 +240,7 @@ export default class EditorApp extends Component {
       builds,
       buildId,
       onUpdateBuild,
-      onSelectPlatform,
+      onSelectSupportedPlatform,
       currentUserIsAdmin,
       saveScreenshot,
       openDevMenu,
@@ -264,6 +263,7 @@ export default class EditorApp extends Component {
           app={this.props.app}
           useDarkTheme={useDarkTheme}
           belongsToCurrentUser={belongsToCurrentUser}
+          build={find(builds, (build) => {return build.id == buildId})}
           {...buildPickerProps}
         />
 

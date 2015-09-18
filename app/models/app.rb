@@ -79,7 +79,7 @@ class App < ActiveRecord::Base
       orientation: 'portrait',
       screenOnly: false,
       xdocMsg: true,
-      deviceColor: 'black',
+      deviceColor: 'white',
       debug: 'true',
     })
 

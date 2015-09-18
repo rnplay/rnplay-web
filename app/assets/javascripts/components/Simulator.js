@@ -6,6 +6,7 @@ import {result, find, template, clone} from 'lodash';
 import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
 import Qs from 'qs'
+import Switch from './Switch'
 
 // Sample appetize URL
 // https://appetize.io/embed/u702ejhe26p438rp73c74uyxur?device=iphone5s&scale=75&orientation=portrait&screenOnly=false&xdocMsg=true&autoapp=false&deviceColor=white&debug=true&params=%7B%22bundleUrl%22:%22http://rnplay-jsierles.ngrok.io/app_js/cUJ22A/index.ios.bundle%22,%22moduleName%22:%22SampleApp%22,%22RCTDevMenu%22:%7B%22liveReloadEnabled%22:true%7D,%22route%22:%22%22%7D
@@ -21,8 +22,7 @@ export default class Simulator extends Component {
 
   appetizeUrl() {
     var prefix = 'https://appetize.io/embed';
-    var buildShortName = this.props.buildId
-    var build = find(this.props.builds, (build) => {return build.id == this.props.buildId})
+    var build = this.props.build
 
     var appetizeId = build.appetize_id
     var appParams = {...this.props.app.appetizeOptions.app_params}
@@ -36,12 +36,12 @@ export default class Simulator extends Component {
       appParams.RCTDevMenu.liveReloadEnabled = false
     }
 
+    console.log(build.platform)
+    console.log(appetizeId)
     var bundlePath = build.platform == 'android' ? appParams.bundlePath : appParams.bundlePath+"/index.ios.bundle";
 
     appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
     var url = `${prefix}/${appetizeId}?${Qs.stringify(appetizeParams)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
-    console.log(appParams.bundleUrl)
-    console.log(url)
     return url;
   }
 
@@ -62,7 +62,6 @@ export default class Simulator extends Component {
                isOpen={this.state.qrModalIsVisible} />
     )
   }
-
 
   renderQRLink = () => {
     return (
@@ -86,19 +85,31 @@ export default class Simulator extends Component {
     }
   }
 
-  selectPlatform = (event) => {
+  onSelectSupportedPlatform = (event) => {
     var state = {}
     console.log(`${event.target.name} ${event.target.checked}`)
     state[`${event.target.name}`] = event.target.checked
-    this.props.onSelectPlatform(event.target.name, event.target.checked);
+    this.props.onSelectSupportedPlatform(event.target.name, event.target.checked);
   }
 
-  platform() {
-    return find(this.props.builds, (build) => {return build.id == this.props.buildId}).platform
+  onSwitchPlatform = (name) => {
+    this.props.onUpdateBuild(this.buildFor(name, this.props.build.name).id)
+  }
+
+  onUpdateBuild = (name) => {
+
+    console.log(this.buildFor(this.props.build.platform, name));
+
+    this.props.onUpdateBuild(this.buildFor(this.props.build.platform, name).id)
+  }
+
+  buildFor = (platform, version) => {
+    console.log(`${platform} ${version}`)
+    console.log(this.props.builds)
+    return find(this.props.builds, (build) => {return build.platform == platform && build.name == version})
   }
 
   render() {
-    console.log(this.platform())
     const {
       useDarkTheme,
       url,
@@ -123,26 +134,32 @@ export default class Simulator extends Component {
 
         <div className="editor-simulator-container__button-container">
           <BuildPicker
-            onChange={this.props.onUpdateBuild}
+            onChange={this.onUpdateBuild}
             builds={builds}
-            ios={this.props.ios}
-            android={this.props.android}
-            selectedBuildId={buildId}
+            selectedBuildName={this.props.build.name}
           />
 
           <div className="editor-simulator-container__checkboxes">
-            <input type="checkbox" defaultChecked={this.props.ios} onChange={this.selectPlatform} name="ios" value="on"/> iOS
-            <input type="checkbox" defaultChecked={this.props.android} onChange={this.selectPlatform} name="android" value="on" /> Android
+            <input type="checkbox" defaultChecked={this.props.ios} onChange={this.onSelectSupportedPlatform} name="ios" value="on"/> iOS
+            <input type="checkbox" defaultChecked={this.props.android} onChange={this.onSelectSupportedPlatform} name="android" value="on" /> Android
           </div>
 
         </div>
 
         {this.renderControls()}
 
+        <Switch
+          onChange={this.onSwitchPlatform}
+          value={this.props.build.platform}
+          name="platform">
+          <span value="ios">iOS</span>
+          <span value="android">Android</span>
+        </Switch>
+
         <div className={classes}>
           <iframe
             src={this.appetizeUrl()}
-            width={`${this.platform() == 'android' ? '300' : '270'}px`}
+            width={`${this.props.build.platform == 'android' ? '300' : '270'}px`}
             height="9999px"
             frameBorder="0"
             scrolling="no"

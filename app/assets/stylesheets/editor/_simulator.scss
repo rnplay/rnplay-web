@@ -22,7 +22,6 @@ $simulator-width: 350px;
     padding-top: 20px;
     overflow: hidden;
     margin: 0 auto;
-
   }
 
   &__button-container { padding-top: 20px; }
@@ -40,4 +39,33 @@ $simulator-width: 350px;
   &__checkboxes {
     margin-top: 20px;
   }
+}
+
+.switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  width: 150px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.switch input {
+  display: none;
+}
+
+.switch .label {
+  padding-top: 5px;
+  text-align: center;
+  transition: all 0.2s ease-out;
+}
+.switch .label label {
+  color: black;
+  cursor: pointer;
+}
+
+.switch .selected label span {
+  color: red;
 }

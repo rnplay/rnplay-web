@@ -1,14 +1,13 @@
 'use strict';
 
 import React from 'react';
+import {map, uniq} from 'lodash';
 
 export default class BuildPicker {
 
   renderOptions() {
-    return this.props.builds.map(({ id, platform, name }) => {
-      if (this.props[platform]) {
-        return <option key={id} value={id}>RN {name}, {platform == 'ios' ? 'iOS' : 'Android'}</option>
-      }
+    return uniq(map(this.props.builds, 'name')).map((name) => {
+      return <option key={name} value={name}>{name}</option>
     });
   }
 
@@ -21,7 +20,7 @@ export default class BuildPicker {
       <div>
         <select
           onChange={this.onChange}
-          defaultValue={this.props.selectedBuildId}
+          defaultValue={this.props.selectedBuildName}
           className="build-picker">
           {this.renderOptions()}
         </select>

@@ -1,8 +1,6 @@
 BUILD_VERSIONS = {
   'ios' => {
-    '0.8.0-rc2' => 'zw2j7w7dkynjna8qrgtn1x68cw',
-    '0.10.0-rc' => 'rhhd3kmuvyx1mu3r06hh45emy8',
-    '0.11.0-rc' => 'u702ejhe26p438rp73c74uyxur'
+    '0.11.0' => 'u702ejhe26p438rp73c74uyxur'
   },
   'android' => {
     '0.11.0' => '0848u8hf8wn40qmarcf7xemqx4'
