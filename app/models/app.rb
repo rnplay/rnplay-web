@@ -6,7 +6,7 @@ class App < ActiveRecord::Base
 
   after_create :setup_git_repo
   after_create :set_module_name
-  after_create :extract_build
+  before_create :assign_build
 
   after_destroy :remove_git_repos
 
@@ -42,6 +42,10 @@ class App < ActiveRecord::Base
     "/#{Rails.env.development? ? '' : 'js/'}#{url_token}/index.ios.bundle"
   end
 
+  def cross_platform_bundle_path
+    "/#{Rails.env.development? ? '' : 'js/'}#{url_token}"
+  end
+
   def set_module_name
     if target_git_repo.has_file?('index.ios.js')
       self.module_name = target_git_repo.contents_of_file('index.ios.js').lines.grep(/registerComponent/).first.scan(/"(.+)"|'(.+)'/).flatten.compact.first
@@ -63,19 +67,19 @@ class App < ActiveRecord::Base
     options[:app_params] ||= {}
 
     options[:app_params] = {
-      "bundlePath" => bundle_path,
+      "bundlePath" => cross_platform_bundle_path,
       "packagerUrlTemplate" => packager_url_template,
       "moduleName" => module_name,
       "RCTDevMenu" => { "liveReloadEnabled" => true }
     }.merge(options[:app_params])
 
     options.merge({
-      device: 'iphone5',
+      device: build.platform == 'android' ? 'nexus5' : 'iphone5',
       scale: '75',
       orientation: 'portrait',
       screenOnly: false,
       xdocMsg: true,
-      deviceColor: 'white',
+      deviceColor: 'black',
       debug: 'true',
     })
 
@@ -154,29 +158,13 @@ class App < ActiveRecord::Base
 
     if created_from_web
       target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
+      target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/sample_app.js"))
       target_git_repo.commit_all_changes("Initial commit from rnplay.org") unless Rails.env.development?
     end
   end
 
-  def rn_version_from_package_json
-    # version = JSON.parse(target_git_repo.files."/package.json"))['dependencies']['react-native']
-    # version.gsub("^", "")
-  end
-
-  def extract_build
-
-    self.build = Build.find_by(name: '0.11.0-rc') unless self.build
-    #
-    # json = JSON.read(target_git_repo.contents_of_file("package.json"))
-    #
-    # if json['dependencies'] && json['dependencies']['react-native']
-    #
-    #   if build = Build.find_by(name: json['dependencies']['react-native'].gsub("^", ""))
-    #     self.build = build
-    #   end
-    #
-    # end
-    save
+  def assign_build
+    self.build = Build.default
   end
 
   def add_url_token

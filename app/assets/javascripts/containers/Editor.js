@@ -21,6 +21,8 @@ import EditorApp from '../components/EditorApp';
     fileSelectorOpen,
     appIsPicked,
     forkToken,
+    ios,
+    android,
     unsavedChanges,
     saved
   } = editor;
@@ -28,8 +30,11 @@ import EditorApp from '../components/EditorApp';
   return {
     app,
     appIsPicked: appIsPicked !== null ? appIsPicked : app.picked,
+    someValue: 'test',
     name: newName || app.name,
     buildId: newBuildId || app.buildId,
+    ios: ios || app.ios,
+    android: android || app.android,
     buildUpdated: !!newBuildId,
     currentFile,
     fileTree,

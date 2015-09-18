@@ -1,4 +1,4 @@
-$simulator-width: 320px;
+$simulator-width: 350px;
 
 .editor-simulator-container {
   min-width: $simulator-width;
@@ -22,9 +22,9 @@ $simulator-width: 320px;
     flex-direction: column;
     width: $simulator-width;
     padding-top: 20px;
-    padding-left: 20px;
     overflow: hidden;
     margin: 0 auto;
+
   }
 
   &__button-container { padding-top: 20px; }
@@ -39,4 +39,7 @@ $simulator-width: 320px;
     }
   }
 
+  &__checkboxes {
+    margin-top: 20px;
+  }
 }

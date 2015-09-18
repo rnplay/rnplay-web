@@ -5,4 +5,8 @@ class Build < ActiveRecord::Base
     name.gsub(".", "").gsub("-", "")
   end
 
+  def self.default
+    find_by(platform: 'ios', name: "0.11.0-rc")
+  end
+
 end

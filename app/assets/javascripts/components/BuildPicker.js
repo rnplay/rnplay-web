@@ -5,15 +5,11 @@ import React from 'react';
 export default class BuildPicker {
 
   renderOptions() {
-    return [
-      <option
-        key="disabled"
-        disabled="disabled">
-        -- React Native version --
-      </option>
-    ].concat(this.props.builds.map(({ id, name }) => (
-      <option key={id} value={id}>{name}</option>
-    )));
+    return this.props.builds.map(({ id, platform, name }) => {
+      if (this.props[platform]) {
+        return <option key={id} value={id}>RN {name}, {platform == 'ios' ? 'iOS' : 'Android'}</option>
+      }
+    });
   }
 
   onChange = (e) => {

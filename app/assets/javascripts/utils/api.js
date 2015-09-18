@@ -24,6 +24,13 @@ export default {
       });
     },
 
+    savePlatform(appId, platform, value) {
+      var data = {app: {}};
+      data.app[platform] = value ? 'true' : '';
+
+      return axios.put(`/apps/${appId}`, data);
+    },
+
     saveScreenshot(appId, data) {
       return axios.put(`/apps/${appId}`, {
         app: {

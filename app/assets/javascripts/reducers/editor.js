@@ -16,6 +16,8 @@ const initialState = {
   showHeader: true,
   fileBodies: {},
   fileTree: {},
+  ios: null,
+  android: null,
   currentFile: 'index.ios.js',
   appSaveInProgress: false,
   fileSelectorOpen: false,
@@ -65,6 +67,16 @@ export default createStore(initialState, {
     ...state,
     newBuildId
   }),
+
+  [`${actions.authorSelectPlatform}-success`]: (state, { platform, value }) => {
+
+    console.log(`${platform} ${value}`)
+    var state = {...state};
+
+    state[platform] = value;
+    console.log(state);
+    return state;
+  },
 
   [`${actions.authorUpdateBuildId}-success`]: (state, { newBuildId }) => ({
     ...state,

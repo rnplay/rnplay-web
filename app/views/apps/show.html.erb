@@ -4,6 +4,8 @@
       raw({app: {
         id: @app.id,
         body: @app.body,
+        ios: @app.ios?,
+        android: @app.android?,
         appetizeOptions: @app.appetize_options(embed: true, autoapp: params[:autoapp], app_params: {route: params[:route] || ""}),
         creator: {username: @app.creator.username, name: @app.creator.name, id: @app.creator_id},
         buildId: @app.build_id,

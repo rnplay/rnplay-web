@@ -116,6 +116,11 @@ export default class EditorApp extends Component {
     }
   }
 
+  onSelectPlatform = (platform, value) => {
+    const { dispatch, authorSelectPlatform, app: {id} } = this.props;
+    dispatch(authorSelectPlatform(id, platform, value));
+  }
+
   onPick = () => {
     const { dispatch, toggleAppPickStatus, appIsPicked, app: { id } } = this.props;
     dispatch(toggleAppPickStatus(id, !appIsPicked));
@@ -159,6 +164,8 @@ export default class EditorApp extends Component {
   }
 
   render() {
+
+    console.log(this.props)
     const {
       useDarkTheme,
       useVimKeyBindings,
@@ -175,7 +182,9 @@ export default class EditorApp extends Component {
       fileSelectorOpen,
       logs,
       unsavedChanges,
-      saved
+      saved,
+      android,
+      ios
     } = this.props;
 
     const {
@@ -184,6 +193,7 @@ export default class EditorApp extends Component {
       onUpdateBuild,
       onChangeFile,
       onUpdateBody,
+      onSelectPlatform,
       belongsToCurrentUser,
       currentUserIsAdmin,
       onPick,
@@ -231,10 +241,13 @@ export default class EditorApp extends Component {
       builds,
       buildId,
       onUpdateBuild,
+      onSelectPlatform,
       currentUserIsAdmin,
       saveScreenshot,
       openDevMenu,
-      rotate
+      rotate,
+      android,
+      ios
     };
 
     const classes = classNames({

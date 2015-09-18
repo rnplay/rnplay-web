@@ -31,6 +31,16 @@ export default {
     newBuildId
   }),
 
+  authorSelectPlatform: (appId, platform, value) => {
+
+    var data = {
+      promise: api.savePlatform(appId, platform, value),
+      platform,
+      value
+    }
+    return data;
+  },
+
   viewerUpdateBuildId: (appId, newBuildId) => ({
     newBuildId
   }),

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import {result, find, template} from 'lodash';
+import {result, find, template, clone} from 'lodash';
 import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
 import Qs from 'qs'
@@ -23,15 +23,25 @@ export default class Simulator extends Component {
     var prefix = 'https://appetize.io/embed';
     var buildShortName = this.props.buildId
     var build = find(this.props.builds, (build) => {return build.id == this.props.buildId})
-    var appetizeId = build.appetize_id
-    var appParams = this.props.app.appetizeOptions.app_params
 
-    if (!this.props.belongsToCurrentUser()) {
+    var appetizeId = build.appetize_id
+    var appParams = {...this.props.app.appetizeOptions.app_params}
+
+    var appetizeParams = this.props.app.appetizeOptions
+    appetizeParams.app_params = null
+
+    if (build.platform == 'android') {
+      appParams.RCTDevMenu = ""
+    } else if (!this.props.belongsToCurrentUser()) {
       appParams.RCTDevMenu.liveReloadEnabled = false
     }
 
-    appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: appParams.bundlePath, buildShortName: build.short_name})
-    var url = `${prefix}/${appetizeId}?${Qs.stringify(this.props.app.appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
+    var bundlePath = build.platform == 'android' ? appParams.bundlePath : appParams.bundlePath+"/index.ios.bundle";
+
+    appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
+    var url = `${prefix}/${appetizeId}?${Qs.stringify(appetizeParams)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
+    console.log(appParams.bundleUrl)
+    console.log(url)
     return url;
   }
 
@@ -75,7 +85,20 @@ export default class Simulator extends Component {
       return null
     }
   }
+
+  selectPlatform = (event) => {
+    var state = {}
+    console.log(`${event.target.name} ${event.target.checked}`)
+    state[`${event.target.name}`] = event.target.checked
+    this.props.onSelectPlatform(event.target.name, event.target.checked);
+  }
+
+  platform() {
+    return find(this.props.builds, (build) => {return build.id == this.props.buildId}).platform
+  }
+
   render() {
+    console.log(this.platform())
     const {
       useDarkTheme,
       url,
@@ -83,25 +106,35 @@ export default class Simulator extends Component {
       buildId
     } = this.props;
 
-    const classes = classNames({
+    let classesObject = {
       'editor-simulator-container__simulator': true,
-      'editor-simulator-container--dark': useDarkTheme
-    });
+      'editor-simulator-container--dark': useDarkTheme,
+    }
+
+    let classes = classNames(classesObject);
+
 
     return (
       <div className="editor-simulator-container">
 
         <div className="editor-header__bar editor-simulator-container__header">
-          <BuildPicker
-            onChange={this.props.onUpdateBuild}
-            builds={builds}
-            selectedBuildId={buildId}
-          />
-
+          {this.renderQRLink()}
         </div>
 
         <div className="editor-simulator-container__button-container">
-          {this.renderQRLink()}
+          <BuildPicker
+            onChange={this.props.onUpdateBuild}
+            builds={builds}
+            ios={this.props.ios}
+            android={this.props.android}
+            selectedBuildId={buildId}
+          />
+
+          <div className="editor-simulator-container__checkboxes">
+            <input type="checkbox" defaultChecked={this.props.ios} onChange={this.selectPlatform} name="ios" value="on"/> iOS
+            <input type="checkbox" defaultChecked={this.props.android} onChange={this.selectPlatform} name="android" value="on" /> Android
+          </div>
+
         </div>
 
         {this.renderControls()}
@@ -109,7 +142,7 @@ export default class Simulator extends Component {
         <div className={classes}>
           <iframe
             src={this.appetizeUrl()}
-            width="294px"
+            width={`${this.platform() == 'android' ? '300' : '270'}px`}
             height="9999px"
             frameBorder="0"
             scrolling="no"
