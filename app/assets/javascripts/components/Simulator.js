@@ -109,6 +109,19 @@ export default class Simulator extends Component {
     return find(this.props.builds, (build) => {return build.platform == platform && build.name == version})
   }
 
+  renderSupportedPlatforms() {
+
+    if (!this.props.belongsToCurrentUser()) {
+      return null
+    }
+
+    return (
+      <div className="editor-simulator-container__checkboxes">
+        <input type="checkbox" defaultChecked={this.props.ios} onChange={this.onSelectSupportedPlatform} name="ios" value="on"/> iOS
+        <input type="checkbox" defaultChecked={this.props.android} onChange={this.onSelectSupportedPlatform} name="android" value="on" /> Android
+      </div>
+    )
+  }
   render() {
     const {
       useDarkTheme,
@@ -138,15 +151,11 @@ export default class Simulator extends Component {
             builds={builds}
             selectedBuildName={this.props.build.name}
           />
-
-          <div className="editor-simulator-container__checkboxes">
-            <input type="checkbox" defaultChecked={this.props.ios} onChange={this.onSelectSupportedPlatform} name="ios" value="on"/> iOS
-            <input type="checkbox" defaultChecked={this.props.android} onChange={this.onSelectSupportedPlatform} name="android" value="on" /> Android
-          </div>
-
         </div>
 
         {this.renderControls()}
+
+        {this.renderSupportedPlatforms()}
 
         <Switch
           onChange={this.onSwitchPlatform}
