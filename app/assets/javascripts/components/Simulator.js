@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import {result, find, template, clone} from 'lodash';
 import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
-import Qs from 'qs'
-import Switch from './Switch'
+import Qs from 'qs';
+import Switch from './Switch';
 
 // Sample appetize URL
 // https://appetize.io/embed/u702ejhe26p438rp73c74uyxur?device=iphone5s&scale=75&orientation=portrait&screenOnly=false&xdocMsg=true&autoapp=false&deviceColor=white&debug=true&params=%7B%22bundleUrl%22:%22http://rnplay-jsierles.ngrok.io/app_js/cUJ22A/index.ios.bundle%22,%22moduleName%22:%22SampleApp%22,%22RCTDevMenu%22:%7B%22liveReloadEnabled%22:true%7D,%22route%22:%22%22%7D
@@ -80,39 +80,43 @@ export default class Simulator extends Component {
           <a onClick={() => this.props.rotate('Left')}>Rotate left</a>
         </div>
       )
-    } else {
-      return null
     }
+    
+    return null;
   }
 
   onSelectSupportedPlatform = (event) => {
-    var state = {}
-    console.log(`${event.target.name} ${event.target.checked}`)
-    state[`${event.target.name}`] = event.target.checked
-    this.props.onSelectSupportedPlatform(event.target.name, event.target.checked);
+    var state = {};
+    const { name, checked } = event.target;
+
+    console.log(`${name} ${checked}`);
+
+    state[`${name}`] = checked;
+    this.props.onSelectSupportedPlatform(name, checked);
   }
 
   onSwitchPlatform = (name) => {
-    this.props.onUpdateBuild(this.buildFor(name, this.props.build.name).id)
+    this.props.onUpdateBuild(this.buildFor(name, this.props.build.name).id);
   }
 
   onUpdateBuild = (name) => {
-
     console.log(this.buildFor(this.props.build.platform, name));
 
-    this.props.onUpdateBuild(this.buildFor(this.props.build.platform, name).id)
+    this.props.onUpdateBuild(this.buildFor(this.props.build.platform, name).id);
   }
 
   buildFor = (platform, version) => {
-    console.log(`${platform} ${version}`)
-    console.log(this.props.builds)
-    return find(this.props.builds, (build) => {return build.platform == platform && build.name == version})
+    console.log(`${platform} ${version}`);
+    console.log(this.props.builds);
+
+    return find(this.props.builds, (build) => {
+      return build.platform == platform && build.name == version;
+    });
   }
 
   renderSupportedPlatforms() {
-
     if (!this.props.belongsToCurrentUser()) {
-      return null
+      return null;
     }
 
     return (
@@ -124,19 +128,16 @@ export default class Simulator extends Component {
   }
   render() {
     const {
-      useDarkTheme,
+      // useDarkTheme,
       url,
       builds,
       buildId
     } = this.props;
 
-    let classesObject = {
+    const classesSimulator = classNames({
       'editor-simulator-container__simulator': true,
-      'editor-simulator-container--dark': useDarkTheme,
-    }
-
-    let classes = classNames(classesObject);
-
+      // 'editor-simulator-container--dark': useDarkTheme,
+    });
 
     return (
       <div className="editor-simulator-container">
@@ -165,10 +166,10 @@ export default class Simulator extends Component {
           <span value="android">Android</span>
         </Switch>
 
-        <div className={classes}>
+        <div className={classesSimulator}>
           <iframe
             src={this.appetizeUrl()}
-            width={`${this.props.build.platform == 'android' ? '300' : '270'}px`}
+            width={`${this.props.build.platform == 'android' ? '300' : '273'}px`}
             height="9999px"
             frameBorder="0"
             scrolling="no"
