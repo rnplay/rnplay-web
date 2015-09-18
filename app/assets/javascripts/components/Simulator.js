@@ -20,9 +20,9 @@ export default class Simulator extends Component {
     };
   }
 
-  appetizeUrl() {
+  appetizeUrlFor(platform) {
     var prefix = 'https://appetize.io/embed';
-    var build = this.props.build;
+    var build = this.buildFor(platform, this.props.build.name);
 
     var appetizeId = build.appetize_id;
     var appParams = {...this.props.app.appetizeOptions.app_params};
@@ -30,15 +30,13 @@ export default class Simulator extends Component {
     var appetizeParams = this.props.app.appetizeOptions;
     appetizeParams.app_params = null;
 
-    if (build.platform == 'android') {
+    if (platform == 'android') {
       appParams.RCTDevMenu = "";
     } else if (!this.props.belongsToCurrentUser()) {
       appParams.RCTDevMenu.liveReloadEnabled = false;
     }
 
-    console.log(build.platform)
-    console.log(appetizeId)
-    var bundlePath = build.platform == 'android' ? appParams.bundlePath : appParams.bundlePath+"/index.ios.bundle";
+    var bundlePath = platform == 'android' ? appParams.bundlePath : appParams.bundlePath+"/index.ios.bundle";
 
     appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
     var url = `${prefix}/${appetizeId}?${Qs.stringify(appetizeParams)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
@@ -81,16 +79,13 @@ export default class Simulator extends Component {
         </div>
       )
     }
-    
+
     return null;
   }
 
   onSelectSupportedPlatform = (event) => {
     var state = {};
     const { name, checked } = event.target;
-
-    console.log(`${name} ${checked}`);
-
     state[`${name}`] = checked;
     this.props.onSelectSupportedPlatform(name, checked);
   }
@@ -100,18 +95,30 @@ export default class Simulator extends Component {
   }
 
   onUpdateBuild = (name) => {
-    console.log(this.buildFor(this.props.build.platform, name));
-
     this.props.onUpdateBuild(this.buildFor(this.props.build.platform, name).id);
   }
 
   buildFor = (platform, version) => {
-    console.log(`${platform} ${version}`);
-    console.log(this.props.builds);
-
     return find(this.props.builds, (build) => {
       return build.platform == platform && build.name == version;
     });
+  }
+
+  renderSwitch() {
+    console.log(`${this.props.ios} ${this.props.android}`)
+    if (this.props.ios && this.props.android) {
+      return (
+        <Switch
+          onChange={this.onSwitchPlatform}
+          value={this.props.build.platform}
+          name="platform">
+          <span value="ios">iOS</span>
+          <span value="android">Android</span>
+        </Switch>
+      )
+    } else {
+      return null;
+    }
   }
 
   renderSupportedPlatforms() {
@@ -122,7 +129,7 @@ export default class Simulator extends Component {
     return (
       <section className="editor-simulator-container__platforms">
         <span className="editor-simulator-container__title">Supported</span>
-        <label for="ios">
+        <label htmlFor="ios">
           <input type="checkbox"
             defaultChecked={this.props.ios}
             onChange={this.onSelectSupportedPlatform}
@@ -132,7 +139,7 @@ export default class Simulator extends Component {
           iOS
         </label>
 
-        <label for="android">
+        <label htmlFor="android">
           <input type="checkbox"
             defaultChecked={this.props.android}
             onChange={this.onSelectSupportedPlatform}
@@ -183,21 +190,23 @@ export default class Simulator extends Component {
           </section>
         </div>
 
-        <Switch
-          onChange={this.onSwitchPlatform}
-          value={this.props.build.platform}
-          name="platform">
-          <span value="ios">iOS</span>
-          <span value="android">Android</span>
-        </Switch>
-
+        {this.renderSwitch()}
         <div className={classesSimulator}>
           <iframe
-            src={this.appetizeUrl()}
-            width={`${this.props.build.platform == 'android' ? '300' : '273'}px`}
+            src={this.appetizeUrlFor('ios')}
+            width="273px"
             height="9999px"
             frameBorder="0"
             scrolling="no"
+            style={{display: this.props.build.platform == 'ios' ? 'block' : 'none'}}
+          />
+          <iframe
+            src={this.appetizeUrlFor('android')}
+            width="300px"
+            height="9999px"
+            frameBorder="0"
+            scrolling="no"
+            style={{display: this.props.build.platform == 'android' ? 'block' : 'none'}}
           />
         </div>
 
