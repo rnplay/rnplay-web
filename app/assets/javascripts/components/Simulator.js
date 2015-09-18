@@ -40,6 +40,7 @@ export default class Simulator extends Component {
 
     appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
     var url = `${prefix}/${appetizeId}?${Qs.stringify(appetizeParams)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
+    console.log(url)
     return url;
   }
 
@@ -52,6 +53,7 @@ export default class Simulator extends Component {
     e.preventDefault();
     this.setState({qrModalIsVisible: false});
   }
+
 
   renderQRModal() {
     return (
@@ -84,9 +86,7 @@ export default class Simulator extends Component {
   }
 
   onSelectSupportedPlatform = (event) => {
-    var state = {};
     const { name, checked } = event.target;
-    state[`${name}`] = checked;
     this.props.onSelectSupportedPlatform(name, checked);
   }
 
@@ -105,12 +105,11 @@ export default class Simulator extends Component {
   }
 
   renderSwitch() {
-    console.log(`${this.props.ios} ${this.props.android}`)
     if (this.props.ios && this.props.android) {
       return (
         <Switch
           onChange={this.onSwitchPlatform}
-          value={this.props.build.platform}
+          defaultValue={this.props.build.platform}
           name="platform">
           <span value="ios">iOS</span>
           <span value="android">Android</span>
