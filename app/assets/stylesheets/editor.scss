@@ -50,15 +50,12 @@ $editor-color-purple: #5C069A;
 }
 
 .editor-button {
-  border-radius: 4px;
-  border: 1px solid $editor-color-purple;
   color: $editor-color-purple;
   cursor: pointer;
-  display: inline-block;
+  display: block;
   font-size: 1.2em;
-  line-height: 1.5em;
+  line-height: 30px;
   margin: 0 auto;
-  padding: 0 15px;
   text-align: center;
 
   &:hover {
