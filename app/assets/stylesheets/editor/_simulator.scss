@@ -1,11 +1,11 @@
 $simulator-width: 350px;
 
 .editor-simulator-container {
-  min-width: $simulator-width;
-  width: $simulator-width;
-  max-width: $simulator-width;
   border-left: 1px solid #ddd;
+  max-width: $simulator-width;
+  min-width: $simulator-width;
   text-align: center;
+  width: $simulator-width;
 
   &__header {
     &__text { padding-right: 5px; }
@@ -14,58 +14,107 @@ $simulator-width: 350px;
   /* Simulator iframe has some weird styles,
      hence the padding left. */
   &__simulator {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: flex;
     flex-direction: column;
-    width: $simulator-width;
-    padding-top: 20px;
-    overflow: hidden;
+    justify-content: center;
     margin: 0 auto;
+    overflow: hidden;
+    padding-top: 20px;
+    width: $simulator-width;
   }
-
-  &__button-container { padding-top: 20px; }
 
   &__controls {
-    margin-top: 20px;
-    text-transform: uppercase;
     cursor: pointer;
     font-size: 80%;
-    a {
-      display: block
-    }
+    margin-top: 20px;
+    text-transform: uppercase;
+
+    a { display: block; }
   }
 
-  &__checkboxes {
+  &__title {
+    color: #999;
+    display: block;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    padding: 0 5px 5px 5px;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  &__settings {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
+
+    & > * { margin: 0 10px; }
+
+    label {
+      font-weight: normal;
+      padding: 0 5px;
+
+      input { margin-right: 5px; }
+    }
+
+    &--single {
+      display: flex;
+      line-height: 30px;
+      vertical-align: middle;
+      
+      // Vertical aling, hence 1px top padding 
+      span { padding: 1px 5px 0 0; }
+    }
   }
 }
 
 .switch {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #aaa;
-  border-radius: 10px;
-  width: 150px;
-  margin: 0 auto;
-  margin-top: 20px;
-}
-.switch input {
-  display: none;
+  border-radius: 3px;
+  border: 1px solid $editor-border-color;
+  display: inline-block;
+  margin: 20px auto 0 auto;
+
+  input { display: none; }
+
+  .label {
+    background: rgba(0,0,0,.05);
+    color: #444;
+    display: inline-block;
+    line-height: 24px;
+    padding: 0;
+    text-align: center;
+    transition: all 0.2s ease-out;
+    width: 72px;
+
+    label {
+      font-size: 14px;
+      font-weight: normal;
+      margin: 0;
+      padding: 0;
+    }
+
+    &:hover { background: transparent; }
+
+    // Doh...
+    &, &.selected, & > * { cursor: pointer; }
+  }
+
+  .selected {
+    background: #fff;
+    box-shadow: 0 0 0 1px $editor-border-color;
+
+    // Don't change on hover
+    &:hover { background: #fff; }
+
+    label span {
+      color: $editor-color-purple;
+      font-weight: bolder;
+    }
+  }
 }
 
-.switch .label {
-  padding-top: 5px;
-  text-align: center;
-  transition: all 0.2s ease-out;
-}
-.switch .label label {
-  color: black;
-  cursor: pointer;
-}
-
-.switch .selected label span {
-  color: red;
+.build-picker {
+  &__container {
+    padding: 0 5px;
+  }
 }

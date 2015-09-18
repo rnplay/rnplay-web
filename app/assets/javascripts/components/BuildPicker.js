@@ -17,7 +17,7 @@ export default class BuildPicker {
 
   render() {
     return (
-      <div>
+      <div className="build-picker__container">
         <select
           onChange={this.onChange}
           defaultValue={this.props.selectedBuildName}

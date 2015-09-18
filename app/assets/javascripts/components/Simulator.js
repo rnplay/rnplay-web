@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import {result, find, template, clone} from 'lodash';
+import Qs from 'qs';
+import { result, find, template, clone } from 'lodash';
 import BuildPicker from './BuildPicker';
 import QrModal from './qr_modal';
-import Qs from 'qs';
 import Switch from './Switch';
 
 // Sample appetize URL
@@ -22,18 +22,18 @@ export default class Simulator extends Component {
 
   appetizeUrl() {
     var prefix = 'https://appetize.io/embed';
-    var build = this.props.build
+    var build = this.props.build;
 
-    var appetizeId = build.appetize_id
-    var appParams = {...this.props.app.appetizeOptions.app_params}
+    var appetizeId = build.appetize_id;
+    var appParams = {...this.props.app.appetizeOptions.app_params};
 
-    var appetizeParams = this.props.app.appetizeOptions
-    appetizeParams.app_params = null
+    var appetizeParams = this.props.app.appetizeOptions;
+    appetizeParams.app_params = null;
 
     if (build.platform == 'android') {
-      appParams.RCTDevMenu = ""
+      appParams.RCTDevMenu = "";
     } else if (!this.props.belongsToCurrentUser()) {
-      appParams.RCTDevMenu.liveReloadEnabled = false
+      appParams.RCTDevMenu.liveReloadEnabled = false;
     }
 
     console.log(build.platform)
@@ -120,11 +120,29 @@ export default class Simulator extends Component {
     }
 
     return (
-      <div className="editor-simulator-container__checkboxes">
-        <input type="checkbox" defaultChecked={this.props.ios} onChange={this.onSelectSupportedPlatform} name="ios" value="on"/> iOS
-        <input type="checkbox" defaultChecked={this.props.android} onChange={this.onSelectSupportedPlatform} name="android" value="on" /> Android
-      </div>
-    )
+      <section className="editor-simulator-container__platforms">
+        <span className="editor-simulator-container__title">Supported</span>
+        <label for="ios">
+          <input type="checkbox"
+            defaultChecked={this.props.ios}
+            onChange={this.onSelectSupportedPlatform}
+            name="ios"
+            id="ios"
+            value="on"/>
+          iOS
+        </label>
+
+        <label for="android">
+          <input type="checkbox"
+            defaultChecked={this.props.android}
+            onChange={this.onSelectSupportedPlatform}
+            name="android"
+            id="android"
+            value="on" />
+          Android
+        </label>
+      </section>
+    );
   }
   render() {
     const {
@@ -139,6 +157,10 @@ export default class Simulator extends Component {
       // 'editor-simulator-container--dark': useDarkTheme,
     });
 
+    const classesBuildPicker = classNames({
+      'editor-simulator-container__settings--single': !this.props.belongsToCurrentUser()
+    });
+
     return (
       <div className="editor-simulator-container">
 
@@ -146,17 +168,20 @@ export default class Simulator extends Component {
           {this.renderQRLink()}
         </div>
 
-        <div className="editor-simulator-container__button-container">
-          <BuildPicker
-            onChange={this.onUpdateBuild}
-            builds={builds}
-            selectedBuildName={this.props.build.name}
-          />
-        </div>
-
         {this.renderControls()}
 
-        {this.renderSupportedPlatforms()}
+        <div className="editor-simulator-container__settings">
+          {this.renderSupportedPlatforms()}
+
+          <section className={classesBuildPicker}>
+            <span className="editor-simulator-container__title">Version</span>
+            <BuildPicker
+              onChange={this.onUpdateBuild}
+              builds={builds}
+              selectedBuildName={this.props.build.name}
+            />
+          </section>
+        </div>
 
         <Switch
           onChange={this.onSwitchPlatform}
