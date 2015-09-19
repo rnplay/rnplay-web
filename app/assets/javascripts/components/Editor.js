@@ -94,7 +94,8 @@ export default class Editor {
       onFileSelectorToggle,
       useDarkTheme,
       unsavedChanges,
-      saved
+      saved,
+      fileSelectorOpen
     };
 
     return (

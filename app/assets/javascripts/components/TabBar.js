@@ -8,14 +8,10 @@ export default class TabBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isOpen: false
-    };
   }
 
   toggleFileSelector() {
     this.props.onFileSelectorToggle();
-    this.setState({ isOpen: !this.state.isOpen });
   }
 
   renderSaveMessage() {
@@ -35,18 +31,18 @@ export default class TabBar extends Component {
       unsavedChanges
     } = this.props;
 
-    const { isOpen } = this.state;
+    const { fileSelectorOpen } = this.props;
 
     var buttonClasses = classNames({
       'editor-tab-bar__tab__button': true,
-      'editor-tab-bar__tab__button--wide': isOpen,
+      'editor-tab-bar__tab__button--wide': fileSelectorOpen,
     });
 
     const iconClasses = classNames({
       'fa': true,
       'editor-tab-bar__icon': true,
-      'fa-folder': !isOpen,
-      'fa-folder-open': isOpen,
+      'fa-folder': !fileSelectorOpen,
+      'fa-folder-open': fileSelectorOpen,
     });
 
     const saveIndicatorClasses = classNames({

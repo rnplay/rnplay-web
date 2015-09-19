@@ -43,12 +43,13 @@ import EditorApp from '../components/EditorApp';
     showHeader,
     appSaveInProgress,
     appSaveError,
-    fileSelectorOpen,
+    fileSelectorOpen: fileSelectorOpen == null ? app.hasMultipleFiles : fileSelectorOpen,
     unsavedChanges,
     saved,
     logs: logs.logs
   };
 })
+
 export default class Editor {
 
   render() {

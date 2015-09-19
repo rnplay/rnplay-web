@@ -140,6 +140,10 @@ class App < ActiveRecord::Base
     source_git_repo.exists?
   end
 
+  def has_multiple_files?
+    target_git_repo.file_list.count > 1
+  end
+
   private
 
   def remove_git_repos

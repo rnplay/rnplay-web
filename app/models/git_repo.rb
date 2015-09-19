@@ -74,7 +74,7 @@ class GitRepo
       set_app_owner
     end
   end
-
+  
   def fork_to(target_repo)
     Rails.logger.info(path)
     Rails.logger.info(target_repo.path)

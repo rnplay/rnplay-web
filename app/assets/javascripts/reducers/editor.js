@@ -20,7 +20,6 @@ const initialState = {
   android: null,
   currentFile: 'index.ios.js',
   appSaveInProgress: false,
-  fileSelectorOpen: false,
   appIsPicked: null,
   forkToken: null,
   unsavedChanges: false,
@@ -121,7 +120,7 @@ export default createStore(initialState, {
   [`${actions.toggleFileSelector}`]: (state, { fileBodies, error }) => {
     return ({
       ...state,
-      fileSelectorOpen: !state.fileSelectorOpen,
+      fileSelectorOpen: state.fileSelectorOpen == null ? false : !state.fileSelectorOpen,
     })
   },
 
