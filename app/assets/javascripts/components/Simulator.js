@@ -91,7 +91,7 @@ export default class Simulator extends Component {
     const { name, checked } = event.target;
     this.props.onSelectSupportedPlatform(name, checked);
     if (!checked) {
-      this.props.onUpdateBuild(this.buildFor(name == 'ios' ? 'android' : 'ios', this.props.build.name).id);  
+      this.props.onUpdateBuild(this.buildFor(name == 'ios' ? 'android' : 'ios', this.props.build.name).id);
     }
   }
 
@@ -197,6 +197,7 @@ export default class Simulator extends Component {
         <div className={classesSimulator}>
           <iframe
             src={this.appetizeUrlFor('ios')}
+            id="ios-simulator"
             width="273px"
             height="9999px"
             frameBorder="0"
@@ -205,6 +206,7 @@ export default class Simulator extends Component {
           />
           <iframe
             src={this.appetizeUrlFor('android')}
+            id="android-simulator"
             width="300px"
             height="9999px"
             frameBorder="0"

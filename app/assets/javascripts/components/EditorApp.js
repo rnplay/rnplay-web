@@ -27,7 +27,8 @@ export default class EditorApp extends Component {
 
   componentDidMount() {
     CodeMirror.commands.save = this.onFileSave;
-    this.simulatorIframe = document.querySelector('iframe');
+    this.iosSimulator = document.querySelector('#ios-simulator');
+    this.androidSimulator = document.querySelector('#android-simulator');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,26 +41,31 @@ export default class EditorApp extends Component {
       return;
     }
 
-    if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
-      const iframe = this.simulatorIframe;
-      iframe.contentWindow.postMessage('requestSession', '*');
-    }
+    // if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
+    //   const iframe = this.simulatorIframe;
+    //   iframe.contentWindow.postMessage('requestSession', '*');
+    // }
+  }
+
+  simulatorAction = (action) => {
+    this.iosSimulator.contentWindow.postMessage(action, '*')
+    this.androidSimulator.contentWindow.postMessage(action, '*')
   }
 
   sendHeartBeat = () => {
-    this.simulatorIframe.contentWindow.postMessage('heartbeat', '*');
+    this.simulatorAction('heartbeat');
   }
 
   saveScreenshot = () => {
-    this.simulatorIframe.contentWindow.postMessage('getScreenshot', '*');
+    this.simulatorAction('getScreenshot');
   }
 
   openDevMenu = () => {
-    this.simulatorIframe.contentWindow.postMessage('shakeDevice', '*');
+    this.simulatorAction('shakeDevice');
   }
 
   rotate = (direction) => {
-    this.simulatorIframe.contentWindow.postMessage(`rotate${direction}`, '*');
+    this.simulatorAction(`rotate${direction}`);
   }
 
   // Keep track of simulator lifecycle
