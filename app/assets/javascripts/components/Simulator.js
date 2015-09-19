@@ -90,6 +90,9 @@ export default class Simulator extends Component {
   onSelectSupportedPlatform = (event) => {
     const { name, checked } = event.target;
     this.props.onSelectSupportedPlatform(name, checked);
+    if (!checked) {
+      this.props.onUpdateBuild(this.buildFor(name == 'ios' ? 'android' : 'ios', this.props.build.name).id);  
+    }
   }
 
   onSwitchPlatform = (name) => {
