@@ -22,6 +22,9 @@ $editor-color-purple: #5C069A;
 @import 'editor/main-menu';
 @import 'editor/modal';
 @import 'editor/backdrop';
+@import 'editor/codemirror';
+
+.app-editor-page { padding: 0; }
 
 .editor-app, .editor-container {
   display: flex;
@@ -47,6 +50,10 @@ $editor-color-purple: #5C069A;
 .editor {
   overflow-y: scroll;
   width: 100%;
+
+  // Make editor to look like its height is 100%... D:
+  background: #fff url(/img/editor-gutter.png) top left repeat-y;
+  background-size: 32px;
 }
 
 .editor-button {
@@ -65,9 +72,4 @@ $editor-color-purple: #5C069A;
   }
 
   i { padding-right: 5px; }
-}
-
-// Override CodeMirror theme
-.cm-s-solarized.CodeMirror {
-  box-shadow: none !important;
 }

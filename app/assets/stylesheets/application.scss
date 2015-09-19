@@ -101,11 +101,3 @@ a {
 }
 
 button { outline: 0; }
-
-.CodeMirror {
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-  &-sizer, &-gutter { height: calc(100vh - 90px); }
-  &-scroll { height: 100%; } 
-}
