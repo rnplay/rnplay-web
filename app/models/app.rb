@@ -165,6 +165,8 @@ class App < ActiveRecord::Base
 
   def assign_build
     self.build = Build.default
+    self.ios = true
+    self.android = true
   end
 
   def add_url_token
