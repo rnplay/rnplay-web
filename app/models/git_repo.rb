@@ -43,6 +43,13 @@ class GitRepo
     set_app_owner
   end
 
+  def npm_install
+    # TODO: background this job
+    if has_file?('package.json')
+      run "cd #{path} && npm install"
+    end
+  end
+
   def bare?
     Rugged::Repository.new(path).bare?
   end
@@ -74,7 +81,7 @@ class GitRepo
       set_app_owner
     end
   end
-  
+
   def fork_to(target_repo)
     Rails.logger.info(path)
     Rails.logger.info(target_repo.path)

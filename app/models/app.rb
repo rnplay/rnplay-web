@@ -170,6 +170,10 @@ class App < ActiveRecord::Base
 
     target_git_repo.clone_from(source_git_repo)
 
+    if (forked_app)
+      target_git_repo.npm_install
+    end
+
     if created_from_web
       target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.ios.js"))
       target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/sample_app.android.js"))
