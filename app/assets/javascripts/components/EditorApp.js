@@ -41,10 +41,10 @@ export default class EditorApp extends Component {
       return;
     }
 
-    // if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
-    //   const iframe = this.simulatorIframe;
-    //   iframe.contentWindow.postMessage('requestSession', '*');
-    // }
+    if (appSaveInProgress && !saveStillInProgress && !appSaveError) {
+      const iframe = this.simulatorIframe;
+      this.simulatorAction('requestSession');
+    }
   }
 
   simulatorAction = (action) => {

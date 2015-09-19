@@ -28,6 +28,16 @@ class App < ActiveRecord::Base
     end
   end
 
+  def packager_root
+    if Rails.env.development?
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io"
+    elsif Rails.env.staging?
+      "https://packagerstaging${buildShortName}.rnplay.org"
+    else
+      "https://packager${buildShortName}.rnplay.org"
+    end
+  end
+
   def packager_url_template
     if Rails.env.development?
       "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io${bundlePath}"
@@ -161,8 +171,8 @@ class App < ActiveRecord::Base
     target_git_repo.clone_from(source_git_repo)
 
     if created_from_web
-      target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.js"))
-      target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/sample_app.js"))
+      target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.ios.js"))
+      target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/sample_app.android.js"))
       target_git_repo.commit_all_changes("Initial commit from rnplay.org") unless Rails.env.development?
     end
   end

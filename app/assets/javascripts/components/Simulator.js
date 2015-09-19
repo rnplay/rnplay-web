@@ -39,7 +39,14 @@ export default class Simulator extends Component {
 
     var appParams = {
       moduleName: this.props.app.moduleName,
+      packagerRoot: this.props.app.packagerRoot,
       bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
+    }
+
+    if (platform == 'ios') {
+      appParams["RCTDevMenu"] = { "liveReloadEnabled": true }
+    } else {
+      appParams['jsMainModuleName'] = this.props.app.urlToken+"/index.android"
     }
 
     var url = `https://appetize.io/embed/${appetizeId}?${Qs.stringify(appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
