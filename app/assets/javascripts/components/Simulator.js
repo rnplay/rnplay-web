@@ -21,26 +21,28 @@ export default class Simulator extends Component {
   }
 
   appetizeUrlFor(platform) {
-    var prefix = 'https://appetize.io/embed';
-    var build = this.buildFor(platform, this.props.build.name);
 
-    var appetizeId = build.appetize_id;
-    var appParams = {...this.props.app.appetizeOptions.app_params};
-
-    var appetizeParams = this.props.app.appetizeOptions;
-    appetizeParams.app_params = null;
-
-    if (platform == 'android') {
-      appParams.RCTDevMenu = "";
-    } else if (!this.props.belongsToCurrentUser()) {
-      appParams.RCTDevMenu.liveReloadEnabled = false;
+    var appetizeOptions = {
+      embed: true,
+      screenOnly: false,
+      device: platform == 'ios' ? 'iphone5' : 'nexus5',
+      xdocMsg: true,
+      deviceColor: 'white',
+      xDocMsg: true,
+      orientation: 'portrait',
+      debug: true
     }
 
-    var bundlePath = platform == 'android' ? appParams.bundlePath : appParams.bundlePath+"/index.ios.bundle";
+    var bundlePath = platform == 'android' ? this.props.app.bundlePath : this.props.app.bundlePath+"/index.ios.bundle";
+    var build = this.buildFor(platform, this.props.build.name);
+    var appetizeId = build.appetize_id;
 
-    appParams['bundleUrl'] = template(appParams.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
-    var url = `${prefix}/${appetizeId}?${Qs.stringify(appetizeParams)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
-    console.log(url)
+    var appParams = {
+      moduleName: this.props.app.moduleName,
+      bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
+    }
+    
+    var url = `https://appetize.io/embed/${appetizeId}?${Qs.stringify(appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
     return url;
   }
 
