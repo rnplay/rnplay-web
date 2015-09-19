@@ -1,21 +1,8 @@
-<div class="container" style="text-align: center; padding-bottom: 50px;">
-  <h1 style="margin-bottom: 40px">Recent apps</h1>
+<div class="container container--picks">
+  <h1 class="title">
+    Recent apps
+  </h1>
   <ul class="list-unstyled" id="apps">
-  <% if @apps.empty? %>
-    <p>
-      You haven't created any apps yet.
-      <br><br><%= link_to "Make your first app!", new_app_path, class: 'btn btn-info' %>
-    </p>
-  <% end %>
-  <% @apps.each do |f| %>
-    <li>
-      <%= link_to f.name || f.module_name, app_path(f.url_token) %>
-      <p>Updated <%= distance_of_time_in_words(f.updated_at, Time.now) %> ago</p>
-      <% if f.creator %>
-        <%= link_to f.try(:creator).try(:username) || 'anonymous', user_apps_path(f.creator) %>
-        <%= image_tag(f.creator.avatar.url, class: "avatar") %>
-      <% end %>
-    </li>
-  <% end %>
+  	<%= render partial: 'apps', locals: {apps: @apps} %>
   </ul>
 </div>

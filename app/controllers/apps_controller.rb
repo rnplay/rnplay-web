@@ -23,6 +23,10 @@ class AppsController < ApplicationController
     end
   end
 
+  def recent
+    @apps = App.order("updated_at desc").limit(30)
+  end
+
   def qr
     qr_code = GoogleQR.new(data: %({"bundle_path": "#{@app.bundle_path}", "module_name": "#{@app.module_name}"}), size: '250x250')
     render json: {url: qr_code.to_s}
