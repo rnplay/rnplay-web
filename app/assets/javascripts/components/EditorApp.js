@@ -117,8 +117,8 @@ export default class EditorApp extends Component {
   }
 
   onSelectSupportedPlatform = (platform, value) => {
-    const { dispatch, authorSelectPlatform, app: {id} } = this.props;
-    dispatch(authorSelectPlatform(id, platform, value));
+    const { dispatch, authorSelectSupportedPlatform, app: {id} } = this.props;
+    dispatch(authorSelectSupportedPlatform(id, platform, value));
   }
 
   onPick = () => {
@@ -255,6 +255,7 @@ export default class EditorApp extends Component {
     });
 
     return (
+
       <div onKeyUp={this.sendHeartBeat} className={classes}>
 
         <Editor editorHeaderProps={editorHeaderProps} {...editorProps} />

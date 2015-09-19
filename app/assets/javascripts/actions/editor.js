@@ -31,10 +31,10 @@ export default {
     newBuildId
   }),
 
-  authorSelectPlatform: (appId, platform, value) => {
+  authorSelectSupportedPlatform: (appId, platform, value) => {
 
     var data = {
-      promise: api.savePlatform(appId, platform, value),
+      promise: api.saveSupportedPlatform(appId, platform, value),
       platform,
       value
     }

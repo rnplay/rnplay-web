@@ -24,7 +24,7 @@ export default {
       });
     },
 
-    savePlatform(appId, platform, value) {
+    saveSupportedPlatform(appId, platform, value) {
       var data = {app: {}};
       data.app[platform] = value ? 'true' : '';
 

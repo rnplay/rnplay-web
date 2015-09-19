@@ -68,13 +68,11 @@ export default createStore(initialState, {
     newBuildId
   }),
 
-  [`${actions.authorSelectPlatform}-success`]: (state, { platform, value }) => {
+  [`${actions.authorSelectSupportedPlatform}-success`]: (state, { platform, value }) => {
 
-    console.log(`${platform} ${value}`)
     var state = {...state};
-
     state[platform] = value;
-    console.log(state);
+
     return state;
   },
 
