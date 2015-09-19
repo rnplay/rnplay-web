@@ -40,11 +40,11 @@ class App < ActiveRecord::Base
 
   def packager_url_template
     if Rails.env.development?
-      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io${bundlePath}"
+      "http://#{ENV['NGROK_SUBDOMAIN']}.ngrok.io/${bundlePath}"
     elsif Rails.env.staging?
-      "https://packagerstaging${buildShortName}.rnplay.org${bundlePath}"
+      "https://packagerstaging${buildShortName}.rnplay.org/${bundlePath}"
     else
-      "https://packager${buildShortName}.rnplay.org${bundlePath}"
+      "https://packager${buildShortName}.rnplay.org/${bundlePath}"
     end
   end
 
@@ -53,7 +53,7 @@ class App < ActiveRecord::Base
   end
 
   def cross_platform_bundle_path
-    "/#{Rails.env.development? ? '' : 'js/'}#{url_token}"
+    "#{Rails.env.development? ? '' : 'js/'}#{url_token}"
   end
 
   def set_module_name
