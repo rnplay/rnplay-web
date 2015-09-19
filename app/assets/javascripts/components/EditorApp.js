@@ -87,7 +87,6 @@ export default class EditorApp extends Component {
         this.saveScreenshot();
       }.bind(this), 3000)
     }
-
     if (data.type == 'debug' && data.message.indexOf('GoogleAnalytics') === -1 && data.message.indexOf('devtools socket') === -1) {
       dispatch(log(data));
     }
