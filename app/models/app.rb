@@ -14,6 +14,8 @@ class App < ActiveRecord::Base
   belongs_to :build
   belongs_to :forked_app, class_name: "App"
 
+  scope :for_platform, -> (platform) { where(platform, true) }
+
   def to_param
     url_token
   end
