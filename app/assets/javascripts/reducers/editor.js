@@ -31,6 +31,7 @@ export default createStore(initialState, {
   [`${actions.switchApp}`]: (state, { app }) => ({
     ...state,
     app,
+    currentFile: app.platform == 'ios' ? 'index.ios.js' : 'index.android.js',
     fileTree: makeFileTree(Object.keys(app.files))
   }),
 
@@ -62,7 +63,7 @@ export default createStore(initialState, {
     saved: false
   }),
 
-  [`${actions.viewerUpdateBuildId}`]: (state, { newBuildId }) => ({
+  [`${actions.viewerUpdateBuild}`]: (state, { newBuildId }) => ({
     ...state,
     newBuildId
   }),
@@ -75,12 +76,13 @@ export default createStore(initialState, {
     return state;
   },
 
-  [`${actions.authorUpdateBuildId}-success`]: (state, { newBuildId }) => ({
+  [`${actions.authorUpdateBuild}-success`]: (state, { newBuildId, newPlatform }) => ({
     ...state,
-    newBuildId
+    newBuildId,
+    currentFile: newPlatform == 'ios' ? 'index.ios.js' : 'index.android.ios'
   }),
 
-  [`${actions.authorUpdateBuildId}-failure`]: (state, { newBuildId }) => ({
+  [`${actions.authorUpdateBuild}-failure`]: (state, { newBuildId }) => ({
     ...state
   }),
 

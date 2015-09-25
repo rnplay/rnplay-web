@@ -103,11 +103,11 @@ export default class Simulator extends Component {
   }
 
   onSwitchPlatform = (name) => {
-    this.props.onUpdateBuild(this.buildFor(name, this.props.build.name).id);
+    this.props.onUpdateBuild(this.buildFor(name, this.props.build.name));
   }
 
   onUpdateBuild = (name) => {
-    this.props.onUpdateBuild(this.buildFor(this.props.build.platform, name).id);
+    this.props.onUpdateBuild(this.buildFor(this.props.build.platform, name));
   }
 
   buildFor = (platform, version) => {

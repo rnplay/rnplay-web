@@ -112,12 +112,12 @@ export default class EditorApp extends Component {
     dispatch(updateBody(currentFile, newBody));
   }
 
-  onUpdateBuild = (buildId) => {
-    const { dispatch, viewerUpdateBuildId, authorUpdateBuildId, app: {id} } = this.props;
+  onUpdateBuild = (build) => {
+    const { dispatch, viewerUpdateBuild, authorUpdateBuild, app: {id} } = this.props;
     if (this.belongsToCurrentUser()) {
-      dispatch(authorUpdateBuildId(id, buildId));
+      dispatch(authorUpdateBuild(id, build));
     } else {
-      dispatch(viewerUpdateBuildId(id, buildId));
+      dispatch(viewerUpdateBuild(id, build));
     }
   }
 

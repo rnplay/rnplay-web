@@ -26,9 +26,10 @@ export default {
     newName
   }),
 
-  authorUpdateBuildId: (appId, newBuildId) => ({
-    promise: api.saveBuildId(appId, newBuildId),
-    newBuildId
+  authorUpdateBuild: (appId, newBuild) => ({
+    promise: api.saveBuildId(appId, newBuild.id),
+    newBuildId: newBuild.id,
+    newPlatform: newBuild.platform
   }),
 
   authorSelectSupportedPlatform: (appId, platform, value) => {
@@ -41,8 +42,9 @@ export default {
     return data;
   },
 
-  viewerUpdateBuildId: (appId, newBuildId) => ({
-    newBuildId
+  viewerUpdateBuild: (appId, newBuild) => ({
+    newBuildId: newBuild.id,
+    newPlatform: newBuild.platform
   }),
 
   saveApp: (appId, name, buildId, fileBodies) => ({
