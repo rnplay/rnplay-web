@@ -4,10 +4,12 @@ class AppsController < ApplicationController
 
   layout :pick_layout
   before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork]
-  before_action :authenticate_user!, only: [:index, :update, :destroy, :new]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
+
+  acts_as_token_authentication_handler_for User, fallback: :devise, only: [:index]
+  before_action :authenticate_user!, only: [:index, :update, :destroy, :new]
 
   protect_from_forgery except: [:show, :create, :update, :fork]
 
