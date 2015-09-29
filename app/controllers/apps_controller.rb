@@ -17,7 +17,7 @@ class AppsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        @apps = @apps.for_platform(params[:platform]).limit(@per_page).offset(@offset)
+        @apps = @apps.for_platform(platform).limit(@per_page).offset(@offset)
         render 'apps'
       end
     end
@@ -33,12 +33,16 @@ class AppsController < ApplicationController
   end
 
   def search
-    @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(params[:platform]).limit(@per_page).offset(@offset)
+    @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
     render 'apps'
   end
 
+  def platform
+    params[:platform] == 'undefined' ? "ios" : params[:platform]
+  end
+
   def picks
-    @apps = App.where(pick: true).for_platform(params[:platform] == 'undefined' ? "ios" : params[:platform]).order('updated_at desc').limit(@per_page).offset(@offset)
+    @apps = App.where(pick: true).for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
     respond_to do |format|
       format.html
       format.json { render 'apps' }
@@ -46,7 +50,7 @@ class AppsController < ApplicationController
   end
 
   def popular
-    @apps = App.order('view_count desc').for_platform(params[:platform]).order('updated_at desc').limit(@per_page).offset(@offset)
+    @apps = App.order('view_count desc').for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
 
     respond_to do |format|
       format.html
