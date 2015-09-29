@@ -38,7 +38,7 @@ class AppsController < ApplicationController
   end
 
   def picks
-    @apps = App.where(pick: true).for_platform(params[:platform] || "ios").order('updated_at desc').limit(@per_page).offset(@offset)
+    @apps = App.where(pick: true).for_platform(params[:platform] == 'undefined' ? "ios" : params[:platform]).order('updated_at desc').limit(@per_page).offset(@offset)
     respond_to do |format|
       format.html
       format.json { render 'apps' }
