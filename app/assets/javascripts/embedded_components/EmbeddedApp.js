@@ -14,10 +14,10 @@ export default class Simulator extends Component {
   appetizeUrlFor(platform) {
     var appetizeOptions = {
       embed: true,
-      screenOnly: this.props.url_params.screen_only || false,
+      screenOnly: this.props.url_params.screen_only || true,
       device: platform == 'ios' ? 'iphone5' : 'nexus5',
       xdocMsg: true,
-      scale: this.props.url_params.scale || '75',
+      scale: this.props.url_params.scale || '100',
       deviceColor: 'white',
       orientation: 'portrait',
       debug: true
@@ -50,10 +50,11 @@ export default class Simulator extends Component {
       <iframe
         src={this.appetizeUrlFor('ios')}
         id="ios-simulator"
-        width="273px"
-        height="9999px"
+        width="320px"
+        height="598px"
         frameBorder="0"
         scrolling="no"
+        style={{border: '1px dashed red'}}
       />
     );
   }
