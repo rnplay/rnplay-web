@@ -11,6 +11,14 @@ export default class Simulator extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    window.addEventListener('message', this.handleSimulatorEvent, false);
+  }
+
+  handleSimulatorEvent = (e) => {
+    console.log(e.data)
+  }
+
   appetizeUrlFor(platform) {
     var appetizeOptions = {
       embed: true,
