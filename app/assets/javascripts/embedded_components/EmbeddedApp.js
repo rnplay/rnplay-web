@@ -35,6 +35,10 @@ export default class Simulator extends Component {
       bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
     }
 
+    if (this.props.url_params.route) {
+      appParams['route'] = this.props.url_params.route;
+    }
+
     var url = `https://appetize.io/embed/${appetizeId}?${Qs.stringify(appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
     return url;
   }
