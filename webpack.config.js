@@ -4,7 +4,8 @@ var railsRoot = path.join(__dirname, '.')
 module.exports = {
   context: railsRoot,
   entry: {
-    'editor.js': 'editor.js'
+    'editor.js': 'editor.js',
+    'embedded_app.js': 'embedded_app.js'
   },
   output: {
     filename: '[name]',

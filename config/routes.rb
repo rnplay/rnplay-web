@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :apps do
     member do
       post :fork
-      get :raw_simulator
+      get :embed
       get :qr
       get :recent
       post :log

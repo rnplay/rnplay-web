@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html style="height: 100%; width: 100%; max-width: 100vw; max-height: 100vh; overflow: hidden">
+<head>
+  <%= stylesheet_link_tag 'embedded_app', media: 'all' %>
+</head>
+
+<div id="embedded-container" class="embedded-app"></div>
+
+<script>
+  window.__data = <%=
+    raw({
+      app: {
+        id: @app.id,
+        platform: @app.build.platform,
+        moduleName: @app.module_name,
+        packagerUrlTemplate: @app.packager_url_template,
+        packagerRoot: @app.packager_root,
+        bundlePath: @app.cross_platform_bundle_path,
+        buildId: @app.build_id,
+        name: @app.name,
+        urlToken: @app.url_token
+      },
+      builds: Build.all.as_json(methods: :short_name)
+    }.to_json)
+ %>
+</script>
+
+<%= fixed_webpack_include_tag('embedded_app.js') %>
+
+</body>
+</html>

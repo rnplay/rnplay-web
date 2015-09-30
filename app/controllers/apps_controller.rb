@@ -3,7 +3,7 @@ class AppsController < ApplicationController
   respond_to :html, :json
 
   layout :pick_layout
-  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork]
+  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :embed]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
@@ -89,8 +89,8 @@ class AppsController < ApplicationController
     raise ActiveRecord::RecordNotFound if !@user
   end
 
-  def raw_simulator
-    render layout: nil
+  def embed
+    render layout: false
   end
 
   def view
