@@ -35,6 +35,7 @@ export default class Simulator extends Component {
       bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
     }
 
+    console.log(this.props.url_params)
     if (this.props.url_params.route) {
       appParams['route'] = this.props.url_params.route;
     }
