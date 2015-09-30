@@ -14,7 +14,7 @@ export default class Simulator extends Component {
   appetizeUrlFor(platform) {
     var appetizeOptions = {
       embed: true,
-      screenOnly: false,
+      screenOnly: this.props.url_params.screen_only || false,
       device: platform == 'ios' ? 'iphone5' : 'nexus5',
       xdocMsg: true,
       scale: this.props.url_params.scale || '75',
