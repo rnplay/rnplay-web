@@ -20,7 +20,8 @@
         name: @app.name,
         urlToken: @app.url_token
       },
-      builds: Build.all.as_json(methods: :short_name)
+      builds: Build.all.as_json(methods: :short_name),
+      url_params: params
     }.to_json)
  %>
 </script>

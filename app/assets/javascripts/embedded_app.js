@@ -1,10 +1,5 @@
 'use strict';
 
-const {
-  app,
-  builds
-} = window.__data;
-
 import React from 'react';
 import EmbeddedApp from './embedded_components/EmbeddedApp';
 

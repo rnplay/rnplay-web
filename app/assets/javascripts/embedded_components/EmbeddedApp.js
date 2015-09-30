@@ -17,8 +17,8 @@ export default class Simulator extends Component {
       screenOnly: false,
       device: platform == 'ios' ? 'iphone5' : 'nexus5',
       xdocMsg: true,
+      scale: this.props.url_params.scale || '75',
       deviceColor: 'white',
-      xDocMsg: true,
       orientation: 'portrait',
       debug: true
     }
