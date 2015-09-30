@@ -16,7 +16,7 @@ module Rnplay
     # the app qr code action
     config.active_support.escape_html_entities_in_json = false
 
-    config.assets.precompile += %w( editor_sprockets.js embedded_app.js embedded_app.css)
+    config.assets.precompile += %w( editor_sprockets.js embedded_app.css)
 
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
       allow do
