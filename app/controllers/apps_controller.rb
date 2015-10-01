@@ -90,6 +90,7 @@ class AppsController < ApplicationController
   end
 
   def embed
+    response.headers.delete "X-Frame-Options"
     render layout: false
   end
 
