@@ -5,7 +5,7 @@ BUILD_VERSIONS = {
   },
   'android' => {
     '0.11.0' => '0848u8hf8wn40qmarcf7xemqx4',
-    '0.11.4' => '0848u8hf8wn40qmarcf7xemqx4'
+    '0.13.0-rc' => 'a706nw9xmv0w43qrf77th4dmxg'
   }
 }
 
