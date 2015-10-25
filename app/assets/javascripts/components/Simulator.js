@@ -40,7 +40,7 @@ export default class Simulator extends Component {
     var appParams = {
       moduleName: this.props.app.moduleName,
       packagerRoot: template(this.props.app.packagerRoot)({buildShortName: build.short_name}),
-      bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name})
+      bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name}) + `?platform=${platform}`
     }
 
     if (platform == 'ios') {
