@@ -1,0 +1,23 @@
+<div class="container container--rnplaycli">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <h2 class="title"><code>rnplay-cli</code></h2>
+      <p class="intro">Use <code>rnplay-cli</code> to push your React Native app to <a href="https://rnplay.org">rnplay.org</a>.</p>
+      
+      <div class="container--rnplaycli__instructions">
+        <h3>Quick Install</h3>
+        <ul>
+          <li>First, install the command line client: <code>npm install -g rnplay-cli</code>.</li>
+          <li>Sign up to the site, and grab your authentication token in your profile page.</li>
+          <li>Run <code>rnplay -a</code> and enter your email and token.</li>
+        </ul>
+      </div>
+
+      <p>From inside your React Native app directory, which should already have a git repository, run <code>rnplay -c</code>. Choose an application name: currently the name should match the registered module name in <code>index.ios.js</code>. This file must exist and be the app entry point.</p>
+
+      <p>Now your app should be created on the site, with a new git remote added to your repo. <code>git push rnplay master</code> will push your master branch up. Now <code>rnplay -o</code> to open the browser to your app.</p>
+    </div>
+  </div>
+
+</div>

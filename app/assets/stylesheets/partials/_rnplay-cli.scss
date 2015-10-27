@@ -1,0 +1,36 @@
+.container {
+  &--rnplaycli {
+
+    .row {
+      margin-bottom: 32px;
+      line-height: 1.642em;
+    }
+
+    .title { text-align: left; }
+
+    .intro {
+      font-size: 1.2em;
+      line-height: 1.2em*1.4;
+      color: lighten(#333, 15%);
+    }
+
+    code {
+      color: #444;
+      background: #eaeaea;
+    }
+
+    &__instructions {
+      background: #333;
+      color: #eee;
+      border-radius: 4px;
+      padding: 16px 24px;
+      margin: 24px 0;
+      line-height: 1.8em;
+
+      code {
+        color: #eee;
+        background: #555;
+      }
+    }
+  }
+}

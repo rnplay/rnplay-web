@@ -41,7 +41,7 @@ $dropdown-link-active-color: #333;
 $grid-gutter-width: 24px;
 
 // Navigation collapse point
-$grid-float-breakpoint: 730px;
+$grid-float-breakpoint: 804px;
 
 $collapse-nav-logo: 400px;
 
@@ -81,6 +81,7 @@ $collapse-nav-logo: 400px;
 @import "partials/navigation";
 @import "partials/buttons";
 @import "partials/about";
+@import "partials/rnplay-cli";
 @import "partials/forms";
 @import "partials/footer";
 

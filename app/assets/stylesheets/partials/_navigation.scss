@@ -46,8 +46,10 @@
       color: $color-purple-light;
     }
 
-    &.new-app {
-      font-weight: bold;
+    &.new-app { font-weight: bold; }
+    &.monospace {
+      font-family: monospace;
+      text-transform: lowercase;
     }
   }
 }

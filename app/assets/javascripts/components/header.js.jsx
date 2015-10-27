@@ -63,6 +63,7 @@ var Header = React.createClass({
                   <li><a className="new-app" href="/apps/new">New App</a></li>
                   {this.renderMyApps()}
                   <li><a href="/apps/picks">Staff Picks</a></li>
+                  <li><a href="/rnplay-cli" className="monospace">rnplay-cli</a></li>
                   <li><a href="/about">About</a></li>
                   {this.renderSignInOutLink()}
                 </ul>

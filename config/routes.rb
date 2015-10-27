@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   get '/privacy', to: "pages#privacy"
   get '/help', to: "pages#help"
   get '/about', to: "pages#about"
+  get '/rnplay-cli', to: "pages#rnplay-cli"
 
   get '/:username/:id', to: "apps#show", as: :user_app
   get '/:username', to: "apps#public_index", as: :user_apps
