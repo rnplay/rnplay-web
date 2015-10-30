@@ -38,7 +38,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
       <h2>Which React Native versions do you support?</h2>
-      <p><%= Build.all.collect(&:name).to_sentence %>.</p>
+      <p><%= Build.all.collect(&:name).uniq.to_sentence %>.</p>
     </div>
   </div>
 
