@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '(*params)' => 'welcome#maintenance'
+
   root 'welcome#index'
 
   mount WebpackRails::Engine, at: 'webpack', as: 'webpack'

@@ -7,4 +7,7 @@ class WelcomeController < ApplicationController
      end
    end
 
+ def maintenance
+   @header_disabled = true
+ end
 end
