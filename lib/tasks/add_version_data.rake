@@ -1,6 +1,6 @@
 BUILD_VERSIONS = {
   'ios' => {
-    '0.20.0' => 'eqcjqpytnc26txac3h5nr3081m'
+    '0.20.0' => '6axwpbv4zb4nwnwk2686h3gkj4'
   },
   'android' => {
     '0.20.0' => 'd8wtae190m9978vwx5mv228erw'
