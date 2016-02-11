@@ -30,7 +30,7 @@ export default class Simulator extends Component {
       deviceColor: 'white',
       xDocMsg: true,
       orientation: 'portrait',
-      debug: false
+      debug: true
     }
 
     var bundlePath = platform == 'android' ? this.props.app.bundlePath : this.props.app.bundlePath+"/index.ios.bundle";
