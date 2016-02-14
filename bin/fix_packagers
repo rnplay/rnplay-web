@@ -2,8 +2,5 @@
 #
 #
 
-echo "Removing stray react-native modules"
-sudo find /home/app/rails/rnplay/app_js -name react-native -exec rm -rf {} \;
-sudo find /home/app/rails/rnplay/app_js -name react-tools -exec rm -rf {} \;
 echo "Restarting packagers"
 for i in `sudo docker ps | grep packager | awk -F"                                   " '{print $2}' | xargs`; do sudo docker restart $i; done
