@@ -121,6 +121,7 @@ class AppsController < ApplicationController
         notice: 'Please sign in to create a new app'
     else
       @app = current_user.apps.create({
+        enabled: true,
         name: "Sample App",
         module_name: "SampleApp",
         build_id: Build.last.id,
