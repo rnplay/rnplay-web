@@ -1,3 +1,19 @@
+<% if !@app.enabled %>
+
+<div style="display: flex; flex-direction: column; align-items: center; width: 500px; justify-content: center; text-align: center; margin: 0 auto; margin-top: 100px">
+  <%= image_tag("cat.jpg", style: "border-radius: 200px") %>
+<h2>Sorry!</h2>
+<h3 style="margin-bottom: 30px">This app is no longer available.</h3>
+<p>We had to disable apps created via our  <i>experimental git repository</i> support. Unfortunately, it caused a lot of errors and due to conflicts between app modules. We're working to stabilize the Playground.</p>
+
+<p>Feel free to <a href="https://rnplay.org/apps/picks">browse some other example apps.</a>
+
+<p>If you have questions, email us! info@rnplay.org.</p>
+</div>
+
+
+<% else %>
+
 <div id="editor-container" class="editor-app"></div>
 <script>
   window.__data = <%=
@@ -10,6 +26,7 @@
         moduleName: @app.module_name,
         packagerUrlTemplate: @app.packager_url_template,
         packagerRoot: @app.packager_root,
+        enabled: @app.enabled,
         bundlePath: @app.cross_platform_bundle_path,
         android: @app.android?,
         creator: {username: @app.creator.username, name: @app.creator.name, id: @app.creator_id},
@@ -28,3 +45,4 @@
       builds: Build.all.as_json(methods: :short_name),
       headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
 </script>
+<% end %>

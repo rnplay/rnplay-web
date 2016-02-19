@@ -44,7 +44,7 @@ class AppsController < ApplicationController
   end
 
   def picks
-    @apps = App.where(pick: true).for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    @apps = App.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
     respond_to do |format|
       format.html
       format.json { render 'apps' }
@@ -52,7 +52,7 @@ class AppsController < ApplicationController
   end
 
   def popular
-    @apps = App.order('view_count desc').for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    @apps = App.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
 
     respond_to do |format|
       format.html
@@ -61,7 +61,7 @@ class AppsController < ApplicationController
   end
 
   def recent
-    @apps = App.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
+    @apps = App.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
   end
 
   def log
@@ -213,7 +213,7 @@ class AppsController < ApplicationController
   end
 
   def pick_layout
-    if params[:action] == 'edit' || params[:action] == 'show'
+    if (params[:action] == 'edit' || params[:action] == 'show') && @app.enabled
       'editor'
     else
       'application'
