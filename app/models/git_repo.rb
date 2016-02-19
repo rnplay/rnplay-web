@@ -17,6 +17,14 @@ class GitRepo
     FileUtils.rm_rf path
   end
 
+  def checkout_all_files
+    run "cd #{path} && git checkout ."
+  end
+
+  def was_pushed?
+    has_file? "package.json"
+  end
+
   def clone_from(source)
     run "git clone #{source.path} #{path}"
     set_app_owner
