@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918033501) do
+ActiveRecord::Schema.define(version: 20160219131614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150918033501) do
     t.boolean  "uses_git"
     t.boolean  "ios"
     t.boolean  "android"
+    t.boolean  "enabled"
   end
 
   add_index "apps", ["name"], name: "index_apps_on_name", using: :btree
