@@ -35,7 +35,7 @@ class AppsController < ApplicationController
   end
 
   def search
-    @apps = App.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
+    @apps = App.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
     render 'apps'
   end
 
@@ -73,7 +73,7 @@ class AppsController < ApplicationController
       @build = Build.where(name: params[:version]).first
       @apps = @build.apps
     else
-      @apps = App.where("name != 'Sample App'")
+      @apps = App.enabled.where("name != 'Sample App'")
     end
 
     @apps = @apps.order("updated_at desc").all
