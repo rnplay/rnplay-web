@@ -17,6 +17,9 @@ module BuildVersionUpdater
         if build.blank?
           Build.create(name: name, appetize_id: public_key, platform: platform)
           puts "Added build: #{platform}:#{name}:#{public_key}"
+        else
+          build.update_attributes(name: name, appetize_id: public_key, platform: platform)
+          puts "Updated build: #{platform}:#{name}:#{public_key}"
         end
       end
     end
