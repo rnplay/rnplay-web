@@ -13,7 +13,7 @@ module BuildVersionUpdater
   def execute
     BUILD_VERSIONS.each do |platform, versions|
       versions.each do |name, public_key|
-        build = Build.where(name: name, appetize_id: public_key, platform: platform).first
+        build = Build.where(name: name, platform: platform).first
         if build.blank?
           Build.create(name: name, appetize_id: public_key, platform: platform)
           puts "Added build: #{platform}:#{name}:#{public_key}"
