@@ -53,6 +53,9 @@ namespace :docker do
     docker_exec("rake db:migrate")
   end
 
+  task :update_builds do
+    docker_exec("rake add_version_data")
+  end
   # desc "Build app docker container"
   # task :build do
   #   run "cp ~/.ssh/authorized_keys #{deploy_to} && cd #{deploy_to} && #{sudo} docker build -t #{app_name} ."
