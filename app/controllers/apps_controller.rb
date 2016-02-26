@@ -137,7 +137,7 @@ class AppsController < ApplicationController
       render json: {error: 'Please sign in to fork this app'}
     else
       @new_app = current_user.apps.create(name: @app.name, module_name: @app.module_name,
-                              build_id: @app.build_id, forked_app: @app)
+                              build_id: @app.build_id, forked_app: @app, enabled: true)
 
       render json: {success: true, token: @new_app.url_token}
     end
