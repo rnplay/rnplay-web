@@ -19,42 +19,6 @@ postgres:
   env_file: ../../.env.production
   image: postgres
 
-packager0110rc:
-  restart: always
-  image: "packager:0.11.0-rc"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager0110rc.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/app/js
-
-packager0110:
-  restart: always
-  image: "packager:0.11.0"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager0110.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/app/js
-
-packager0114:
-  restart: always
-  image: "packager:0.11.4"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager0114.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/app/js
-
-packager0130rc:
-  restart: always
-  image: "packager:0.13.0-rc"
-  env_file: ../../.env.production
-  environment:
-    VIRTUAL_HOST: packager0130rc.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/app/js
-
 redis:
   restart: always
   image: redis
@@ -74,13 +38,3 @@ worker:
     - postgres
     - redis
     - cache
-
-grack:
-  image: grack-docker
-  volumes:
-    - /home/app/repos:/var/repos
-    - /home/app/rails/rnplay:/rails
-  links:
-    - postgres
-  environment:
-    VIRTUAL_HOST: git.rnplay.org
