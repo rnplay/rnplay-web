@@ -37,8 +37,7 @@
     <script type="text/javascript">
       var email = "<%= current_user.email %>";
       var first_name = "<%= current_user.name %>";
-
-      nudgespot.identify(email, {first_name: first_name, last_name: last_name});
+      nudgespot.identify(email, {first_name: first_name});
     </script>
   <% end %>
 </body>
