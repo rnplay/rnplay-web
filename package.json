@@ -15,7 +15,7 @@
     "lodash": "^3.10.1",
     "qs": "5.1.0",
     "react": "0.13.3",
-    "react-native": "0.11.0",
+    "react-native": "0.20.0",
     "react-redux": "^2.1.2",
     "redux": "^3.0.0",
     "redux-promise": "^0.5.0",
