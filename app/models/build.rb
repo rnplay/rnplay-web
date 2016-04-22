@@ -6,7 +6,7 @@ class Build < ActiveRecord::Base
   end
 
   def self.default
-    find_by(platform: 'ios', name: "0.21.0")
+    find_by(platform: 'ios', name: "0.24.1")
   end
 
 end
