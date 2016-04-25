@@ -203,6 +203,7 @@ export default class EditorApp extends Component {
       onPick,
       onSave,
       onFork,
+      onFileSave,
       saveScreenshot,
       rotate,
       openDevMenu
@@ -233,6 +234,7 @@ export default class EditorApp extends Component {
       useDarkTheme,
       onChangeFile,
       onUpdateBody,
+      onFileSave,
       belongsToCurrentUser,
       fileSelectorOpen,
       onFileSelectorToggle,

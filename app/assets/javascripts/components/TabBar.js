@@ -61,8 +61,7 @@ export default class TabBar extends Component {
           <div className={saveIndicatorClasses}></div>
         </span>
         {this.renderSaveMessage()}
-        <button className="editor-tab-bar__save">Save</div>
-</button>
+        <button className="editor-tab-bar__save" onClick={(e) => {e.preventDefault(); this.props.onFileSave();}}>Save</button>
       </div>
     );
   }

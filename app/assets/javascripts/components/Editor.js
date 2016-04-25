@@ -84,6 +84,7 @@ export default class Editor {
       onFileSelectorToggle,
       useDarkTheme,
       logs,
+      onFileSave,
       editorHeaderProps,
       unsavedChanges,
       saved
@@ -91,6 +92,7 @@ export default class Editor {
 
     const tabBarProps = {
       currentFile,
+      onFileSave,
       onFileSelectorToggle,
       useDarkTheme,
       unsavedChanges,
