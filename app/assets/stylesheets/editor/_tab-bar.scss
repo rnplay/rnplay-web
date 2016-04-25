@@ -7,6 +7,23 @@
   z-index: 5;
   display: flex;
 
+  &__save {
+    height: 30px;
+    border: 0;
+    width: 100px;
+    background-color: $editor-color-purple;
+    color: white;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    position:absolute;
+    right: 0;
+  }
+
+  &__save:hover {
+    font-weight: bold;
+  }
+
   &__tab {
     background: $editor-color-light-grey;
     border-right: 1px solid $editor-border-color;

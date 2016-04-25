@@ -61,6 +61,8 @@ export default class TabBar extends Component {
           <div className={saveIndicatorClasses}></div>
         </span>
         {this.renderSaveMessage()}
+        <button className="editor-tab-bar__save">Save</div>
+</button>
       </div>
     );
   }
