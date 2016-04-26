@@ -44,6 +44,11 @@ var Header = React.createClass({
       <div className="container-fluid header">
         <div className="row">
           <div className="col-xs-12">
+            <p style={{backgroundColor: "#fff", padding: 8, borderBottom: "1px dotted #777"}}>Need to test and share your <strong>private apps</strong> in the browser? <a style={{textDecoration: "underline"}} href="https://reploy.io">Try our new service at reploy.io.</a></p>            
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
             <nav className="navbar navbar-default">
               <div className="navbar-header">
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-main">
