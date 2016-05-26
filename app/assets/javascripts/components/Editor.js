@@ -83,6 +83,7 @@ export default class Editor {
       onFileSelectorToggle,
       useDarkTheme,
       logs,
+      belongsToCurrentUser,
       onFileSave,
       editorHeaderProps,
       unsavedChanges,
@@ -94,6 +95,7 @@ export default class Editor {
       onFileSave,
       onFileSelectorToggle,
       useDarkTheme,
+      belongsToCurrentUser,
       unsavedChanges,
       saved,
       fileSelectorOpen
