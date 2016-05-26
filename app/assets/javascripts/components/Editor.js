@@ -49,7 +49,6 @@ export default class Editor {
     } = this.props;
 
     const options = assign({}, DEFAULT_CODEMIRROR_OPTIONS, {
-      readOnly: belongsToCurrentUser() ? false : 'nocursor',
       theme: useDarkTheme ? 'midnight' : DEFAULT_CODEMIRROR_OPTIONS.theme,
     }, useVimKeyBindings ? {keyMap: 'vim'} : {});
 

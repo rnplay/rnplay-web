@@ -141,10 +141,9 @@ export default class EditorApp extends Component {
    * Triggers saving of the current file, if the buffer as been modified
    */
   onFileSave = () => {
-    const { dispatch, saveFile, fileBodies, currentFile, app: { id } } = this.props;
+    const { currentUser, dispatch, saveFile, fileBodies, currentFile, app: { id } } = this.props;
     const fileBody = fileBodies[currentFile];
-
-    if (fileBody) {
+    if (this.belongsToCurrentUser() && fileBody) {
       dispatch(saveFile(id, currentFile, fileBody));
     }
   }
