@@ -84,6 +84,8 @@ class GitRepo
 
   # TODO: refactor to File model
   def update_file(name, content)
+
+    content = content.gsub(/@providesModule.*$/, "")
     File.open("#{path}/#{name}", "w") do |file|
       file.write(content)
       set_app_owner
