@@ -29,7 +29,7 @@ class AppsController < ApplicationController
     render json: {
       "name": @app.name,
       "mainModuleName": @app.module_name,
-      "sdkVersion":"6.0.2",
+      "sdkVersion":"6.0.0",
       "xde":true,
       "developer":{
         "tool":"rnplay"
