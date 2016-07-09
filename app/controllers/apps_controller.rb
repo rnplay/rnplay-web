@@ -26,6 +26,8 @@ class AppsController < ApplicationController
   end
 
   def exp_manifest
+    platform = request.headers['Exponent-Platform']
+
     render json: {
       "name": @app.name,
       "appKey": @app.module_name,
@@ -34,7 +36,7 @@ class AppsController < ApplicationController
       "developer":{
         "tool":"rnplay"
       },
-      "bundleUrl":"https://packagerexponent.rnplay.org/js/#{@app.url_token}/index.#{params[:platform] || 'ios'}.bundle?platform=ios&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
+      "bundleUrl":"https://packagerexponent.rnplay.org/js/#{@app.url_token}/index.#{platform}.bundle?platform=#{platform}&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
     }
   end
 
