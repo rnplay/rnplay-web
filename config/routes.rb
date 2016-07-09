@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
 
   get '/users/:id', to: "apps#public_index", as: :userid_apps
+  get '/apps/:id/index.exp', to: "apps#exp_manifest", as: :app_exp_manifest
+
   get '/contact' => 'support#new'
   post '/contact' => 'support#create'
 
@@ -24,7 +26,6 @@ Rails.application.routes.draw do
     member do
       post :fork
       get :raw_simulator
-      get :exp_manifest
       get :qr
       get :recent
       post :log
