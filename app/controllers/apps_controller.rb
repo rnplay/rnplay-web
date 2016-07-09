@@ -28,6 +28,7 @@ class AppsController < ApplicationController
   def exp_manifest
     render json: {
       "name": @app.name,
+      "mainModuleName": @app.module_name,
       "sdkVersion":"6.0.2",
       "xde":true,
       "developer":{
