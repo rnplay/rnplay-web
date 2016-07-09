@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     member do
       post :fork
       get :raw_simulator
+      get :exp_manifest
       get :qr
       get :recent
       post :log

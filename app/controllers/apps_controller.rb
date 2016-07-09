@@ -3,7 +3,7 @@ class AppsController < ApplicationController
   respond_to :html, :json
 
   layout :pick_layout
-  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork]
+  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
@@ -23,6 +23,18 @@ class AppsController < ApplicationController
         render 'apps'
       end
     end
+  end
+
+  def exp_manifest
+    render json: {
+      "name": @app.name,
+      "sdkVersion":"6.0.2",
+      "xde":true,
+      "developer":{
+        "tool":"rnplay"
+      },
+      "bundleUrl":"https://packagerexponent.rnplay.org/js/#{@app.url_token}/index.#{params[:platform] || 'ios'}.bundle?platform=ios&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
+    }
   end
 
   def recent
