@@ -5,8 +5,6 @@ class ValidationsController < ApplicationController
   respond_to :json, :html
 
   def email
-    render json: {email: params[:email]}
-
-    # render json: { available: User.where(email: params[:email]).count === 0 }
+    render json: { available: User.where(email: params[:email]).count === 0 }
   end
 end
