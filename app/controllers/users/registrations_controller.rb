@@ -1,10 +1,18 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :verify_authenticity_token, if: Proc.new { |c| c.request.format == 'application/json' }
+  skip_before_filter :verify_authenticity_token,
+    if: Proc.new { |c| c.request.format == 'application/json' }
+
   respond_to :json, :html
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
   before_filter :configure_permitted_parameters
+
+  def _validate
+    render json: {
+      exists: User.where(params[:email]).count > 0
+    }
+  end
 
   # GET /resource/sign_up
   # def new

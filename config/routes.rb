@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   }
 
 
+  namespace :users do
+    get '/_validate/:email', to: 'registrations#_validate'
+  end
+
   get '/users/:id', to: "apps#public_index", as: :userid_apps
   get '/apps/:id/index.exp', to: "apps#exp_manifest", as: :app_exp_manifest
 
