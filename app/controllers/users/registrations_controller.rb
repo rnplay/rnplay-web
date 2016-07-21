@@ -8,12 +8,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   before_filter :configure_permitted_parameters
 
-  def _validate
-    render json: {
-      available: User.where(email: params[:email]).count === 0
-    }
-  end
-
   # GET /resource/sign_up
   # def new
   #   super

@@ -14,10 +14,6 @@ Rails.application.routes.draw do
   get '/users/:id', to: "apps#public_index", as: :userid_apps
   get '/apps/:id/index.exp', to: "apps#exp_manifest", as: :app_exp_manifest
 
-  namespace :users do
-    get '/_validate/:email', to: 'registrations#_validate'
-  end
-
   get '/contact' => 'support#new'
   post '/contact' => 'support#create'
 
@@ -64,8 +60,8 @@ Rails.application.routes.draw do
   get '/privacy', to: "pages#privacy"
   get '/help', to: "pages#help"
   get '/about', to: "pages#about"
+  get '/validations/email/:email', to: "validations#email"
 
   get '/:username/:id', to: "apps#show", as: :user_app
   get '/:username', to: "apps#public_index", as: :user_apps
-
 end
