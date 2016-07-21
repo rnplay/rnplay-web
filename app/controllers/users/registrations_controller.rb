@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def _validate
     render json: {
-      exists: User.where(params[:email]).count > 0
+      available: User.where(email: params[:email]).count === 0
     }
   end
 
