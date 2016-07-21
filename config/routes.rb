@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   get '/privacy', to: "pages#privacy"
   get '/help', to: "pages#help"
   get '/about', to: "pages#about"
-  get '/validations/email/:email', to: "validations#email"
+  get '/validations/email/:email', to: "validations#email", constraints: { email: /.*/ }
 
   get '/:username/:id', to: "apps#show", as: :user_app
   get '/:username', to: "apps#public_index", as: :user_apps
