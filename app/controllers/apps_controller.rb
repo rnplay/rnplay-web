@@ -31,7 +31,7 @@ class AppsController < ApplicationController
     render json: {
       "name": @app.name,
       "appKey": @app.module_name,
-      "sdkVersion":"6.0.0",
+      "sdkVersion":"8.0.0",
       "xde":true,
       "developer":{
         "tool":"rnplay"
