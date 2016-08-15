@@ -139,7 +139,7 @@ class AppsController < ApplicationController
         enabled: true,
         name: "Sample App",
         module_name: "main",
-        build_id: Build.last.id,
+        build_id: Build.where(name: '0.31.0').first,
         created_from_web: true
       })
 
