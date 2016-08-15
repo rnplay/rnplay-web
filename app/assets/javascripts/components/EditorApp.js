@@ -47,9 +47,9 @@ export default class EditorApp extends Component {
     }
   }
 
-  simulatorAction = (action, param = '*') => {
-    this.iosSimulator.contentWindow.postMessage(action, param)
-    this.androidSimulator.contentWindow.postMessage(action, param)
+  simulatorAction = (action) => {
+    this.iosSimulator.contentWindow.postMessage(action, '*')
+    this.androidSimulator.contentWindow.postMessage(action, '*')
   }
 
   sendHeartBeat = () => {
@@ -74,12 +74,13 @@ export default class EditorApp extends Component {
     const { data } = e;
     const { dispatch, log, saveScreenshot } = this.props;
 
+    console.log(e);
+
     if (data.type === 'screenshot') {
       dispatch(saveScreenshot(this.props.app.id, data.data));
     } else if (data === 'sessionRequested') {
       this.simulatorActive = true;
-      console.log(`exp://rnplay.org/apps/${this.props.app.id}/index.exp`);
-      this.simulatorAction('openUrl', `exp://rnplay.org/apps/${this.props.app.id}/index.exp`);
+      this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.id}/index.exp`});
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
     } else if (data.type === 'debug' && data.message.indexOf('Running application') !== -1 && this.belongsToCurrentUser()) {
