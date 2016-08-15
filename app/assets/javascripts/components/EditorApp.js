@@ -78,10 +78,10 @@ export default class EditorApp extends Component {
 
     if (data.type === 'screenshot') {
       dispatch(saveScreenshot(this.props.app.id, data.data));
-    } else if (data === 'sessionRequested') {
+    } else if (data.type === 'sessionRequested') {
       this.simulatorActive = true;
       this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.id}/index.exp`});
-    } else if (data === 'sessionEnded') {
+    } else if (data.type === 'sessionEnded') {
       this.simulatorActive = false;
     } else if (data.type === 'debug' && data.message.indexOf('Running application') !== -1 && this.belongsToCurrentUser()) {
       console.log('Taking screenshot in 3 seconds...')
