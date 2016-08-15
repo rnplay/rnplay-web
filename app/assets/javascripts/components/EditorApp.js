@@ -80,10 +80,10 @@ export default class EditorApp extends Component {
       dispatch(saveScreenshot(this.props.app.id, data.data));
     } else if (data === 'sessionRequested') {
       this.simulatorActive = true;
-      this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.id}/index.exp`});
+      this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.id}`});
     } else if (data === 'firstFrameReceived') {
       console.log(`exp://rnplay.org/apps/${this.props.app.id}`);
-      this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.id}/index.exp`});
+      this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.id}`});
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
     } else if (data.type === 'debug' && data.message.indexOf('Running application') !== -1 && this.belongsToCurrentUser()) {
