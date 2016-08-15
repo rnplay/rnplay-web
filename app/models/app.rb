@@ -178,8 +178,13 @@ class App < ActiveRecord::Base
     end
 
     if created_from_web
-      target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/sample_app.ios.js"))
-      target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/sample_app.android.js"))
+      if build.name.to_f > 0.24
+        target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/app.ios.js"))
+        target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/app.android.js"))
+      else
+        target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/app_old.ios.js"))
+        target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/app_old.android.js"))
+      end
       target_git_repo.commit_all_changes("Initial commit from rnplay.org") unless Rails.env.development?
     end
   end

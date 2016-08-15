@@ -138,7 +138,7 @@ class AppsController < ApplicationController
       @app = current_user.apps.create({
         enabled: true,
         name: "Sample App",
-        module_name: "SampleApp",
+        module_name: "main",
         build_id: Build.last.id,
         created_from_web: true
       })
