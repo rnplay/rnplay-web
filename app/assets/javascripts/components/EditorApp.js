@@ -47,6 +47,15 @@ export default class EditorApp extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
+      if (this.props.app.exponent) {
+        this.simulatorAction('restartApp');
+      }
+    }
+  }
+
+
   simulatorAction = (action) => {
     this.iosSimulator.contentWindow.postMessage(action, '*')
     this.androidSimulator.contentWindow.postMessage(action, '*')
@@ -80,10 +89,6 @@ export default class EditorApp extends Component {
       dispatch(saveScreenshot(this.props.app.id, data.data));
     } else if (data === 'sessionRequested') {
       this.simulatorActive = true;
-      // this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.urlToken}`});
-    } else if (data === 'firstFrameReceived') {
-      console.log(`exp://rnplay.org/apps/${this.props.app.id}`);
-      // this.simulatorAction({type: 'url', value: `exp://rnplay.org/apps/${this.props.app.urlToken}`});
     } else if (data === 'sessionEnded') {
       this.simulatorActive = false;
     } else if (data.type === 'debug' && data.message.indexOf('Running application') !== -1 && this.belongsToCurrentUser()) {
