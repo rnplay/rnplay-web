@@ -235,7 +235,7 @@ class AppsController < ApplicationController
     uriEncodedOptions = encode_uri_component(JSON.generate(options))
 
     result = HTTParty.post(
-      "http://exp.host:3000/--/api/signPlaygroundManifest/#{uriEncodedOptions}",
+      "https://exp.host/--/api/signPlaygroundManifest/#{uriEncodedOptions}",
       payload
     )
 
