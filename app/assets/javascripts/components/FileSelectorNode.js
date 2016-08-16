@@ -13,10 +13,6 @@ export default class FileSelectorNode extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-  }
-
   onNodeClick = (e) => {
     e.preventDefault();
     e.stopPropagation();

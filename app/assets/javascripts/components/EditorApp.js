@@ -48,10 +48,6 @@ export default class EditorApp extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log({
-      prevUnsavedChanges: prevProps.unsavedChanges,
-      unsavedChanges: this.props.unsavedChanges,
-    });
     if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
       this.simulatorAction('restartApp');
     }
