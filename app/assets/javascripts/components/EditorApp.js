@@ -48,10 +48,12 @@ export default class EditorApp extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log({
+      prevUnsavedChanges: prevProps.unsavedChanges,
+      unsavedChanges: this.props.unsavedChanges,
+    });
     if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
-      if (this.props.app.exponent) {
-        this.simulatorAction('restartApp');
-      }
+      this.simulatorAction('restartApp');
     }
   }
 
@@ -82,8 +84,6 @@ export default class EditorApp extends Component {
 
     const { data } = e;
     const { dispatch, log, saveScreenshot } = this.props;
-
-    console.log(data);
 
     if (data.type === 'screenshot') {
       dispatch(saveScreenshot(this.props.app.id, data.data));
