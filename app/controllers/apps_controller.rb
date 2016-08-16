@@ -1,3 +1,6 @@
+require 'httparty'
+require 'json'
+
 class AppsController < ApplicationController
 
   respond_to :html, :json
@@ -27,8 +30,7 @@ class AppsController < ApplicationController
 
   def exp_manifest
     platform = request.headers['Exponent-Platform']
-
-    render json: {
+    unsigned_manifest = {
       "name": @app.name,
       "appKey": @app.module_name,
       "sdkVersion":"8.0.0",
@@ -38,6 +40,9 @@ class AppsController < ApplicationController
       },
       "bundleUrl":"https://packagerexponent.rnplay.org/js/#{@app.url_token}/index.#{platform}.bundle?platform=#{platform}&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
     }
+    signed_manifest = sign_manifest(unsigned_manifest)
+
+    render json: signed_manifest
   end
 
   def recent
@@ -212,6 +217,31 @@ class AppsController < ApplicationController
   end
 
   private
+
+  def encode_uri_component(string)
+    URI.escape(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+  end
+
+  def sign_manifest(unsigned_manifest)
+    payload = {
+      body: unsigned_manifest
+    }
+
+    options = {
+      serverSecret: ENV['EXPONENT_SERVER_SECRET'],
+      appId: @app.url_token,
+    }
+
+    uriEncodedOptions = encode_uri_component(JSON.generate(options))
+
+    result = HTTParty.post(
+      "http://exp.host:3000/--/api/signPlaygroundManifest/#{uriEncodedOptions}",
+      payload
+    )
+
+    signed_manifest = JSON.parse(JSON.parse(result.response.body)['response'])
+    signed_manifest
+  end
 
   def paginate
     @per_page = 10
