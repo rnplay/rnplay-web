@@ -26,6 +26,7 @@ export default class Simulator extends Component {
       embed: true,
       screenOnly: false,
       device: platform == 'ios' ? 'iphone5' : 'nexus5',
+      launchUrl: `exp://rnplay.org/apps/${this.props.app.urlToken}`,
       xdocMsg: true,
       deviceColor: 'white',
       xDocMsg: true,
