@@ -17,7 +17,11 @@ class AppsController < ApplicationController
   protect_from_forgery except: [:show, :create, :update, :fork]
 
   def index
-    @apps = current_user.apps.order("updated_at desc")
+    if is_exponent_client?
+      @apps = current_user.apps.exponent.order("updated_at desc")
+    else
+      @apps = current_user.apps.order("updated_at desc")
+    end
 
     respond_to do |format|
       format.html
@@ -46,7 +50,11 @@ class AppsController < ApplicationController
   end
 
   def recent
-    @apps = App.order("updated_at desc").limit(30)
+    if is_exponent_client?
+      @apps = App.exponent.order("updated_at desc").limit(30)
+    else
+      @apps = App.order("updated_at desc").limit(30)
+    end
   end
 
   def qr
@@ -55,7 +63,12 @@ class AppsController < ApplicationController
   end
 
   def search
-    @apps = App.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
+    if is_exponent_client?
+      @apps = App.exponent.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
+    else
+      @apps = App.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
+    end
+
     render 'apps'
   end
 
@@ -64,7 +77,12 @@ class AppsController < ApplicationController
   end
 
   def picks
-    @apps = App.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    if is_exponent_client?
+      @apps = App.exponent.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    else
+      @apps = App.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    end
+
     respond_to do |format|
       format.html
       format.json { render 'apps' }
@@ -72,7 +90,11 @@ class AppsController < ApplicationController
   end
 
   def popular
-    @apps = App.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    if is_exponent_client?
+      @apps = App.exponent.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    else
+      @apps = App.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
+    end
 
     respond_to do |format|
       format.html
@@ -81,7 +103,11 @@ class AppsController < ApplicationController
   end
 
   def recent
-    @apps = App.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
+    if is_exponent_client?
+      @apps = App.exponent.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
+    else
+      @apps = App.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
+    end
   end
 
   def log
@@ -96,7 +122,11 @@ class AppsController < ApplicationController
       @apps = App.enabled.where("name != 'Sample App'")
     end
 
-    @apps = @apps.order("updated_at desc").all
+    if is_exponent_client?
+      @apps = @apps.exponent.order("updated_at desc").all
+    else
+      @apps = @apps.order("updated_at desc").all
+    end
 
     respond_to do |format|
       format.html
@@ -139,12 +169,20 @@ class AppsController < ApplicationController
     if !user_signed_in?
       redirect_to new_user_session_path,
         notice: 'Please sign in to create a new app'
+    elsif current_user.email == 'brentvatne@gmail.com'
+      @app = current_user.apps.create({
+        enabled: true,
+        name: "Sample App",
+        module_name: "main",
+        build_id: Build.last.id,
+        created_from_web: true
+      })
     else
       @app = current_user.apps.create({
         enabled: true,
         name: "Sample App",
         module_name: "main",
-        build: Build.where(name: '0.31.0').first,
+        build_id: Build.where(name: '0.24.1').first.id,
         created_from_web: true
       })
 

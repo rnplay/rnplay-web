@@ -16,6 +16,7 @@ class App < ActiveRecord::Base
 
   scope :for_platform, -> (platform) { where(platform, true) }
   scope :enabled, -> { where('enabled', true) }
+  scope :exponent, -> { joins(:build).merge(Build.exponent) }
 
   def to_param
     url_token
@@ -190,9 +191,11 @@ class App < ActiveRecord::Base
   end
 
   def assign_build
-    self.build = Build.default
-    self.ios = true
-    self.android = true
+    if (!build)
+      self.build = Build.default
+      self.ios = true
+      self.android = true
+    end
   end
 
   def add_url_token
