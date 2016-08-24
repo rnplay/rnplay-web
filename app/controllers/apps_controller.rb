@@ -185,9 +185,9 @@ class AppsController < ApplicationController
         build_id: Build.where(name: '0.24.1').first.id,
         created_from_web: true
       })
-
-      redirect_to app_path(@app)
     end
+
+    redirect_to app_path(@app)
   end
 
   def fork
