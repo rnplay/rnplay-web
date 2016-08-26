@@ -164,7 +164,6 @@ class AppsController < ApplicationController
       format.html
       format.json { render 'app' }
     end
-    end
   end
 
   def new
