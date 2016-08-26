@@ -162,6 +162,8 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.json { render 'app' }
+    end
     end
   end
 
