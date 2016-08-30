@@ -5,7 +5,7 @@ class AppsController < ApplicationController
   respond_to :html, :json
 
   layout :pick_layout
-  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest]
+  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest, :push]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
@@ -27,6 +27,23 @@ class AppsController < ApplicationController
         @apps = @apps.for_platform(platform).limit(@per_page).offset(@offset)
         render 'apps'
       end
+    end
+  end
+
+  def push
+    if user_signed_in?
+      app = JSON.parse(render_to_string(template: 'app.json.jbuilder', locals: {app: @app}))
+
+      @push_tokens = current_user.push_tokens.all
+      @push_tokens.each do |token|
+        exponent.publish(
+          exponentPushToken: token.value,
+          message: "#{@app.name} on Playground",
+          data: {app: app},
+        )
+      end
+
+      render json: {success: true}
     end
   end
 
@@ -56,8 +73,12 @@ class AppsController < ApplicationController
   end
 
   def qr
-    qr_code = GoogleQR.new(data: %({"bundle_path": "#{@app.bundle_path}", "module_name": "#{@app.module_name}"}), size: '250x250')
-    render json: {url: qr_code.to_s}
+    if user_signed_in? && current_user.email == 'brentvatne@gmail.com'
+      push
+    else
+      qr_code = GoogleQR.new(data: %({"bundle_path": "#{@app.bundle_path}", "module_name": "#{@app.module_name}"}), size: '250x250')
+      render json: {url: qr_code.to_s}
+    end
   end
 
   def search
@@ -301,5 +322,9 @@ class AppsController < ApplicationController
     else
       'application'
     end
+  end
+
+  def exponent
+    @exponent ||= Exponent::Push::Client.new
   end
 end

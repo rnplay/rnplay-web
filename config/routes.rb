@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post :fork
       get :raw_simulator
       get :qr
+      get :push
       get :recent
       post :log
       post :view
