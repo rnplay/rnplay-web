@@ -32,14 +32,14 @@ class AppsController < ApplicationController
 
   def push
     if user_signed_in?
-      app = JSON.parse(render_to_string(template: 'app.json.jbuilder', locals: {app: @app}))
+      # app = JSON.parse(render_to_string(template: 'app.json.jbuilder', locals: {app: @app}))
 
       @push_tokens = current_user.push_tokens.all
       @push_tokens.each do |token|
         exponent.publish(
           exponentPushToken: token.value,
           message: "#{@app.name} on Playground",
-          data: {app: app},
+          data: {url_token: @app.url_token},
         )
       end
 
