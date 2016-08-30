@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'welcome#index'
 
   mount WebpackRails::Engine, at: 'webpack', as: 'webpack'
@@ -10,7 +9,6 @@ Rails.application.routes.draw do
     :registrations => "users/registrations"
   }
 
-
   get '/users/:id', to: "apps#public_index", as: :userid_apps
   get '/apps/:id/index.exp', to: "apps#exp_manifest", as: :app_exp_manifest
 
@@ -18,6 +16,8 @@ Rails.application.routes.draw do
   post '/contact' => 'support#create'
 
   get '/profile' => 'devise/registrations#edit', as: :profile
+
+  resources :push_tokens, only: [:index, :create, :destroy]
 
   get '/plays/:id' => 'apps#show'
   get '/plays/:id/edit' => 'apps#show'

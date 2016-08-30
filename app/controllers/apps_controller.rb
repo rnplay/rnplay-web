@@ -2,7 +2,6 @@ require 'httparty'
 require 'json'
 
 class AppsController < ApplicationController
-
   respond_to :html, :json
 
   layout :pick_layout
@@ -10,7 +9,6 @@ class AppsController < ApplicationController
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
-
   acts_as_token_authentication_handler_for User, fallback: :devise, only: [:index]
   before_action :authenticate_user!, only: [:index, :update, :destroy, :new]
 

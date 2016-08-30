@@ -15,6 +15,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Exponent's push notification API
+gem 'exponent-server-sdk', '~> 0.0.2'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -57,4 +60,3 @@ gem "simple_token_authentication"
 gem 'webpack_rails', '~> 1.0.0.pre', github: 'danott/webpack_rails'
 gem "rugged"
 gem "lograge"
-

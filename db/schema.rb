@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219131614) do
+ActiveRecord::Schema.define(version: 20160830012521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 20160219131614) do
     t.string   "name"
     t.string   "binary_version"
     t.string   "bundle_hash"
+  end
+
+  create_table "push_tokens", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "value"
   end
 
   create_table "users", force: :cascade do |t|

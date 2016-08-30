@@ -124,6 +124,8 @@ GEM
     erubis (2.7.0)
     excon (0.45.4)
     execjs (2.6.0)
+    exponent-server-sdk (0.0.2)
+      httparty
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     fog-aws (0.7.6)
@@ -376,6 +378,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views
   dotenv-rails
+  exponent-server-sdk (~> 0.0.2)
   fog-aws
   font-awesome-rails
   foreman
