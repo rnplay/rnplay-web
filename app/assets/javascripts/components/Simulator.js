@@ -21,33 +21,26 @@ export default class Simulator extends Component {
   }
 
   appetizeUrlFor(platform) {
+    let manifestUrl = `rnplay://rnplay.org/apps/${this.props.app.urlToken}`;
 
     var appetizeOptions = {
       embed: true,
       screenOnly: false,
       device: platform == 'ios' ? 'iphone5' : 'nexus5',
-      launchUrl: `exp://rnplay.org/apps/${this.props.app.urlToken}`,
+      launchUrl: platform === 'android' ? manifestUrl : undefined,
       xdocMsg: true,
       deviceColor: 'white',
       xDocMsg: true,
       orientation: 'portrait',
-      debug: true
+      debug: true,
     }
 
-    var bundlePath = platform == 'android' ? this.props.app.bundlePath : this.props.app.bundlePath+"/index.ios.bundle";
     var build = this.buildFor(platform, this.props.build.name);
     var appetizeId = build.appetize_id;
 
-    var appParams = {
-      moduleName: this.props.app.moduleName,
-      packagerRoot: template(this.props.app.packagerRoot)({buildShortName: build.short_name}),
-      bundleUrl: template(this.props.app.packagerUrlTemplate)({bundlePath: bundlePath, buildShortName: build.short_name}) + `?platform=${platform}`
-    }
 
-    if (platform == 'ios') {
-      appParams["RCTDevMenu"] = { "liveReloadEnabled": true }
-    } else {
-      appParams['jsMainModuleName'] = `${bundlePath}/index.android`
+    var appParams = {
+      "EXKernelLaunchUrlDefaultsKey": manifestUrl,
     }
 
     var url = `https://appetize.io/embed/${appetizeId}?${Qs.stringify(appetizeOptions)}&params=${encodeURIComponent(JSON.stringify(appParams))}`
