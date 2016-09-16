@@ -1,0 +1,53 @@
+packager0200:
+  restart: always
+  image: packager:0.20.0
+  environment:
+    VIRTUAL_HOST: packager0200.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+
+packager0210:
+  restart: always
+  image: packager:0.21.0
+  environment:
+    VIRTUAL_HOST: packager0210.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+
+packager0220:
+  restart: always
+  image: packager:0.22.0
+  environment:
+    VIRTUAL_HOST: packager0220.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+
+packager0241:
+  restart: always
+  image: packager:0.24.1
+  environment:
+    VIRTUAL_HOST: packager0241.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+
+packager0280:
+  restart: always
+  image: packager:0.28.0
+  environment:
+    VIRTUAL_HOST: packager0280.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+
+packagerexponent:
+  restart: always
+  image: packager:exponent
+  environment:
+    VIRTUAL_HOST: packagerexponent.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
