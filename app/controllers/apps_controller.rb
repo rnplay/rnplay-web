@@ -52,7 +52,11 @@ class AppsController < ApplicationController
     unsigned_manifest = {
       "name": @app.name,
       "appKey": @app.module_name,
-      "sdkVersion":"8.0.0",
+      "sdkVersion":"10.0.0",
+      "packagerOpts": {
+        "dev":true,
+        "minify":false,
+      },
       "xde":true,
       "developer":{
         "tool":"rnplay"
