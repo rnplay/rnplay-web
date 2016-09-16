@@ -50,7 +50,7 @@ class AppsController < ApplicationController
   def exp_manifest
     platform = request.headers['Exponent-Platform']
     base_url = "https://packagerexponent.rnplay.org/js/#{@app.url_token}"
-    dev = platform == 'android'
+    dev = platform == 'android' ? 'true' : 'false'
 
     unsigned_manifest = {
       "name": @app.name,
