@@ -49,7 +49,8 @@ export default class EditorApp extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
-      this.simulatorAction('restartApp');
+      let url = `rnplay://rnplay.org/apps/${this.props.app.urlToken}+reload`;
+      this.openUrl(url);
     }
   }
 
