@@ -48,8 +48,14 @@ export default class EditorApp extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    let build = find(this.props.builds, ({id}) => {
+      return id == this.props.buildId
+    });
+
     if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
-      // this.simulatorAction('restartApp');
+      if (build.platform == 'android') {
+        this.simulatorAction('restartApp');
+      }
       // let url = `rnplay://rnplay.org/apps/${this.props.app.urlToken}+reload`;
       // this.simulatorAction({type: 'url', value: url});
     }
