@@ -51,11 +51,21 @@ class AppsController < ApplicationController
     platform = request.headers['Exponent-Platform']
     unsigned_manifest = {
       "name": @app.name,
+      "version":"1.0.0",
+      "description": "An app on Playground",
       "appKey": @app.module_name,
+      "orientation":"portrait",
+      "primaryColor":"#6631BA",
       "sdkVersion":"10.0.0",
+      "publishedTime":"2016-09-14T03:49:32.071Z",
+      "iconUrl":"https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
       "packagerOpts": {
         "dev":true,
         "minify":false,
+      },
+      "loading": {
+        "hideExponentText":false,
+        "iconUrl":"https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png"
       },
       "xde":true,
       "developer":{
