@@ -49,7 +49,7 @@ class AppsController < ApplicationController
 
   def exp_manifest
     platform = request.headers['Exponent-Platform']
-    bundle_url = "https://packagerexponent.rnplay.org/js/#{@app.url_token}/index.#{platform}.bundle?platform=#{platform}&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
+    base_url = "https://packagerexponent.rnplay.org/js/#{@app.url_token}"
 
     unsigned_manifest = {
       "name": @app.name,
@@ -60,7 +60,7 @@ class AppsController < ApplicationController
       "primaryColor":"#6631BA",
       "sdkVersion":"10.0.0",
       "publishedTime":"2016-09-14T03:49:32.071Z",
-      "debuggerHost": bundle_url,
+      "debuggerHost": base_url,
       "iconUrl":"https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
       "packagerOpts": {
         "dev":true,
@@ -74,7 +74,7 @@ class AppsController < ApplicationController
       "developer":{
         "tool":"rnplay"
       },
-      "bundleUrl": bundle_url
+      "bundleUrl": "#{base_url}/index.#{platform}.bundle?platform=#{platform}&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
     }
     signed_manifest = sign_manifest(unsigned_manifest)
 
