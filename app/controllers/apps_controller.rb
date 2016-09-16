@@ -63,7 +63,7 @@ class AppsController < ApplicationController
       "debuggerHost": base_url,
       "iconUrl":"https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
       "packagerOpts": {
-        "dev":true,
+        "dev":false,
         "minify":false,
       },
       "loading": {
@@ -74,7 +74,7 @@ class AppsController < ApplicationController
       "developer":{
         "tool":"rnplay"
       },
-      "bundleUrl": "#{base_url}/index.#{platform}.bundle?platform=#{platform}&dev=true&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
+      "bundleUrl": "#{base_url}/index.#{platform}.bundle?platform=#{platform}&dev=false&strict=false&minify=false&hot=false&includeAssetFileHashes=true"
     }
     signed_manifest = sign_manifest(unsigned_manifest)
 
