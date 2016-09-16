@@ -54,14 +54,10 @@ class AppsController < ApplicationController
 
     unsigned_manifest = {
       "name": @app.name,
+      "appKey": @app.module_name,
       "version":"1.0.0",
       "description": "An app on Playground",
-      "appKey": @app.module_name,
-      "orientation":"portrait",
-      "primaryColor":"#6631BA",
       "sdkVersion":"10.0.0",
-      "publishedTime":"2016-09-14T03:49:32.071Z",
-      "debuggerHost": base_url,
       "iconUrl":"https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
       "packagerOpts": {
         "dev":dev,
