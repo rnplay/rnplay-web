@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     end
 
     render text: 'Sorry for the inconvenience, React Native Playground is currently unavailable! We should be back within the next week (date of posting: Saturday, September 17).'
+    false
   end
 
   def after_sign_in_path_for(resource)
