@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
 
   def under_construction
     if is_exponent_client?  ||
+        request.headers['Accept'] == 'application/json' ||
        request.format == 'application/json' ||
        is_special_person?
       return true
