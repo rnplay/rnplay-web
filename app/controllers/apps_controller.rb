@@ -55,7 +55,7 @@ class AppsController < ApplicationController
 
     unsigned_manifest = {
       "name": @app.name,
-      "appKey": @app.module_name,
+      "appKey": 'main',
       "version":"1.0.0",
       "description": "An app on Playground",
       "sdkVersion":"10.0.0",
