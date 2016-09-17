@@ -61,11 +61,7 @@ class App < ActiveRecord::Base
   end
 
   def set_module_name
-    if target_git_repo.has_file?('index.ios.js')
-      self.module_name = target_git_repo.contents_of_file('index.ios.js').lines.grep(/registerComponent/).first.scan(/"(.+)"|'(.+)'/).flatten.compact.first
-    else
-      self.module_name = name
-    end
+    self.module_name = 'main'
     save
   end
 
