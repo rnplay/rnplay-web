@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker build -t packager:exponent .
+docker-compose up -d
