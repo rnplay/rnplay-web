@@ -76,7 +76,7 @@ export default createStore(initialState, {
   [`${actions.authorUpdateBuild}-success`]: (state, { newBuildId, newPlatform }) => ({
     ...state,
     newBuildId,
-    currentFile: newPlatform == 'ios' ? 'index.ios.js' : 'index.android.ios'
+    currentFile: 'main.js',
   }),
 
   [`${actions.authorUpdateBuild}-failure`]: (state, { newBuildId }) => ({
