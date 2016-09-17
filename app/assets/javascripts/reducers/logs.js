@@ -12,7 +12,7 @@ export default createStore(initialState, {
 
   [`${actions.log}`]: (state,  { item }) => {
     return {
-      logs [],
+      logs: [],
     };
 
     return {
