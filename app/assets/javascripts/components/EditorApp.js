@@ -53,7 +53,11 @@ export default class EditorApp extends Component {
     });
 
     if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
-      this.simulatorAction('shakeDevice');
+      if (build.platform == 'android') {
+        this.simulatorAction({type: 'location', value: getFakeLocation()});
+      } else {
+        this.simulatorAction('shakeDevice');
+      }
     }
   }
 
@@ -289,3 +293,10 @@ export default class EditorApp extends Component {
     );
   }
 };
+
+let previousFakeLocation = [1,50];
+function getFakeLocation() {
+  let loc = previousFakeLocation.reverse();
+  previousFakeLocation = loc;
+  return loc;
+}
