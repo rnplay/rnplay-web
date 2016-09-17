@@ -5,14 +5,14 @@ class AppsController < ApplicationController
   respond_to :html, :json
 
   layout :pick_layout
-  before_action :set_app, only: [:show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest, :push]
+  before_action :set_app, only: [:last_updated, :show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest, :push]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
   acts_as_token_authentication_handler_for User, fallback: :devise, only: [:index]
   before_action :authenticate_user!, only: [:index, :update, :destroy, :new]
 
-  protect_from_forgery except: [:show, :create, :update, :fork]
+  protect_from_forgery except: [:last_updated, :show, :create, :update, :fork]
 
   def index
     if is_exponent_client?
@@ -184,6 +184,10 @@ class AppsController < ApplicationController
         render nothing: true
       end
     end
+  end
+
+  def last_updated
+    render json: { updated_at: @app.updated_at.to_i }
   end
 
   def show

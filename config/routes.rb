@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :apps do
     member do
       post :fork
+      get :last_updated
       get :raw_simulator
       get :qr
       get :push
