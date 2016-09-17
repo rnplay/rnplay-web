@@ -53,11 +53,11 @@ export default class EditorApp extends Component {
     });
 
     if (prevProps.unsavedChanges && !this.props.unsavedChanges) {
-      if (build.platform == 'android') {
+      // if (build.platform == 'android') {
         // this.simulatorAction('restartApp');
         let url = `rnplay://rnplay.org/apps/${this.props.app.urlToken}+reload`;
         this.simulatorAction({type: 'url', value: url});
-      }
+      // }
     }
   }
 
