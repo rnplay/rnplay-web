@@ -188,6 +188,9 @@ class App < ActiveRecord::Base
   end
 
   def assign_build
+    self.ios = true
+    self.android = true
+
     if (!build)
       self.build = Build.default
       self.ios = true

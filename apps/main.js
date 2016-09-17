@@ -10,9 +10,6 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Hello there!
-        </Text>
         <Text style={styles.instructions}>
           Edit and save with Cmd+S (Mac) or Ctrl+S (Windows). Changes will
           be reflected immediately in the simulator or on your device.
@@ -29,11 +26,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 28,
+  instructions: {
+    fontSize: 16,
     textAlign: 'center',
-    margin: 10,
+    margin: 15,
   },
 });
 
-registerComponent(SampleApp);
+registerComponent(App);
