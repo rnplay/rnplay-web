@@ -4,6 +4,8 @@ require 'json'
 class AppsController < ApplicationController
   respond_to :html, :json
 
+  before_action :under_construction
+
   layout :pick_layout
   before_action :set_app, only: [:last_updated, :show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest, :push]
   before_action :paginate, only: [:popular, :search, :picks, :index]
