@@ -53,7 +53,7 @@ export default class Switch extends Component {
 
   render() {
     return (
-      <div className={`switch ${this.props.className}`}>
+      <div className={`switch ${this.props.className || ''}`}>
         {this.renderChildren()}
       </div>
     )

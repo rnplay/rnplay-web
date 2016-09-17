@@ -119,13 +119,6 @@ export default createStore(initialState, {
     })
   },
 
-  [`${actions.toggleFileSelector}`]: (state, { fileBodies, error }) => {
-    return ({
-      ...state,
-      fileSelectorOpen: state.fileSelectorOpen == null ? false : !state.fileSelectorOpen,
-    })
-  },
-
   [`${actions.toggleAppPickStatus}-success`]: (state, { picked }) => {
     return ({
       ...state,

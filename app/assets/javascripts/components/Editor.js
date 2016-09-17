@@ -5,7 +5,6 @@ import CodeMirror from 'codemirror';
 import assign from 'lodash/object/assign';
 
 import EditorHeader from './EditorHeader';
-import FileSelector from './FileSelector';
 import TabBar from './TabBar';
 import Logger from './Logger';
 
@@ -79,8 +78,6 @@ export default class Editor {
       app: { body },
       currentFile,
       fileTree,
-      fileSelectorOpen,
-      onFileSelectorToggle,
       useDarkTheme,
       logs,
       belongsToCurrentUser,
@@ -93,12 +90,10 @@ export default class Editor {
     const tabBarProps = {
       currentFile,
       onFileSave,
-      onFileSelectorToggle,
       useDarkTheme,
       belongsToCurrentUser,
       unsavedChanges,
       saved,
-      fileSelectorOpen
     };
 
     return (
@@ -108,12 +103,6 @@ export default class Editor {
         <TabBar {...tabBarProps} />
 
         <div className="editor-wrap">
-          <FileSelector
-            open={fileSelectorOpen}
-            files={fileTree}
-            current={currentFile}
-            onSelect={this.changeFile}
-          />
           <div className="editor">
             <textarea
               ref="editorTextArea"

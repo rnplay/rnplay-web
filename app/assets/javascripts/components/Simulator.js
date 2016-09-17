@@ -59,6 +59,7 @@ export default class Simulator extends Component {
 
 
   renderQRModal() {
+    return null;
     return (
       <QrModal urlToken={this.props.app.urlToken}
                onClickBackdrop={this.hideQRModal}
@@ -67,6 +68,7 @@ export default class Simulator extends Component {
   }
 
   renderQRLink = () => {
+    return null;
     return (
       <a onClick={this.showQRModal} className="editor-button">
         <i className="fa fa-mobile"></i> Run on your device
@@ -75,6 +77,8 @@ export default class Simulator extends Component {
   }
 
   renderControls() {
+    return null;
+
     if (this.props.currentUserIsAdmin()) {
       return (
         <div className="editor-simulator-container__controls">
@@ -111,22 +115,34 @@ export default class Simulator extends Component {
   }
 
   renderSwitch() {
-    if (this.props.ios && this.props.android) {
-      return (
-        <Switch
-          onChange={this.onSwitchPlatform}
-          defaultValue={this.props.build.platform}
-          name="platform">
-          <span value="ios">iOS</span>
-          <span value="android">Android</span>
-        </Switch>
-      )
-    } else {
-      return null;
-    }
+    return (
+      <Switch
+        onChange={this.onSwitchPlatform}
+        defaultValue={this.props.build.platform}
+        name="platform">
+        <span value="ios">iOS</span>
+        <span value="android">Android</span>
+      </Switch>
+    )
+  }
+
+  renderBuildPicker() {
+    return null;
+
+    return (
+      <section className={classesBuildPicker}>
+        <span className="editor-simulator-container__title">Version</span>
+        <BuildPicker
+          onChange={this.onUpdateBuild}
+          builds={builds}
+          selectedBuildName={this.props.build.name}
+        />
+      </section>
+    );
   }
 
   renderSupportedPlatforms() {
+    return null;
     if (!this.props.belongsToCurrentUser()) {
       return null;
     }
@@ -174,24 +190,11 @@ export default class Simulator extends Component {
 
     return (
       <div className="editor-simulator-container">
-
-        <div className="editor-header__bar editor-simulator-container__header">
-          {this.renderQRLink()}
-        </div>
-
         {this.renderControls()}
 
         <div className="editor-simulator-container__settings">
           {this.renderSupportedPlatforms()}
-
-          <section className={classesBuildPicker}>
-            <span className="editor-simulator-container__title">Version</span>
-            <BuildPicker
-              onChange={this.onUpdateBuild}
-              builds={builds}
-              selectedBuildName={this.props.build.name}
-            />
-          </section>
+          {this.renderBuildPicker()}
         </div>
 
         {this.renderSwitch()}

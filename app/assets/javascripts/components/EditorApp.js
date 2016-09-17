@@ -177,11 +177,6 @@ export default class EditorApp extends Component {
     }
   }
 
-  onFileSelectorToggle = () => {
-    const { dispatch, toggleFileSelector } = this.props;
-    dispatch(toggleFileSelector());
-  }
-
   render() {
 
     const {
@@ -197,7 +192,6 @@ export default class EditorApp extends Component {
       buildId,
       appSaveError,
       appIsPicked,
-      fileSelectorOpen,
       logs,
       unsavedChanges,
       saved,
@@ -206,7 +200,6 @@ export default class EditorApp extends Component {
     } = this.props;
 
     const {
-      onFileSelectorToggle,
       onUpdateName,
       onUpdateBuild,
       onChangeFile,
@@ -250,8 +243,6 @@ export default class EditorApp extends Component {
       onUpdateBody,
       onFileSave,
       belongsToCurrentUser,
-      fileSelectorOpen,
-      onFileSelectorToggle,
       logs,
       unsavedChanges,
       saved

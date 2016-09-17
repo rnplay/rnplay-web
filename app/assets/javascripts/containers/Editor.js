@@ -19,7 +19,6 @@ import EditorApp from '../components/EditorApp';
     showHeader,
     appSaveInProgress,
     appSaveError,
-    fileSelectorOpen,
     appIsPicked,
     forkToken,
     ios,
@@ -45,7 +44,6 @@ import EditorApp from '../components/EditorApp';
     showHeader,
     appSaveInProgress,
     appSaveError,
-    fileSelectorOpen: fileSelectorOpen == null ? app.hasMultipleFiles : fileSelectorOpen,
     unsavedChanges,
     saved,
     logs: logs.logs

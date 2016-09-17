@@ -10,10 +10,6 @@ export default class TabBar extends Component {
 
   }
 
-  toggleFileSelector() {
-    this.props.onFileSelectorToggle();
-  }
-
   renderSaveMessage() {
     if (this.props.saved) {
       return (
@@ -26,12 +22,11 @@ export default class TabBar extends Component {
 
   renderSaveButton() {
     if (this.props.belongsToCurrentUser()) {
-      return <button className="editor-tab-bar__save" onClick={(e) => {e.preventDefault(); this.props.onFileSave();}}>Save</button>      
+      return <button className="editor-tab-bar__save" onClick={(e) => {e.preventDefault(); this.props.onFileSave();}}>Save</button>
     }
   }
   render() {
     const {
-      onFileSelectorToggle,
       currentFile,
       unsavedChanges
     } = this.props;
@@ -56,11 +51,6 @@ export default class TabBar extends Component {
 
     return (
       <div className="editor-header__bar editor-tab-bar">
-        <span className={buttonClasses} ref="toggleFileSelector" onClick={this.toggleFileSelector.bind(this)}>
-          <i className={iconClasses}></i>
-          <span className="editor-tab-bar__text">Files</span>
-          <i className="fa fa-angle-right editor-tab-bar__icon--right"></i>
-        </span>
         <span className="editor-tab-bar__tab">
           {currentFile}
           <div className={saveIndicatorClasses}></div>
