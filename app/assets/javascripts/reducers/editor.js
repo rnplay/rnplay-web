@@ -15,10 +15,9 @@ const initialState = {
   newBuildId: null,
   showHeader: true,
   fileBodies: {},
-  fileTree: {},
   ios: null,
   android: null,
-  currentFile: 'index.ios.js',
+  currentFile: 'main.js',
   appSaveInProgress: false,
   appIsPicked: null,
   forkToken: null,
@@ -31,8 +30,6 @@ export default createStore(initialState, {
   [`${actions.switchApp}`]: (state, { app }) => ({
     ...state,
     app,
-    currentFile: app.platform == 'ios' ? 'index.ios.js' : 'index.android.js',
-    fileTree: makeFileTree(Object.keys(app.files))
   }),
 
   [`${actions.switchFile}`]: (state, { currentFile }) => {

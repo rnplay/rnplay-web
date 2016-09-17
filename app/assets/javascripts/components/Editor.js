@@ -77,7 +77,6 @@ export default class Editor {
     const {
       app: { body },
       currentFile,
-      fileTree,
       useDarkTheme,
       logs,
       belongsToCurrentUser,

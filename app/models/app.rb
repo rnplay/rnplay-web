@@ -180,8 +180,9 @@ class App < ActiveRecord::Base
 
     if created_from_web
       if build.name.to_f > 0.24
-        target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/app.ios.js"))
-        target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/app.android.js"))
+        target_git_repo.update_file("main.js", File.read("#{Rails.root}/apps/main.js"))
+        target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/index.ios.js"))
+        target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/index.android.js"))
       else
         target_git_repo.update_file("index.ios.js", File.read("#{Rails.root}/apps/app_old.ios.js"))
         target_git_repo.update_file("index.android.js", File.read("#{Rails.root}/apps/app_old.android.js"))

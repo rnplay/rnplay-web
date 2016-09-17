@@ -188,7 +188,6 @@ export default class EditorApp extends Component {
       showHeader,
       name,
       currentFile,
-      fileTree,
       buildId,
       appSaveError,
       appIsPicked,
@@ -234,7 +233,6 @@ export default class EditorApp extends Component {
 
     const editorProps = {
       app,
-      fileTree,
       currentFile,
       currentUser,
       useVimKeyBindings,
