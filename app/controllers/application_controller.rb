@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
       return true
     end
 
-    render text: 'Sorry for the inconvenience, React Native Playground is currently unavailable! We should be back within the next week (date of posting: Saturday, September 17).'
+    render template: 'shared/maint'
     false
   end
 
