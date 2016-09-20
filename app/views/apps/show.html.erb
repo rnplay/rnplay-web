@@ -42,7 +42,7 @@
       useVimKeyBindings: user_signed_in? && current_user.use_vim_keybindings?,
       useDarkTheme: user_signed_in? && current_user.use_dark_theme?,
       isDevelopment: Rails.env.development?,
-      builds: user_signed_in? && current_user.email == 'brentvatne@gmail.com' ? Build.all.as_json(methods: [:short_name, :exponent]) : Build.where('name != ?', '0.31.0').as_json(methods: [:short_name, :exponent]),
+      builds: user_signed_in? && Build.all.as_json(methods: [:short_name, :exponent]),
       headerLogoSrc: asset_path('header_logo.png')}.to_json) %>
 </script>
 <% end %>

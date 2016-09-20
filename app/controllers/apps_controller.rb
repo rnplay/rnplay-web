@@ -17,16 +17,12 @@ class AppsController < ApplicationController
   protect_from_forgery except: [:last_updated, :show, :create, :update, :fork]
 
   def index
-    if is_exponent_client?
-      @apps = current_user.apps.exponent.order("updated_at desc")
-    else
-      @apps = current_user.apps.order("updated_at desc")
-    end
+    @apps = current_user.apps.exponent.order("updated_at desc")
 
     respond_to do |format|
       format.html
       format.json do
-        @apps = @apps.for_platform(platform).limit(@per_page).offset(@offset)
+        @apps = @apps.limit(@per_page).offset(@offset)
         render 'apps'
       end
     end
@@ -82,28 +78,21 @@ class AppsController < ApplicationController
   end
 
   def recent
-    if is_exponent_client?
-      @apps = App.exponent.order("updated_at desc").limit(30)
-    else
-      @apps = App.order("updated_at desc").limit(30)
-    end
+    @apps = App.exponent.order("updated_at desc").limit(30)
   end
 
   def qr
-    if user_signed_in? && current_user.email == 'brentvatne@gmail.com'
-      push
-    else
-      qr_code = GoogleQR.new(data: %({"bundle_path": "#{@app.bundle_path}", "module_name": "#{@app.module_name}"}), size: '250x250')
-      render json: {url: qr_code.to_s}
-    end
+    render text: 'removed for now'
+    # if user_signed_in? && current_user.email == 'brentvatne@gmail.com'
+    #   push
+    # else
+    #   qr_code = GoogleQR.new(data: %({"bundle_path": "#{@app.bundle_path}", "module_name": "#{@app.module_name}"}), size: '250x250')
+    #   render json: {url: qr_code.to_s}
+    # end
   end
 
   def search
-    if is_exponent_client?
-      @apps = App.exponent.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
-    else
-      @apps = App.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
-    end
+    @apps = App.exponent.enabled.where(["lower(name) LIKE lower(?)", "%#{params[:name]}%"]).for_platform(platform).limit(@per_page).offset(@offset)
 
     render 'apps'
   end
@@ -113,11 +102,7 @@ class AppsController < ApplicationController
   end
 
   def picks
-    if is_exponent_client?
-      @apps = App.exponent.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
-    else
-      @apps = App.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
-    end
+    @apps = App.exponent.where(pick: true).enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
 
     respond_to do |format|
       format.html
@@ -126,11 +111,7 @@ class AppsController < ApplicationController
   end
 
   def popular
-    if is_exponent_client?
-      @apps = App.exponent.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
-    else
-      @apps = App.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
-    end
+    @apps = App.exponent.order('view_count desc').enabled.for_platform(platform).order('updated_at desc').limit(@per_page).offset(@offset)
 
     respond_to do |format|
       format.html
@@ -139,11 +120,7 @@ class AppsController < ApplicationController
   end
 
   def recent
-    if is_exponent_client?
-      @apps = App.exponent.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
-    else
-      @apps = App.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
-    end
+    @apps = App.exponent.enabled.where("name != 'Sample App' AND name != 'Sample App'").order('updated_at desc')
   end
 
   def log
@@ -153,16 +130,12 @@ class AppsController < ApplicationController
   def public
     if params[:version].present?
       @build = Build.where(name: params[:version]).first
-      @apps = @build.apps
+      @apps = @build.apps.exponent
     else
-      @apps = App.enabled.where("name != 'Sample App'")
+      @apps = App.exponent.enabled.where("name != 'Sample App'")
     end
 
-    if is_exponent_client?
-      @apps = @apps.exponent.order("updated_at desc").all
-    else
-      @apps = @apps.order("updated_at desc").all
-    end
+    @apps = @apps.exponent.order("updated_at desc").all
 
     respond_to do |format|
       format.html
@@ -210,20 +183,12 @@ class AppsController < ApplicationController
     if !user_signed_in?
       redirect_to new_user_session_path,
         notice: 'Please sign in to create a new app'
-    elsif current_user.email == 'brentvatne@gmail.com'
-      @app = current_user.apps.create({
-        enabled: true,
-        name: "Sample App",
-        module_name: "main",
-        build_id: Build.last.id,
-        created_from_web: true
-      })
     else
       @app = current_user.apps.create({
         enabled: true,
         name: "Sample App",
         module_name: "main",
-        build_id: Build.where(name: '0.24.1').first.id,
+        build_id: Build.last.id,
         created_from_web: true
       })
     end
