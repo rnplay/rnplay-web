@@ -179,7 +179,7 @@ export default class Simulator extends Component {
         className="editor-simulator-container__buttons--restart"
         onClick={() => this.props.simulatorAction('restartApp')}>
         Restart
-      </span>
+      </a>
     );
   }
 
