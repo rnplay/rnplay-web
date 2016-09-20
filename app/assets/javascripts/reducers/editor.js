@@ -27,10 +27,16 @@ const initialState = {
 
 export default createStore(initialState, {
 
-  [`${actions.switchApp}`]: (state, { app }) => ({
-    ...state,
-    app,
-  }),
+  [`${actions.switchApp}`]: (state, { app }) => {
+    // note(brent): awful hack so people can still view their old things, sort of
+    if (app.buildId < 29) {
+      return {
+        ...state,
+        app,
+        currentFile: app.ios ? 'index.ios.js' : 'index.android.js',
+      };
+    }
+  },
 
   [`${actions.switchFile}`]: (state, { currentFile }) => {
     currentFile = state.app.files[currentFile] ?
