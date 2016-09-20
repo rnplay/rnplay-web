@@ -61,7 +61,6 @@ export default class EditorApp extends Component {
     }
   }
 
-
   simulatorAction = (action) => {
     this.iosSimulator.contentWindow.postMessage(action, '*')
     this.androidSimulator.contentWindow.postMessage(action, '*')
@@ -274,6 +273,7 @@ export default class EditorApp extends Component {
           app={this.props.app}
           useDarkTheme={useDarkTheme}
           belongsToCurrentUser={belongsToCurrentUser}
+          simulatorAction={this.simulatorAction}
           build={find(builds, (build) => {return build.id == buildId})}
           {...buildPickerProps}
         />

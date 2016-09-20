@@ -172,6 +172,17 @@ export default class Simulator extends Component {
       </section>
     );
   }
+
+  renderRestartButton() {
+    return (
+      <a
+        className="editor-simulator-container__buttons--restart"
+        onClick={() => this.props.simulatorAction('restartApp')}>
+        Restart
+      </span>
+    );
+  }
+
   render() {
     const {
       // useDarkTheme,
@@ -197,7 +208,11 @@ export default class Simulator extends Component {
           {this.renderBuildPicker()}
         </div>
 
-        {this.renderSwitch()}
+        <div className="editor-simulator-container__buttons">
+          {this.renderSwitch()}
+          {this.renderRestartButton()}
+        </div>
+
         <div className={classesSimulator}>
           <iframe
             src={this.appetizeUrlFor('ios')}
