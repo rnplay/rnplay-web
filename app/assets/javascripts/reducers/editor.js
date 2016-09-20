@@ -35,6 +35,11 @@ export default createStore(initialState, {
         app,
         currentFile: app.ios ? 'index.ios.js' : 'index.android.js',
       };
+    } else {
+      return {
+        ...state,
+        app,
+      }
     }
   },
 
