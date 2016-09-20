@@ -1,6 +1,7 @@
 import React from 'react';
 import { registerComponent } from 'react-native-playground';
 import {
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -14,6 +15,8 @@ class App extends React.Component {
           Edit and save with Cmd+S (Mac) or Ctrl+S (Windows). Changes will
           be reflected immediately in the simulator or on your device.
         </Text>
+
+        <StatusBar barStyle="default" />
       </View>
     );
   }
