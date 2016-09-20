@@ -1,5 +1,7 @@
 import React from 'react';
-import { registerComponent } from 'react-native-playground';
+import {
+  registerComponent,
+} from 'react-native-playground';
 import {
   StatusBar,
   StyleSheet,
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   instructions: {
     fontSize: 16,
