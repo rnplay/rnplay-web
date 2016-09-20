@@ -84,7 +84,6 @@ export default class EditorApp extends Component {
 
   // Keep track of simulator lifecycle
   handleSimulatorEvent = (e) => {
-
     const { data } = e;
     const { dispatch, log, saveScreenshot } = this.props;
 

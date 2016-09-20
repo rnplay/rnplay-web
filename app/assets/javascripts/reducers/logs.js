@@ -11,11 +11,6 @@ const initialState = {
 export default createStore(initialState, {
 
   [`${actions.log}`]: (state,  { item }) => {
-    // Disable logging
-    return {
-      logs: [],
-    };
-
     return {
       logs: state.logs.concat(item)
     };
