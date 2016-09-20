@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 const formatDate = (date) => date.toISOString().replace('T', ' ').replace('Z', '');
 
-export default class Editor extends Component {
+export default class Logger extends Component {
 
   constructor(props, context) {
     super(props, context);

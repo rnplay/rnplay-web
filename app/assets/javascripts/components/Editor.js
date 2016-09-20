@@ -78,7 +78,6 @@ export default class Editor {
       app: { body },
       currentFile,
       useDarkTheme,
-      logs,
       belongsToCurrentUser,
       onFileSave,
       editorHeaderProps,
@@ -109,10 +108,9 @@ export default class Editor {
             />
           </div>
         </div>
-
-        <Logger logs={logs} />
-
       </div>
     );
+
+    // <Logger logs={logs} />
   }
 }
