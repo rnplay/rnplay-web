@@ -50,6 +50,7 @@ $simulator-width: 350px;
     display: inline-block;
 
     &--restart {
+      cursor: pointer;
       display: inline-block;
       margin-left: 10px;
       background-color: #fff;
