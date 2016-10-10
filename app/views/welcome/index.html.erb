@@ -1,8 +1,15 @@
 <div class="container <% if params[:action] == 'picks' %>container--picks<% end %>">
-  <header>
-    <h1 class="title">Test and share React Native code samples</h1>
-  </header>
+  <div class="col-sm-5">
+    <h3>Test and share React Native code, on iOS and Android, <strong>in the browser</strong>.</h3>
+    <p style="margin-top: 2em; margin-bottom: 2em">Powered by <a href="https://getexponent.com/">Exponent</a>, rnplay.org
+      is the easiest way to play with the React Native API.
+    </p>
+    <a style="font-size: 120%; border: 1px solid #ddd; padding: 5px; background-color: #fff" href="https://getexponent.com/">Sign up and create an app now</a>
+  </div>
 
-  <%= render partial: '/apps/apps', locals: {apps: @apps} %>
+  <div class="col-sm-8">
+    <%= render partial: '/apps/apps', locals: {apps: @apps} %>
+  </div>
+
 
 </div>
