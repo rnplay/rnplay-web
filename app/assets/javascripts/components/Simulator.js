@@ -115,6 +115,7 @@ export default class Simulator extends Component {
   }
 
   renderSwitch() {
+    console.log(this.props)
     return (
       <Switch
         onChange={this.onSwitchPlatform}
