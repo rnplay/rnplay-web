@@ -201,6 +201,7 @@ export default class Simulator extends Component {
 
     return (
       <div className="editor-simulator-container">
+        <h2 style={{fontSize: "14px"}}><a href="http://facebook.github.io/react-native/releases/0.33/">React Native <strong>0.33</strong></a> <span style={{color: "#999"}}>via</span> <a href="http://exponentjs.com">exponent.js</a></h2>
         {this.renderControls()}
 
         <div className="editor-simulator-container__settings">
