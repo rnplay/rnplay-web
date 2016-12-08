@@ -20,6 +20,8 @@ postgres:
   container_name: postgres
   env_file: ../../.env.production
   image: postgres:9.4
+  volumes:
+    - /var/lib/postgres:/var/lib/postgres
 
 redis:
   restart: always
@@ -51,4 +53,23 @@ proxy:
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
     - /home/app/certs:/etc/nginx/certs
-    - /home/app/proxy/proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+
+packager0330:
+  restart: always
+  image: rnplay/packager:0.33.0
+  container_name: packager0330
+  environment:
+    VIRTUAL_HOST: packager0330.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+
+packager0370:
+  restart: always
+  image: rnplay/packager:0.37.0
+  container_name: packager0370
+  environment:
+    VIRTUAL_HOST: packager0370.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
