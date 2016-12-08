@@ -1,18 +1,12 @@
 {
   "name": "RNPlayPackager",
   "version": "0.33.0",
-  "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh",
-    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "logs": "adb logcat *:S ReactNative:V ReactNativeJS:V"
-  },
   "dependencies": {
     "@exponent/ex-navigation": "^1.6.0",
-    "@exponent/samples": "^1.0.2",
-    "@exponent/vector-icons": "^1.0.1",
-    "exponent": "^10.0.0",
-    "react": "~15.3.2",
-    "react-native": "github:exponentjs/react-native#sdk-10.1.2"
+     "@exponent/samples": "^1.0.2",
+     "@exponent/vector-icons": "^1.0.1",
+     "exponent": "^10.0.0",
+     "react": "~15.3.2",
+     "react-native": "github:exponentjs/react-native#sdk-10.1.2"
   }
 }
