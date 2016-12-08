@@ -1,7 +1,8 @@
 rails:
-  build: .
+  image: rnplay/web
   restart: always
   env_file: ../../.env.production
+  container_name: rails
   volumes:
     - /home/app/rails/rnplay:/app
     - /home/app/repos:/var/repos
@@ -16,43 +17,38 @@ rails:
 
 postgres:
   restart: always
+  container_name: postgres
   env_file: ../../.env.production
-  image: postgres
+  image: postgres:9.4
 
 redis:
   restart: always
+  container_name: redis
   image: redis
 
 cache:
   restart: always
+  container_name: memcache
   image: memcached
 
-worker:
+logger:
+  image: progrium/logspout
+  container_name: logger
+  command: syslog://logs.papertrailapp.com:13269
   restart: always
-  build: .
-  command: bundle exec sidekiq -e production -c 25
   volumes:
-    - /home/app/rails/rnplay:/app
-  env_file: ../../.env.production
-  links:
-    - postgres
-    - redis
-    - cache
+    - /var/run/docker.sock:/tmp/docker.sock
 
-packager0330:
+proxy:
   restart: always
-  image: rnplay/packager:0.33.0
+  container_name: proxy
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+    - "443:443"
   environment:
-    VIRTUAL_HOST: packager0330.rnplay.org
+    DEFAULT_HOST: rnplay.org
   volumes:
-    - /home/app/rails/rnplay/app_js:/app/js
-    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
-
-packager0370:
-  restart: always
-  image: rnplay/packager:0.37.0
-  environment:
-    VIRTUAL_HOST: packager0370.rnplay.org
-  volumes:
-    - /home/app/rails/rnplay/app_js:/app/js
-    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
+    - /var/run/docker.sock:/tmp/docker.sock
+    - /home/app/certs:/etc/nginx/certs
+    - /home/app/proxy/proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
