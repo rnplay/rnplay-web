@@ -41,7 +41,7 @@ worker:
 
 packager0330:
   restart: always
-  image: packager:0.33.0
+  image: rnplay/packager:0.33.0
   environment:
     VIRTUAL_HOST: packager0330.rnplay.org
   volumes:
@@ -50,7 +50,7 @@ packager0330:
 
 packager0370:
   restart: always
-  image: packager:0.37.0
+  image: rnplay/packager:0.37.0
   environment:
     VIRTUAL_HOST: packager0370.rnplay.org
   volumes:
