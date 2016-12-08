@@ -38,3 +38,12 @@ worker:
     - postgres
     - redis
     - cache
+
+packager0330:
+  restart: always
+  image: packager:0.33.0
+  environment:
+    VIRTUAL_HOST: packager0330.rnplay.org
+  volumes:
+    - /home/app/rails/rnplay/app_js:/app/js
+    - /home/app/rails/rnplay/public/.well-known:/app/.well-known
