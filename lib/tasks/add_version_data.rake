@@ -4,16 +4,16 @@ BUILD_VERSIONS = {
     '0.21.0' => 'ag7twzt8pe400kb3yad0r0yy8w',
     '0.24.1' => 'mzv0wej631g9mxc881x2wmnpvc',
     '0.31.0' => '6e3avyjpcu74460vbzqrffq3t4',
-    '0.33.0' => '',
-    '0.37.0' => ''
+    '0.33.0' => '6e3avyjpcu74460vbzqrffq3t4',
+    '0.37.0' => '6e3avyjpcu74460vbzqrffq3t4'
   },
   'android' => {
     '0.20.0' => 'd8wtae190m9978vwx5mv228erw',
     '0.21.0' => '4cjhgh3ud6bdwqcbtkeprqgfx0',
     '0.24.1' => '8bx06h5q4et704jcjggk25zkfw',
     '0.31.0' => 'rkwyy8kaabjhz3zq2160n9gprw',
-    '0.33.0' => '',
-    '0.37.0' => ''
+    '0.33.0' => 'rkwyy8kaabjhz3zq2160n9gprw',
+    '0.37.0' => 'rkwyy8kaabjhz3zq2160n9gprw'
 
   }
 }
