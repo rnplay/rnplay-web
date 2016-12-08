@@ -1,4 +1,4 @@
-FROM node:5.7.1
+FROM node:7.2.1
 
 RUN apt-get update && \
     apt-get -y install software-properties-common git-core build-essential automake unzip python-dev python-setuptools && \
