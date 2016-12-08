@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get -y install software-properties-common git-core build-essential automake unzip python-dev python-setuptools && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone -b v4.5.0 https://github.com/facebook/watchman.git /tmp/watchman
+RUN git clone -b v4.7.0 https://github.com/facebook/watchman.git /tmp/watchman
 WORKDIR /tmp/watchman
 RUN ./autogen.sh
 RUN ./configure
