@@ -11,6 +11,7 @@
     "@exponent/ex-navigation": "^1.6.0",
     "@exponent/samples": "^1.0.2",
     "@exponent/vector-icons": "^1.0.1",
+    "react-native-playground": "1.0.5",
     "exponent": "^10.0.0",
     "react": "~15.3.2",
     "react-native": "github:exponentjs/react-native#sdk-10.1.2"
