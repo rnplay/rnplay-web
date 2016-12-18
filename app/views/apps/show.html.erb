@@ -3,12 +3,9 @@
 <div style="display: flex; flex-direction: column; align-items: center; width: 500px; justify-content: center; text-align: center; margin: 0 auto; margin-top: 100px">
   <%= image_tag("cat.jpg", style: "border-radius: 200px") %>
 <h2>Sorry!</h2>
-<h3 style="margin-bottom: 30px">This app is no longer available.</h3>
-<p>We had to disable apps created before switching our client to use Exponent JS. Sorry about that!</p>
-
-<p>Feel free to <a href="https://rnplay.org/apps/picks">see how other example apps are written now.</a>
-
-<p>If you have questions, email us! info@rnplay.org.</p>
+<h3>This app is no longer available.</h3>
+<h4 style="margin-bottom: 30px">You can still <%= link_to "view the raw source files", raw_index_app_path(@app) %></h4>
+<p>We had to disable apps created before switching our client to <a href="http://exponentjs.com">Exponent JS</a>. Sorry about that! <a href="https://rnplay.org/apps/picks">See how other example apps are written now</a>. If you have questions, email us! info@rnplay.org.</p>
 </div>
 
 

@@ -7,7 +7,7 @@ class AppsController < ApplicationController
   # before_action :under_construction
 
   layout :pick_layout
-  before_action :set_app, only: [:last_updated, :show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest, :push]
+  before_action :set_app, only: [:last_updated, :show, :edit, :destroy, :raw_simulator, :qr, :view, :fork, :exp_manifest, :push, :raw_index, :raw_file]
   before_action :paginate, only: [:popular, :search, :picks, :index]
 
   acts_as_token_authentication_handler_for User, fallback: :none, only: :create
@@ -75,6 +75,13 @@ class AppsController < ApplicationController
     signed_manifest = sign_manifest(unsigned_manifest)
 
     render json: signed_manifest
+  end
+
+  def raw_index
+  end
+
+  def raw_file
+    render :text => @app.target_git_repo.contents_of_file(params[:file]), content_type: 'application/javascript'
   end
 
   def recent

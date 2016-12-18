@@ -27,6 +27,8 @@ Rails.application.routes.draw do
       post :fork
       get :last_updated
       get :raw_simulator
+      get :raw_index
+      get :raw_file
       get :qr
       get :push
       get :recent

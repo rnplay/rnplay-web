@@ -1,0 +1,6 @@
+<ul>
+  <% @app.target_git_repo.file_list.each do |file| %>
+  <% f = File.basename(file) %>
+  <li><%= link_to f, raw_file_app_path(file: f) %></li>
+<% end %>
+</ul>
