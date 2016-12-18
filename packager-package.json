@@ -2,11 +2,12 @@
   "name": "RNPlayPackager",
   "version": "0.33.0",
   "dependencies": {
-    "@exponent/ex-navigation": "^1.6.0",
-     "@exponent/samples": "^1.0.2",
-     "@exponent/vector-icons": "^1.0.1",
-     "exponent": "^10.0.0",
-     "react": "~15.3.2",
-     "react-native": "github:exponentjs/react-native#sdk-10.1.2"
+    "@exponent/ex-navigation": "~2.2.0",
+    "@exponent/samples": "~1.0.2",
+    "@exponent/vector-icons": "~2.0.3",
+    "exponent": "~12.0.3",
+    "react": "~15.3.2",
+    "react-native": "git+https://github.com/exponentjs/react-native#sdk-12.0.0",
+    "react-native-playground": "1.0.5"
   }
 }
