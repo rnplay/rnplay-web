@@ -210,7 +210,6 @@ export default class Simulator extends Component {
         </div>
 
         <div className="editor-simulator-container__buttons">
-          {this.renderSwitch()}
           {this.renderRestartButton()}
         </div>
 
@@ -223,15 +222,6 @@ export default class Simulator extends Component {
             frameBorder="0"
             scrolling="no"
             style={{display: this.props.build.platform == 'ios' ? 'block' : 'none'}}
-          />
-          <iframe
-            src={this.appetizeUrlFor('android')}
-            id="android-simulator"
-            width="300px"
-            height="9999px"
-            frameBorder="0"
-            scrolling="no"
-            style={{display: this.props.build.platform == 'android' ? 'block' : 'none'}}
           />
         </div>
 
