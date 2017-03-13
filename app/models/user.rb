@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_token_authenticatable
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable,
          :omniauthable, :omniauth_providers => [:github]
 

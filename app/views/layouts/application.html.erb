@@ -23,6 +23,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= yield(:body_class) %>">
+  <p style="font-size: 120%; padding: 10px; background-color: black; color: #eee; text-align: center">rnplay.org is shutting down on April 1st, 2017. But don't despair! Try out Expo's improved prototyping tool, <a style="color: #e2e" href="https://sketch.expo.io">Sketch</a>.
+
   <%= react_component 'Header', currentUser: current_user,
       headerLogoSrc: asset_path('react-native-playground-logo.svg') %>
 
