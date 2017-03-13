@@ -1,3 +1,7 @@
+## DEPRECATION NOTICE
+
+rnplay.org is shutting down on April 1st, 2017. It's been replaced by https://sketch.expo.io. This repo will remain here for reference, but no longer accepts issues or pull requests. Thanks to everyone who contributed to and supported this project!
+
 ## Setup
 
 You should have Ruby 2.2 installed. Preferred way is using [rbenv](https://github.com/sstephenson/rbenv). Once you have that installed, run ```rbenv install 2.2.2```.
